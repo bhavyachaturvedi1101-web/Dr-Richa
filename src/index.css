@@ -26,6 +26,7 @@ body {
   color: var(--neutral-charcoal);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -42,3 +43,69 @@ a {
 button {
   font-family: inherit;
 }
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* ============================================
+   HERO SECTION - MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Hero */
+  section[style*="min-height: 80vh"] {
+    padding: 3rem 1.5rem !important;
+    gap: 2rem !important;
+  }
+}
+
+/* ============================================
+   GLOBAL SECTION PADDING - MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  section {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+  }
+  
+  h1 {
+    font-size: 2rem !important;
+    line-height: 1.2 !important;
+  }
+
+  h2 {
+    font-size: 1.75rem !important;
+  }
+
+  h3 {
+    font-size: 1.1rem !important;
+  }
+}
+
+/* ============================================
+   ABOUT PAGE - MOBILE
+   ============================================ */
+@media (max-width: 768px) {
+  /* Split layout blocks go column */
+  div[style*="splitBlock"] {
+    flex-direction: column !important;
+  }
+
+  div[style*="bannerBlock"] {
+    padding: 2rem 1.5rem !important;
+  }
+}
+
+/* ============================================
+   HIGHLIGHTS SECTION - MOBILE
+   ============================================ */
+@media (max-width: 600px) {
+  div[style*="highlightsGrid"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ============================================
+   MOBILE NAV - handled in Navbar.jsx
+   ============================================ */

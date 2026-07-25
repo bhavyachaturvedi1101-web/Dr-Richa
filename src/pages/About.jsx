@@ -31,7 +31,7 @@ export default function About() {
         <div style={styles.content}>
           
           {/* Section 1: Meet Dr. Jain */}
-          <div style={styles.splitBlock}>
+          <div style={styles.splitBlock} className="split-block">
             <motion.div 
               style={styles.imageWrapper}
               initial={{ opacity: 0, x: -30 }}
@@ -85,7 +85,7 @@ export default function About() {
           </motion.div>
 
           {/* Section 3: Our Philosophy */}
-          <div style={styles.splitBlockReverse}>
+          <div style={styles.splitBlockReverse} className="split-block-reverse">
             <motion.div 
               style={styles.imageWrapper}
               initial={{ opacity: 0, x: 30 }}

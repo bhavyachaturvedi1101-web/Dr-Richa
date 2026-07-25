@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 
 export default function Hero() {
   return (
-    <section style={styles.heroSection}>
+    <section style={styles.heroSection} className="hero-section">
       <motion.div 
         initial="hidden"
         animate="visible"
@@ -16,7 +16,7 @@ export default function Hero() {
         }}
         style={styles.content}
       >
-        <motion.h1 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }} style={styles.title}>
+        <motion.h1 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }} style={styles.title} className="hero-title">
           Dr. Jain's Multi-speciality Dental and Polyclinic
         </motion.h1>
         <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }} style={styles.subtitle}>

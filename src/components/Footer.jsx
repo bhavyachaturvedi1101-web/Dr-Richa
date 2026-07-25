@@ -4,7 +4,7 @@ import { MapPin, Phone, Clock } from 'lucide-react';
 export default function Footer() {
   return (
     <footer style={styles.footer}>
-      <div style={styles.container}>
+      <div style={styles.container} className="footer-container">
         <div style={styles.column}>
           <h3 style={styles.title}>Dr. Jain's Dental & Polyclinic</h3>
           <p style={styles.text}>Providing excellent and painless dental care in Mandsaur.</p>
