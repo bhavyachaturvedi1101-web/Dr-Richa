@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Clock, Smile } from 'lucide-react';
+import { MapPin, Phone, Clock, Stethoscope } from 'lucide-react';
 
 export default function Footer() {
   return (
@@ -15,10 +15,10 @@ export default function Footer() {
           {/* Brand */}
           <div style={styles.brand}>
             <div style={styles.logoRow}>
-              <div style={styles.logoIcon}><Smile size={22} color="#fff" strokeWidth={2.5} /></div>
-              <span style={styles.logoText}>Dr. Jain's Dental</span>
+              <div style={styles.logoIcon}><Stethoscope size={22} color="#fff" strokeWidth={2.5} /></div>
+              <span style={styles.logoText}>Dental Speciality Centre</span>
             </div>
-            <p style={styles.tagline}>Providing excellent and painless dental care in Mandsaur since 2020.</p>
+            <p style={styles.tagline}>Providing complete dental care in Indore.</p>
           </div>
 
           {/* Quick Links */}
@@ -38,14 +38,14 @@ export default function Footer() {
           {/* Contact */}
           <div>
             <h4 style={styles.colTitle}>Contact</h4>
-            <div style={styles.infoRow}><Phone size={16} color="var(--brand-surgical-blue)" /><span style={styles.infoText}>07947104543</span></div>
-            <div style={styles.infoRow}><MapPin size={16} color="var(--brand-surgical-blue)" /><span style={styles.infoText}>173 Dhanmandi Jankupura, Mandsaur, Front Of Dhawaj Office</span></div>
+            <div style={styles.infoRow}><Phone size={16} color="var(--brand-surgical-blue)" /><span style={styles.infoText}>6262178282</span></div>
+            <div style={styles.infoRow}><MapPin size={16} color="var(--brand-surgical-blue)" /><span style={styles.infoText}>F 9, 10, BCM CITY, Khandelwal Nagar, Janki Nagar, Indore</span></div>
             <div style={styles.infoRow}><Clock size={16} color="var(--brand-surgical-blue)" /><span style={styles.infoText}>Open 24 Hrs, Monday – Sunday</span></div>
           </div>
         </div>
 
         <div style={styles.bottom}>
-          <p style={styles.bottomText}>© 2026 Dr. Jain's Multi-Speciality Dental and Polyclinic. All rights reserved.</p>
+          <p style={styles.bottomText}>© 2026 Dr Richa Tiwari - Dental Speciality Centre. All rights reserved.</p>
         </div>
       </div>
     </footer>

@@ -5,7 +5,7 @@ import { Star, Quote } from 'lucide-react';
 const reviews = [
   {
     name: 'Pinkesh Meena',
-    text: 'My experience at Dr. Jain\'s Multi-Speciality Dental and Polyclinic was excellent. The doctors provided accurate diagnoses and communicated effectively.',
+    text: 'My experience at Dental Speciality Centre was excellent. The doctors provided accurate diagnoses and communicated effectively.',
     rating: 5,
   },
   {
@@ -43,7 +43,7 @@ export default function Testimonials() {
           What Our Patients Say
         </motion.h2>
 
-        <div style={styles.grid}>
+        <div style={styles.grid} className="testimonials-grid">
           {reviews.map((review, index) => (
             <motion.div
               key={index}

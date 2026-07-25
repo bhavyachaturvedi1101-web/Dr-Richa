@@ -6,7 +6,7 @@ const highlights = [
   {
     tag: 'RESTORATIVE CARE',
     title: 'RCT (Root Canal)',
-    desc: 'Precise, painless root canal treatment to save your infected tooth — Dr. Jain walks you through every step so you feel confident and calm.',
+    desc: 'Precise, painless root canal treatment to save your infected tooth — Dr. Richa Tiwari walks you through every step so you feel confident and calm.',
     image: '/rct_image.png',
     link: '/services',
   },
@@ -36,61 +36,72 @@ const highlights = [
 export default function Highlights() {
   return (
     <section style={styles.section}>
-      <div style={styles.sectionHeader}>
+      <motion.div 
+        style={styles.sectionHeader}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, amount: 0.3 }}
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.2 },
+          }
+        }}
+      >
         <motion.p
           style={styles.eyebrow}
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } }}
         >
           — HIGHLIGHTS FROM THE BUSINESS
         </motion.p>
         <motion.h2
           style={styles.heading}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } }}
         >
           Everything your smile needs,<br />under one roof.
         </motion.h2>
         <motion.p
           style={styles.subheading}
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.1 }}
+          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } }}
         >
           From routine care to advanced procedures — every treatment starts with an honest conversation.
         </motion.p>
-      </div>
+      </motion.div>
 
       <div style={styles.rows}>
         {highlights.map((item, idx) => (
-          <motion.div
+          <div
             key={idx}
             style={{
               ...styles.row,
               flexDirection: idx % 2 === 0 ? 'row' : 'row-reverse',
             }}
             className="highlight-row"
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
           >
-            <div style={styles.imageBox}>
+            <motion.div 
+              style={styles.imageBox}
+              initial={{ opacity: 0, x: idx % 2 === 0 ? -40 : 40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: "easeOut" }}
+            >
               <span style={styles.badge}>0{idx + 1}</span>
               <img src={item.image} alt={item.title} style={styles.image} />
-            </div>
-            <div style={styles.textBox}>
+            </motion.div>
+            <motion.div 
+              style={styles.textBox}
+              initial={{ opacity: 0, x: idx % 2 === 0 ? 40 : -40 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
+              transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+            >
               <p style={styles.tag}>— {item.tag}</p>
               <h3 style={styles.title}>{item.title}</h3>
               <p style={styles.desc}>{item.desc}</p>
               <Link to={item.link} style={styles.link}>Learn more →</Link>
-            </div>
-          </motion.div>
+            </motion.div>
+          </div>
         ))}
       </div>
     </section>

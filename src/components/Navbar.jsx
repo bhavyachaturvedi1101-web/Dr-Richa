@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Smile, Menu, X } from 'lucide-react';
+import { Stethoscope, Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
@@ -24,9 +24,9 @@ export default function Navbar() {
         {/* Logo Section */}
         <Link to="/" style={styles.logoWrapper} onClick={closeMenu}>
           <div style={styles.logoIcon}>
-            <Smile size={24} color="#ffffff" strokeWidth={2.5} />
+            <Stethoscope size={24} color="#ffffff" strokeWidth={2.5} />
           </div>
-          <span style={styles.logoText}>Dr. Jain's Dental</span>
+          <span style={styles.logoText}>Dental Speciality Centre</span>
         </Link>
 
         {/* Desktop Links */}

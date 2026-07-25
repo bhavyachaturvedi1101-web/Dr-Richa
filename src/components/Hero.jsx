@@ -8,7 +8,7 @@ export default function Hero() {
     <>
       {/* ── HERO: full-screen with overlay ── */}
       <section style={styles.hero}>
-        <img src="/clinic_interior.png" alt="Dr. Jain's Dental Clinic" style={styles.bgImage} />
+        <img src="/clinic_interior.png" alt="Dental Speciality Centre" style={styles.bgImage} />
         <div style={styles.overlay} />
 
         <motion.div
@@ -21,7 +21,7 @@ export default function Hero() {
             style={styles.eyebrow}
             variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
           >
-            — Mandsaur · Est. Local Practice
+            — Indore · Est. Local Practice
           </motion.p>
 
           <motion.h1
@@ -36,18 +36,19 @@ export default function Hero() {
             style={styles.subtitle}
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
           >
-            Dr. Jain's Multi-Speciality Dental and Polyclinic — Mandsaur's trusted neighbourhood dentist.
+            Dental Speciality Centre — Indore's trusted neighbourhood dentist.
             Quality treatment, honest advice, and painless care.
           </motion.p>
 
           <motion.div
             style={styles.ctas}
+            className="hero-ctas"
             variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
           >
             <Link to="/contact" style={styles.ctaPrimary}>
               <Calendar size={18} /> Book Appointment
             </Link>
-            <a href="tel:07947104543" style={styles.ctaSecondary}>
+            <a href="tel:6262178282" style={styles.ctaSecondary}>
               <Phone size={18} /> Call Now
             </a>
           </motion.div>
@@ -62,7 +63,7 @@ export default function Hero() {
               <Star size={16} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
               <Star size={16} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
               <Star size={16} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
-              &nbsp;4.5 on Google
+              &nbsp;5.0 on Google
             </span>
             <span style={styles.divider}>|</span>
             <span style={styles.trustItem}><CheckCircle2 size={16} /> Painless, modern care</span>
@@ -81,26 +82,38 @@ export default function Hero() {
 
       {/* ── STATS BAR ── */}
       <section style={styles.statsBar}>
-        <div style={styles.statsContainer} className="stats-grid">
+        <motion.div 
+          style={styles.statsContainer} 
+          className="stats-grid"
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.3 }}
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.2 },
+            }
+          }}
+        >
           {[
-            { num: '4+', label: 'Years of Experience' },
+            { num: '9+', label: 'Years of Experience' },
             { num: '24/7', label: 'Emergency Services' },
-            { num: '₹100', label: 'Consultation Fee' },
             { num: '100%', label: 'Painless Treatment' },
           ].map((stat, i) => (
             <motion.div
               key={i}
               style={styles.statItem}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
+              variants={{
+                hidden: { opacity: 0, y: 20 },
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+              }}
             >
               <span style={styles.statNum}>{stat.num}</span>
               <span style={styles.statLabel}>{stat.label}</span>
             </motion.div>
           ))}
-        </div>
+        </motion.div>
       </section>
     </>
   );

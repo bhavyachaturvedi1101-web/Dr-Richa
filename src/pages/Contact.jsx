@@ -6,27 +6,42 @@ export default function Contact() {
   return (
     <section style={styles.section}>
       <motion.div 
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
+        initial="hidden"
+        animate="visible"
+        variants={{
+          hidden: { opacity: 0 },
+          visible: {
+            opacity: 1,
+            transition: { staggerChildren: 0.2 },
+          }
+        }}
         style={styles.container}
       >
-        <h1 style={styles.title}>Contact Us</h1>
+        <motion.h1 
+          style={styles.title}
+          variants={{ hidden: { opacity: 0, y: -20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } }}
+        >
+          Contact Us
+        </motion.h1>
         <div style={styles.grid}>
           
-          <div style={styles.card}>
+          <motion.div 
+            style={styles.card}
+            variants={{ hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+          >
             <h2 style={styles.subtitle}>Get In Touch</h2>
             <div style={styles.infoRow}>
               <Phone size={24} color="var(--brand-surgical-blue)" />
               <div>
                 <p style={styles.label}>Phone</p>
-                <p style={styles.text}>07947104543</p>
+                <p style={styles.text}>6262178282</p>
               </div>
             </div>
             <div style={styles.infoRow}>
               <MapPin size={24} color="var(--brand-surgical-blue)" />
               <div>
                 <p style={styles.label}>Address</p>
-                <p style={styles.text}>173 Dhanmandi Jankupura, Mandsaur, Front Of Dhawaj Office, 458002</p>
+                <p style={styles.text}>F 9, 10, BCM CITY, Khandelwal Nagar, Janki Nagar, Indore, Madhya Pradesh 452012</p>
               </div>
             </div>
             <div style={styles.infoRow}>
@@ -36,9 +51,12 @@ export default function Contact() {
                 <p style={styles.text}>Open 24 Hrs, Monday - Sunday</p>
               </div>
             </div>
-          </div>
+          </motion.div>
 
-          <div style={styles.card}>
+          <motion.div 
+            style={styles.card}
+            variants={{ hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+          >
             <h2 style={styles.subtitle}>Send a Message</h2>
             <form style={styles.form}>
               <input type="text" placeholder="Your Name" style={styles.input} />
@@ -46,9 +64,26 @@ export default function Contact() {
               <textarea placeholder="How can we help you?" style={{...styles.input, minHeight: '120px'}}></textarea>
               <button type="button" style={styles.cta}>Submit Request</button>
             </form>
-          </div>
+          </motion.div>
 
         </div>
+
+        {/* ── MAP SECTION ── */}
+        <motion.div 
+          style={styles.mapContainer}
+          variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut", delay: 0.2 } } }}
+        >
+          <iframe 
+            src="https://maps.google.com/maps?q=BCM%20CITY,%20Indore&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+            width="100%" 
+            height="400" 
+            style={{ border: 0, borderRadius: '18px' }} 
+            allowFullScreen 
+            loading="lazy" 
+            title="Google Maps Location"
+          ></iframe>
+        </motion.div>
+
       </motion.div>
     </section>
   );
@@ -127,6 +162,14 @@ const styles = {
     fontSize: '1.125rem',
     fontWeight: '500',
     cursor: 'pointer',
-    marginTop: '1rem'
+    marginTop: '1rem',
+    transition: 'background-color 0.2s',
+  },
+  mapContainer: {
+    marginTop: '4rem',
+    width: '100%',
+    borderRadius: '18px',
+    overflow: 'hidden',
+    boxShadow: '0 20px 40px var(--neutral-sky-tint)',
   }
 };

@@ -4,13 +4,11 @@ import { Link } from 'react-router-dom';
 import { CheckCircle2, Award, Heart, Shield } from 'lucide-react';
 
 const quickInfo = [
-  { label: 'Specialization', value: 'Dentist, Implantologist, Oral And Maxillofacial Surgeon' },
-  { label: 'Qualification', value: 'BDS - MP Medical Science University (2022)' },
-  { label: 'Experience', value: '4 Years in Healthcare' },
+  { label: 'Specialization', value: 'Oral and Dental Surgeon, Family and Aesthetic Dentist' },
+  { label: 'Qualification', value: 'B.D.S. from College of Dental Science and Hospital (C.D.SH.), Rau, Indore' },
+  { label: 'Experience', value: '9 Years in Healthcare' },
   { label: 'Languages', value: 'English, Hindi' },
-  { label: 'Registration', value: 'A-12354-Dental Council Of India' },
-  { label: 'Consultation Fee', value: '₹ 100' },
-  { label: 'Video Consultation', value: 'Available (₹ 100)' },
+  { label: 'Registration', value: 'A-12354-Dental Council Of India' }
 ];
 
 const values = [
@@ -22,20 +20,31 @@ const values = [
 
 export default function About() {
   return (
-    <div style={{ backgroundColor: '#f8fbfe' }}>
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5, ease: 'easeOut' }}
+      style={{ backgroundColor: '#f8fbfe' }}
+    >
 
       {/* ── HERO BANNER ── */}
       <section style={styles.heroBanner}>
         <div style={styles.heroBannerOverlay} />
         <motion.div
           style={styles.heroBannerContent}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.2 },
+            },
+          }}
         >
-          <p style={styles.eyebrow}>— ABOUT US</p>
-          <h1 style={styles.heroTitle}>Dr. Jain's Multi-Speciality<br />Dental & Polyclinic</h1>
-          <p style={styles.heroSub}>Trusted dental care in Mandsaur — where expertise meets compassion.</p>
+          <motion.p style={styles.eyebrow} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>— ABOUT US</motion.p>
+          <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>Dental Speciality Centre</motion.h1>
+          <motion.p style={styles.heroSub} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>Trusted dental care in Indore — where expertise meets compassion.</motion.p>
         </motion.div>
       </section>
 
@@ -50,25 +59,25 @@ export default function About() {
               viewport={{ once: true }}
               transition={{ duration: 0.7 }}
             >
-              <img src="/about_doc.png" alt="Dr. Kapil Jain" style={styles.img} />
+              <img src="/about_doc.png" alt="Dr. Richa Tiwari" style={styles.img} />
             </motion.div>
-            <motion.div
-              style={styles.textBox}
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
+              <motion.div
+                style={styles.textBox}
+                initial={{ opacity: 0, x: 40 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, amount: 0.3 }}
+                transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
+              >
               <p style={styles.eyebrow2}>— THE DOCTOR</p>
-              <h2 style={styles.sectionTitle}>Meet Dr. Kapil Jain</h2>
+              <h2 style={styles.sectionTitle}>Meet Dr. Richa Tiwari</h2>
               <p style={styles.body}>
-                Dr. Kapil Jain is an experienced, polite, and highly professional dentist serving the Mandsaur
-                community. He holds a BDS degree from Madhya Pradesh Medical Science University (2022) and
-                specializes in Dental Implantology and Oral & Maxillofacial Surgery.
+                Dr. Richa Tiwari Vyas is an experienced, polite, and highly professional dentist serving the Indore
+                community. She holds a B.D.S. degree from College of Dental Science and Hospital (C.D.SH.), Rau, Indore
+                and has 9 years of clinical experience.
               </p>
               <p style={styles.body} style={{ marginTop: '1rem' }}>
-                He believes in taking the time to explain every dental problem and proposed treatment
-                to patients — ensuring they feel comfortable, informed, and in control. His gentle approach
+                She believes in taking the time to explain every dental problem and proposed treatment
+                to patients — ensuring they feel comfortable, informed, and in control. Her gentle approach
                 makes every visit a reassuring experience.
               </p>
               <Link to="/contact" style={styles.cta}>Book an Appointment →</Link>
@@ -143,16 +152,14 @@ export default function About() {
         </div>
       </section>
 
-    </div>
+    </motion.div>
   );
 }
 
 const styles = {
   heroBanner: {
     position: 'relative',
-    backgroundImage: 'url(/clinic_interior.png)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundColor: '#0a2342',
     minHeight: '50vh',
     display: 'flex',
     alignItems: 'center',

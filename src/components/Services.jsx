@@ -11,21 +11,33 @@ const services = [
   },
   {
     tag: 'PREVENTIVE CARE',
-    title: 'Ultrasonic Teeth Cleaning',
-    desc: 'Professional ultrasonic scaling to remove plaque and tartar buildup, leaving your teeth feeling clean, fresh, and healthy.',
+    title: 'Teeth Cleaning & Polishing',
+    desc: 'Professional ultrasonic scaling and polishing to remove plaque and tartar buildup, leaving your teeth feeling clean, fresh, and healthy.',
     image: '/dental_service_6.jpg',
   },
   {
     tag: 'RESTORATIVE CARE',
-    title: 'Composite (Laser) Filing',
-    desc: 'Tooth-colored laser composite fillings that blend seamlessly with your natural teeth — durable, aesthetic, and pain-free.',
-    image: '/dental_service_7.jpg',
+    title: 'Root Canal Treatment (RCT)',
+    desc: 'Precise, painless root canal treatment to save your infected tooth — Dr. Richa Tiwari walks you through every step so you feel confident and calm.',
+    image: '/rct_image.png',
   },
   {
-    tag: 'PREVENTIVE CARE',
-    title: 'Advanced Preventive Care',
-    desc: 'Comprehensive preventive programs including fluoride treatments, sealants, and routine checkups to keep dental problems away.',
+    tag: 'ORTHODONTICS',
+    title: 'Clear Aligners & Metal Braces',
+    desc: 'Straighten your teeth and correct your bite with our range of orthodontic solutions, from traditional metal braces to invisible clear aligners.',
     image: '/dental_service_4.jpg',
+  },
+  {
+    tag: 'SPECIALIZED CARE',
+    title: 'Jaw Correction',
+    desc: 'Advanced treatments for jaw alignment and TMJ disorders to improve function, alleviate pain, and enhance your facial profile.',
+    image: '/dental_service_2.jpg',
+  },
+  {
+    tag: 'SPECIALIZED CARE',
+    title: 'Pediatric Dentistry',
+    desc: 'Gentle, compassionate dental care tailored specifically for children to ensure their smiles grow healthy and strong from the very beginning.',
+    image: '/dental_service_3.jpg',
   },
   {
     tag: 'EMERGENCY CARE',
@@ -45,13 +57,19 @@ export default function Services() {
         <div style={styles.overlay} />
         <motion.div
           style={styles.heroBannerContent}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+          initial="hidden"
+          animate="visible"
+          variants={{
+            hidden: { opacity: 0 },
+            visible: {
+              opacity: 1,
+              transition: { staggerChildren: 0.2 },
+            },
+          }}
         >
-          <p style={styles.eyebrow}>— OUR SERVICES</p>
-          <h1 style={styles.heroTitle}>Comprehensive Dental Services</h1>
-          <p style={styles.heroSub}>Everything your smile needs, backed by expertise and modern technology.</p>
+          <motion.p style={styles.eyebrow} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>— OUR SERVICES</motion.p>
+          <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>Comprehensive Dental Services</motion.h1>
+          <motion.p style={styles.heroSub} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>Everything your smile needs, backed by expertise and modern technology.</motion.p>
         </motion.div>
       </section>
 
@@ -60,20 +78,22 @@ export default function Services() {
         <div style={styles.container}>
           <div style={styles.rows}>
             {services.map((svc, idx) => (
-              <motion.div
+              <div
                 key={idx}
                 style={{
                   ...styles.row,
                   flexDirection: idx % 2 === 0 ? 'row' : 'row-reverse',
                 }}
                 className="highlight-row"
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.6 }}
               >
                 {/* Image */}
-                <div style={styles.imageBox}>
+                <motion.div 
+                  style={styles.imageBox}
+                  initial={{ opacity: 0, x: idx % 2 === 0 ? -40 : 40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6, ease: "easeOut" }}
+                >
                   <span style={styles.badge}>0{idx + 1}</span>
                   {svc.isEmergency ? (
                     <div style={styles.emergencyCard}>
@@ -91,16 +111,22 @@ export default function Services() {
                   ) : (
                     <img src={svc.image} alt={svc.title} style={styles.image} />
                   )}
-                </div>
+                </motion.div>
 
                 {/* Text */}
-                <div style={styles.textBox}>
+                <motion.div 
+                  style={styles.textBox}
+                  initial={{ opacity: 0, x: idx % 2 === 0 ? 40 : -40 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.3 }}
+                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
+                >
                   <p style={styles.tag}>— {svc.tag}</p>
                   <h2 style={styles.cardTitle}>{svc.title}</h2>
                   <p style={styles.desc}>{svc.desc}</p>
                   <Link to="/contact" style={styles.link}>Book this service →</Link>
-                </div>
-              </motion.div>
+                </motion.div>
+              </div>
             ))}
           </div>
         </div>
@@ -115,7 +141,7 @@ export default function Services() {
         transition={{ duration: 0.6 }}
       >
         <h2 style={styles.ctaTitle}>Ready for a healthier smile?</h2>
-        <p style={styles.ctaSub}>Book an appointment today — consultations start at just ₹100.</p>
+        <p style={styles.ctaSub}>Book an appointment today to get started on your treatment.</p>
         <Link to="/contact" style={styles.ctaBtn}>Book Appointment →</Link>
       </motion.section>
 
@@ -126,9 +152,7 @@ export default function Services() {
 const styles = {
   heroBanner: {
     position: 'relative',
-    backgroundImage: 'url(/dental_service_3.jpg)',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+    backgroundColor: '#0a2342',
     minHeight: '45vh',
     display: 'flex',
     alignItems: 'center',
