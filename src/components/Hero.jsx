@@ -81,7 +81,7 @@ export default function Hero() {
 
       {/* ── STATS BAR ── */}
       <section style={styles.statsBar}>
-        <div style={styles.statsContainer}>
+        <div style={styles.statsContainer} className="stats-grid">
           {[
             { num: '4+', label: 'Years of Experience' },
             { num: '24/7', label: 'Emergency Services' },

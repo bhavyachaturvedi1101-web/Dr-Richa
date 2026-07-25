@@ -1,111 +1,92 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
+/* ============================================
+   CSS VARIABLES
+   ============================================ */
 :root {
   --brand-surgical-blue: #2597d0;
-  --accent-sky-gradient: linear-gradient(180deg, #779bc1 0%, #9abfda 58%, #cbdcec 100%);
-  --neutral-obsidian: #070709;
   --neutral-ink: #151515;
   --neutral-charcoal: #60606c;
-  --neutral-slate: #8b8b8b;
-  --neutral-sky-tint: #d7e6f5;
-  --neutral-cloud-gray: #f5f5f5;
   --neutral-paper-white: #ffffff;
-
-  --font-inter: 'Inter', sans-serif;
+  --neutral-cloud-gray: #f3f4f6;
+  --neutral-obsidian: #07080a;
+  --neutral-slate: #9ca3af;
+  --neutral-sky-tint: #e8f4fd;
+  --brand-trust-green: #10b981;
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
+/* ============================================
+   GLOBAL RESET & BASE
+   ============================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
 body {
-  font-family: var(--font-inter);
-  background-color: var(--neutral-paper-white);
-  color: var(--neutral-charcoal);
-  line-height: 1.5;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  color: var(--neutral-ink);
+  background: #ffffff;
   -webkit-font-smoothing: antialiased;
   overflow-x: hidden;
 }
+img { max-width: 100%; display: block; }
+a { color: inherit; }
 
-h1, h2, h3, h4, h5, h6 {
-  color: var(--neutral-ink);
-  letter-spacing: -0.04em;
-  font-weight: 600;
+/* ============================================
+   NAVBAR
+   ============================================ */
+.desktop-nav { display: flex !important; }
+.mobile-nav  { display: none  !important; }
+
+@media (max-width: 768px) {
+  .desktop-nav { display: none  !important; }
+  .mobile-nav  { display: flex  !important; }
 }
-
-a {
-  text-decoration: none;
-  color: inherit;
-}
-
-button {
-  font-family: inherit;
-}
-
-img {
-  max-width: 100%;
-  height: auto;
+.mobile-menu-open {
+  position: fixed;
+  top: 70px;
+  left: 0;
+  right: 0;
+  background: #ffffff;
+  padding: 1.5rem;
+  z-index: 999;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.1);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
 }
 
 /* ============================================
-   HERO SECTION - MOBILE
+   FLEX LAYOUTS TO VERTICAL STACK (Mobile overrides)
    ============================================ */
-@media (max-width: 768px) {
-  /* Hero */
-  section[style*="min-height: 80vh"] {
-    padding: 3rem 1.5rem !important;
-    gap: 2rem !important;
-  }
-}
-
-/* ============================================
-   GLOBAL SECTION PADDING - MOBILE
-   ============================================ */
-@media (max-width: 768px) {
-  section {
-    padding-left: 1rem !important;
-    padding-right: 1rem !important;
+@media (max-width: 900px) {
+  .highlight-row,
+  .split-block,
+  .footer-container {
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+    text-align: center !important;
   }
   
-  h1 {
-    font-size: 2rem !important;
-    line-height: 1.2 !important;
-  }
-
-  h2 {
-    font-size: 1.75rem !important;
-  }
-
-  h3 {
-    font-size: 1.1rem !important;
+  .highlight-row > div,
+  .split-block > div {
+    flex: 1 1 100% !important;
+    width: 100% !important;
   }
 }
 
 /* ============================================
-   ABOUT PAGE - MOBILE
+   SECTION PADDING & FONT SCALING (Mobile)
    ============================================ */
 @media (max-width: 768px) {
-  /* Split layout blocks go column */
-  div[style*="splitBlock"] {
-    flex-direction: column !important;
+  section, footer > div {
+    padding-left: 1.25rem !important;
+    padding-right: 1.25rem !important;
+    padding-top: 4rem !important;
+    padding-bottom: 4rem !important;
   }
-
-  div[style*="bannerBlock"] {
-    padding: 2rem 1.5rem !important;
-  }
-}
-
-/* ============================================
-   HIGHLIGHTS SECTION - MOBILE
-   ============================================ */
-@media (max-width: 600px) {
-  div[style*="highlightsGrid"] {
-    grid-template-columns: 1fr !important;
+  
+  /* Make 24/7 emergency card font responsive */
+  .emergency-num {
+    font-size: clamp(3rem, 15vw, 7rem) !important;
   }
 }
 
-/* ============================================
-   MOBILE NAV - handled in Navbar.jsx
-   ============================================ */

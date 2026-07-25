@@ -78,7 +78,7 @@ export default function Services() {
                   {svc.isEmergency ? (
                     <div style={styles.emergencyCard}>
                       <div style={styles.emergencyInner}>
-                        <span style={styles.emergencyNum}>24/7</span>
+                        <span style={styles.emergencyNum} className="emergency-num">24/7</span>
                         <span style={styles.emergencyLabel}>Always Available</span>
                         <div style={styles.emergencyDots}>
                           <span style={styles.dot} />
