@@ -1,108 +1,259 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { Phone, Calendar, Star, CheckCircle2, Clock } from 'lucide-react';
 
 export default function Hero() {
   return (
-    <section style={styles.heroSection} className="hero-section">
-      <motion.div 
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 0 },
-          visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.15 }
-          }
-        }}
-        style={styles.content}
-      >
-        <motion.h1 variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }} style={styles.title} className="hero-title">
-          Dr. Jain's Multi-speciality Dental and Polyclinic
-        </motion.h1>
-        <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }} style={styles.subtitle}>
-          By Dr. Kapil Jain
-        </motion.p>
-        <motion.p variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }} style={styles.description}>
-          Experience painless, comprehensive dental care in a modern and clean environment. 
-          Your smile is our priority.
-        </motion.p>
-        <motion.button 
-          variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }} 
-          whileHover={{ scale: 1.05 }}
-          whileTap={{ scale: 0.95 }}
-          style={styles.cta}
+    <>
+      {/* ── HERO: full-screen with overlay ── */}
+      <section style={styles.hero}>
+        <img src="/clinic_interior.png" alt="Dr. Jain's Dental Clinic" style={styles.bgImage} />
+        <div style={styles.overlay} />
+
+        <motion.div
+          style={styles.content}
+          initial="hidden"
+          animate="visible"
+          variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { staggerChildren: 0.15 } } }}
         >
-          Book Appointment
-        </motion.button>
-      </motion.div>
-      <motion.div
-        initial={{ opacity: 0, x: 50, scale: 0.95 }}
-        animate={{ opacity: 1, x: 0, scale: 1 }}
-        transition={{ duration: 0.8, delay: 0.2, type: "spring", stiffness: 50 }}
-        style={styles.imageContainer}
-      >
-        <img src="/clinic_interior.png" alt="Modern Dental Clinic" style={styles.image} />
-      </motion.div>
-    </section>
+          <motion.p
+            style={styles.eyebrow}
+            variants={{ hidden: { opacity: 0, y: 10 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}
+          >
+            — Mandsaur · Est. Local Practice
+          </motion.p>
+
+          <motion.h1
+            style={styles.title}
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          >
+            Gentle care for a smile<br />
+            you're <span style={styles.accent}>proud</span> to show.
+          </motion.h1>
+
+          <motion.p
+            style={styles.subtitle}
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          >
+            Dr. Jain's Multi-Speciality Dental and Polyclinic — Mandsaur's trusted neighbourhood dentist.
+            Quality treatment, honest advice, and painless care.
+          </motion.p>
+
+          <motion.div
+            style={styles.ctas}
+            variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.6 } } }}
+          >
+            <Link to="/contact" style={styles.ctaPrimary}>
+              <Calendar size={18} /> Book Appointment
+            </Link>
+            <a href="tel:07947104543" style={styles.ctaSecondary}>
+              <Phone size={18} /> Call Now
+            </a>
+          </motion.div>
+
+          <motion.div
+            style={styles.trustBar}
+            variants={{ hidden: { opacity: 0 }, visible: { opacity: 1, transition: { duration: 0.8, delay: 0.5 } } }}
+          >
+            <span style={styles.trustItem}>
+              <Star size={16} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
+              <Star size={16} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
+              <Star size={16} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
+              <Star size={16} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
+              <Star size={16} style={{ color: '#f59e0b', fill: '#f59e0b' }} />
+              &nbsp;4.5 on Google
+            </span>
+            <span style={styles.divider}>|</span>
+            <span style={styles.trustItem}><CheckCircle2 size={16} /> Painless, modern care</span>
+            <span style={styles.divider}>|</span>
+            <span style={styles.trustItem}><Clock size={16} /> Open 24 Hrs</span>
+          </motion.div>
+        </motion.div>
+
+        {/* Wave SVG divider */}
+        <div style={styles.wave}>
+          <svg viewBox="0 0 1440 80" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ display: 'block', width: '100%', height: '80px' }}>
+            <path d="M0,40 C360,80 1080,0 1440,40 L1440,80 L0,80 Z" fill="#ffffff" />
+          </svg>
+        </div>
+      </section>
+
+      {/* ── STATS BAR ── */}
+      <section style={styles.statsBar}>
+        <div style={styles.statsContainer}>
+          {[
+            { num: '4+', label: 'Years of Experience' },
+            { num: '24/7', label: 'Emergency Services' },
+            { num: '₹100', label: 'Consultation Fee' },
+            { num: '100%', label: 'Painless Treatment' },
+          ].map((stat, i) => (
+            <motion.div
+              key={i}
+              style={styles.statItem}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+            >
+              <span style={styles.statNum}>{stat.num}</span>
+              <span style={styles.statLabel}>{stat.label}</span>
+            </motion.div>
+          ))}
+        </div>
+      </section>
+    </>
   );
 }
 
 const styles = {
-  heroSection: {
-    background: 'var(--accent-sky-gradient)',
-    minHeight: '80vh',
+  hero: {
+    position: 'relative',
+    minHeight: '100vh',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    padding: '4rem 2rem',
-    gap: '4rem',
-    flexWrap: 'wrap',
+    overflow: 'hidden',
+  },
+  bgImage: {
+    position: 'absolute',
+    inset: 0,
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center',
+  },
+  overlay: {
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(to bottom, rgba(0,30,60,0.65) 0%, rgba(0,30,60,0.55) 100%)',
   },
   content: {
-    flex: '1 1 400px',
-    maxWidth: '600px',
+    position: 'relative',
+    zIndex: 2,
+    textAlign: 'center',
+    maxWidth: '860px',
+    padding: '0 2rem',
+    paddingBottom: '80px',
+  },
+  eyebrow: {
+    color: '#7dd3fa',
+    fontSize: '0.95rem',
+    fontWeight: '600',
+    letterSpacing: '0.1em',
+    textTransform: 'uppercase',
+    marginBottom: '1.5rem',
   },
   title: {
-    fontSize: '3.5rem',
-    lineHeight: '1.1',
-    color: 'var(--neutral-ink)',
-    marginBottom: '1rem',
-    fontFamily: 'var(--font-inter)',
-    letterSpacing: '-0.04em',
-    fontWeight: '600',
+    fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+    fontWeight: '700',
+    color: '#ffffff',
+    lineHeight: '1.15',
+    marginBottom: '1.5rem',
+    letterSpacing: '-0.02em',
+  },
+  accent: {
+    color: '#7dd3fa',
+    fontStyle: 'italic',
   },
   subtitle: {
-    fontSize: '1.5rem',
-    color: 'var(--brand-surgical-blue)',
-    marginBottom: '1.5rem',
-    fontWeight: '500',
-  },
-  description: {
-    fontSize: '1.125rem',
-    color: 'var(--neutral-charcoal)',
+    fontSize: '1.15rem',
+    color: 'rgba(255,255,255,0.85)',
+    lineHeight: '1.7',
     marginBottom: '2.5rem',
-  },
-  cta: {
-    backgroundColor: 'var(--neutral-obsidian)',
-    color: 'var(--neutral-paper-white)',
-    border: 'none',
-    padding: '1rem 2rem',
-    borderRadius: '9999px',
-    fontSize: '1.125rem',
-    fontWeight: '500',
-    cursor: 'pointer',
-    transition: 'opacity 0.2s',
-  },
-  imageContainer: {
-    flex: '1 1 400px',
     maxWidth: '600px',
-    borderRadius: '18px',
-    overflow: 'hidden',
-    boxShadow: '0 20px 40px var(--neutral-sky-tint)',
+    margin: '0 auto 2.5rem',
   },
-  image: {
+  ctas: {
+    display: 'flex',
+    gap: '1rem',
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+    marginBottom: '3rem',
+  },
+  ctaPrimary: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    backgroundColor: 'var(--brand-surgical-blue)',
+    color: '#ffffff',
+    padding: '0.9rem 2rem',
+    borderRadius: '999px',
+    fontWeight: '700',
+    fontSize: '1rem',
+    textDecoration: 'none',
+    boxShadow: '0 4px 20px rgba(37,151,208,0.4)',
+  },
+  ctaSecondary: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.5rem',
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    backdropFilter: 'blur(10px)',
+    color: '#ffffff',
+    padding: '0.9rem 2rem',
+    borderRadius: '999px',
+    fontWeight: '600',
+    fontSize: '1rem',
+    textDecoration: 'none',
+    border: '1px solid rgba(255,255,255,0.3)',
+  },
+  trustBar: {
+    display: 'flex',
+    gap: '1rem',
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexWrap: 'wrap',
+    marginTop: '1rem',
+  },
+  trustItem: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.4rem',
+    color: 'rgba(255,255,255,0.9)',
+    fontSize: '0.9rem',
+    fontWeight: '500',
+  },
+  divider: {
+    color: 'rgba(255,255,255,0.4)',
+    fontSize: '1rem',
+  },
+  wave: {
+    position: 'absolute',
+    bottom: 0,
+    left: 0,
     width: '100%',
-    height: 'auto',
-    display: 'block',
-  }
+    zIndex: 3,
+  },
+  // Stats bar
+  statsBar: {
+    backgroundColor: '#ffffff',
+    padding: '3rem 2rem',
+    borderBottom: '1px solid #e8f4fd',
+  },
+  statsContainer: {
+    maxWidth: '900px',
+    margin: '0 auto',
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
+    gap: '2rem',
+    textAlign: 'center',
+  },
+  statItem: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.4rem',
+    alignItems: 'center',
+  },
+  statNum: {
+    fontSize: '2.5rem',
+    fontWeight: '800',
+    color: 'var(--brand-surgical-blue)',
+    lineHeight: 1,
+  },
+  statLabel: {
+    fontSize: '0.9rem',
+    color: 'var(--neutral-charcoal)',
+    fontWeight: '500',
+  },
 };

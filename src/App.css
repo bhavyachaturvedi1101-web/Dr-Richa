@@ -21,6 +21,16 @@
 }
 
 /* ============================================
+   HIGHLIGHT ROWS - MOBILE STACK
+   ============================================ */
+@media (max-width: 768px) {
+  .highlight-row {
+    flex-direction: column !important;
+  }
+}
+
+
+/* ============================================
    HERO SECTION - MOBILE
    ============================================ */
 @media (max-width: 768px) {

@@ -1,32 +1,53 @@
 import React from 'react';
-import { MapPin, Phone, Clock } from 'lucide-react';
+import { Link } from 'react-router-dom';
+import { MapPin, Phone, Clock, Smile } from 'lucide-react';
 
 export default function Footer() {
   return (
     <footer style={styles.footer}>
-      <div style={styles.container} className="footer-container">
-        <div style={styles.column}>
-          <h3 style={styles.title}>Dr. Jain's Dental & Polyclinic</h3>
-          <p style={styles.text}>Providing excellent and painless dental care in Mandsaur.</p>
-        </div>
-        <div style={styles.column}>
-          <h4 style={styles.subtitle}>Contact</h4>
-          <div style={styles.infoRow}>
-            <Phone size={20} color="var(--brand-surgical-blue)" />
-            <span style={styles.text}>07947104543</span>
-          </div>
-          <div style={styles.infoRow}>
-            <MapPin size={20} color="var(--brand-surgical-blue)" />
-            <span style={styles.text}>173 Dhanmandi Jankupura, Mandsaur, Front Of Dhawaj Office</span>
-          </div>
-          <div style={styles.infoRow}>
-            <Clock size={20} color="var(--brand-surgical-blue)" />
-            <span style={styles.text}>Open 24 Hrs, Monday - Sunday</span>
-          </div>
-        </div>
+      <div style={styles.wave}>
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={{ display: 'block', width: '100%', height: '60px' }}>
+          <path d="M0,30 C480,60 960,0 1440,30 L1440,60 L0,60 Z" fill="#07080a" />
+        </svg>
       </div>
-      <div style={styles.bottomBar}>
-        <p style={styles.bottomText}>© 2026 Dr. Jain's Multi-speciality Dental and Polyclinic. All rights reserved.</p>
+      <div style={styles.inner}>
+        <div style={styles.grid} className="footer-container">
+          {/* Brand */}
+          <div style={styles.brand}>
+            <div style={styles.logoRow}>
+              <div style={styles.logoIcon}><Smile size={22} color="#fff" strokeWidth={2.5} /></div>
+              <span style={styles.logoText}>Dr. Jain's Dental</span>
+            </div>
+            <p style={styles.tagline}>Providing excellent and painless dental care in Mandsaur since 2020.</p>
+          </div>
+
+          {/* Quick Links */}
+          <div>
+            <h4 style={styles.colTitle}>Quick Links</h4>
+            {[
+              { label: 'About Us', to: '/about' },
+              { label: 'Services', to: '/services' },
+              { label: 'Facilities', to: '/facilities' },
+              { label: 'Contact', to: '/contact' },
+            ].map((l) => (
+              <div key={l.label} style={{ marginBottom: '0.6rem' }}>
+                <Link to={l.to} style={styles.navLink}>{l.label}</Link>
+              </div>
+            ))}
+          </div>
+
+          {/* Contact */}
+          <div>
+            <h4 style={styles.colTitle}>Contact</h4>
+            <div style={styles.infoRow}><Phone size={16} color="var(--brand-surgical-blue)" /><span style={styles.infoText}>07947104543</span></div>
+            <div style={styles.infoRow}><MapPin size={16} color="var(--brand-surgical-blue)" /><span style={styles.infoText}>173 Dhanmandi Jankupura, Mandsaur, Front Of Dhawaj Office</span></div>
+            <div style={styles.infoRow}><Clock size={16} color="var(--brand-surgical-blue)" /><span style={styles.infoText}>Open 24 Hrs, Monday – Sunday</span></div>
+          </div>
+        </div>
+
+        <div style={styles.bottom}>
+          <p style={styles.bottomText}>© 2026 Dr. Jain's Multi-Speciality Dental and Polyclinic. All rights reserved.</p>
+        </div>
       </div>
     </footer>
   );
@@ -34,51 +55,83 @@ export default function Footer() {
 
 const styles = {
   footer: {
-    backgroundColor: 'var(--neutral-obsidian)',
-    color: 'var(--neutral-paper-white)',
-    paddingTop: '4rem',
+    backgroundColor: '#07080a',
   },
-  container: {
+  wave: {
+    lineHeight: 0,
+    backgroundColor: '#f8fbfe',
+  },
+  inner: {
+    padding: '4rem 2rem 2rem',
     maxWidth: '1200px',
     margin: '0 auto',
-    padding: '0 2rem',
+  },
+  grid: {
     display: 'flex',
-    flexWrap: 'wrap',
     gap: '4rem',
     justifyContent: 'space-between',
+    flexWrap: 'wrap',
     marginBottom: '3rem',
   },
-  column: {
-    flex: '1 1 300px',
+  brand: {
+    flex: '1 1 280px',
   },
-  title: {
-    fontSize: '1.5rem',
-    color: 'var(--neutral-paper-white)',
+  logoRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.75rem',
     marginBottom: '1rem',
+  },
+  logoIcon: {
+    backgroundColor: 'var(--brand-surgical-blue)',
+    borderRadius: '10px',
+    padding: '0.4rem',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoText: {
+    fontSize: '1.25rem',
+    fontWeight: '800',
+    color: '#ffffff',
     letterSpacing: '-0.02em',
   },
-  subtitle: {
-    fontSize: '1.25rem',
-    color: 'var(--neutral-paper-white)',
-    marginBottom: '1.5rem',
-  },
-  text: {
-    color: 'var(--neutral-slate)',
+  tagline: {
+    color: '#8b8b9a',
+    fontSize: '0.95rem',
     lineHeight: '1.6',
+  },
+  colTitle: {
+    color: '#ffffff',
+    fontSize: '1rem',
+    fontWeight: '700',
+    marginBottom: '1.25rem',
+    letterSpacing: '-0.01em',
+  },
+  navLink: {
+    color: '#8b8b9a',
+    fontSize: '0.95rem',
+    textDecoration: 'none',
+    transition: 'color 0.2s',
   },
   infoRow: {
     display: 'flex',
-    alignItems: 'center',
-    gap: '1rem',
+    alignItems: 'flex-start',
+    gap: '0.75rem',
     marginBottom: '1rem',
   },
-  bottomBar: {
-    borderTop: '1px solid var(--neutral-charcoal)',
-    padding: '1.5rem 2rem',
+  infoText: {
+    color: '#8b8b9a',
+    fontSize: '0.9rem',
+    lineHeight: '1.5',
+  },
+  bottom: {
+    borderTop: '1px solid #1e1e2a',
+    paddingTop: '1.5rem',
     textAlign: 'center',
   },
   bottomText: {
-    color: 'var(--neutral-slate)',
-    fontSize: '0.875rem',
-  }
+    color: '#555565',
+    fontSize: '0.85rem',
+  },
 };
