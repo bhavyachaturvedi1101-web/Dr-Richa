@@ -27,7 +27,6 @@ export default function Footer() {
             {[
               { label: 'About Us', to: '/about' },
               { label: 'Services', to: '/services' },
-              { label: 'Facilities', to: '/facilities' },
               { label: 'Contact', to: '/contact' },
             ].map((l) => (
               <div key={l.label} style={{ marginBottom: '0.6rem' }}>
