@@ -75,7 +75,7 @@ export default function About() {
                 community. She holds a B.D.S. degree from College of Dental Science and Hospital (C.D.SH.), Rau, Indore
                 and has 9 years of clinical experience.
               </p>
-              <p style={styles.body} style={{ marginTop: '1rem' }}>
+              <p style={{ ...styles.body, marginTop: '1rem' }}>
                 She believes in taking the time to explain every dental problem and proposed treatment
                 to patients — ensuring they feel comfortable, informed, and in control. Her gentle approach
                 makes every visit a reassuring experience.

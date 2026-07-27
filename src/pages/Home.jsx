@@ -1,24 +1,35 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
-import Highlights from '../components/Highlights';
-
+import AboutMinimal from '../components/AboutMinimal';
+import Specialist from '../components/Specialist';
+import ServicesOverview from '../components/ServicesOverview';
+import WhyTrustUs from '../components/WhyTrustUs';
+import Process from '../components/Process';
 import Testimonials from '../components/Testimonials';
-import Services from '../components/Services';
+import Transformations from '../components/Transformations';
+import Education from '../components/Education';
+import DigitalJourneys from '../components/DigitalJourneys';
 
 export default function Home() {
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      style={{ backgroundColor: '#ffffff' }}
     >
       <Hero />
-      <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
-        <Highlights />
-      </div>
-
+      <AboutMinimal />
+      <Specialist />
+      <ServicesOverview />
+      <WhyTrustUs />
+      <Process />
       <Testimonials />
+      <Transformations />
+      <Education />
+      <DigitalJourneys />
     </motion.div>
   );
 }
+
