@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Clock, Stethoscope, MessageSquare, X, Award } from 'lucide-react';
+import { MapPin, Phone, Clock, MessageSquare, X, Award } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Footer() {
@@ -44,8 +44,18 @@ export default function Footer() {
           {/* Brand Info */}
           <div style={styles.brand}>
             <div style={styles.logoRow}>
-              <div style={styles.logoIcon}>
-                <Stethoscope size={22} color="#ffffff" strokeWidth={2.5} />
+              <div style={{
+                width: '38px',
+                height: '38px',
+                borderRadius: '50%',
+                overflow: 'hidden',
+                backgroundColor: '#ffffff',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                flexShrink: 0
+              }}>
+                <img src="/logo.svg" alt="Dental Speciality Centre Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
               </div>
               <span style={styles.logoText}>Dental Speciality Centre</span>
             </div>
@@ -64,7 +74,7 @@ export default function Footer() {
             {[
               { label: 'Home', to: '/' },
               { label: 'About Us', to: '/about' },
-              { label: 'Services', to: '/services' },
+              { label: 'Treatments', to: '/treatments' },
               { label: 'Contact', to: '/contact' },
             ].map((l) => (
               <div key={l.label} style={{ marginBottom: '0.75rem' }}>

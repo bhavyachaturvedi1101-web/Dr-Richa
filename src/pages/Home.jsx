@@ -3,7 +3,7 @@ import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import AboutMinimal from '../components/AboutMinimal';
 import Specialist from '../components/Specialist';
-import ServicesOverview from '../components/ServicesOverview';
+import TreatmentsOverview from '../components/TreatmentsOverview';
 import WhyTrustUs from '../components/WhyTrustUs';
 import Process from '../components/Process';
 import Testimonials from '../components/Testimonials';
@@ -22,7 +22,7 @@ export default function Home() {
       <Hero />
       <AboutMinimal />
       <Specialist />
-      <ServicesOverview />
+      <TreatmentsOverview />
       <WhyTrustUs />
       <Process />
       <Testimonials />

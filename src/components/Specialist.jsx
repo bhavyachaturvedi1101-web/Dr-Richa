@@ -5,12 +5,12 @@ import { Award, ArrowRight } from 'lucide-react';
 
 export default function Specialist() {
   const listItems = [
-    { num: '01', title: 'Microscopic Root Canal Therapy (RCT)' },
-    { num: '02', title: 'Painless Laser & Restorative Endodontics' },
-    { num: '03', title: 'Aesthetic Ceramic Crowns & Restoration Work' },
-    { num: '04', title: 'Gentle Preventive Cleaning & Hygiene' },
-    { num: '05', title: 'Pediatric Dentistry & Child Oral Care' },
-    { num: '06', title: 'TMJ Treatment & Jaw Corrections' },
+    { num: '01', title: 'Microscopic Root Canal Therapy (RCT)', image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=600&auto=format&fit=crop' },
+    { num: '02', title: 'Painless Laser & Restorative Endodontics', image: 'https://images.unsplash.com/photo-1598256989800-fea5ce5146c1?q=80&w=600&auto=format&fit=crop' },
+    { num: '03', title: 'Aesthetic Ceramic Crowns & Restoration Work', image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=600&auto=format&fit=crop' },
+    { num: '04', title: 'Gentle Preventive Cleaning & Hygiene', image: 'https://images.unsplash.com/photo-1522849696084-818b291c6b68?q=80&w=600&auto=format&fit=crop' },
+    { num: '05', title: 'Pediatric Dentistry & Child Oral Care', image: 'https://images.unsplash.com/photo-1518152006812-edab29b069ac?q=80&w=600&auto=format&fit=crop' },
+    { num: '06', title: 'TMJ Treatment & Jaw Corrections', image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=600&auto=format&fit=crop' },
   ];
 
   return (
@@ -113,16 +113,29 @@ export default function Specialist() {
               <motion.div 
                 key={idx} 
                 style={styles.expertiseCard}
-                initial={{ opacity: 0, y: 15 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.5, delay: idx * 0.08 }}
-                whileHover={{ x: 5 }}
+                whileHover="hover"
               >
-                <span style={styles.expertNum}>{item.num}</span>
+                <div style={styles.expertImageWrapper}>
+                  <motion.img 
+                    src={item.image} 
+                    alt={item.title} 
+                    style={styles.expertImage} 
+                    variants={{ hover: { scale: 1.05 } }}
+                    transition={{ duration: 0.4, ease: 'easeOut' }}
+                  />
+                  <div style={styles.expertNumOverlay}>{item.num}</div>
+                </div>
                 <div style={styles.expertContent}>
                   <p style={styles.expertTitle}>{item.title}</p>
-                  <div style={styles.expertBar} className="expert-accent-bar" />
+                  <motion.div 
+                    style={styles.expertBar} 
+                    variants={{ hover: { width: '100%', opacity: 1 } }}
+                    transition={{ duration: 0.3 }}
+                  />
                 </div>
               </motion.div>
             ))}
@@ -307,39 +320,61 @@ const styles = {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
     gap: '2.5rem 2rem',
-    maxWidth: '1000px',
+    maxWidth: '1100px',
     margin: '0 auto',
   },
   expertiseCard: {
     display: 'flex',
-    alignItems: 'flex-start',
-    gap: '16px',
-    cursor: 'default',
+    flexDirection: 'column',
+    backgroundColor: '#ffffff',
+    borderRadius: '16px',
+    overflow: 'hidden',
+    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
+    cursor: 'pointer',
   },
-  expertNum: {
-    fontSize: '1.25rem',
-    fontWeight: '300',
-    color: 'var(--neutral-slate)',
-    lineHeight: '1',
-    paddingTop: '2px',
+  expertImageWrapper: {
+    position: 'relative',
+    width: '100%',
+    height: '200px',
+    overflow: 'hidden',
+  },
+  expertImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    display: 'block',
+  },
+  expertNumOverlay: {
+    position: 'absolute',
+    top: '16px',
+    right: '16px',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backdropFilter: 'blur(4px)',
+    color: 'var(--brand-surgical-blue)',
+    fontSize: '0.85rem',
+    fontWeight: '800',
+    padding: '4px 10px',
+    borderRadius: '999px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
   },
   expertContent: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '8px',
+    gap: '12px',
+    padding: '24px',
     flex: 1,
+    justifyContent: 'center',
   },
   expertTitle: {
-    fontSize: '0.95rem',
+    fontSize: '1rem',
     fontWeight: '700',
     color: 'var(--neutral-ink)',
     lineHeight: '1.4',
   },
   expertBar: {
-    width: '0%',
-    height: '1px',
+    width: '30%',
+    height: '2px',
     backgroundColor: 'var(--brand-surgical-blue)',
-    transition: 'width 0.4s ease',
     opacity: 0.6,
   },
 };

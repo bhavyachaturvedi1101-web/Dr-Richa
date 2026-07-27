@@ -1,14 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { CheckCircle2, Award, Heart, Shield } from 'lucide-react';
+import { CheckCircle2, Award, Heart, Shield, Calendar, UserCheck, Languages, Clipboard } from 'lucide-react';
 
-const quickInfo = [
-  { label: 'Specialization', value: 'Oral and Dental Surgeon, Family and Aesthetic Dentist' },
-  { label: 'Qualification', value: 'B.D.S. from College of Dental Science and Hospital (C.D.SH.), Rau, Indore' },
-  { label: 'Experience', value: '9 Years in Healthcare' },
-  { label: 'Languages', value: 'English, Hindi' },
-  { label: 'Registration', value: 'A-12354-Dental Council Of India' }
+const credentials = [
+  { icon: Award, label: 'Specialization', value: 'Oral and Dental Surgeon, Family and Aesthetic Dentist' },
+  { icon: Clipboard, label: 'Qualification', value: 'B.D.S. from College of Dental Science and Hospital (C.D.SH.), Rau, Indore' },
+  { icon: UserCheck, label: 'Experience', value: '9 Years of Dedicated Clinical Practice' },
+  { icon: Languages, label: 'Languages', value: 'English, Hindi' },
+  { icon: CheckCircle2, label: 'Registration', value: 'A-12354 - Dental Council of India' }
 ];
 
 const values = [
@@ -19,136 +19,179 @@ const values = [
 ];
 
 export default function About() {
+  const cardVariants = {
+    hidden: { opacity: 0, y: 20 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
+  };
+
   return (
     <motion.div
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5, ease: 'easeOut' }}
-      style={{ backgroundColor: '#f8fbfe' }}
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      style={{ backgroundColor: '#ffffff' }}
     >
-
+      
       {/* ── HERO BANNER ── */}
       <section style={styles.heroBanner}>
-        <div style={styles.heroBannerOverlay} />
-        <motion.div
-          style={styles.heroBannerContent}
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.2 },
-            },
-          }}
-        >
-          <motion.p style={styles.eyebrow} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>— ABOUT US</motion.p>
-          <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>Dental Speciality Centre</motion.h1>
-          <motion.p style={styles.heroSub} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>Trusted dental care in Indore — where expertise meets compassion.</motion.p>
-        </motion.div>
+        <div style={styles.heroOverlay} />
+        <div style={styles.heroOverlayGrid} />
+        <div style={styles.container}>
+          <motion.div
+            style={styles.heroContent}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+            }}
+          >
+            <motion.p 
+              style={styles.heroSubtag} 
+              variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
+            >
+              Our Story
+            </motion.p>
+            <motion.h1 
+              style={styles.heroTitle} 
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            >
+              Dental Speciality <span style={{ color: 'var(--brand-surgical-blue)' }}>Centre.</span>
+            </motion.h1>
+            <motion.p 
+              style={styles.heroDesc} 
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            >
+              Trusted dental care in Indore — where clinical expertise meets empathetic patient hospitality.
+            </motion.p>
+          </motion.div>
+        </div>
       </section>
 
-      {/* ── MEET DR. JAIN ── */}
+      {/* ── MEET THE SPECIALIST ── */}
       <section style={styles.section}>
         <div style={styles.container}>
-          <div style={styles.splitBlock} className="split-block">
-            <motion.div
-              style={styles.imageBox}
-              initial={{ opacity: 0, x: -40 }}
+          <div style={styles.grid}>
+            
+            {/* Visual Column */}
+            <motion.div 
+              style={styles.visualWrapper}
+              initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
+              transition={{ duration: 0.8 }}
             >
-              <img src="/about_doc.png" alt="Dr. Richa Tiwari" style={styles.img} />
+              <div style={styles.imageCapsule}>
+                <img src="/about_doc.png" alt="Dr. Richa Tiwari" style={styles.aboutImg} />
+              </div>
+              {/* Overlapping badge */}
+              <div style={styles.floatingStatsBadge}>
+                <span style={styles.badgeNum}>9+</span>
+                <span style={styles.badgeLabel}>Years clinical excellence</span>
+              </div>
             </motion.div>
-              <motion.div
-                style={styles.textBox}
-                initial={{ opacity: 0, x: 40 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, amount: 0.3 }}
-                transition={{ duration: 0.7, ease: "easeOut", delay: 0.2 }}
-              >
-              <p style={styles.eyebrow2}>— THE DOCTOR</p>
-              <h2 style={styles.sectionTitle}>Meet Dr. Richa Tiwari</h2>
-              <p style={styles.body}>
-                Dr. Richa Tiwari Vyas is an experienced, polite, and highly professional dentist serving the Indore
-                community. She holds a B.D.S. degree from College of Dental Science and Hospital (C.D.SH.), Rau, Indore
-                and has 9 years of clinical experience.
+
+            {/* Text Column */}
+            <motion.div 
+              style={styles.textWrapper}
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <span style={styles.subtag}>The Surgeon</span>
+              <h2 style={styles.sectionHeading}>Meet Dr. Richa Tiwari</h2>
+              <p style={styles.paragraph}>
+                Dr. Richa Tiwari Vyas is an experienced, polite, and highly professional dentist serving the Indore community. She holds a B.D.S. degree from College of Dental Science and Hospital (C.D.SH.), Rau, Indore and has over 9 years of clinical experience.
               </p>
-              <p style={{ ...styles.body, marginTop: '1rem' }}>
-                She believes in taking the time to explain every dental problem and proposed treatment
-                to patients — ensuring they feel comfortable, informed, and in control. Her gentle approach
-                makes every visit a reassuring experience.
+              <p style={styles.paragraph}>
+                She believes in taking the time to explain every dental problem and proposed treatment options to patients — ensuring they feel comfortable, informed, and in control of their health. Her gentle approach makes every visit a reassuring experience.
               </p>
-              <Link to="/contact" style={styles.cta}>Book an Appointment →</Link>
+
+              {/* Action Button */}
+              <div style={{ marginTop: '1.5rem' }}>
+                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                  <Link to="/contact" style={styles.ctaBtn}>
+                    <Calendar size={16} /> Book Appointment
+                  </Link>
+                </motion.div>
+              </div>
             </motion.div>
+
           </div>
         </div>
       </section>
 
-      {/* ── PHILOSOPHY ── */}
-      <section style={styles.section}>
+      {/* ── PROFESSIONAL CREDENTIALS ── */}
+      <section style={styles.credSection}>
         <div style={styles.container}>
-          <div style={{ ...styles.splitBlock, flexDirection: 'row-reverse' }} className="split-block">
-            <motion.div
-              style={styles.imageBox}
-              initial={{ opacity: 0, x: 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <img src="/highlights.png" alt="Modern Dental Equipment" style={styles.img} />
-            </motion.div>
-            <motion.div
-              style={styles.textBox}
-              initial={{ opacity: 0, x: -40 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.7 }}
-            >
-              <p style={styles.eyebrow2}>— OUR PHILOSOPHY</p>
-              <h2 style={styles.sectionTitle}>Care you can trust, every time.</h2>
-              <p style={styles.body}>
-                We are dedicated to providing completely painless treatments. We never recommend
-                unnecessary procedures or add hidden charges. Our clinic is equipped with modern,
-                sterilized equipment to maintain the highest standards of hygiene and patient safety.
-              </p>
-              <p style={{ ...styles.body, marginTop: '1rem' }}>
-                We want your visit to be comfortable, transparent, and relieving. Your trust is
-                our greatest asset, and we work every day to earn it.
-              </p>
-            </motion.div>
+          <span style={styles.subtagCenter}>Verified History</span>
+          <h2 style={styles.sectionHeadingCenter}>Credentials & Certifications</h2>
+          
+          <div style={styles.credList}>
+            {credentials.map((c, idx) => {
+              const IconComp = c.icon;
+              return (
+                <motion.div 
+                  key={idx}
+                  style={styles.credCard}
+                  initial={{ opacity: 0, y: 15 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.5, delay: idx * 0.08 }}
+                  whileHover={{ x: 5 }}
+                >
+                  <div style={styles.credIconWrapper}>
+                    <IconComp size={18} color="var(--brand-surgical-blue)" />
+                  </div>
+                  <div>
+                    <span style={styles.credLabel}>{c.label}</span>
+                    <p style={styles.credValue}>{c.value}</p>
+                  </div>
+                </motion.div>
+              );
+            })}
           </div>
         </div>
       </section>
 
-      {/* ── VALUES ── */}
-      <section style={styles.valuesSection}>
+      {/* ── WHY CHOOSE US ── */}
+      <section style={styles.section}>
         <div style={styles.container}>
-          <motion.p style={styles.eyebrow} initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: true }}>— WHY CHOOSE US</motion.p>
-          <motion.h2 style={styles.sectionTitle} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.6 }}>
-            What makes us different
-          </motion.h2>
-          <div style={styles.valuesGrid}>
+          <span style={styles.subtagCenter}>Why Choose Us</span>
+          <h2 style={styles.sectionHeadingCenter}>Care you can trust, every time.</h2>
+          <p style={styles.sectionDescCenter}>
+            We are dedicated to providing completely painless treatments. We never recommend unnecessary procedures or add hidden charges.
+          </p>
+
+          <motion.div 
+            style={styles.valuesGrid}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, amount: 0.2 }}
+            variants={{
+              hidden: {},
+              visible: { transition: { staggerChildren: 0.1 } }
+            }}
+          >
             {values.map((v, i) => {
               const Icon = v.icon;
               return (
                 <motion.div
                   key={i}
                   style={styles.valueCard}
-                  initial={{ opacity: 0, y: 30 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.5, delay: i * 0.1 }}
-                  whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(37,151,208,0.12)' }}
+                  variants={cardVariants}
+                  whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(37,151,208,0.08)' }}
                 >
-                  <div style={styles.iconBox}><Icon size={24} color="var(--brand-surgical-blue)" /></div>
+                  <div style={styles.iconBox}>
+                    <Icon size={22} color="var(--brand-surgical-blue)" />
+                  </div>
                   <h3 style={styles.valueTitle}>{v.title}</h3>
                   <p style={styles.valueDesc}>{v.desc}</p>
                 </motion.div>
               );
             })}
-          </div>
+          </motion.div>
         </div>
       </section>
 
@@ -157,179 +200,263 @@ export default function About() {
 }
 
 const styles = {
-  heroBanner: {
-    position: 'relative',
-    backgroundColor: '#0a2342',
-    minHeight: '50vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-  },
-  heroBannerOverlay: {
-    position: 'absolute',
-    inset: 0,
-    background: 'linear-gradient(to bottom, rgba(0,30,60,0.7), rgba(0,30,60,0.6))',
-  },
-  heroBannerContent: {
-    position: 'relative',
-    zIndex: 2,
-    padding: '0 2rem',
-  },
-  eyebrow: {
-    color: 'var(--brand-surgical-blue)',
-    fontSize: '0.85rem',
-    fontWeight: '700',
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
-    marginBottom: '0.75rem',
-    textAlign: 'center',
-  },
-  eyebrow2: {
-    color: 'var(--brand-surgical-blue)',
-    fontSize: '0.82rem',
-    fontWeight: '700',
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
-    marginBottom: '0.75rem',
-  },
-  heroTitle: {
-    color: '#ffffff',
-    fontSize: 'clamp(2rem, 5vw, 3.5rem)',
-    fontWeight: '800',
-    lineHeight: 1.15,
-    marginBottom: '1rem',
-    letterSpacing: '-0.02em',
-  },
-  heroSub: {
-    color: 'rgba(255,255,255,0.85)',
-    fontSize: '1.1rem',
-  },
-  section: {
-    padding: '6rem 2rem',
-  },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
+    padding: '0 2rem',
+    position: 'relative',
+    zIndex: 2,
   },
-  sectionTitle: {
-    fontSize: 'clamp(1.75rem, 3.5vw, 2.75rem)',
+  heroBanner: {
+    position: 'relative',
+    backgroundColor: '#ffffff',
+    padding: '10rem 0 5rem',
+    overflow: 'hidden',
+  },
+  heroOverlay: {
+    position: 'absolute',
+    inset: 0,
+    background: 'transparent',
+    zIndex: 1,
+    display: 'none',
+  },
+  heroOverlayGrid: {
+    position: 'absolute',
+    inset: 0,
+    background: 'transparent',
+    zIndex: 1,
+    display: 'none',
+  },
+  heroContent: {
+    maxWidth: '800px',
+    margin: '0 auto',
+    textAlign: 'center',
     color: 'var(--neutral-ink)',
-    fontWeight: '700',
-    marginBottom: '1.5rem',
-    letterSpacing: '-0.02em',
-    lineHeight: 1.2,
   },
-  splitBlock: {
+  heroSubtag: {
+    fontSize: '0.85rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.3em',
+    color: 'var(--brand-surgical-blue)',
+    fontWeight: '700',
+    marginBottom: '1rem',
+  },
+  heroTitle: {
+    fontSize: 'clamp(2.5rem, 6vw, 4.25rem)',
+    fontWeight: '800',
+    lineHeight: '1.1',
+    letterSpacing: '-0.02em',
+    color: 'var(--neutral-ink)',
+    marginBottom: '1.25rem',
+  },
+  heroDesc: {
+    fontSize: '1.15rem',
+    color: 'var(--neutral-charcoal)',
+    lineHeight: '1.65',
+    maxWidth: '600px',
+    margin: '0 auto',
+  },
+  section: {
+    padding: '7rem 0',
+  },
+  grid: {
     display: 'flex',
-    gap: '5rem',
     alignItems: 'center',
+    gap: '5rem',
     flexWrap: 'wrap',
   },
-  imageBox: {
-    flex: '1 1 420px',
-    borderRadius: '24px',
-    overflow: 'hidden',
-    boxShadow: '0 20px 50px rgba(37,151,208,0.12)',
-  },
-  img: {
-    width: '100%',
-    minHeight: '420px',
-    objectFit: 'cover',
-    display: 'block',
-  },
-  textBox: {
-    flex: '1 1 340px',
-  },
-  body: {
-    fontSize: '1.08rem',
-    color: 'var(--neutral-charcoal)',
-    lineHeight: '1.75',
-  },
-  cta: {
-    display: 'inline-block',
-    marginTop: '2rem',
-    color: 'var(--brand-surgical-blue)',
-    fontWeight: '700',
-    fontSize: '1rem',
-    borderBottom: '2px solid var(--brand-surgical-blue)',
-    paddingBottom: '2px',
-    textDecoration: 'none',
-  },
-  infoSection: {
-    padding: '6rem 2rem',
-    backgroundColor: 'var(--neutral-cloud-gray)',
-    textAlign: 'center',
-  },
-  infoGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(260px, 1fr))',
-    gap: '1.5rem',
-    marginTop: '3rem',
-    textAlign: 'left',
-  },
-  infoCard: {
-    backgroundColor: '#ffffff',
-    padding: '1.75rem 2rem',
-    borderRadius: '16px',
-    border: '1px solid #dbeef9',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.5rem',
-    cursor: 'default',
-    transition: 'box-shadow 0.3s',
-  },
-  infoLabel: {
-    fontSize: '0.8rem',
-    color: 'var(--brand-surgical-blue)',
-    textTransform: 'uppercase',
-    letterSpacing: '0.08em',
-    fontWeight: '700',
-  },
-  infoValue: {
-    fontSize: '1.05rem',
-    color: 'var(--neutral-ink)',
-    fontWeight: '600',
-    lineHeight: '1.4',
-  },
-  valuesSection: {
-    padding: '6rem 2rem',
-    backgroundColor: '#ffffff',
-    textAlign: 'center',
-  },
-  valuesGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))',
-    gap: '2rem',
-    marginTop: '3rem',
-    textAlign: 'left',
-  },
-  valueCard: {
-    backgroundColor: '#f8fbfe',
-    padding: '2rem',
-    borderRadius: '20px',
-    border: '1px solid #dbeef9',
-    cursor: 'default',
-    transition: 'box-shadow 0.3s',
-  },
-  iconBox: {
-    backgroundColor: '#e0f2fe',
-    width: '52px',
-    height: '52px',
-    borderRadius: '14px',
+  visualWrapper: {
+    flex: '1 1 480px',
+    position: 'relative',
+    height: '520px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: '1.25rem',
+  },
+  imageCapsule: {
+    width: '75%',
+    height: '95%',
+    borderRadius: '140px',
+    overflow: 'hidden',
+    border: '8px solid #ffffff',
+    boxShadow: '0 25px 60px rgba(0,0,0,0.12)',
+  },
+  aboutImg: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  floatingStatsBadge: {
+    position: 'absolute',
+    bottom: '8%',
+    right: '5%',
+    backgroundColor: '#ffffff',
+    border: '1px solid rgba(0,0,0,0.06)',
+    borderRadius: '24px',
+    padding: '1rem 1.5rem',
+    boxShadow: '0 15px 30px rgba(0,0,0,0.08)',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+  },
+  badgeNum: {
+    fontSize: '2rem',
+    fontWeight: '800',
+    color: 'var(--brand-surgical-blue)',
+    lineHeight: '1',
+  },
+  badgeLabel: {
+    fontSize: '0.65rem',
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    color: 'var(--neutral-charcoal)',
+    letterSpacing: '0.05em',
+    marginTop: '4px',
+  },
+  textWrapper: {
+    flex: '1 1 450px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.5rem',
+  },
+  subtag: {
+    fontSize: '0.8rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.3em',
+    color: 'var(--brand-surgical-blue)',
+    fontWeight: '700',
+    display: 'block',
+  },
+  sectionHeading: {
+    fontSize: 'clamp(2.25rem, 4vw, 3.25rem)',
+    color: 'var(--neutral-ink)',
+    fontWeight: '800',
+    letterSpacing: '-0.02em',
+  },
+  paragraph: {
+    fontSize: '1.05rem',
+    color: 'var(--neutral-charcoal)',
+    lineHeight: '1.75',
+  },
+  ctaBtn: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    backgroundColor: 'var(--brand-surgical-blue)',
+    color: '#ffffff',
+    padding: '0.85rem 1.75rem',
+    borderRadius: '999px',
+    fontWeight: '700',
+    fontSize: '0.9rem',
+    textDecoration: 'none',
+    boxShadow: '0 6px 15px rgba(37,151,208,0.3)',
+  },
+  // Credentials
+  credSection: {
+    padding: '6rem 0',
+    backgroundColor: '#f8fbfe',
+    borderTop: '1px solid rgba(0,0,0,0.04)',
+    borderBottom: '1px solid rgba(0,0,0,0.04)',
+  },
+  subtagCenter: {
+    fontSize: '0.8rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.3em',
+    color: 'var(--brand-surgical-blue)',
+    fontWeight: '700',
+    display: 'block',
+    textAlign: 'center',
+    marginBottom: '0.75rem',
+  },
+  sectionHeadingCenter: {
+    fontSize: 'clamp(2.25rem, 3.5vw, 3rem)',
+    color: 'var(--neutral-ink)',
+    fontWeight: '800',
+    letterSpacing: '-0.02em',
+    textAlign: 'center',
+    marginBottom: '4rem',
+  },
+  sectionDescCenter: {
+    fontSize: '1.1rem',
+    color: 'var(--neutral-charcoal)',
+    maxWidth: '560px',
+    margin: '-3rem auto 4rem',
+    textAlign: 'center',
+    lineHeight: '1.65',
+  },
+  credList: {
+    maxWidth: '800px',
+    margin: '0 auto',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+  },
+  credCard: {
+    backgroundColor: '#ffffff',
+    border: '1px solid rgba(0,0,0,0.05)',
+    borderRadius: '20px',
+    padding: '1.25rem 2rem',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1.5rem',
+    transition: 'all 0.25s ease',
+    cursor: 'default',
+  },
+  credIconWrapper: {
+    width: '42px',
+    height: '42px',
+    borderRadius: '10px',
+    backgroundColor: 'var(--neutral-sky-tint)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
+  },
+  credLabel: {
+    fontSize: '0.75rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.08em',
+    fontWeight: '700',
+    color: 'var(--neutral-slate)',
+  },
+  credValue: {
+    fontSize: '0.98rem',
+    fontWeight: '700',
+    color: 'var(--neutral-ink)',
+    marginTop: '2px',
+  },
+  // Values Cards Choose Us
+  valuesGrid: {
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+    gap: '2rem',
+  },
+  valueCard: {
+    backgroundColor: '#f8fbfe',
+    border: '1px solid #dbeef9',
+    borderRadius: '24px',
+    padding: '2.25rem',
+    cursor: 'default',
+    transition: 'all 0.3s ease',
+  },
+  iconBox: {
+    width: '46px',
+    height: '46px',
+    borderRadius: '12px',
+    backgroundColor: '#e0f2fe',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: '1.5rem',
   },
   valueTitle: {
-    fontSize: '1.15rem',
+    fontSize: '1.2rem',
+    fontWeight: '800',
     color: 'var(--neutral-ink)',
-    fontWeight: '700',
     marginBottom: '0.6rem',
   },
   valueDesc: {
-    fontSize: '0.95rem',
+    fontSize: '0.92rem',
     color: 'var(--neutral-charcoal)',
     lineHeight: '1.65',
   },

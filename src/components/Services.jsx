@@ -1,350 +1,479 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import { Activity, Cpu, Shield, Award, Smile, Heart, Phone, ClipboardCheck } from 'lucide-react';
 
-const services = [
+const deepServices = [
   {
-    tag: 'DIAGNOSTICS',
-    title: 'Dental & Oral X-ray',
-    desc: 'Advanced digital X-ray technology for accurate diagnosis — fast, safe, and low-radiation imaging to guide your treatment plan.',
-    image: '/dental_service_1.jpg',
-  },
-  {
-    tag: 'PREVENTIVE CARE',
-    title: 'Teeth Cleaning & Polishing',
-    desc: 'Professional ultrasonic scaling and polishing to remove plaque and tartar buildup, leaving your teeth feeling clean, fresh, and healthy.',
-    image: '/dental_service_6.jpg',
-  },
-  {
-    tag: 'RESTORATIVE CARE',
+    id: 'rct',
+    tag: 'Endodontics',
     title: 'Root Canal Treatment (RCT)',
-    desc: 'Precise, painless root canal treatment to save your infected tooth — Dr. Richa Tiwari walks you through every step so you feel confident and calm.',
+    desc: 'Deep bacterial decay can compromise the vital pulp of your tooth. Dr. Richa Tiwari walks you through every step of our microscope-assisted therapy to save your biological tooth safely and painlessly.',
+    points: [
+      'High-precision rotary file systems for silent, frictionless cleaning',
+      'Microscopic mapping of root canals to catch complex branches',
+      'Bio-compatible thermoplastic sealing to prevent reinfection',
+      'Single-sitting procedures for 90% of uncomplicated cases'
+    ],
     image: '/rct_image.png',
+    icon: Activity
   },
   {
-    tag: 'ORTHODONTICS',
+    id: 'xray',
+    tag: 'Diagnostics',
+    title: 'Dental & Oral X-ray',
+    desc: 'Complete diagnostic precision is the bedrock of honest medicine. We utilize low-radiation digital oral imaging to diagnose underlying issues immediately.',
+    points: [
+      '90% lower radiation exposure than traditional film X-rays',
+      'Instant high-resolution digital visual output on chairside screens',
+      'Accurate detection of interproximal decay, jaw cysts, and bone integrity',
+      'Detailed visual blueprints provided before any treatment begins'
+    ],
+    image: '/dental_service_1.jpg',
+    icon: Cpu
+  },
+  {
+    id: 'cleaning',
+    tag: 'Preventive Care',
+    title: 'Teeth Cleaning & Polishing',
+    desc: 'Plaque and tartar accumulation host millions of bacteria that cause gum disease. Our professional scaling maintains clean, healthy biological foundations.',
+    points: [
+      'Advanced painless ultrasonic scaling to clean under the gumline',
+      'Polishing with air-flow systems to restore original luster',
+      'Removes surface stains from coffee, tea, and smoking instantly',
+      'Comes with a complete diagnostic gum recession checkup'
+    ],
+    image: '/dental_service_6.jpg',
+    icon: Shield
+  },
+  {
+    id: 'braces',
+    tag: 'Orthodontics',
     title: 'Clear Aligners & Metal Braces',
-    desc: 'Straighten your teeth and correct your bite with our range of orthodontic solutions, from traditional metal braces to invisible clear aligners.',
+    desc: 'Correct crowded or crooked teeth to achieve balance and jaw harmony. We offer both invisible clear trays and durable metal braces.',
+    points: [
+      'Premium computer-guided clear aligners that are virtually invisible',
+      'Traditional metal and ceramic braces for complex structural corrections',
+      'Step-by-step digital simulation of your target orthodontic results',
+      'Tailored follow-up cycles for steady, safe alignment correction'
+    ],
     image: '/dental_service_4.jpg',
+    icon: Award
   },
   {
-    tag: 'SPECIALIZED CARE',
-    title: 'Jaw Correction',
-    desc: 'Advanced treatments for jaw alignment and TMJ disorders to improve function, alleviate pain, and enhance your facial profile.',
+    id: 'jaw',
+    tag: 'Specialized Care',
+    title: 'Jaw Correction (TMJ)',
+    desc: 'Relieve chronic jaw pain, clicking sounds, and headache symptoms caused by temporomandibular joint disorders or bite imbalances.',
+    points: [
+      'Custom nocturnal splints to eliminate teeth grinding (bruxism)',
+      'Orthopedic jaw alignment and occlusal equilibrations',
+      'Specialized physical exercises to restore smooth joint mobility',
+      'Full facial symmetry mapping for aesthetic bite adjustments'
+    ],
     image: '/dental_service_2.jpg',
+    icon: Smile
   },
   {
-    tag: 'SPECIALIZED CARE',
+    id: 'pediatric',
+    tag: 'Pediatrics',
     title: 'Pediatric Dentistry',
-    desc: 'Gentle, compassionate dental care tailored specifically for children to ensure their smiles grow healthy and strong from the very beginning.',
+    desc: 'Build positive oral habits for your children. We offer cavity sealants, gentle cleanings, and anxiety-free pediatric reinforcements.',
+    points: [
+      'Hospitality-focused, zero-anxiety child clinical environment',
+      'Fluoride varnishes and preventive cavity pit-and-fissure sealants',
+      'Monitoring primary-to-permanent tooth blueprints to avoid braces',
+      'Habit correction counseling for thumb sucking and mouth breathing'
+    ],
     image: '/dental_service_3.jpg',
+    icon: Heart
   },
   {
-    tag: 'EMERGENCY CARE',
-    title: '24 Hours Dental Emergency',
-    desc: 'We\'re available around the clock for dental emergencies. Toothache, broken tooth, swelling — immediate and compassionate care, anytime.',
-    image: null,
-    isEmergency: true,
-  },
+    id: 'emergency',
+    tag: 'Emergency Care',
+    title: '24 Hour Dental Emergency',
+    desc: 'Intense toothaches, broken teeth, or sudden clinical swelling require immediate, empathetic care. We are accessible around the clock in Indore.',
+    points: [
+      'Immediate access to Dr. Richa Tiwari for trauma or severe pain',
+      'Emergency nerve sedation and swelling management protocols',
+      'Available 24 hours a day, 7 days a week',
+      'Direct contact line: 6262178282'
+    ],
+    image: '/emergency_image.png',
+    icon: Phone,
+    isEmergency: true
+  }
 ];
 
 export default function Services() {
-  return (
-    <div style={{ backgroundColor: '#f8fbfe' }}>
+  const { hash } = useLocation();
 
+  useEffect(() => {
+    if (hash) {
+      const element = document.getElementById(hash.replace('#', ''));
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 100);
+      }
+    }
+  }, [hash]);
+
+  const scrollToAnchor = (id) => {
+    const element = document.getElementById(id);
+    if (element) {
+      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+  };
+
+  return (
+    <div style={{ backgroundColor: '#ffffff' }}>
+      
       {/* ── HERO BANNER ── */}
       <section style={styles.heroBanner}>
-        <div style={styles.overlay} />
-        <motion.div
-          style={styles.heroBannerContent}
-          initial="hidden"
-          animate="visible"
-          variants={{
-            hidden: { opacity: 0 },
-            visible: {
-              opacity: 1,
-              transition: { staggerChildren: 0.2 },
-            },
-          }}
-        >
-          <motion.p style={styles.eyebrow} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>— OUR SERVICES</motion.p>
-          <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>Comprehensive Dental Services</motion.h1>
-          <motion.p style={styles.heroSub} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5 } } }}>Everything your smile needs, backed by expertise and modern technology.</motion.p>
-        </motion.div>
-      </section>
-
-      {/* ── SERVICES ROWS ── */}
-      <section style={styles.section}>
+        <div style={styles.heroOverlay} />
+        <div style={styles.heroOverlayGrid} />
         <div style={styles.container}>
-          <div style={styles.rows}>
-            {services.map((svc, idx) => (
-              <div
-                key={idx}
-                style={{
-                  ...styles.row,
-                  flexDirection: idx % 2 === 0 ? 'row' : 'row-reverse',
-                }}
-                className="highlight-row"
-              >
-                {/* Image */}
-                <motion.div 
-                  style={styles.imageBox}
-                  initial={{ opacity: 0, x: idx % 2 === 0 ? -40 : 40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, ease: "easeOut" }}
-                >
-                  <span style={styles.badge}>0{idx + 1}</span>
-                  {svc.isEmergency ? (
-                    <div style={styles.emergencyCard}>
-                      <div style={styles.emergencyInner}>
-                        <span style={styles.emergencyNum} className="emergency-num">24/7</span>
-                        <span style={styles.emergencyLabel}>Always Available</span>
-                        <div style={styles.emergencyDots}>
-                          <span style={styles.dot} />
-                          <span style={styles.dot} />
-                          <span style={styles.dot} />
-                        </div>
-                        <span style={styles.emergencyCall}>📞 Call Anytime</span>
-                      </div>
-                    </div>
-                  ) : (
-                    <img src={svc.image} alt={svc.title} style={styles.image} />
-                  )}
-                </motion.div>
-
-                {/* Text */}
-                <motion.div 
-                  style={styles.textBox}
-                  initial={{ opacity: 0, x: idx % 2 === 0 ? 40 : -40 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, amount: 0.3 }}
-                  transition={{ duration: 0.6, ease: "easeOut", delay: 0.1 }}
-                >
-                  <p style={styles.tag}>— {svc.tag}</p>
-                  <h2 style={styles.cardTitle}>{svc.title}</h2>
-                  <p style={styles.desc}>{svc.desc}</p>
-                  <Link to="/contact" style={styles.link}>Book this service →</Link>
-                </motion.div>
-              </div>
-            ))}
-          </div>
+          <motion.div
+            style={styles.heroContent}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+            }}
+          >
+            <motion.p style={styles.heroSubtag} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
+              Our Procedures
+            </motion.p>
+            <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+              Dental Procedures
+            </motion.h1>
+            <motion.p style={styles.heroDesc} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+              World-class specialized treatments blending dental technology with a quiet clinical touch.
+            </motion.p>
+          </motion.div>
         </div>
       </section>
 
-      {/* ── CTA BANNER ── */}
-      <motion.section
-        style={styles.ctaBanner}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.6 }}
-      >
-        <h2 style={styles.ctaTitle}>Ready for a healthier smile?</h2>
-        <p style={styles.ctaSub}>Book an appointment today to get started on your treatment.</p>
-        <Link to="/contact" style={styles.ctaBtn}>Book Appointment →</Link>
-      </motion.section>
+      {/* ── DETAILS WRAPPER ── */}
+      <section style={styles.detailsSection}>
+        <div style={styles.container}>
+          <div style={styles.layoutWrapper}>
+            
+            {/* Left Column: Sticky Sidebar Menu */}
+            <div style={styles.sidebarCol} className="desktop-nav">
+              <div style={styles.sidebarCard}>
+                <p style={styles.sidebarTitle}>Treatment Menu</p>
+                <div style={styles.sidebarList}>
+                  {deepServices.map((svc) => {
+                    const Icon = svc.icon;
+                    return (
+                      <button
+                        key={svc.id}
+                        onClick={() => scrollToAnchor(svc.id)}
+                        style={styles.sidebarBtn}
+                      >
+                        <Icon size={16} style={{ color: 'var(--brand-surgical-blue)' }} />
+                        <span style={styles.sidebarBtnText}>{svc.title}</span>
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+            </div>
+
+            {/* Right Column: Deep-dive Service Cards */}
+            <div style={styles.contentCol}>
+              {deepServices.map((svc, idx) => {
+                const Icon = svc.icon;
+                const isEm = svc.isEmergency;
+
+                return (
+                  <motion.div
+                    key={svc.id}
+                    id={svc.id}
+                    style={{
+                      ...styles.detailBlock,
+                      borderTop: idx > 0 ? '1px solid rgba(0,0,0,0.06)' : 'none',
+                      paddingTop: idx > 0 ? '5rem' : '0',
+                    }}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true, amount: 0.15 }}
+                    transition={{ duration: 0.8 }}
+                  >
+                    <div style={styles.blockGrid}>
+                      {/* Image Block */}
+                      <div style={styles.imageBlock}>
+                        {isEm ? (
+                          <div style={styles.emergencyVisual}>
+                            <div style={styles.emBadge}>24/7</div>
+                            <p style={styles.emLabel}>Active Emergency Desk</p>
+                          </div>
+                        ) : (
+                          <img src={svc.image} alt={svc.title} style={styles.procedureImg} />
+                        )}
+                        <div style={styles.imgAccentOverlay} />
+                      </div>
+
+                      {/* Info Block */}
+                      <div style={styles.infoBlock}>
+                        <div style={styles.tagWrapper}>
+                          <Icon size={16} color="var(--brand-surgical-blue)" />
+                          <span style={styles.tagText}>{svc.tag}</span>
+                        </div>
+                        
+                        <h3 style={styles.blockTitle}>{svc.title}</h3>
+                        <p style={styles.blockDesc}>{svc.desc}</p>
+
+                        <div style={styles.pointsList}>
+                          {svc.points.map((pt, i) => (
+                            <div key={i} style={styles.pointRow}>
+                              <ClipboardCheck size={16} color="var(--brand-trust-green)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                              <span style={styles.pointText}>{pt}</span>
+                            </div>
+                          ))}
+                        </div>
+
+                        <div style={{ marginTop: '2rem' }}>
+                          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                            <Link to="/contact" style={{
+                              ...styles.bookBtn,
+                              backgroundColor: isEm ? '#ef4444' : 'var(--neutral-ink)',
+                              boxShadow: isEm ? '0 6px 15px rgba(239,68,68,0.3)' : '0 6px 15px rgba(0,0,0,0.1)'
+                            }}>
+                              Book Procedure consultation
+                            </Link>
+                          </motion.div>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+          </div>
+        </div>
+      </section>
 
     </div>
   );
 }
 
 const styles = {
-  heroBanner: {
-    position: 'relative',
-    backgroundColor: '#0a2342',
-    minHeight: '45vh',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    textAlign: 'center',
-  },
-  overlay: {
-    position: 'absolute',
-    inset: 0,
-    background: 'linear-gradient(to bottom, rgba(0,30,60,0.72), rgba(0,30,60,0.62))',
-  },
-  heroBannerContent: {
-    position: 'relative',
-    zIndex: 2,
-    padding: '0 2rem',
-  },
-  eyebrow: {
-    color: '#7dd3fa',
-    fontSize: '0.85rem',
-    fontWeight: '700',
-    letterSpacing: '0.12em',
-    textTransform: 'uppercase',
-    marginBottom: '0.75rem',
-  },
-  heroTitle: {
-    color: '#ffffff',
-    fontSize: 'clamp(1.8rem, 5vw, 3.5rem)',
-    fontWeight: '800',
-    lineHeight: 1.15,
-    marginBottom: '1rem',
-    letterSpacing: '-0.02em',
-  },
-  heroSub: {
-    color: 'rgba(255,255,255,0.85)',
-    fontSize: '1.1rem',
-  },
-  section: {
-    padding: '6rem 2rem',
-  },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
+    padding: '0 2rem',
+    position: 'relative',
+    zIndex: 2,
   },
-  rows: {
+  heroBanner: {
+    position: 'relative',
+    backgroundColor: '#07080a',
+    padding: '9rem 0 7rem',
+    overflow: 'hidden',
+  },
+  heroOverlay: {
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(to bottom, rgba(7,8,10,0.6) 0%, rgba(7,8,10,0.85) 100%)',
+    zIndex: 1,
+  },
+  heroOverlayGrid: {
+    position: 'absolute',
+    inset: 0,
+    background: 'radial-gradient(circle at 80% 20%, rgba(37,151,208,0.18) 0%, transparent 60%)',
+    zIndex: 1,
+  },
+  heroContent: {
+    maxWidth: '700px',
+    color: '#ffffff',
+  },
+  heroSubtag: {
+    fontSize: '0.85rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.3em',
+    color: 'var(--brand-surgical-blue)',
+    fontWeight: '700',
+    marginBottom: '1rem',
+  },
+  heroTitle: {
+    fontSize: 'clamp(2.5rem, 6vw, 4.25rem)',
+    fontWeight: '800',
+    lineHeight: '1.1',
+    letterSpacing: '-0.02em',
+    marginBottom: '1.25rem',
+  },
+  heroDesc: {
+    fontSize: '1.15rem',
+    color: 'rgba(255,255,255,0.8)',
+    lineHeight: '1.65',
+  },
+  // Details Section Layout
+  detailsSection: {
+    padding: '6rem 0 7rem',
+  },
+  layoutWrapper: {
+    display: 'flex',
+    gap: '3rem',
+  },
+  // Sticky Sidebar Menu
+  sidebarCol: {
+    flex: '0 0 280px',
+  },
+  sidebarCard: {
+    position: 'sticky',
+    top: '110px',
+    backgroundColor: '#f8fbfe',
+    border: '1px solid #dbeef9',
+    borderRadius: '24px',
+    padding: '1.75rem',
+  },
+  sidebarTitle: {
+    fontSize: '0.75rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.12em',
+    fontWeight: '800',
+    color: 'var(--neutral-slate)',
+    marginBottom: '1.25rem',
+    borderBottom: '1px solid rgba(0,0,0,0.06)',
+    paddingBottom: '0.75rem',
+  },
+  sidebarList: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '6rem',
+    gap: '0.5rem',
   },
-  row: {
+  sidebarBtn: {
     display: 'flex',
     alignItems: 'center',
+    gap: '10px',
+    background: 'none',
+    border: 'none',
+    width: '100%',
+    padding: '0.65rem 0.75rem',
+    borderRadius: '10px',
+    cursor: 'pointer',
+    textAlign: 'left',
+    transition: 'background-color 0.2s',
+    outline: 'none',
+  },
+  sidebarBtnText: {
+    fontSize: '0.88rem',
+    fontWeight: '700',
+    color: 'var(--neutral-ink)',
+  },
+  // Detailed Service block
+  contentCol: {
+    flex: 1,
+    display: 'flex',
+    flexDirection: 'column',
     gap: '5rem',
+  },
+  detailBlock: {
+    scrollMarginTop: '110px',
+  },
+  blockGrid: {
+    display: 'flex',
+    gap: '3rem',
     flexWrap: 'wrap',
   },
-  imageBox: {
-    flex: '1 1 420px',
-    position: 'relative',
-    borderRadius: '20px',
+  imageBlock: {
+    flex: '1 1 300px',
+    height: '320px',
+    borderRadius: '24px',
     overflow: 'hidden',
-    boxShadow: '0 20px 50px rgba(37,151,208,0.12)',
+    position: 'relative',
+    boxShadow: '0 20px 45px rgba(0,0,0,0.06)',
   },
-  badge: {
-    position: 'absolute',
-    top: '1rem',
-    left: '1rem',
-    zIndex: 2,
-    backgroundColor: '#ffffff',
-    color: 'var(--neutral-ink)',
-    width: '48px',
-    height: '48px',
-    borderRadius: '50%',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    fontWeight: '800',
-    fontSize: '1rem',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.12)',
-  },
-  image: {
+  procedureImg: {
     width: '100%',
-    height: '360px',
+    height: '100%',
     objectFit: 'cover',
-    display: 'block',
   },
-  textBox: {
-    flex: '1 1 340px',
+  imgAccentOverlay: {
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(to top, rgba(37,151,208,0.08), transparent)',
+    pointerEvents: 'none',
   },
-  tag: {
-    color: 'var(--brand-surgical-blue)',
-    fontSize: '0.82rem',
-    fontWeight: '700',
-    letterSpacing: '0.1em',
-    textTransform: 'uppercase',
-    marginBottom: '0.75rem',
-  },
-  cardTitle: {
-    fontSize: 'clamp(1.5rem, 3vw, 2.25rem)',
-    color: 'var(--neutral-ink)',
-    fontWeight: '700',
-    marginBottom: '1rem',
-    letterSpacing: '-0.02em',
-    lineHeight: 1.2,
-  },
-  desc: {
-    fontSize: '1.05rem',
-    color: 'var(--neutral-charcoal)',
-    lineHeight: '1.75',
-    marginBottom: '1.5rem',
-  },
-  link: {
-    color: 'var(--brand-surgical-blue)',
-    fontWeight: '700',
-    fontSize: '1rem',
-    textDecoration: 'none',
-    borderBottom: '2px solid var(--brand-surgical-blue)',
-    paddingBottom: '2px',
-  },
-  ctaBanner: {
-    backgroundColor: 'var(--brand-surgical-blue)',
-    padding: '5rem 2rem',
-    textAlign: 'center',
-  },
-  ctaTitle: {
-    fontSize: 'clamp(1.75rem, 4vw, 2.75rem)',
-    color: '#ffffff',
-    fontWeight: '800',
-    marginBottom: '1rem',
-    letterSpacing: '-0.02em',
-  },
-  ctaSub: {
-    color: 'rgba(255,255,255,0.85)',
-    fontSize: '1.1rem',
-    marginBottom: '2rem',
-  },
-  ctaBtn: {
-    display: 'inline-block',
-    backgroundColor: '#ffffff',
-    color: 'var(--brand-surgical-blue)',
-    padding: '1rem 2.5rem',
-    borderRadius: '999px',
-    fontWeight: '700',
-    fontSize: '1rem',
-    textDecoration: 'none',
-    boxShadow: '0 8px 24px rgba(0,0,0,0.15)',
-  },
-  // 24/7 Emergency visual
-  emergencyCard: {
+  emergencyVisual: {
     width: '100%',
-    height: '360px',
-    background: 'linear-gradient(135deg, #0c2d4e 0%, #1a5276 40%, #2597d0 100%)',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  emergencyInner: {
+    height: '100%',
+    background: 'linear-gradient(135deg, #ef4444 0%, #991b1b 100%)',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    gap: '0.75rem',
-  },
-  emergencyNum: {
-    fontSize: '7rem',
-    fontWeight: '800',
+    justifyContent: 'center',
     color: '#ffffff',
-    lineHeight: 1,
-    letterSpacing: '-0.04em',
-    textShadow: '0 4px 30px rgba(0,0,0,0.3)',
   },
-  emergencyLabel: {
-    fontSize: '1.1rem',
-    color: 'rgba(255,255,255,0.85)',
-    fontWeight: '600',
-    letterSpacing: '0.15em',
-    textTransform: 'uppercase',
+  emBadge: {
+    fontSize: '4.5rem',
+    fontWeight: '800',
+    lineHeight: '1',
   },
-  emergencyDots: {
-    display: 'flex',
-    gap: '0.5rem',
-    margin: '0.5rem 0',
-  },
-  dot: {
-    width: '8px',
-    height: '8px',
-    borderRadius: '50%',
-    backgroundColor: 'rgba(255,255,255,0.5)',
-    display: 'inline-block',
-  },
-  emergencyCall: {
-    fontSize: '1rem',
-    color: '#7dd3fa',
+  emLabel: {
+    fontSize: '0.9rem',
     fontWeight: '700',
-    letterSpacing: '0.05em',
+    textTransform: 'uppercase',
+    letterSpacing: '0.1em',
+    marginTop: '0.5rem',
   },
+  infoBlock: {
+    flex: '1.2 1 380px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.25rem',
+  },
+  tagWrapper: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  tagText: {
+    fontSize: '0.78rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.12em',
+    fontWeight: '700',
+    color: 'var(--brand-surgical-blue)',
+  },
+  blockTitle: {
+    fontSize: '1.75rem',
+    fontWeight: '800',
+    color: 'var(--neutral-ink)',
+    letterSpacing: '-0.01em',
+  },
+  blockDesc: {
+    fontSize: '0.98rem',
+    color: 'var(--neutral-charcoal)',
+    lineHeight: '1.7',
+  },
+  pointsList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.75rem',
+    marginVertical: '0.5rem',
+  },
+  pointRow: {
+    display: 'flex',
+    gap: '10px',
+    alignItems: 'flex-start',
+  },
+  pointText: {
+    fontSize: '0.9rem',
+    color: 'var(--neutral-charcoal)',
+    lineHeight: '1.5',
+  },
+  bookBtn: {
+    display: 'inline-flex',
+    color: '#ffffff',
+    padding: '0.85rem 1.75rem',
+    borderRadius: '12px',
+    fontWeight: '700',
+    fontSize: '0.9rem',
+    textDecoration: 'none',
+  }
 };
-

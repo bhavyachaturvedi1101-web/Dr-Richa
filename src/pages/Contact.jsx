@@ -1,175 +1,366 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Clock } from 'lucide-react';
+import { MapPin, Phone, Clock, Mail, Send } from 'lucide-react';
 
 export default function Contact() {
-  return (
-    <section style={styles.section}>
-      <motion.div 
-        initial="hidden"
-        animate="visible"
-        variants={{
-          hidden: { opacity: 0 },
-          visible: {
-            opacity: 1,
-            transition: { staggerChildren: 0.2 },
-          }
-        }}
-        style={styles.container}
-      >
-        <motion.h1 
-          style={styles.title}
-          variants={{ hidden: { opacity: 0, y: -20 }, visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } } }}
-        >
-          Contact Us
-        </motion.h1>
-        <div style={styles.grid}>
-          
-          <motion.div 
-            style={styles.card}
-            variants={{ hidden: { opacity: 0, x: -40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
-          >
-            <h2 style={styles.subtitle}>Get In Touch</h2>
-            <div style={styles.infoRow}>
-              <Phone size={24} color="var(--brand-surgical-blue)" />
-              <div>
-                <p style={styles.label}>Phone</p>
-                <p style={styles.text}>6262178282</p>
-              </div>
-            </div>
-            <div style={styles.infoRow}>
-              <MapPin size={24} color="var(--brand-surgical-blue)" />
-              <div>
-                <p style={styles.label}>Address</p>
-                <p style={styles.text}>F 9, 10, BCM CITY, Khandelwal Nagar, Janki Nagar, Indore, Madhya Pradesh 452012</p>
-              </div>
-            </div>
-            <div style={styles.infoRow}>
-              <Clock size={24} color="var(--brand-surgical-blue)" />
-              <div>
-                <p style={styles.label}>Hours</p>
-                <p style={styles.text}>Open 24 Hrs, Monday - Sunday</p>
-              </div>
-            </div>
-          </motion.div>
+  const infoItems = [
+    { icon: Phone, label: 'Direct Line', val: '6262178282', desc: 'Call our primary reception desk' },
+    { icon: Mail, label: 'Email Address', val: 'contact@dentalspeciality.com', desc: 'Send us clinical scan documents' },
+    { icon: MapPin, label: 'Indore Clinic', val: 'F 9, 10, BCM CITY, Khandelwal Nagar, Janki Nagar, Indore', desc: 'Circular Road, Indore, MP 452012' },
+    { icon: Clock, label: 'Clinical Hours', val: 'Open 24 Hrs', desc: 'Monday – Sunday emergency care' }
+  ];
 
-          <motion.div 
-            style={styles.card}
-            variants={{ hidden: { opacity: 0, x: 40 }, visible: { opacity: 1, x: 0, transition: { duration: 0.6, ease: "easeOut" } } }}
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.6 }}
+      style={{ backgroundColor: '#ffffff' }}
+    >
+      
+      {/* ── HERO BANNER ── */}
+      <section style={styles.heroBanner}>
+        <div style={styles.heroOverlay} />
+        <div style={styles.heroOverlayGrid} />
+        <div style={styles.container}>
+          <motion.div
+            style={styles.heroContent}
+            initial="hidden"
+            animate="visible"
+            variants={{
+              hidden: { opacity: 0 },
+              visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+            }}
           >
-            <h2 style={styles.subtitle}>Send a Message</h2>
-            <form style={styles.form}>
-              <input type="text" placeholder="Your Name" style={styles.input} />
-              <input type="email" placeholder="Your Email" style={styles.input} />
-              <textarea placeholder="How can we help you?" style={{...styles.input, minHeight: '120px'}}></textarea>
-              <button type="button" style={styles.cta}>Submit Request</button>
-            </form>
+            <motion.p 
+              style={styles.heroSubtag} 
+              variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
+            >
+              Get In Touch
+            </motion.p>
+            <motion.h1 
+              style={styles.heroTitle} 
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            >
+              Connect With <span style={{ color: 'var(--brand-surgical-blue)' }}>Us.</span>
+            </motion.h1>
+            <motion.p 
+              style={styles.heroDesc} 
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            >
+              Ready to secure your booking? Contact our Indore team or send an online request.
+            </motion.p>
+          </motion.div>
+        </div>
+      </section>
+
+      {/* ── CONTACT GRID ── */}
+      <section style={styles.section}>
+        <div style={styles.container}>
+          <div style={styles.grid}>
+            
+            {/* Left Column: Direct Info Cards */}
+            <motion.div 
+              style={styles.infoCol}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 style={styles.sectionHeading}>Contact Details</h2>
+              <p style={styles.sectionDesc}>
+                Whether you have an emergency toothache or wish to book a routine scale & polish, we are here to support you.
+              </p>
+
+              <div style={styles.infoList}>
+                {infoItems.map((item, idx) => {
+                  const Icon = item.icon;
+                  return (
+                    <div key={idx} style={styles.infoCard}>
+                      <div style={styles.iconWrapper}>
+                        <Icon size={18} color="var(--brand-surgical-blue)" />
+                      </div>
+                      <div>
+                        <span style={styles.infoLabel}>{item.label}</span>
+                        <p style={styles.infoValue}>{item.val}</p>
+                        <p style={styles.infoDesc}>{item.desc}</p>
+                      </div>
+                    </div>
+                  );
+                })}
+              </div>
+            </motion.div>
+
+            {/* Right Column: Animated Form */}
+            <motion.div 
+              style={styles.formCol}
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
+            >
+              <div style={styles.formCard}>
+                <h3 style={styles.formTitle}>Send a Message</h3>
+                <p style={styles.formDesc}>Fill in your details below and a medical representative will reach back shortly.</p>
+                
+                <form style={styles.form}>
+                  <div style={styles.inputWrapper}>
+                    <input type="text" placeholder="Full Name" style={styles.inputField} required />
+                  </div>
+                  <div style={styles.inputWrapper}>
+                    <input type="email" placeholder="Email Address" style={styles.inputField} required />
+                  </div>
+                  <div style={styles.inputWrapper}>
+                    <input type="tel" placeholder="Mobile Number" style={styles.inputField} required />
+                  </div>
+                  <div style={styles.inputWrapper}>
+                    <textarea placeholder="How can we help your smile today?" style={styles.textareaField} required></textarea>
+                  </div>
+                  
+                  <div style={{ marginTop: '1rem' }}>
+                    <motion.button 
+                      type="button" 
+                      style={styles.submitBtn}
+                      whileHover={{ scale: 1.03 }}
+                      whileTap={{ scale: 0.97 }}
+                    >
+                      Submit Message <Send size={14} />
+                    </motion.button>
+                  </div>
+                </form>
+              </div>
+            </motion.div>
+
+          </div>
+
+          {/* ── MAP CONTAINER ── */}
+          <motion.div 
+            style={styles.mapWrapper}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
+            <iframe 
+              src="https://maps.google.com/maps?q=BCM%20CITY,%20Indore&t=&z=15&ie=UTF8&iwloc=&output=embed" 
+              width="100%" 
+              height="450" 
+              style={{ border: 0 }} 
+              allowFullScreen 
+              loading="lazy" 
+              title="Google Maps Location"
+            ></iframe>
           </motion.div>
 
         </div>
+      </section>
 
-        {/* ── MAP SECTION ── */}
-        <motion.div 
-          style={styles.mapContainer}
-          variants={{ hidden: { opacity: 0, y: 40 }, visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut", delay: 0.2 } } }}
-        >
-          <iframe 
-            src="https://maps.google.com/maps?q=BCM%20CITY,%20Indore&t=&z=15&ie=UTF8&iwloc=&output=embed" 
-            width="100%" 
-            height="400" 
-            style={{ border: 0, borderRadius: '18px' }} 
-            allowFullScreen 
-            loading="lazy" 
-            title="Google Maps Location"
-          ></iframe>
-        </motion.div>
-
-      </motion.div>
-    </section>
+    </motion.div>
   );
 }
 
 const styles = {
-  section: {
-    padding: '6rem 2rem',
-    backgroundColor: 'var(--neutral-cloud-gray)',
-    minHeight: '80vh'
-  },
   container: {
     maxWidth: '1200px',
     margin: '0 auto',
+    padding: '0 2rem',
+    position: 'relative',
+    zIndex: 2,
   },
-  title: {
-    fontSize: '3rem',
+  heroBanner: {
+    position: 'relative',
+    backgroundColor: '#ffffff',
+    padding: '10rem 0 5rem',
+    overflow: 'hidden',
+  },
+  heroOverlay: {
+    position: 'absolute',
+    inset: 0,
+    background: 'transparent',
+    zIndex: 1,
+    display: 'none',
+  },
+  heroOverlayGrid: {
+    position: 'absolute',
+    inset: 0,
+    background: 'transparent',
+    zIndex: 1,
+    display: 'none',
+  },
+  heroContent: {
+    maxWidth: '800px',
+    margin: '0 auto',
+    textAlign: 'center',
     color: 'var(--neutral-ink)',
-    marginBottom: '3rem',
-    letterSpacing: '-0.04em',
-    textAlign: 'center'
+  },
+  heroSubtag: {
+    fontSize: '0.85rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.3em',
+    color: 'var(--brand-surgical-blue)',
+    fontWeight: '700',
+    marginBottom: '1rem',
+  },
+  heroTitle: {
+    fontSize: 'clamp(2.5rem, 6vw, 4.25rem)',
+    fontWeight: '800',
+    lineHeight: '1.1',
+    letterSpacing: '-0.02em',
+    color: 'var(--neutral-ink)',
+    marginBottom: '1.25rem',
+  },
+  heroDesc: {
+    fontSize: '1.15rem',
+    color: 'var(--neutral-charcoal)',
+    lineHeight: '1.65',
+    maxWidth: '600px',
+    margin: '0 auto',
+  },
+  section: {
+    padding: '7rem 0',
   },
   grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))',
-    gap: '4rem',
-  },
-  card: {
-    backgroundColor: 'var(--neutral-paper-white)',
-    padding: '3rem',
-    borderRadius: '18px',
-    boxShadow: '0 20px 40px var(--neutral-sky-tint)',
-  },
-  subtitle: {
-    fontSize: '1.5rem',
-    color: 'var(--neutral-ink)',
-    marginBottom: '2rem'
-  },
-  infoRow: {
     display: 'flex',
+    gap: '5rem',
+    flexWrap: 'wrap',
     alignItems: 'flex-start',
-    gap: '1rem',
-    marginBottom: '2rem'
   },
-  label: {
-    fontSize: '0.875rem',
-    color: 'var(--neutral-slate)',
-    marginBottom: '0.25rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.05em'
+  infoCol: {
+    flex: '1 1 450px',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.5rem',
   },
-  text: {
-    fontSize: '1.125rem',
+  sectionHeading: {
+    fontSize: '2rem',
+    fontWeight: '800',
+    color: 'var(--neutral-ink)',
+    letterSpacing: '-0.02em',
+  },
+  sectionDesc: {
+    fontSize: '1.02rem',
     color: 'var(--neutral-charcoal)',
+    lineHeight: '1.7',
+    marginBottom: '1rem',
+  },
+  infoList: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.5rem',
+  },
+  infoCard: {
+    display: 'flex',
+    gap: '1.25rem',
+    alignItems: 'flex-start',
+  },
+  iconWrapper: {
+    width: '42px',
+    height: '42px',
+    borderRadius: '10px',
+    backgroundColor: 'var(--neutral-sky-tint)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
+  },
+  infoLabel: {
+    fontSize: '0.75rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.08em',
+    fontWeight: '700',
+    color: 'var(--neutral-slate)',
+  },
+  infoValue: {
+    fontSize: '1.1rem',
+    fontWeight: '800',
+    color: 'var(--neutral-ink)',
+    marginTop: '2px',
+  },
+  infoDesc: {
+    fontSize: '0.85rem',
+    color: 'var(--neutral-charcoal)',
+    marginTop: '2px',
+  },
+  // Form Col
+  formCol: {
+    flex: '1 1 450px',
+  },
+  formCard: {
+    backgroundColor: '#f8fbfe',
+    border: '1px solid #dbeef9',
+    borderRadius: '30px',
+    padding: '2.5rem',
+    boxShadow: '0 20px 40px rgba(37,151,208,0.03)',
+  },
+  formTitle: {
+    fontSize: '1.4rem',
+    fontWeight: '800',
+    color: 'var(--neutral-ink)',
+    marginBottom: '0.5rem',
+  },
+  formDesc: {
+    fontSize: '0.88rem',
+    color: 'var(--neutral-charcoal)',
+    lineHeight: '1.5',
+    marginBottom: '2rem',
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1rem'
+    gap: '1rem',
   },
-  input: {
-    padding: '1rem',
-    borderRadius: '8px',
-    border: '1px solid var(--neutral-slate)',
-    fontSize: '1rem',
-    fontFamily: 'inherit',
-    outline: 'none',
-    width: '100%'
-  },
-  cta: {
-    backgroundColor: 'var(--neutral-obsidian)',
-    color: 'var(--neutral-paper-white)',
-    border: 'none',
-    padding: '1rem 2rem',
-    borderRadius: '9999px',
-    fontSize: '1.125rem',
-    fontWeight: '500',
-    cursor: 'pointer',
-    marginTop: '1rem',
-    transition: 'background-color 0.2s',
-  },
-  mapContainer: {
-    marginTop: '4rem',
+  inputWrapper: {
     width: '100%',
-    borderRadius: '18px',
+  },
+  inputField: {
+    width: '100%',
+    padding: '0.9rem 1.25rem',
+    borderRadius: '12px',
+    border: '1px solid #dbeef9',
+    backgroundColor: '#ffffff',
+    fontSize: '0.95rem',
+    color: 'var(--neutral-ink)',
+    outline: 'none',
+    fontFamily: 'inherit',
+    transition: 'border-color 0.2s',
+  },
+  textareaField: {
+    width: '100%',
+    minHeight: '120px',
+    padding: '0.9rem 1.25rem',
+    borderRadius: '12px',
+    border: '1px solid #dbeef9',
+    backgroundColor: '#ffffff',
+    fontSize: '0.95rem',
+    color: 'var(--neutral-ink)',
+    outline: 'none',
+    fontFamily: 'inherit',
+    resize: 'vertical',
+    transition: 'border-color 0.2s',
+  },
+  submitBtn: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: '8px',
+    width: '100%',
+    backgroundColor: 'var(--brand-surgical-blue)',
+    color: '#ffffff',
+    padding: '1rem',
+    borderRadius: '12px',
+    border: 'none',
+    fontWeight: '700',
+    fontSize: '0.95rem',
+    cursor: 'pointer',
+    boxShadow: '0 4px 14px rgba(37,151,208,0.3)',
+  },
+  // Map
+  mapWrapper: {
+    marginTop: '6rem',
+    borderRadius: '28px',
     overflow: 'hidden',
-    boxShadow: '0 20px 40px var(--neutral-sky-tint)',
+    border: '1px solid rgba(0,0,0,0.06)',
+    boxShadow: '0 25px 50px rgba(0,0,0,0.08)',
+    lineHeight: 0,
   }
 };

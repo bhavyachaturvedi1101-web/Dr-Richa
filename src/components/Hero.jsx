@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, Calendar, Star, CheckCircle2, Clock, ChevronDown } from 'lucide-react';
+import { Phone, Calendar, CheckCircle2, ChevronDown } from 'lucide-react';
 
 export default function Hero() {
   const containerVariants = {
@@ -26,19 +26,29 @@ export default function Hero() {
 
   return (
     <section style={styles.hero}>
-      {/* Background Container with Ken Burns effect */}
+      {/* Background Container with Video loop */}
       <div style={styles.bgWrapper}>
-        <motion.img 
-          src="/clinic_interior.png" 
-          alt="Dental Speciality Centre Interior" 
-          style={styles.bgImage}
-          initial={{ scale: 1.15, opacity: 0 }}
-          animate={{ scale: 1, opacity: 0.85 }}
-          transition={{ duration: 2.5, ease: 'easeOut' }}
-        />
-        {/* Modern dark gradient overlays */}
+        {/* High-quality background video loop */}
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            zIndex: 1,
+            opacity: 1 // Fully visible background video
+          }}
+        >
+          <source src="https://assets.mixkit.co/videos/39480/39480-720.mp4" type="video/mp4" />
+        </video>
+        {/* Dark overlay for text contrast */}
         <div style={styles.overlayMain} />
-        <div style={styles.overlaySide} />
       </div>
 
       {/* Hero Content Area */}
@@ -53,23 +63,21 @@ export default function Hero() {
             style={styles.eyebrow}
             variants={itemVariants}
           >
-            Indore, Madhya Pradesh
+            Indore's Premier Dental Surgery
           </motion.span>
           
           <motion.h1 
             style={styles.title}
             variants={itemVariants}
           >
-            Gentle care for a smile<br />
-            you're <span style={styles.accent}>proud</span> to show.
+            A smile you're <span style={styles.accent}>proud</span> to show.
           </motion.h1>
 
           <motion.p 
             style={styles.subtitle}
             variants={itemVariants}
           >
-            Dental Speciality Centre — Indore's trusted neighborhood clinic. 
-            Providing high-precision microscopic RCT, painless lasers, and absolute comfort.
+            Indore's trusted clinic for painless microscopic root canals, advanced laser therapies, and cosmetic smiles.
           </motion.p>
 
           <motion.div 
@@ -89,27 +97,21 @@ export default function Hero() {
             </motion.div>
           </motion.div>
 
-          {/* Quick Trust Highlights */}
+          {/* Quick Trust Highlights matching reference */}
           <motion.div 
             style={styles.trustBar}
             variants={itemVariants}
           >
             <div style={styles.trustItem}>
-              <div style={styles.starsWrapper}>
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={15} style={{ color: '#fbbf24', fill: '#fbbf24' }} />
-                ))}
-              </div>
-              <span style={styles.trustText}>5.0 on Google Review</span>
+              <CheckCircle2 size={16} color="#ffffff" />
+              <span style={styles.trustText}>5.0 Google Reviews</span>
             </div>
-            <span style={styles.divider}>•</span>
             <div style={styles.trustItem}>
-              <CheckCircle2 size={16} color="var(--brand-surgical-blue)" />
+              <CheckCircle2 size={16} color="#ffffff" />
               <span style={styles.trustText}>Painless Modern Care</span>
             </div>
-            <span style={styles.divider}>•</span>
             <div style={styles.trustItem}>
-              <Clock size={16} color="var(--brand-surgical-blue)" />
+              <CheckCircle2 size={16} color="#ffffff" />
               <span style={styles.trustText}>Open 24 Hours</span>
             </div>
           </motion.div>
@@ -143,7 +145,7 @@ const styles = {
     alignItems: 'center',
     justifyContent: 'center',
     overflow: 'hidden',
-    backgroundColor: '#07080a',
+    backgroundColor: '#000000',
   },
   bgWrapper: {
     position: 'absolute',
@@ -161,13 +163,7 @@ const styles = {
   overlayMain: {
     position: 'absolute',
     inset: 0,
-    background: 'linear-gradient(to bottom, rgba(7, 8, 10, 0.75) 0%, rgba(7, 8, 10, 0.5) 50%, rgba(7, 8, 10, 0.85) 100%)',
-    zIndex: 1,
-  },
-  overlaySide: {
-    position: 'absolute',
-    inset: 0,
-    background: 'radial-gradient(circle at 80% 20%, rgba(37, 151, 208, 0.15) 0%, transparent 60%)',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
     zIndex: 1,
   },
   container: {
@@ -193,31 +189,32 @@ const styles = {
     fontSize: '0.85rem',
     textTransform: 'uppercase',
     letterSpacing: '0.3em',
-    color: 'var(--brand-surgical-blue)',
+    color: 'rgba(255, 255, 255, 0.9)',
     fontWeight: '700',
     marginBottom: '1.25rem',
     display: 'inline-block',
-    textShadow: '0 2px 10px rgba(0,0,0,0.5)'
   },
   title: {
     fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
-    fontWeight: '800',
-    lineHeight: '1.15',
+    fontWeight: '900',
+    lineHeight: '1.1',
     letterSpacing: '-0.02em',
     marginBottom: '1.5rem',
-    textShadow: '0 4px 20px rgba(0,0,0,0.6)'
+    color: '#ffffff'
   },
   accent: {
-    color: 'var(--brand-surgical-blue)',
-    fontStyle: 'italic',
+    background: 'linear-gradient(to right, #38bdf8, #818cf8)',
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text',
+    display: 'inline-block',
   },
   subtitle: {
     fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-    color: 'rgba(255, 255, 255, 0.85)',
+    color: 'rgba(255, 255, 255, 0.9)',
     lineHeight: '1.7',
     maxWidth: '650px',
     marginBottom: '2.5rem',
-    textShadow: '0 2px 10px rgba(0,0,0,0.5)'
   },
   ctas: {
     display: 'flex',
@@ -230,22 +227,21 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
-    backgroundColor: 'var(--brand-surgical-blue)',
-    color: '#ffffff',
+    backgroundColor: '#ffffff',
+    color: '#000000',
     padding: '0.9rem 2.2rem',
     borderRadius: '999px',
-    fontWeight: '700',
+    fontWeight: '900',
     fontSize: '0.95rem',
     textDecoration: 'none',
-    boxShadow: '0 6px 20px rgba(37, 151, 208, 0.4)',
+    boxShadow: '0 15px 35px rgba(255, 255, 255, 0.25)',
     transition: 'all 0.3s ease',
   },
   ctaSecondary: {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
-    backgroundColor: 'rgba(255, 255, 255, 0.12)',
-    backdropFilter: 'blur(12px)',
+    backgroundColor: 'transparent',
     color: '#ffffff',
     padding: '0.9rem 2.2rem',
     borderRadius: '999px',
@@ -259,22 +255,13 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '1.25rem',
+    gap: '1.5rem',
     flexWrap: 'wrap',
-    padding: '0.75rem 1.5rem',
-    borderRadius: '999px',
-    backgroundColor: 'rgba(255, 255, 255, 0.04)',
-    border: '1px solid rgba(255, 255, 255, 0.06)',
-    backdropFilter: 'blur(8px)',
   },
   trustItem: {
     display: 'flex',
     alignItems: 'center',
     gap: '8px',
-  },
-  starsWrapper: {
-    display: 'flex',
-    gap: '2px',
   },
   trustText: {
     fontSize: '0.82rem',
@@ -282,7 +269,7 @@ const styles = {
     color: 'rgba(255, 255, 255, 0.9)'
   },
   divider: {
-    color: 'rgba(255, 255, 255, 0.2)',
+    color: 'rgba(0, 0, 0, 0.15)',
     fontSize: '0.8rem',
   },
   scrollIndicator: {

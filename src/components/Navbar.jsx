@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Stethoscope, Menu, X, ChevronDown, Calendar, Shield, Cpu, Activity, Award } from 'lucide-react';
+import { Menu, X, ChevronDown, Calendar, Shield, Cpu, Activity, Award, Sparkles, Star, Heart, Smile } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function Navbar() {
@@ -26,23 +26,43 @@ export default function Navbar() {
   const navLinks = [
     { name: 'Home', path: '/' },
     { name: 'About Us', path: '/about' },
-    { name: 'Services', path: '/services' },
+    { name: 'Treatments', path: '/treatments' },
+    { name: 'Blogs', path: '/blogs' },
+    { name: 'Gallery', path: '/gallery' },
+    { name: 'Case Studies', path: '/case-studies' },
     { name: 'Contact', path: '/contact' }
   ];
 
+  // Treatments ordered row-by-row for a perfect 2-column layout mapping:
+  // Row 1: Root Canal (RCT) | Dental Implants
+  // Row 2: Crowns & Bridges | Gum Therapy
+  // Row 3: Orthodontics | Teeth Whitening
+  // Row 4: Restoration of Teeth / Filling | Smile Designing
+  // Row 5: Extraction | Dental Jewellery
+  // Row 6: Pedodontics / Child Dentistry
   const treatments = [
-    { name: 'Root Canal Treatment (RCT)', path: '/services#rct', icon: Activity, desc: 'Painless, microscope-assisted endodontics' },
-    { name: 'Dental & Oral X-ray', path: '/services#xray', icon: Cpu, desc: 'Advanced low-radiation digital imaging' },
-    { name: 'Teeth Cleaning & Polishing', path: '/services#cleaning', icon: Shield, desc: 'Ultrasonic scaling & fresh oral hygiene' },
-    { name: 'Clear Aligners & Braces', path: '/services#braces', icon: Award, desc: 'Modern aesthetic bite straightening' }
+    { name: 'Root Canal (RCT)', path: '/treatments#rct', icon: Activity, desc: 'Painless microscopic endodontics' },
+    { name: 'Dental Implants', path: '/treatments#implants', icon: Cpu, desc: 'Permanent bio-compatible replacements' },
+    { name: 'Crowns & Bridges', path: '/treatments#crowns', icon: Award, desc: 'Premium ceramic and zirconia caps' },
+    { name: 'Gum Therapy', path: '/treatments#gum', icon: Shield, desc: 'Scaling and laser bleeding gum cure' },
+    { name: 'Orthodontics', path: '/treatments#ortho', icon: Smile, desc: 'Clear aligners and traditional braces' },
+    { name: 'Teeth Whitening', path: '/treatments#whitening', icon: Sparkles, desc: 'Professional cosmetic bleaching' },
+    { name: 'Restoration of Teeth / Filling', path: '/treatments#restoration', icon: Shield, desc: 'Composite tooth-colored fillings' },
+    { name: 'Smile Designing', path: '/treatments#smile', icon: Smile, desc: 'Comprehensive aesthetic smile planning' },
+    { name: 'Extraction', path: '/treatments#extraction', icon: X, desc: 'Safe, gentle, aseptic tooth removal' },
+    { name: 'Dental Jewellery', path: '/treatments#jewellery', icon: Star, desc: 'Sparkling premium tooth accessories' },
+    { name: 'Pedodontics / Child Dentistry', path: '/treatments#pedodontics', icon: Heart, desc: 'Kid-friendly cavity prevention care' }
   ];
 
-  // Navbar color scheme based on scroll state
-  const navBg = isScrolled ? 'rgba(255, 255, 255, 0.98)' : 'rgba(7, 8, 10, 0.2)';
-  const navBorder = isScrolled ? '1px solid rgba(0,0,0,0.06)' : '1px solid rgba(255,255,255,0.08)';
-  const navShadow = isScrolled ? '0 10px 30px -10px rgba(0,0,0,0.08)' : 'none';
-  const logoTextClr = isScrolled ? 'var(--neutral-ink)' : '#ffffff';
-  const linkTextClr = isScrolled ? 'var(--neutral-charcoal)' : 'rgba(255,255,255,0.85)';
+  // Navbar color scheme: solid on subpages, scroll-responsive on homepage
+  const isHomePage = location.pathname === '/';
+  const showSolidNav = !isHomePage || isScrolled;
+
+  const navBg = showSolidNav ? 'rgba(255, 255, 255, 0.98)' : 'rgba(7, 8, 10, 0.2)';
+  const navBorder = showSolidNav ? '1px solid rgba(0,0,0,0.06)' : '1px solid rgba(255,255,255,0.08)';
+  const navShadow = showSolidNav ? '0 10px 30px -10px rgba(0,0,0,0.08)' : 'none';
+  const logoTextClr = showSolidNav ? 'var(--neutral-ink)' : '#ffffff';
+  const linkTextClr = showSolidNav ? 'var(--neutral-charcoal)' : 'rgba(255,255,255,0.85)';
 
   return (
     <nav style={{
@@ -51,20 +71,36 @@ export default function Navbar() {
       borderBottom: navBorder,
       boxShadow: navShadow,
     }}>
+      <style dangerouslySetInnerHTML={{__html: `
+        .dropdown-item-hover:hover {
+          background-color: rgba(37, 151, 208, 0.04) !important;
+        }
+      `}} />
       <div style={styles.container}>
         
         {/* Logo Section */}
         <Link to="/" style={styles.logoWrapper} onClick={closeMenu}>
           <motion.div 
-            style={styles.logoIcon}
+            style={{
+              width: '42px',
+              height: '42px',
+              borderRadius: '50%',
+              overflow: 'hidden',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              backgroundColor: '#ffffff',
+              boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
+              flexShrink: 0
+            }}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <Stethoscope size={24} color="#ffffff" strokeWidth={2.5} />
+            <img src="/logo.svg" alt="Dental Speciality Centre Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </motion.div>
           <div style={styles.logoTextWrapper}>
             <span style={{ ...styles.logoText, color: logoTextClr }}>Dental Speciality Centre</span>
-            <span style={styles.logoSub}>Indore Premier Dentistry</span>
+            <span style={styles.logoSub}>DR. RICHA TIWARI VYAS</span>
           </div>
         </Link>
 
@@ -74,7 +110,7 @@ export default function Navbar() {
             const isActive = location.pathname === link.path;
             
             // Treatments dropdown integration
-            if (link.name === 'Services') {
+            if (link.name === 'Treatments') {
               return (
                 <div 
                   key={link.name} 
@@ -97,7 +133,7 @@ export default function Navbar() {
                       paddingBottom: '0.25rem'
                     }}
                   >
-                    Services
+                    Treatments
                     <ChevronDown size={14} style={{
                       transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
                       transition: 'transform 0.3s ease'
@@ -122,10 +158,11 @@ export default function Navbar() {
                                 key={t.name}
                                 to={t.path}
                                 onClick={closeMenu}
+                                className="dropdown-item-hover"
                                 style={styles.dropdownItem}
                               >
                                 <div style={styles.dropdownIconWrapper}>
-                                  <IconComp size={18} color="var(--brand-surgical-blue)" />
+                                  <IconComp size={16} color="var(--brand-surgical-blue)" />
                                 </div>
                                 <div>
                                   <div style={styles.dropdownItemTitle}>{t.name}</div>
@@ -136,8 +173,8 @@ export default function Navbar() {
                           })}
                         </div>
                         <div style={styles.dropdownFooter}>
-                          <Link to="/services" onClick={closeMenu} style={styles.allServicesLink}>
-                            View All Specialized Services →
+                          <Link to="/treatments" onClick={closeMenu} style={styles.allServicesLink}>
+                            View All Specialized Treatments →
                           </Link>
                         </div>
                       </motion.div>
@@ -181,15 +218,15 @@ export default function Navbar() {
           onClick={toggleMenu} 
           style={{
             ...styles.hamburger,
-            backgroundColor: isScrolled ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.1)'
+            backgroundColor: showSolidNav ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.1)'
           }}
           className="mobile-nav"
           aria-label="Toggle menu"
         >
           {menuOpen ? (
-            <X size={24} color={isScrolled ? 'var(--neutral-ink)' : '#ffffff'} />
+            <X size={24} color={showSolidNav ? 'var(--neutral-ink)' : '#ffffff'} />
           ) : (
-            <Menu size={24} color={isScrolled ? 'var(--neutral-ink)' : '#ffffff'} />
+            <Menu size={24} color={showSolidNav ? 'var(--neutral-ink)' : '#ffffff'} />
           )}
         </button>
       </div>
@@ -309,49 +346,47 @@ const styles = {
   dropdownCard: {
     position: 'absolute',
     top: '100%',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    width: '420px',
-    backgroundColor: '#ffffff',
-    borderRadius: '20px',
-    padding: '1rem',
-    boxShadow: '0 20px 40px rgba(0,0,0,0.12)',
-    border: '1px solid rgba(0,0,0,0.06)',
+    left: '-20px',
+    width: '680px',
+    backgroundColor: '#f0f7fd',
+    borderRadius: '24px',
+    padding: '1.25rem',
+    boxShadow: '0 20px 45px rgba(37,151,208,0.08)',
+    border: '1px solid #cce3f5',
     marginTop: '0.8rem',
     zIndex: 1010
   },
   dropdownGrid: {
-    display: 'flex',
-    flexDirection: 'column',
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
     gap: '4px'
   },
   dropdownItem: {
     display: 'flex',
     alignItems: 'center',
     gap: '12px',
-    padding: '0.75rem 1rem',
+    padding: '0.6rem 0.8rem',
     borderRadius: '12px',
     textDecoration: 'none',
     transition: 'background-color 0.2s',
   },
-  // We'll handle hover dynamically or via inline hover hooks in future
   dropdownIconWrapper: {
-    width: '32px',
-    height: '32px',
-    borderRadius: '8px',
-    backgroundColor: 'var(--neutral-sky-tint)',
+    width: '28px',
+    height: '28px',
+    borderRadius: '6px',
+    backgroundColor: '#ffffff',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexShrink: 0
   },
   dropdownItemTitle: {
-    fontSize: '0.9rem',
+    fontSize: '0.82rem',
     fontWeight: '700',
     color: 'var(--neutral-ink)'
   },
   dropdownItemDesc: {
-    fontSize: '0.75rem',
+    fontSize: '0.7rem',
     color: 'var(--neutral-charcoal)',
     marginTop: '1px'
   },
