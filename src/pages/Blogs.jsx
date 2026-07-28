@@ -11,7 +11,8 @@ const blogArticles = [
     category: 'Patient Comfort',
     author: 'Dr. Richa Tiwari',
     date: 'July 15, 2026',
-    readTime: '4 min read'
+    readTime: '4 min read',
+    image: '/images/patient_comfort_blog.png'
   },
   {
     slug: 'microscopic-rct-game-changer',
@@ -20,7 +21,8 @@ const blogArticles = [
     category: 'Endodontics',
     author: 'Dr. Richa Tiwari',
     date: 'June 28, 2026',
-    readTime: '6 min read'
+    readTime: '6 min read',
+    image: '/images/endodontics_blog.png'
   },
   {
     slug: 'importance-of-child-dentistry-blueprints',
@@ -29,7 +31,8 @@ const blogArticles = [
     category: 'Pediatric Care',
     author: 'Dr. Richa Tiwari',
     date: 'May 10, 2026',
-    readTime: '5 min read'
+    readTime: '5 min read',
+    image: '/images/pediatric_blog.png'
   },
   {
     slug: 'myth-prevention-vs-pain',
@@ -38,7 +41,8 @@ const blogArticles = [
     category: 'Preventive Care',
     author: 'Dr. Richa Tiwari',
     date: 'April 14, 2026',
-    readTime: '3 min read'
+    readTime: '3 min read',
+    image: '/images/preventive_blog.png'
   }
 ];
 
@@ -109,10 +113,23 @@ export default function Blogs() {
             {blogArticles.map((article, idx) => (
               <motion.div
                 key={idx}
-                style={styles.card}
+                style={{
+                  ...styles.card,
+                  top: `calc(120px + ${idx * 20}px)`,
+                  zIndex: idx,
+                }}
                 variants={itemVariants}
                 whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(37,151,208,0.06)', borderColor: 'rgba(37,151,208,0.2)' }}
               >
+                <div style={styles.cardImageContainer}>
+                  <motion.img 
+                    src={article.image} 
+                    alt={article.title} 
+                    style={styles.cardImage} 
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.4 }}
+                  />
+                </div>
                 <div style={styles.cardHeader}>
                   <span style={styles.category}>{article.category}</span>
                   <span style={styles.readTime}>{article.readTime}</span>
@@ -213,27 +230,44 @@ const styles = {
     padding: '7rem 0',
   },
   grid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-    gap: '2.5rem 2rem',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '4rem',
+    maxWidth: '750px',
+    margin: '0 auto',
+    paddingBottom: '5rem',
   },
   card: {
     backgroundColor: '#ffffff',
     border: '1px solid rgba(0,0,0,0.05)',
     borderRadius: '24px',
-    padding: '2.25rem',
+    padding: '1.75rem',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    minHeight: '340px',
+    minHeight: '280px',
     transition: 'all 0.3s ease',
     cursor: 'pointer',
+    position: 'sticky',
+    boxShadow: '0 -10px 40px rgba(0,0,0,0.03)',
   },
   cardHeader: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
     marginBottom: '1.5rem',
+  },
+  cardImageContainer: {
+    width: '100%',
+    height: '240px',
+    marginBottom: '1.5rem',
+    overflow: 'hidden',
+    borderRadius: '16px',
+  },
+  cardImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
   },
   category: {
     fontSize: '0.72rem',
@@ -254,7 +288,7 @@ const styles = {
     marginBottom: '2rem',
   },
   blogTitle: {
-    fontSize: '1.35rem',
+    fontSize: '1.2rem',
     fontWeight: '800',
     color: 'var(--neutral-ink)',
     lineHeight: '1.3',

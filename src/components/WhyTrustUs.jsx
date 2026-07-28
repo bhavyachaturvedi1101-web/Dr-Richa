@@ -54,7 +54,7 @@ export default function WhyTrustUs() {
   return (
     <section style={styles.section} id="why-us">
       <div style={styles.container}>
-        
+
         {/* Section Header */}
         <div style={styles.header}>
           <span style={styles.subtag}>How We Are Different</span>
@@ -65,7 +65,7 @@ export default function WhyTrustUs() {
         </div>
 
         {/* Pillars Grid */}
-        <motion.div 
+        <motion.div
           style={styles.grid}
           initial="hidden"
           whileInView="visible"

@@ -59,29 +59,29 @@ export default function Hero() {
           animate="visible"
           variants={containerVariants}
         >
-          <motion.span 
+          <motion.span
             style={styles.eyebrow}
             variants={itemVariants}
           >
             Indore's Premier Dental Surgery
           </motion.span>
-          
-          <motion.h1 
+
+          <motion.h1
             style={styles.title}
             variants={itemVariants}
           >
             A smile you're <span style={styles.accent}>proud</span> to show.
           </motion.h1>
 
-          <motion.p 
+          <motion.p
             style={styles.subtitle}
             variants={itemVariants}
           >
             Indore's trusted clinic for painless microscopic root canals, advanced laser therapies, and cosmetic smiles.
           </motion.p>
 
-          <motion.div 
-            style={styles.ctas} 
+          <motion.div
+            style={styles.ctas}
             className="hero-ctas"
             variants={itemVariants}
           >
@@ -98,7 +98,7 @@ export default function Hero() {
           </motion.div>
 
           {/* Quick Trust Highlights matching reference */}
-          <motion.div 
+          <motion.div
             style={styles.trustBar}
             variants={itemVariants}
           >
@@ -119,7 +119,7 @@ export default function Hero() {
       </div>
 
       {/* Downward Arrow Scroll Indicator */}
-      <motion.div 
+      <motion.div
         style={styles.scrollIndicator}
         animate={{ y: [0, 8, 0] }}
         transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}

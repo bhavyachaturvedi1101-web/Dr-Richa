@@ -71,16 +71,17 @@ export default function Navbar() {
       borderBottom: navBorder,
       boxShadow: navShadow,
     }}>
-      <style dangerouslySetInnerHTML={{__html: `
+      <style dangerouslySetInnerHTML={{
+        __html: `
         .dropdown-item-hover:hover {
           background-color: rgba(37, 151, 208, 0.04) !important;
         }
       `}} />
       <div style={styles.container}>
-        
+
         {/* Logo Section */}
         <Link to="/" style={styles.logoWrapper} onClick={closeMenu}>
-          <motion.div 
+          <motion.div
             style={{
               width: '42px',
               height: '42px',
@@ -108,12 +109,12 @@ export default function Navbar() {
         <div style={styles.links} className="desktop-nav">
           {navLinks.map((link) => {
             const isActive = location.pathname === link.path;
-            
+
             // Treatments dropdown integration
             if (link.name === 'Treatments') {
               return (
-                <div 
-                  key={link.name} 
+                <div
+                  key={link.name}
                   style={{ position: 'relative' }}
                   onMouseEnter={() => setDropdownOpen(true)}
                   onMouseLeave={() => setDropdownOpen(false)}
@@ -185,11 +186,11 @@ export default function Navbar() {
             }
 
             return (
-              <Link 
-                key={link.name} 
-                to={link.path} 
+              <Link
+                key={link.name}
+                to={link.path}
                 style={{
-                  ...styles.link, 
+                  ...styles.link,
                   color: isActive ? 'var(--brand-surgical-blue)' : linkTextClr,
                   fontWeight: isActive ? '700' : '500',
                   borderBottom: isActive ? '2px solid var(--brand-surgical-blue)' : '2px solid transparent'
@@ -214,8 +215,8 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Hamburger */}
-        <button 
-          onClick={toggleMenu} 
+        <button
+          onClick={toggleMenu}
           style={{
             ...styles.hamburger,
             backgroundColor: showSolidNav ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.1)'

@@ -16,41 +16,41 @@ export default function AboutMinimal() {
 
       <div style={styles.container}>
         <div style={styles.grid}>
-          
+
           {/* Left Column: Visual Capsules */}
           <div style={styles.visualCol}>
-            <motion.div 
+            <motion.div
               style={styles.capsuleWrapper}
               initial={{ opacity: 0, scale: 0.9 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
             >
-              <img 
-                src="/clinic_interior.png" 
-                alt="State-of-the-Art Dental Clinic" 
-                style={styles.mainImg} 
+              <img
+                src="/clinic_interior.png"
+                alt="State-of-the-Art Dental Clinic"
+                style={styles.mainImg}
               />
               <div style={styles.imgOverlay} />
             </motion.div>
 
             {/* Overlapping Reception capsule */}
-            <motion.div 
+            <motion.div
               style={styles.subCapsuleWrapper}
               initial={{ opacity: 0, x: -30, y: 30 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
             >
-              <img 
-                src="/highlights.png" 
-                alt="Clinic Highlights" 
-                style={styles.subImg} 
+              <img
+                src="/highlights.png"
+                alt="Clinic Highlights"
+                style={styles.subImg}
               />
             </motion.div>
 
             {/* Floating Glassmorphism Badge */}
-            <motion.div 
+            <motion.div
               style={styles.badge}
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
@@ -66,7 +66,7 @@ export default function AboutMinimal() {
           </div>
 
           {/* Right Column: Copywriting */}
-          <motion.div 
+          <motion.div
             style={styles.textCol}
             initial="hidden"
             whileInView="visible"

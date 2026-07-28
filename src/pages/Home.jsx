@@ -10,6 +10,7 @@ import Testimonials from '../components/Testimonials';
 import Transformations from '../components/Transformations';
 import Education from '../components/Education';
 import DigitalJourneys from '../components/DigitalJourneys';
+import { StickyFeatureSection } from '../components/ui/sticky-scroll-cards-section';
 
 export default function Home() {
   return (
@@ -28,6 +29,7 @@ export default function Home() {
       <Testimonials />
       <Transformations />
       <Education />
+      <StickyFeatureSection />
       <DigitalJourneys />
     </motion.div>
   );

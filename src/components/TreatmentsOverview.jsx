@@ -4,80 +4,80 @@ import { Link } from 'react-router-dom';
 import { Activity, Award, Smile, Shield, X, Heart, Cpu, Sparkles, Star, ArrowRight } from 'lucide-react';
 
 const treatmentList = [
-  { 
-    id: 'rct', 
-    name: 'Root Canal (RCT)', 
-    icon: Activity, 
+  {
+    id: 'rct',
+    name: 'Root Canal (RCT)',
+    icon: Activity,
     desc: 'Microscope-assisted painless pulpal treatments to preserve natural teeth.',
     tag: 'Endodontics'
   },
-  { 
-    id: 'implants', 
-    name: 'Dental Implants', 
-    icon: Cpu, 
+  {
+    id: 'implants',
+    name: 'Dental Implants',
+    icon: Cpu,
     desc: 'Permanent titanium dental roots to restore complete bite function.',
     tag: 'Implantology'
   },
-  { 
-    id: 'crowns', 
-    name: 'Crowns & Bridges', 
-    icon: Award, 
+  {
+    id: 'crowns',
+    name: 'Crowns & Bridges',
+    icon: Award,
     desc: 'High-strength ceramic and zirconia restorations to support compromised structures.',
     tag: 'Prosthodontics'
   },
-  { 
-    id: 'gum', 
-    name: 'Gum Therapy', 
-    icon: Shield, 
+  {
+    id: 'gum',
+    name: 'Gum Therapy',
+    icon: Shield,
     desc: 'Professional ultrasonic scale checks and laser bleeding gums management.',
     tag: 'Periodontics'
   },
-  { 
-    id: 'ortho', 
-    name: 'Orthodontics', 
-    icon: Smile, 
+  {
+    id: 'ortho',
+    name: 'Orthodontics',
+    icon: Smile,
     desc: 'Clear, comfortable aligners and traditional braces for crowding corrections.',
     tag: 'Aligners'
   },
-  { 
-    id: 'whitening', 
-    name: 'Teeth Whitening', 
-    icon: Sparkles, 
+  {
+    id: 'whitening',
+    name: 'Teeth Whitening',
+    icon: Sparkles,
     desc: 'Cosmetic bleaching to remove tobacco, tea, and aging yellow stains.',
     tag: 'Aesthetics'
   },
-  { 
-    id: 'restoration', 
-    name: 'Restoration / Filling', 
-    icon: Shield, 
+  {
+    id: 'restoration',
+    name: 'Restoration / Filling',
+    icon: Shield,
     desc: 'Aesthetic, mercury-free composite tooth fillings for cavity closures.',
     tag: 'Restorative'
   },
-  { 
-    id: 'smile', 
-    name: 'Smile Designing', 
-    icon: Smile, 
+  {
+    id: 'smile',
+    name: 'Smile Designing',
+    icon: Smile,
     desc: 'Custom aesthetic orthodontic analysis and veneers for celebrity smiles.',
     tag: 'Cosmetics'
   },
-  { 
-    id: 'extraction', 
-    name: 'Extraction', 
-    icon: X, 
+  {
+    id: 'extraction',
+    name: 'Extraction',
+    icon: X,
     desc: 'Completely sterile, painless surgical removals for pediatric and geriatric needs.',
     tag: 'Surgery'
   },
-  { 
-    id: 'jewellery', 
-    name: 'Dental Jewellery', 
-    icon: Star, 
+  {
+    id: 'jewellery',
+    name: 'Dental Jewellery',
+    icon: Star,
     desc: 'Safe, non-invasive sparkling tooth gems to accessorize your smile.',
     tag: 'Accessories'
   },
-  { 
-    id: 'pedodontics', 
-    name: 'Pedodontics / Child Care', 
-    icon: Heart, 
+  {
+    id: 'pedodontics',
+    name: 'Pedodontics / Child Care',
+    icon: Heart,
     desc: 'Anxiety-free dental sealants and fluoride varnishes for children.',
     tag: 'Pediatrics'
   }
@@ -103,7 +103,7 @@ export default function TreatmentsOverview() {
   return (
     <section style={styles.section} id="treatments-overview">
       <div style={styles.container}>
-        
+
         {/* Header Block */}
         <div style={styles.header}>
           <span style={styles.subtag}>Clinical Expertise</span>
@@ -114,7 +114,7 @@ export default function TreatmentsOverview() {
         </div>
 
         {/* 11 Treatments Grid */}
-        <motion.div 
+        <motion.div
           style={styles.grid}
           initial="hidden"
           whileInView="visible"
@@ -136,10 +136,10 @@ export default function TreatmentsOverview() {
                   </div>
                   <span style={styles.cardTag}>{t.tag}</span>
                 </div>
-                
+
                 <h3 style={styles.cardTitle}>{t.name}</h3>
                 <p style={styles.cardDesc}>{t.desc}</p>
-                
+
                 <Link to={`/treatments#${t.id}`} style={styles.exploreLink}>
                   Explore Treatment <ArrowRight size={12} />
                 </Link>

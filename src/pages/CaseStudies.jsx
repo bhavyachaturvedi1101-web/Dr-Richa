@@ -11,7 +11,8 @@ const caseLogs = [
     diagnosis: 'Severe pulpal abscess and secondary infection on lower right molar.',
     treatment: 'Coordinated extraction utilizing specialized geriatric local anesthesia and blood pressure monitoring. Finished in 15 minutes under quiet conditions.',
     result: 'Complete pain-free removal, zero bleeding issues, and rapid socket healing verified in 4 days.',
-    icon: FolderHeart
+    icon: FolderHeart,
+    image: '/images/case_study_geriatric.png'
   },
   {
     title: 'Preservative Microscopic RCT',
@@ -20,7 +21,8 @@ const caseLogs = [
     diagnosis: 'Deep clinical decay compromise of pulpal tissue in upper central incisor.',
     treatment: 'Microscope-assisted root mapping. Cleaned and shaped canals under digital visual magnification. Sealed using thermoplastic obturation.',
     result: 'Tooth fully saved and biological root preserved, avoiding the need for artificial titanium implants.',
-    icon: Activity
+    icon: Activity,
+    image: '/images/case_study_endodontics.png'
   },
   {
     title: 'Computer-Guided Clear Aligner Therapy',
@@ -29,7 +31,8 @@ const caseLogs = [
     diagnosis: 'Severe lower arch dental crowding and resulting bite imbalance.',
     treatment: '3D digital alignment mapping. Designed 24 cycles of custom bio-compatible clear aligner trays worn over 12 months.',
     result: 'Fully balanced alignment achieved, dental gaps closed, and bite load safely distributed.',
-    icon: CheckCircle
+    icon: CheckCircle,
+    image: '/images/case_study_orthodontics.png'
   }
 ];
 
@@ -58,7 +61,7 @@ export default function CaseStudies() {
       transition={{ duration: 0.6 }}
       style={{ backgroundColor: '#ffffff' }}
     >
-      
+
       {/* ── HERO BANNER ── */}
       <section style={styles.heroBanner}>
         <div style={styles.heroOverlay} />
@@ -89,8 +92,8 @@ export default function CaseStudies() {
       {/* ── CASE STUDIES LIST ── */}
       <section style={styles.section}>
         <div style={styles.container}>
-          
-          <motion.div 
+
+          <motion.div
             style={styles.list}
             initial="hidden"
             whileInView="visible"
@@ -106,6 +109,9 @@ export default function CaseStudies() {
                   variants={cardVariants}
                   whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(37,151,208,0.05)' }}
                 >
+                  <div style={styles.cardImageContainer}>
+                    <img src={log.image} alt={log.title} style={styles.cardImage} />
+                  </div>
                   <div style={styles.cardHeader}>
                     <div style={styles.tagWrapper}>
                       <Icon size={16} color="var(--brand-surgical-blue)" />
@@ -231,6 +237,18 @@ const styles = {
     flexWrap: 'wrap',
     gap: '1rem',
     marginBottom: '1.5rem',
+  },
+  cardImageContainer: {
+    width: '100%',
+    height: '280px',
+    marginBottom: '2.5rem',
+    borderRadius: '16px',
+    overflow: 'hidden',
+  },
+  cardImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
   },
   tagWrapper: {
     display: 'flex',
