@@ -322,9 +322,9 @@ export default function Specialist() {
               })}
             </div>
 
-            {/* Right Column: Squarespace Sticky Visual Display Frame */}
-            <div style={styles.displayCol} className="responsive-sticky">
-              <div style={styles.displayFrame}>
+            {/* Right Column: Dynamic Image Showcase */}
+            <div style={styles.displayCol} className="expertise-image-col">
+              <div style={styles.displayFrame} className="expertise-image-frame">
                 <AnimatePresence mode="wait">
                   <motion.div
                     key={activeItem.id}
@@ -355,6 +355,7 @@ export default function Specialist() {
                     {/* Bottom Glass Content Card */}
                     <motion.div 
                       style={styles.bottomGlassCard}
+                      className="expertise-glass-card"
                       initial={{ opacity: 0, y: 20 }}
                       animate={{ opacity: 1, y: 0 }}
                       transition={{ delay: 0.2, duration: 0.4 }}

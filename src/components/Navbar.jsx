@@ -29,8 +29,7 @@ export default function Navbar() {
     { name: 'Treatments', path: '/treatments' },
     { name: 'Blogs', path: '/blogs' },
     { name: 'Gallery', path: '/gallery' },
-    { name: 'Case Studies', path: '/case-studies' },
-    { name: 'Contact', path: '/contact' }
+    { name: 'Case Studies', path: '/case-studies' }
   ];
 
   // Treatments ordered row-by-row for a perfect 2-column layout mapping:

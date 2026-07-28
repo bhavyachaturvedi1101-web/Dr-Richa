@@ -1,14 +1,41 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { MapPin, Phone, Clock, Mail, Send } from 'lucide-react';
+import { MapPin, Phone, Clock, Mail, Calendar, Stethoscope, User, ChevronDown } from 'lucide-react';
 
 export default function Contact() {
+  const [submitted, setSubmitted] = useState(false);
+
   const infoItems = [
     { icon: Phone, label: 'Direct Line', val: '6262178282', desc: 'Call our primary reception desk' },
     { icon: Mail, label: 'Email Address', val: 'contact@dentalspeciality.com', desc: 'Send us clinical scan documents' },
     { icon: MapPin, label: 'Indore Clinic', val: 'F 9, 10, BCM CITY, Khandelwal Nagar, Janki Nagar, Indore', desc: 'Circular Road, Indore, MP 452012' },
     { icon: Clock, label: 'Clinical Hours', val: 'Open 24 Hrs', desc: 'Monday – Sunday emergency care' }
   ];
+
+  const treatments = [
+    'Routine Check-up & Cleaning',
+    'Teeth Whitening',
+    'Dental Implants',
+    'Root Canal Treatment',
+    'Orthodontics / Braces',
+    'Cosmetic Dentistry',
+    'Tooth Extraction',
+    'Dental Crowns & Bridges',
+    'Pediatric Dentistry',
+    'Emergency Dental Care',
+    'Other / Not Sure',
+  ];
+
+  const timeSlots = [
+    'Morning (9:00 AM – 12:00 PM)',
+    'Afternoon (12:00 PM – 4:00 PM)',
+    'Evening (4:00 PM – 8:00 PM)',
+  ];
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    setSubmitted(true);
+  };
 
   return (
     <motion.div
@@ -21,7 +48,6 @@ export default function Contact() {
       {/* ── HERO BANNER ── */}
       <section style={styles.heroBanner}>
         <div style={styles.heroOverlay} />
-        <div style={styles.heroOverlayGrid} />
         <div style={styles.container}>
           <motion.div
             style={styles.heroContent}
@@ -42,13 +68,13 @@ export default function Contact() {
               style={styles.heroTitle} 
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
             >
-              Connect With <span style={{ color: 'var(--brand-surgical-blue)' }}>Us.</span>
+              Book Your <span style={{ color: 'var(--brand-surgical-blue)' }}>Appointment.</span>
             </motion.h1>
             <motion.p 
               style={styles.heroDesc} 
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
             >
-              Ready to secure your booking? Contact our Indore team or send an online request.
+              Schedule a visit with Dr. Richa Tiwari Vyas — expert dental care tailored just for you.
             </motion.p>
           </motion.div>
         </div>
@@ -59,33 +85,24 @@ export default function Contact() {
         <div style={styles.container}>
           <div style={styles.grid}>
             
-            {/* Left Column: Direct Info Cards */}
+            {/* Left Column: Info */}
             <motion.div 
               style={styles.infoCol}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={{
-                hidden: { opacity: 0 },
-                visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-              }}
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
             >
-              <motion.h2 style={styles.sectionHeading} variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }}>Contact Details</motion.h2>
-              <motion.p style={styles.sectionDesc} variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }}>
+              <h2 style={styles.sectionHeading}>Contact Details</h2>
+              <p style={styles.sectionDesc}>
                 Whether you have an emergency toothache or wish to book a routine scale & polish, we are here to support you.
-              </motion.p>
+              </p>
 
               <div style={styles.infoList}>
                 {infoItems.map((item, idx) => {
                   const Icon = item.icon;
                   return (
-                    <motion.div 
-                      key={idx} 
-                      style={styles.infoCard}
-                      variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
-                      whileHover={{ scale: 1.02, x: 5, backgroundColor: 'rgba(37,151,208,0.03)' }}
-                      transition={{ type: "spring", stiffness: 300 }}
-                    >
+                    <div key={idx} style={styles.infoCard}>
                       <div style={styles.iconWrapper}>
                         <Icon size={18} color="var(--brand-surgical-blue)" />
                       </div>
@@ -94,58 +111,136 @@ export default function Contact() {
                         <p style={styles.infoValue}>{item.val}</p>
                         <p style={styles.infoDesc}>{item.desc}</p>
                       </div>
-                    </motion.div>
+                    </div>
                   );
                 })}
               </div>
+
+              {/* Doctor info badges */}
+              <div style={styles.badgeRow}>
+                <div style={styles.badge}><User size={13} /> Dr. Richa Tiwari Vyas</div>
+                <div style={styles.badge}><Stethoscope size={13} /> BDS — 9+ Yrs Experience</div>
+                <div style={styles.badge}><Calendar size={13} /> Same-Day Appointments Available</div>
+              </div>
             </motion.div>
 
-            {/* Right Column: Animated Form */}
+            {/* Right Column: Appointment Form */}
             <motion.div 
               style={styles.formCol}
-              initial="hidden"
-              whileInView="visible"
-              viewport={{ once: true, amount: 0.2 }}
-              variants={{
-                hidden: { opacity: 0 },
-                visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.3 } }
-              }}
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.1 }}
             >
               <div style={styles.formCard}>
-                <motion.h3 style={styles.formTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>Send a Message</motion.h3>
-                <motion.p style={styles.formDesc} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>Fill in your details below and a medical representative will reach back shortly.</motion.p>
-                
-                <form style={styles.form}>
-                  <motion.div style={styles.inputWrapper} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
-                    <motion.input type="text" placeholder="Full Name" style={styles.inputField} required whileFocus={{ scale: 1.01, borderColor: 'var(--brand-surgical-blue)' }} />
+                {/* Gradient Header */}
+                <div style={styles.formHeader}>
+                  <div style={styles.formHeaderIcon}>🦷</div>
+                  <div>
+                    <h3 style={styles.formTitle}>Book an Appointment</h3>
+                    <p style={styles.formDesc}>Dr. Richa Tiwari Vyas · Indore Dental Speciality Centre</p>
+                  </div>
+                </div>
+
+                <div style={styles.formBody}>
+                {submitted ? (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.9 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    style={styles.successBox}
+                  >
+                    <div style={styles.successIcon}>✓</div>
+                    <h3 style={styles.successTitle}>Appointment Requested!</h3>
+                    <p style={styles.successDesc}>
+                      Thank you! Dr. Richa's team will confirm your slot within a few hours via call or WhatsApp.
+                    </p>
                   </motion.div>
-                  <motion.div style={styles.inputWrapper} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
-                    <motion.input type="email" placeholder="Email Address" style={styles.inputField} required whileFocus={{ scale: 1.01, borderColor: 'var(--brand-surgical-blue)' }} />
-                  </motion.div>
-                  <motion.div style={styles.inputWrapper} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
-                    <motion.input type="tel" placeholder="Mobile Number" style={styles.inputField} required whileFocus={{ scale: 1.01, borderColor: 'var(--brand-surgical-blue)' }} />
-                  </motion.div>
-                  <motion.div style={styles.inputWrapper} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
-                    <motion.textarea placeholder="How can we help your smile today?" style={styles.textareaField} required whileFocus={{ scale: 1.01, borderColor: 'var(--brand-surgical-blue)' }}></motion.textarea>
-                  </motion.div>
-                  
-                  <motion.div style={{ marginTop: '1rem' }} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
-                    <motion.button 
-                      type="button" 
-                      style={styles.submitBtn}
-                      whileHover={{ scale: 1.03 }}
-                      whileTap={{ scale: 0.97 }}
-                    >
-                      Submit Message <Send size={14} />
-                    </motion.button>
-                  </motion.div>
-                </form>
+                ) : (
+                  <>
+                    <form style={styles.form} onSubmit={handleSubmit}>
+
+                      {/* Name & Phone */}
+                      <div style={styles.rowTwo}>
+                        <div style={styles.inputWrapper}>
+                          <label style={styles.inputLabel}>👤 Full Name *</label>
+                          <input type="text" placeholder="e.g. Rahul Sharma" style={styles.inputField} required />
+                        </div>
+                        <div style={styles.inputWrapper}>
+                          <label style={styles.inputLabel}>📞 Mobile Number *</label>
+                          <input type="tel" placeholder="+91 XXXXX XXXXX" style={styles.inputField} required />
+                        </div>
+                      </div>
+
+                      {/* Email */}
+                      <div style={styles.inputWrapper}>
+                        <label style={styles.inputLabel}>✉️ Email Address</label>
+                        <input type="email" placeholder="your@email.com" style={styles.inputField} />
+                      </div>
+
+                      {/* Treatment Type */}
+                      <div style={styles.inputWrapper}>
+                        <label style={styles.inputLabel}>🦷 Treatment / Service Needed *</label>
+                        <div style={styles.selectWrapper}>
+                          <select style={styles.selectField} required defaultValue="">
+                            <option value="" disabled>— Select a treatment —</option>
+                            {treatments.map((t, i) => <option key={i} value={t}>{t}</option>)}
+                          </select>
+                          <ChevronDown size={16} style={styles.selectIcon} />
+                        </div>
+                      </div>
+
+                      {/* Date & Time */}
+                      <div style={styles.rowTwo}>
+                        <div style={styles.inputWrapper}>
+                          <label style={styles.inputLabel}>📅 Preferred Date *</label>
+                          <input 
+                            type="date" 
+                            style={styles.inputField} 
+                            required 
+                            min={new Date().toISOString().split('T')[0]} 
+                          />
+                        </div>
+                        <div style={styles.inputWrapper}>
+                          <label style={styles.inputLabel}>⏰ Preferred Time *</label>
+                          <div style={styles.selectWrapper}>
+                            <select style={styles.selectField} required defaultValue="">
+                              <option value="" disabled>— Pick a slot —</option>
+                              {timeSlots.map((s, i) => <option key={i} value={s}>{s}</option>)}
+                            </select>
+                            <ChevronDown size={16} style={styles.selectIcon} />
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* Concern */}
+                      <div style={styles.inputWrapper}>
+                        <label style={styles.inputLabel}>💬 Describe Your Concern (Optional)</label>
+                        <textarea 
+                          placeholder="E.g. I have mild tooth pain in the lower left area since 3 days..." 
+                          style={styles.textareaField}
+                        ></textarea>
+                      </div>
+                      
+                      <motion.button 
+                        type="submit" 
+                        style={styles.submitBtn}
+                        whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(37,151,208,0.4)' }}
+                        whileTap={{ scale: 0.97 }}
+                      >
+                        <Calendar size={16} /> Confirm Appointment
+                      </motion.button>
+
+                      <p style={styles.formNote}>🔒 Your information is private and only used to confirm your visit.</p>
+                    </form>
+                  </>
+                )}
+                </div>
               </div>
             </motion.div>
 
           </div>
 
-          {/* ── MAP CONTAINER ── */}
+          {/* ── MAP ── */}
           <motion.div 
             style={styles.mapWrapper}
             initial={{ opacity: 0, y: 30 }}
@@ -181,7 +276,7 @@ const styles = {
   },
   heroBanner: {
     position: 'relative',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#f0f8ff',
     padding: '10rem 0 5rem',
     overflow: 'hidden',
   },
@@ -190,14 +285,6 @@ const styles = {
     inset: 0,
     background: 'transparent',
     zIndex: 1,
-    display: 'none',
-  },
-  heroOverlayGrid: {
-    position: 'absolute',
-    inset: 0,
-    background: 'transparent',
-    zIndex: 1,
-    display: 'none',
   },
   heroContent: {
     maxWidth: '800px',
@@ -238,7 +325,7 @@ const styles = {
     alignItems: 'flex-start',
   },
   infoCol: {
-    flex: '1 1 450px',
+    flex: '1 1 350px',
     display: 'flex',
     flexDirection: 'column',
     gap: '1.5rem',
@@ -253,7 +340,6 @@ const styles = {
     fontSize: '1.02rem',
     color: 'var(--neutral-charcoal)',
     lineHeight: '1.7',
-    marginBottom: '1rem',
   },
   infoList: {
     display: 'flex',
@@ -264,9 +350,6 @@ const styles = {
     display: 'flex',
     gap: '1.25rem',
     alignItems: 'flex-start',
-    padding: '0.75rem',
-    borderRadius: '16px',
-    cursor: 'default',
   },
   iconWrapper: {
     width: '42px',
@@ -286,7 +369,7 @@ const styles = {
     color: 'var(--neutral-slate)',
   },
   infoValue: {
-    fontSize: '1.1rem',
+    fontSize: '1rem',
     fontWeight: '800',
     color: 'var(--neutral-ink)',
     marginTop: '2px',
@@ -296,80 +379,192 @@ const styles = {
     color: 'var(--neutral-charcoal)',
     marginTop: '2px',
   },
-  // Form Col
+  badgeRow: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.6rem',
+    marginTop: '0.5rem',
+  },
+  badge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    fontSize: '0.82rem',
+    fontWeight: '700',
+    color: 'var(--brand-surgical-blue)',
+    backgroundColor: '#e8f5fd',
+    borderRadius: '999px',
+    padding: '0.45rem 1rem',
+    width: 'fit-content',
+  },
   formCol: {
-    flex: '1 1 450px',
+    flex: '1 1 500px',
   },
   formCard: {
-    backgroundColor: '#f8fbfe',
+    backgroundColor: '#ffffff',
     border: '1px solid #dbeef9',
     borderRadius: '30px',
-    padding: '2.5rem',
-    boxShadow: '0 20px 40px rgba(37,151,208,0.03)',
+    overflow: 'hidden',
+    boxShadow: '0 30px 60px rgba(37,151,208,0.10)',
+  },
+  formHeader: {
+    background: 'linear-gradient(135deg, #1e8bc3 0%, #2597d0 50%, #0fa3b1 100%)',
+    padding: '2rem 2.5rem',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1.25rem',
+  },
+  formHeaderIcon: {
+    fontSize: '2.5rem',
+    lineHeight: 1,
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    borderRadius: '16px',
+    padding: '0.6rem 0.75rem',
+  },
+  formBody: {
+    padding: '2rem 2.5rem 2.5rem',
   },
   formTitle: {
     fontSize: '1.4rem',
     fontWeight: '800',
-    color: 'var(--neutral-ink)',
-    marginBottom: '0.5rem',
+    color: '#ffffff',
+    marginBottom: '0.25rem',
   },
   formDesc: {
-    fontSize: '0.88rem',
-    color: 'var(--neutral-charcoal)',
+    fontSize: '0.82rem',
+    color: 'rgba(255,255,255,0.80)',
     lineHeight: '1.5',
-    marginBottom: '2rem',
   },
   form: {
     display: 'flex',
     flexDirection: 'column',
+    gap: '1.2rem',
+  },
+  rowTwo: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
     gap: '1rem',
   },
   inputWrapper: {
-    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.4rem',
+  },
+  inputLabel: {
+    fontSize: '0.75rem',
+    fontWeight: '700',
+    color: 'var(--neutral-charcoal)',
+    textTransform: 'uppercase',
+    letterSpacing: '0.04em',
   },
   inputField: {
     width: '100%',
-    padding: '0.9rem 1.25rem',
-    borderRadius: '12px',
-    border: '1px solid #dbeef9',
-    backgroundColor: '#ffffff',
-    fontSize: '0.95rem',
+    padding: '0.9rem 1.2rem',
+    borderRadius: '14px',
+    border: '2px solid #e8f4fd',
+    backgroundColor: '#f8fbfe',
+    fontSize: '0.93rem',
     color: 'var(--neutral-ink)',
     outline: 'none',
     fontFamily: 'inherit',
-    transition: 'border-color 0.2s',
+    transition: 'all 0.2s',
+    boxSizing: 'border-box',
+  },
+  selectWrapper: {
+    position: 'relative',
+  },
+  selectField: {
+    width: '100%',
+    padding: '0.9rem 2.5rem 0.9rem 1.2rem',
+    borderRadius: '14px',
+    border: '2px solid #e8f4fd',
+    backgroundColor: '#f8fbfe',
+    fontSize: '0.93rem',
+    color: 'var(--neutral-ink)',
+    outline: 'none',
+    fontFamily: 'inherit',
+    appearance: 'none',
+    cursor: 'pointer',
+    boxSizing: 'border-box',
+  },
+  selectIcon: {
+    position: 'absolute',
+    right: '1rem',
+    top: '50%',
+    transform: 'translateY(-50%)',
+    pointerEvents: 'none',
+    color: 'var(--neutral-slate)',
   },
   textareaField: {
     width: '100%',
-    minHeight: '120px',
-    padding: '0.9rem 1.25rem',
-    borderRadius: '12px',
-    border: '1px solid #dbeef9',
-    backgroundColor: '#ffffff',
-    fontSize: '0.95rem',
+    minHeight: '100px',
+    padding: '0.9rem 1.2rem',
+    borderRadius: '14px',
+    border: '2px solid #e8f4fd',
+    backgroundColor: '#f8fbfe',
+    fontSize: '0.93rem',
     color: 'var(--neutral-ink)',
     outline: 'none',
     fontFamily: 'inherit',
     resize: 'vertical',
-    transition: 'border-color 0.2s',
+    transition: 'all 0.2s',
+    boxSizing: 'border-box',
   },
   submitBtn: {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '8px',
+    gap: '10px',
     width: '100%',
-    backgroundColor: 'var(--brand-surgical-blue)',
+    background: 'linear-gradient(135deg, #1e8bc3, #0fa3b1)',
     color: '#ffffff',
-    padding: '1rem',
-    borderRadius: '12px',
+    padding: '1.1rem',
+    borderRadius: '14px',
     border: 'none',
-    fontWeight: '700',
-    fontSize: '0.95rem',
+    fontWeight: '800',
+    fontSize: '1rem',
     cursor: 'pointer',
-    boxShadow: '0 4px 14px rgba(37,151,208,0.3)',
+    boxShadow: '0 6px 20px rgba(37,151,208,0.35)',
+    letterSpacing: '0.02em',
+    marginTop: '0.5rem',
   },
-  // Map
+  formNote: {
+    fontSize: '0.76rem',
+    color: 'var(--neutral-slate)',
+    textAlign: 'center',
+    marginTop: '0.5rem',
+  },
+  successBox: {
+    textAlign: 'center',
+    padding: '3rem 1rem',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    gap: '1rem',
+  },
+  successIcon: {
+    width: '70px',
+    height: '70px',
+    borderRadius: '50%',
+    backgroundColor: '#e8f5fd',
+    color: 'var(--brand-surgical-blue)',
+    fontSize: '2rem',
+    fontWeight: '800',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  successTitle: {
+    fontSize: '1.5rem',
+    fontWeight: '800',
+    color: 'var(--neutral-ink)',
+  },
+  successDesc: {
+    fontSize: '0.95rem',
+    color: 'var(--neutral-charcoal)',
+    lineHeight: '1.6',
+    maxWidth: '320px',
+  },
   mapWrapper: {
     marginTop: '6rem',
     borderRadius: '28px',

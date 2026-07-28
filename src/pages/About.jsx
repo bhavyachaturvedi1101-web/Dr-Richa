@@ -12,10 +12,30 @@ const credentials = [
 ];
 
 const values = [
-  { icon: Heart, title: 'Patient-First Care', desc: 'Every decision we make centers on your comfort, health, and long-term smile.' },
-  { icon: Shield, title: 'No Hidden Charges', desc: 'Transparent pricing with honest advice. We never recommend unnecessary procedures.' },
-  { icon: Award, title: 'Modern Equipment', desc: 'Fully sterilized, state-of-the-art equipment to ensure maximum safety and precision.' },
-  { icon: CheckCircle2, title: 'Painless Treatments', desc: 'Advanced techniques and gentle care make every procedure as comfortable as possible.' },
+  { 
+    icon: Heart, 
+    title: 'Patient-First Care', 
+    desc: 'Every decision we make centers on your comfort, health, and long-term smile.',
+    img: 'https://images.unsplash.com/photo-1571772996211-2f02c9727629?q=80&w=600&auto=format&fit=crop'
+  },
+  { 
+    icon: Shield, 
+    title: 'No Hidden Charges', 
+    desc: 'Transparent pricing with honest advice. We never recommend unnecessary procedures.',
+    img: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=600&auto=format&fit=crop'
+  },
+  { 
+    icon: Award, 
+    title: 'Modern Equipment', 
+    desc: 'Fully sterilized, state-of-the-art equipment to ensure maximum safety and precision.',
+    img: 'https://images.unsplash.com/photo-1579684453423-f84349ef60b0?q=80&w=600&auto=format&fit=crop'
+  },
+  { 
+    icon: CheckCircle2, 
+    title: 'Painless Treatments', 
+    desc: 'Advanced techniques and gentle care make every procedure as comfortable as possible.',
+    img: 'https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=600&auto=format&fit=crop'
+  },
 ];
 const bgImages = [
   'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2070&auto=format&fit=crop',
@@ -44,7 +64,7 @@ export default function About() {
       transition={{ duration: 0.6 }}
       style={{ backgroundColor: '#ffffff' }}
     >
-      
+
       {/* ── HERO BANNER ── */}
       <section style={styles.heroBanner}>
         <AnimatePresence>
@@ -66,7 +86,7 @@ export default function About() {
             alt="Dental Clinic Background"
           />
         </AnimatePresence>
-        
+
         {/* Light overlay to maintain text readability */}
         <div style={{ ...styles.heroOverlay, display: 'block', backgroundColor: 'rgba(255, 255, 255, 0.6)' }} />
         <div style={styles.heroOverlayGrid} />
@@ -80,20 +100,20 @@ export default function About() {
               visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
             }}
           >
-            <motion.p 
-              style={styles.heroSubtag} 
+            <motion.p
+              style={styles.heroSubtag}
               variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
             >
               Our Story
             </motion.p>
-            <motion.h1 
-              style={styles.heroTitle} 
+            <motion.h1
+              style={styles.heroTitle}
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
             >
               Dental Speciality <span style={{ color: 'var(--brand-surgical-blue)' }}>Centre.</span>
             </motion.h1>
-            <motion.p 
-              style={styles.heroDesc} 
+            <motion.p
+              style={styles.heroDesc}
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
             >
               Trusted dental care in Indore — where clinical expertise meets empathetic patient hospitality.
@@ -106,9 +126,9 @@ export default function About() {
       <section style={styles.section}>
         <div style={styles.container}>
           <div style={styles.grid}>
-            
+
             {/* Visual Column */}
-            <motion.div 
+            <motion.div
               style={styles.visualWrapper}
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -126,7 +146,7 @@ export default function About() {
             </motion.div>
 
             {/* Text Column */}
-            <motion.div 
+            <motion.div
               style={styles.textWrapper}
               initial={{ opacity: 0, x: 30 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -161,12 +181,12 @@ export default function About() {
         <div style={styles.container}>
           <span style={styles.subtagCenter}>Verified History</span>
           <h2 style={styles.sectionHeadingCenter}>Credentials & Certifications</h2>
-          
+
           <div style={styles.credList}>
             {credentials.map((c, idx) => {
               const IconComp = c.icon;
               return (
-                <motion.div 
+                <motion.div
                   key={idx}
                   style={styles.credCard}
                   initial={{ opacity: 0, y: 15 }}
@@ -198,7 +218,7 @@ export default function About() {
             We are dedicated to providing completely painless treatments. We never recommend unnecessary procedures or add hidden charges.
           </p>
 
-          <motion.div 
+          <motion.div
             style={styles.valuesGrid}
             initial="hidden"
             whileInView="visible"
@@ -215,13 +235,18 @@ export default function About() {
                   key={i}
                   style={styles.valueCard}
                   variants={cardVariants}
-                  whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(37,151,208,0.08)' }}
+                  whileHover={{ y: -8, scale: 1.02, boxShadow: '0 20px 40px rgba(37,151,208,0.15)' }}
                 >
-                  <div style={styles.iconBox}>
-                    <Icon size={22} color="var(--brand-surgical-blue)" />
+                  <div style={styles.valueImgContainer}>
+                    <img src={v.img} alt={v.title} style={styles.valueImg} />
+                    <div style={styles.iconBoxFloating}>
+                      <Icon size={20} color="var(--brand-surgical-blue)" />
+                    </div>
                   </div>
-                  <h3 style={styles.valueTitle}>{v.title}</h3>
-                  <p style={styles.valueDesc}>{v.desc}</p>
+                  <div style={styles.valueContent}>
+                    <h3 style={styles.valueTitle}>{v.title}</h3>
+                    <p style={styles.valueDesc}>{v.desc}</p>
+                  </div>
                 </motion.div>
               );
             })}
@@ -466,22 +491,43 @@ const styles = {
     gap: '2rem',
   },
   valueCard: {
-    backgroundColor: '#f8fbfe',
+    backgroundColor: '#ffffff',
     border: '1px solid #dbeef9',
     borderRadius: '24px',
-    padding: '2.25rem',
     cursor: 'default',
     transition: 'all 0.3s ease',
+    overflow: 'hidden',
+    display: 'flex',
+    flexDirection: 'column',
   },
-  iconBox: {
-    width: '46px',
-    height: '46px',
+  valueImgContainer: {
+    width: '100%',
+    height: '180px',
+    position: 'relative',
+    overflow: 'hidden',
+  },
+  valueImg: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    transition: 'transform 0.5s ease',
+  },
+  iconBoxFloating: {
+    width: '42px',
+    height: '42px',
     borderRadius: '12px',
-    backgroundColor: '#e0f2fe',
+    backgroundColor: '#ffffff',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: '1.5rem',
+    position: 'absolute',
+    bottom: '-21px',
+    left: '1.75rem',
+    boxShadow: '0 8px 20px rgba(37,151,208,0.15)',
+    zIndex: 2,
+  },
+  valueContent: {
+    padding: '2.5rem 1.75rem 2rem 1.75rem',
   },
   valueTitle: {
     fontSize: '1.2rem',

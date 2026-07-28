@@ -1,7 +1,20 @@
-import React, { useEffect } from 'react';
-import { motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link, useLocation } from 'react-router-dom';
-import { Activity, Award, Smile, Shield, X, Heart, Cpu, Sparkles, Star, ClipboardCheck } from 'lucide-react';
+import {
+  Activity,
+  Award,
+  Smile,
+  Shield,
+  X,
+  Heart,
+  Cpu,
+  Sparkles,
+  Star,
+  ClipboardCheck,
+  ArrowUpRight
+} from 'lucide-react';
+import MagneticButton from './ui/MagneticButton';
 
 const deepTreatments = [
   {
@@ -57,7 +70,7 @@ const deepTreatments = [
       'Targeted antimicrobial gum washes and localized laser sanitation',
       'Regular gum health monitoring to prevent advanced periodontitis'
     ],
-    image: '/dental_service_4.jpg',
+    image: '/laser_image.png',
     icon: Shield
   },
   {
@@ -71,7 +84,7 @@ const deepTreatments = [
       'Interactive 3D dental mapping to simulate your final smile progression',
       'Maintains dental hygiene by correcting crowded, hard-to-clean spaces'
     ],
-    image: '/dental_service_2.jpg',
+    image: '/images/case_study_orthodontics.png',
     icon: Smile
   },
   {
@@ -160,28 +173,106 @@ const deepTreatments = [
   }
 ];
 
+const categories = [
+  'All',
+  'Endodontics',
+  'Implantology',
+  'Prosthodontics',
+  'Periodontics',
+  'Orthodontics',
+  'Cosmetics',
+  'Restorative',
+  'Aesthetics',
+  'Oral Surgery',
+  'Pediatrics'
+];
+
 export default function Treatments() {
   const { hash } = useLocation();
+  const [selectedCategory, setSelectedCategory] = useState('All');
 
   useEffect(() => {
     if (hash) {
-      const element = document.getElementById(hash.replace('#', ''));
-      if (element) {
+      const targetId = hash.replace('#', '');
+      const matched = deepTreatments.find((t) => t.id === targetId);
+      if (matched) {
+        setSelectedCategory('All');
         setTimeout(() => {
-          element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 100);
+          const element = document.getElementById(targetId);
+          if (element) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }
+        }, 150);
       }
     }
   }, [hash]);
 
+  const filteredTreatments = selectedCategory === 'All'
+    ? deepTreatments
+    : deepTreatments.filter((t) => t.tag === selectedCategory);
 
   return (
-    <div style={{ backgroundColor: '#ffffff' }}>
-      
-      {/* ── HERO BANNER ── */}
+    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
+      <style dangerouslySetInnerHTML={{ __html: `
+        @media (max-width: 900px) {
+          .treatment-card-grid {
+            flex-direction: column !important;
+            gap: 2rem !important;
+          }
+          .treatment-img-box {
+            width: 100% !important;
+            min-height: 260px !important;
+            max-height: 320px !important;
+          }
+          .treatment-hero-grid {
+            flex-direction: column !important;
+            text-align: center !important;
+            gap: 2.5rem !important;
+          }
+          .treatment-hero-img-col {
+            width: 100% !important;
+            max-width: 400px !important;
+            margin: 0 auto !important;
+          }
+        }
+        .treatment-card-hover {
+          transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .treatment-card-hover:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 25px 60px -12px rgba(37, 151, 208, 0.18);
+          border-color: rgba(56, 189, 248, 0.5) !important;
+        }
+        .treatment-img {
+          transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .treatment-card-hover:hover .treatment-img {
+          transform: scale(1.05);
+        }
+        .category-tab-scroll {
+          display: flex;
+          gap: 0.6rem;
+          overflow-x: auto;
+          padding: 0.5rem 0.25rem 1rem;
+          scrollbar-width: none;
+        }
+        .category-tab-scroll::-webkit-scrollbar {
+          display: none;
+        }
+      `}} />
+
+      {/* ── HERO BANNER WITH CLINIC BACKGROUND IMAGE ── */}
       <section style={styles.heroBanner}>
-        <div style={styles.heroOverlay} />
-        <div style={styles.heroOverlayGrid} />
+        {/* Background Image & Gradient Overlay */}
+        <div style={styles.heroBgWrapper}>
+          <img
+            src="/clinic_interior.png"
+            alt="Dental Surgery Clinic Interior"
+            style={styles.heroBgImg}
+          />
+          <div style={styles.heroBgOverlay} />
+        </div>
+
         <div style={styles.container}>
           <motion.div
             style={styles.heroContent}
@@ -192,89 +283,147 @@ export default function Treatments() {
               visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
             }}
           >
-            <motion.p style={styles.heroSubtag} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
-              Our Procedures
-            </motion.p>
             <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-              Clinical <span style={{ color: 'var(--brand-surgical-blue)' }}>Treatments.</span>
+              Our Specialized <span style={{ color: '#38bdf8' }}>Treatments.</span>
             </motion.h1>
             <motion.p style={styles.heroDesc} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-              Empathy-first specialized dental care utilizing state-of-the-art diagnostic machinery.
+              Explore our full spectrum of microscopic, surgical, and cosmetic dental procedures led by Dr. Richa Tiwari Vyas. Every treatment is designed with precision and pain-free patient comfort in mind.
             </motion.p>
           </motion.div>
         </div>
       </section>
 
-      {/* ── DETAILS WRAPPER ── */}
+      {/* ── INTERACTIVE CATEGORY FILTER BAR ── */}
+      <section style={styles.filterSection}>
+        <div style={styles.container}>
+          <div className="category-tab-scroll">
+            {categories.map((cat) => {
+              const isSelected = selectedCategory === cat;
+              return (
+                <button
+                  key={cat}
+                  onClick={() => setSelectedCategory(cat)}
+                  style={{
+                    ...styles.categoryBtn,
+                    color: isSelected ? '#ffffff' : 'var(--neutral-charcoal)',
+                  }}
+                >
+                  {isSelected && (
+                    <motion.div
+                      layoutId="activeTreatmentTab"
+                      style={styles.activeTabPill}
+                      transition={{ type: 'spring', stiffness: 350, damping: 28 }}
+                    />
+                  )}
+                  <span style={{ position: 'relative', zIndex: 2 }}>{cat}</span>
+                </button>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ── DETAILS WRAPPER (UNIQUE 3D PERSPECTIVE ANIMATED CARDS) ── */}
       <section style={styles.detailsSection}>
         <div style={styles.container}>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '5rem', width: '100%' }}>
-              {deepTreatments.map((t, idx) => {
+          <AnimatePresence mode="popLayout">
+            <motion.div
+              key={selectedCategory}
+              style={styles.cardsContainer}
+              initial="hidden"
+              animate="visible"
+              exit="hidden"
+            >
+              {filteredTreatments.map((t, idx) => {
                 const Icon = t.icon;
+                const isEven = idx % 2 === 0;
 
                 return (
                   <motion.div
                     key={t.id}
                     id={t.id}
-                    style={{
-                      ...styles.detailBlock,
-                      borderTop: idx > 0 ? '1px solid rgba(0,0,0,0.06)' : 'none',
-                      paddingTop: idx > 0 ? '5rem' : '0',
-                    }}
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
+                    layout
+                    className="treatment-card-hover"
+                    style={styles.cardBlock}
+                    initial={{ opacity: 0, y: 50, rotateX: 10, scale: 0.95 }}
+                    whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
                     viewport={{ once: true, amount: 0.15 }}
-                    transition={{ duration: 0.8 }}
+                    transition={{ duration: 0.7, delay: (idx % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
                   >
-                    <div style={styles.blockGrid}>
-                      {/* Image Block */}
-                      <div style={styles.imageBlock}>
-                        <img src={t.image} alt={t.title} style={styles.procedureImg} />
-                        <div style={styles.imgAccentOverlay} />
+                    <div
+                      className="treatment-card-grid"
+                      style={{
+                        ...styles.blockGrid,
+                        flexDirection: isEven ? 'row' : 'row-reverse',
+                      }}
+                    >
+                      {/* Uncropped Image Block (Full Image Visible with objectFit: contain) */}
+                      <div className="treatment-img-box" style={styles.imageBlock}>
+                        <div style={styles.imgBadge}>
+                          <Icon size={14} color="#0284c7" />
+                          <span>{t.tag}</span>
+                        </div>
+                        <img
+                          src={t.image}
+                          alt={t.title}
+                          className="treatment-img"
+                          style={styles.procedureImg}
+                        />
                       </div>
 
                       {/* Info Block */}
                       <div style={styles.infoBlock}>
                         <div style={styles.tagWrapper}>
-                          <Icon size={16} color="var(--brand-surgical-blue)" />
+                          <div style={styles.iconCircle}>
+                            <Icon size={18} color="var(--brand-surgical-blue)" />
+                          </div>
                           <span style={styles.tagText}>{t.tag}</span>
                         </div>
-                        
+
                         <h3 style={styles.blockTitle}>{t.title}</h3>
                         <p style={styles.blockDesc}>{t.desc}</p>
 
+                        {/* Interactive Bullet Points with Hover Translate */}
                         <div style={styles.pointsList}>
                           {t.points.map((pt, i) => (
-                            <div key={i} style={styles.pointRow}>
-                              <ClipboardCheck size={16} color="var(--brand-trust-green)" style={{ flexShrink: 0, marginTop: '2px' }} />
+                            <motion.div
+                              key={i}
+                              style={styles.pointRow}
+                              whileHover={{ x: 8 }}
+                              transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+                            >
+                              <div style={styles.checkIconWrapper}>
+                                <ClipboardCheck size={15} color="var(--brand-surgical-blue)" />
+                              </div>
                               <span style={styles.pointText}>{pt}</span>
-                            </div>
+                            </motion.div>
                           ))}
                         </div>
 
-                        <div style={{ marginTop: '2rem' }}>
-                          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+                        <div style={{ marginTop: '1.75rem' }}>
+                          <MagneticButton>
                             <Link to="/contact" style={styles.bookBtn}>
-                              Book Treatment Consultation
+                              <span>Book Treatment Consultation</span>
+                              <ArrowUpRight size={17} />
                             </Link>
-                          </motion.div>
+                          </MagneticButton>
                         </div>
                       </div>
                     </div>
                   </motion.div>
                 );
               })}
-            </div>
+            </motion.div>
+          </AnimatePresence>
         </div>
       </section>
-
     </div>
   );
 }
 
 const styles = {
   container: {
-    maxWidth: '1200px',
+    maxWidth: '1240px',
     margin: '0 auto',
     padding: '0 2rem',
     position: 'relative',
@@ -282,195 +431,227 @@ const styles = {
   },
   heroBanner: {
     position: 'relative',
-    backgroundColor: '#ffffff',
-    padding: '10rem 0 5rem',
+    backgroundColor: '#07080a',
+    padding: '10rem 0 5.5rem',
+    overflow: 'hidden',
+    color: '#ffffff',
+  },
+  heroBgWrapper: {
+    position: 'absolute',
+    inset: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: 1,
     overflow: 'hidden',
   },
-  heroOverlay: {
-    position: 'absolute',
-    inset: 0,
-    background: 'transparent',
-    zIndex: 1,
-    display: 'none',
+  heroBgImg: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center',
+    display: 'block',
   },
-  heroOverlayGrid: {
+  heroBgOverlay: {
     position: 'absolute',
     inset: 0,
-    background: 'transparent',
-    zIndex: 1,
-    display: 'none',
+    background: 'linear-gradient(135deg, rgba(7, 8, 10, 0.88) 0%, rgba(15, 23, 42, 0.82) 55%, rgba(37, 151, 208, 0.52) 100%)',
+    backdropFilter: 'blur(2px)',
   },
   heroContent: {
-    maxWidth: '800px',
+    position: 'relative',
+    zIndex: 2,
+    maxWidth: '820px',
     margin: '0 auto',
     textAlign: 'center',
-    color: 'var(--neutral-ink)',
-  },
-  heroSubtag: {
-    fontSize: '0.85rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.3em',
-    color: 'var(--brand-surgical-blue)',
-    fontWeight: '700',
-    marginBottom: '1rem',
+    color: '#ffffff',
   },
   heroTitle: {
     fontSize: 'clamp(2.5rem, 6vw, 4.25rem)',
-    fontWeight: '800',
-    lineHeight: '1.1',
-    letterSpacing: '-0.02em',
-    color: 'var(--neutral-ink)',
+    fontWeight: '900',
+    lineHeight: '1.12',
+    letterSpacing: '-0.025em',
+    color: '#ffffff',
     marginBottom: '1.25rem',
   },
   heroDesc: {
     fontSize: '1.15rem',
-    color: 'var(--neutral-charcoal)',
-    lineHeight: '1.65',
-    maxWidth: '600px',
+    color: '#e2e8f0',
+    lineHeight: '1.7',
+    maxWidth: '680px',
     margin: '0 auto',
   },
-  // Details Section Layout
-  detailsSection: {
-    padding: '6rem 0 7rem',
+  // Filter Bar
+  filterSection: {
+    padding: '0 0 2rem',
+    borderBottom: '1px solid #f1f5f9',
   },
-  layoutWrapper: {
-    display: 'flex',
-    gap: '3rem',
-  },
-  // Sticky Sidebar Menu
-  sidebarCol: {
-    flex: '0 0 280px',
-  },
-  sidebarCard: {
-    position: 'sticky',
-    top: '110px',
-    backgroundColor: '#f8fbfe',
-    border: '1px solid #dbeef9',
-    borderRadius: '24px',
-    padding: '1.5rem',
-  },
-  sidebarTitle: {
-    fontSize: '0.75rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.12em',
-    fontWeight: '800',
-    color: 'var(--neutral-slate)',
-    marginBottom: '1rem',
-    borderBottom: '1px solid rgba(0,0,0,0.06)',
-    paddingBottom: '0.5rem',
-  },
-  sidebarList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.25rem',
-  },
-  sidebarBtn: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '10px',
-    background: 'none',
+  categoryBtn: {
+    position: 'relative',
     border: 'none',
-    width: '100%',
-    padding: '0.55rem 0.65rem',
-    borderRadius: '10px',
+    background: 'none',
+    padding: '0.65rem 1.35rem',
+    borderRadius: '9999px',
+    fontSize: '0.9rem',
+    fontWeight: '700',
     cursor: 'pointer',
-    textAlign: 'left',
-    transition: 'background-color 0.2s',
+    transition: 'color 0.2s',
+    whiteSpace: 'nowrap',
     outline: 'none',
   },
-  sidebarBtnText: {
-    fontSize: '0.82rem',
-    fontWeight: '700',
-    color: 'var(--neutral-ink)',
+  activeTabPill: {
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(135deg, var(--brand-surgical-blue), #0284c7)',
+    borderRadius: '9999px',
+    boxShadow: '0 6px 15px rgba(2, 132, 199, 0.3)',
+    zIndex: 1,
   },
-  // Detailed Service block
-  contentCol: {
-    flex: 1,
+  // Cards Container
+  detailsSection: {
+    padding: '4rem 0 8rem',
+  },
+  cardsContainer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '5rem',
+    gap: '3rem',
   },
-  detailBlock: {
-    scrollMarginTop: '110px',
+  cardBlock: {
+    scrollMarginTop: '120px',
+    backgroundColor: '#ffffff',
+    border: '1px solid #e2e8f0',
+    borderRadius: '32px',
+    padding: '2.5rem',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)',
+    position: 'relative',
+    overflow: 'hidden',
   },
   blockGrid: {
     display: 'flex',
     gap: '3rem',
-    flexWrap: 'wrap',
+    alignItems: 'center',
   },
+  // Uncropped Image Block (objectFit: contain ensures 100% visibility)
   imageBlock: {
-    flex: '1 1 300px',
-    height: '320px',
+    flex: '1 1 420px',
+    minHeight: '340px',
+    maxHeight: '400px',
     borderRadius: '24px',
     overflow: 'hidden',
     position: 'relative',
-    boxShadow: '0 20px 45px rgba(0,0,0,0.06)',
+    backgroundColor: '#f8fafc',
+    border: '1px solid #e2e8f0',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    padding: '1.5rem',
+    boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.02)',
   },
   procedureImg: {
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
+    objectFit: 'contain',
+    display: 'block',
+    maxHeight: '100%',
   },
-  imgAccentOverlay: {
+  imgBadge: {
     position: 'absolute',
-    inset: 0,
-    background: 'linear-gradient(to top, rgba(37,151,208,0.08), transparent)',
-    pointerEvents: 'none',
+    top: '1rem',
+    left: '1rem',
+    backgroundColor: 'rgba(255, 255, 255, 0.95)',
+    backdropFilter: 'blur(8px)',
+    border: '1px solid #e2e8f0',
+    padding: '0.4rem 0.85rem',
+    borderRadius: '9999px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '6px',
+    fontSize: '0.75rem',
+    fontWeight: '800',
+    color: '#0f172a',
+    zIndex: 3,
+    boxShadow: '0 4px 12px rgba(0,0,0,0.06)',
   },
   infoBlock: {
-    flex: '1.2 1 380px',
+    flex: '1.2 1 460px',
     display: 'flex',
     flexDirection: 'column',
-    gap: '1.25rem',
+    gap: '1.15rem',
   },
   tagWrapper: {
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
+    gap: '10px',
+  },
+  iconCircle: {
+    width: '38px',
+    height: '38px',
+    borderRadius: '12px',
+    backgroundColor: 'rgba(56, 189, 248, 0.12)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
   },
   tagText: {
-    fontSize: '0.78rem',
+    fontSize: '0.8rem',
     textTransform: 'uppercase',
-    letterSpacing: '0.12em',
-    fontWeight: '700',
+    letterSpacing: '0.15em',
+    fontWeight: '800',
     color: 'var(--brand-surgical-blue)',
   },
   blockTitle: {
-    fontSize: '1.75rem',
-    fontWeight: '800',
+    fontSize: '2rem',
+    fontWeight: '900',
     color: 'var(--neutral-ink)',
-    letterSpacing: '-0.01em',
+    letterSpacing: '-0.02em',
+    lineHeight: '1.2',
   },
   blockDesc: {
-    fontSize: '0.98rem',
+    fontSize: '1rem',
     color: 'var(--neutral-charcoal)',
-    lineHeight: '1.7',
+    lineHeight: '1.75',
   },
   pointsList: {
     display: 'flex',
     flexDirection: 'column',
     gap: '0.75rem',
-    marginVertical: '0.5rem',
+    marginTop: '0.5rem',
   },
   pointRow: {
     display: 'flex',
-    gap: '10px',
+    gap: '12px',
     alignItems: 'flex-start',
+    cursor: 'default',
+  },
+  checkIconWrapper: {
+    width: '24px',
+    height: '24px',
+    borderRadius: '8px',
+    backgroundColor: 'rgba(56, 189, 248, 0.1)',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
+    marginTop: '2px',
   },
   pointText: {
-    fontSize: '0.9rem',
+    fontSize: '0.92rem',
     color: 'var(--neutral-charcoal)',
-    lineHeight: '1.55',
+    lineHeight: '1.6',
+    fontWeight: '500',
   },
   bookBtn: {
     display: 'inline-flex',
-    backgroundColor: 'var(--neutral-ink)',
+    alignItems: 'center',
+    gap: '8px',
+    background: 'linear-gradient(135deg, var(--neutral-ink), #1e293b)',
     color: '#ffffff',
-    padding: '0.85rem 1.75rem',
-    borderRadius: '12px',
-    fontWeight: '700',
-    fontSize: '0.9rem',
+    padding: '0.9rem 1.85rem',
+    borderRadius: '14px',
+    fontWeight: '800',
+    fontSize: '0.92rem',
     textDecoration: 'none',
-    boxShadow: '0 6px 15px rgba(0,0,0,0.1)'
+    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)',
+    transition: 'transform 0.2s',
   }
 };
+
