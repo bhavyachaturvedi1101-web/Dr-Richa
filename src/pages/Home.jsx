@@ -11,6 +11,7 @@ import Transformations from '../components/Transformations';
 import Education from '../components/Education';
 import DigitalJourneys from '../components/DigitalJourneys';
 import { StickyFeatureSection } from '../components/ui/sticky-scroll-cards-section';
+import ScrollReveal from '../components/ui/ScrollReveal';
 
 export default function Home() {
   return (
@@ -21,16 +22,30 @@ export default function Home() {
       style={{ backgroundColor: '#ffffff' }}
     >
       <Hero />
-      <AboutMinimal />
-      <Specialist />
+      <ScrollReveal direction="fade-up" margin="-60px">
+        <AboutMinimal />
+      </ScrollReveal>
+      <ScrollReveal direction="fade-up" margin="-60px">
+        <Specialist />
+      </ScrollReveal>
       <TreatmentsOverview />
       <WhyTrustUs />
-      <Process />
-      <Testimonials />
-      <Transformations />
-      <Education />
+      <ScrollReveal direction="fade-up" margin="-60px">
+        <Process />
+      </ScrollReveal>
+      <ScrollReveal direction="fade-up" margin="-60px">
+        <Testimonials />
+      </ScrollReveal>
+      <ScrollReveal direction="fade-up" margin="-60px">
+        <Transformations />
+      </ScrollReveal>
+      <ScrollReveal direction="fade-up" margin="-60px">
+        <Education />
+      </ScrollReveal>
       <StickyFeatureSection />
-      <DigitalJourneys />
+      <ScrollReveal direction="fade-up" margin="-60px">
+        <DigitalJourneys />
+      </ScrollReveal>
     </motion.div>
   );
 }

@@ -1,16 +1,27 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { Phone, Calendar, CheckCircle2, ChevronDown } from 'lucide-react';
+import MagneticButton from './ui/MagneticButton';
 
 export default function Hero() {
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start']
+  });
+
+  // Parallax transformations for background and floating badges
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.2]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
+        staggerChildren: 0.12,
+        delayChildren: 0.15
       }
     }
   };
@@ -20,15 +31,16 @@ export default function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
+  const words = ["A", "smile", "you're", "proud", "to", "show."];
+
   return (
-    <section style={styles.hero}>
-      {/* Background Container with Video loop */}
-      <div style={styles.bgWrapper}>
-        {/* High-quality background video loop */}
+    <section ref={heroRef} style={styles.hero}>
+      {/* Background Container with Video loop & Parallax */}
+      <motion.div style={{ ...styles.bgWrapper, y: bgY, opacity, willChange: 'transform, opacity' }}>
         <video
           autoPlay
           loop
@@ -42,14 +54,13 @@ export default function Hero() {
             objectFit: 'cover',
             objectPosition: 'center',
             zIndex: 1,
-            opacity: 1 // Fully visible background video
+            opacity: 1
           }}
         >
           <source src="https://assets.mixkit.co/videos/39480/39480-720.mp4" type="video/mp4" />
         </video>
-        {/* Dark overlay for text contrast */}
         <div style={styles.overlayMain} />
-      </div>
+      </motion.div>
 
       {/* Hero Content Area */}
       <div style={styles.container}>
@@ -59,19 +70,31 @@ export default function Hero() {
           animate="visible"
           variants={containerVariants}
         >
-          <motion.span
-            style={styles.eyebrow}
-            variants={itemVariants}
-          >
-            Indore's Premier Dental Surgery
-          </motion.span>
-
-          <motion.h1
-            style={styles.title}
-            variants={itemVariants}
-          >
-            A smile you're <span style={styles.accent}>proud</span> to show.
-          </motion.h1>
+          {/* Staggered Word-by-Word Title Entrance */}
+          <h1 style={styles.title} aria-label="A smile you're proud to show.">
+            {words.map((word, idx) => (
+              <motion.span
+                key={idx}
+                variants={{
+                  hidden: { opacity: 0, y: 28, scale: 0.96 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+                  }
+                }}
+                style={{
+                  display: 'inline-block',
+                  marginRight: '0.28em',
+                  color: word === 'proud' ? '#38bdf8' : '#ffffff',
+                  willChange: 'transform, opacity'
+                }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </h1>
 
           <motion.p
             style={styles.subtitle}
@@ -85,16 +108,21 @@ export default function Hero() {
             className="hero-ctas"
             variants={itemVariants}
           >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <Link to="/contact" style={styles.ctaPrimary}>
-                <Calendar size={18} /> Book Appointment
-              </Link>
-            </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-              <a href="tel:6262178282" style={styles.ctaSecondary}>
-                <Phone size={18} /> Call Specialist
-              </a>
-            </motion.div>
+            <MagneticButton strength={0.35}>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link to="/contact" style={styles.ctaPrimary}>
+                  <Calendar size={18} /> Book Appointment
+                </Link>
+              </motion.div>
+            </MagneticButton>
+
+            <MagneticButton strength={0.35}>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <a href="tel:6262178282" style={styles.ctaSecondary}>
+                  <Phone size={18} /> Call Specialist
+                </a>
+              </motion.div>
+            </MagneticButton>
           </motion.div>
 
           {/* Quick Trust Highlights matching reference */}
@@ -154,16 +182,10 @@ const styles = {
     height: '100%',
     zIndex: 0,
   },
-  bgImage: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    objectPosition: 'center',
-  },
   overlayMain: {
     position: 'absolute',
     inset: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    backgroundColor: 'rgba(0, 0, 0, 0.52)',
     zIndex: 1,
   },
   container: {
@@ -188,26 +210,27 @@ const styles = {
   eyebrow: {
     fontSize: '0.85rem',
     textTransform: 'uppercase',
-    letterSpacing: '0.3em',
+    letterSpacing: '0.25em',
     color: 'rgba(255, 255, 255, 0.9)',
     fontWeight: '700',
     marginBottom: '1.25rem',
-    display: 'inline-block',
+    display: 'inline-flex',
+    alignItems: 'center',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    padding: '0.35rem 1rem',
+    borderRadius: '999px',
+    backdropFilter: 'blur(8px)',
   },
   title: {
     fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
     fontWeight: '900',
-    lineHeight: '1.1',
+    lineHeight: '1.15',
     letterSpacing: '-0.02em',
     marginBottom: '1.5rem',
-    color: '#ffffff'
-  },
-  accent: {
-    background: 'linear-gradient(to right, #38bdf8, #818cf8)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-    display: 'inline-block',
+    color: '#ffffff',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   subtitle: {
     fontSize: 'clamp(1rem, 2vw, 1.2rem)',
@@ -241,7 +264,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     gap: '10px',
-    backgroundColor: 'transparent',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
     color: '#ffffff',
     padding: '0.9rem 2.2rem',
     borderRadius: '999px',
@@ -249,6 +272,7 @@ const styles = {
     fontSize: '0.95rem',
     textDecoration: 'none',
     border: '1px solid rgba(255, 255, 255, 0.2)',
+    backdropFilter: 'blur(10px)',
     transition: 'all 0.3s ease',
   },
   trustBar: {
@@ -267,10 +291,6 @@ const styles = {
     fontSize: '0.82rem',
     fontWeight: '600',
     color: 'rgba(255, 255, 255, 0.9)'
-  },
-  divider: {
-    color: 'rgba(0, 0, 0, 0.15)',
-    fontSize: '0.8rem',
   },
   scrollIndicator: {
     position: 'absolute',
@@ -292,5 +312,5 @@ const styles = {
     display: 'block',
     width: '100%',
     height: '40px',
-  }
+  },
 };

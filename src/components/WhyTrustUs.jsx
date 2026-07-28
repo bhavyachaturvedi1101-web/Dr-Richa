@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { ShieldAlert, Compass, Star, Eye } from 'lucide-react';
+import ScrollReveal, { StaggerContainer, StaggerItem } from './ui/ScrollReveal';
 
 const trustPillars = [
   {
@@ -34,73 +35,58 @@ const trustPillars = [
 ];
 
 export default function WhyTrustUs() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
-    }
-  };
-
   return (
     <section style={styles.section} id="why-us">
       <div style={styles.container}>
 
-        {/* Section Header */}
-        <div style={styles.header}>
+        {/* Section Header with Scroll Reveal */}
+        <ScrollReveal direction="fade-up" style={styles.header}>
           <span style={styles.subtag}>How We Are Different</span>
           <h2 style={styles.heading}>Why Patients Trust Us.</h2>
           <p style={styles.subheading}>
             Four core clinical pillars that define every single visit, ensuring absolute safety and peace of mind.
           </p>
-        </div>
+        </ScrollReveal>
 
-        {/* Pillars Grid */}
-        <motion.div
-          style={styles.grid}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.15 }}
-          variants={containerVariants}
-        >
+        {/* Pillars Grid with Stagger Container */}
+        <StaggerContainer style={styles.grid} staggerDelay={0.12}>
           {trustPillars.map((pillar, idx) => {
             const Icon = pillar.icon;
             return (
-              <motion.div
+              <StaggerItem
                 key={idx}
-                style={styles.card}
-                variants={cardVariants}
-                whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(37,151,208,0.06)' }}
+                direction="fade-up"
               >
-                <div style={styles.cardTop}>
-                  <div style={styles.iconBox}>
-                    <Icon size={20} color="var(--brand-surgical-blue)" />
+                <motion.div
+                  style={{ ...styles.card, willChange: 'transform, opacity' }}
+                  whileHover={{
+                    y: -8,
+                    boxShadow: '0 25px 45px -12px rgba(37,151,208,0.12)',
+                    borderColor: 'rgba(37,151,208,0.35)',
+                    transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] }
+                  }}
+                >
+                  <div style={styles.cardTop}>
+                    <div style={styles.iconBox}>
+                      <Icon size={20} color="var(--brand-surgical-blue)" />
+                    </div>
+                    <span style={styles.numText}>{pillar.num}</span>
                   </div>
-                  <span style={styles.numText}>{pillar.num}</span>
-                </div>
 
-                <div style={styles.cardMiddle}>
-                  <h3 style={styles.pillarTitle}>{pillar.title}</h3>
-                  <p style={styles.pillarDesc}>{pillar.desc}</p>
-                </div>
+                  <div style={styles.cardMiddle}>
+                    <h3 style={styles.pillarTitle}>{pillar.title}</h3>
+                    <p style={styles.pillarDesc}>{pillar.desc}</p>
+                  </div>
 
-                <div style={styles.cardBottom}>
-                  <div style={styles.line} />
-                  <span style={styles.tagline}>{pillar.tagline}</span>
-                </div>
-              </motion.div>
+                  <div style={styles.cardBottom}>
+                    <div style={styles.line} />
+                    <span style={styles.tagline}>{pillar.tagline}</span>
+                  </div>
+                </motion.div>
+              </StaggerItem>
             );
           })}
-        </motion.div>
+        </StaggerContainer>
 
       </div>
     </section>
