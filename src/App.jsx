@@ -8,6 +8,7 @@ import Contact from './pages/Contact';
 import Blogs from './pages/Blogs';
 import Gallery from './pages/Gallery';
 import CaseStudies from './pages/CaseStudies';
+import IntroLoader from './components/IntroLoader';
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -21,23 +22,25 @@ function ScrollToTop() {
 
 function App() {
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Routes>
-        <Route path="/" element={<Layout />}>
-          <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="treatments" element={<TreatmentsPage />} />
-          <Route path="services" element={<TreatmentsPage />} />
-          <Route path="contact" element={<Contact />} />
-          <Route path="blogs" element={<Blogs />} />
-          <Route path="gallery" element={<Gallery />} />
-          <Route path="case-studies" element={<CaseStudies />} />
-        </Route>
-      </Routes>
-    </BrowserRouter>
+    <>
+      <IntroLoader />
+      <BrowserRouter>
+        <ScrollToTop />
+        <Routes>
+          <Route path="/" element={<Layout />}>
+            <Route index element={<Home />} />
+            <Route path="about" element={<About />} />
+            <Route path="treatments" element={<TreatmentsPage />} />
+            <Route path="services" element={<TreatmentsPage />} />
+            <Route path="contact" element={<Contact />} />
+            <Route path="blogs" element={<Blogs />} />
+            <Route path="gallery" element={<Gallery />} />
+            <Route path="case-studies" element={<CaseStudies />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
-export default App;
 export default App;

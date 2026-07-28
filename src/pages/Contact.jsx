@@ -62,21 +62,30 @@ export default function Contact() {
             {/* Left Column: Direct Info Cards */}
             <motion.div 
               style={styles.infoCol}
-              initial={{ opacity: 0, x: -30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8 }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+              }}
             >
-              <h2 style={styles.sectionHeading}>Contact Details</h2>
-              <p style={styles.sectionDesc}>
+              <motion.h2 style={styles.sectionHeading} variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }}>Contact Details</motion.h2>
+              <motion.p style={styles.sectionDesc} variants={{ hidden: { opacity: 0, x: -20 }, visible: { opacity: 1, x: 0 } }}>
                 Whether you have an emergency toothache or wish to book a routine scale & polish, we are here to support you.
-              </p>
+              </motion.p>
 
               <div style={styles.infoList}>
                 {infoItems.map((item, idx) => {
                   const Icon = item.icon;
                   return (
-                    <div key={idx} style={styles.infoCard}>
+                    <motion.div 
+                      key={idx} 
+                      style={styles.infoCard}
+                      variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+                      whileHover={{ scale: 1.02, x: 5, backgroundColor: 'rgba(37,151,208,0.03)' }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
                       <div style={styles.iconWrapper}>
                         <Icon size={18} color="var(--brand-surgical-blue)" />
                       </div>
@@ -85,7 +94,7 @@ export default function Contact() {
                         <p style={styles.infoValue}>{item.val}</p>
                         <p style={styles.infoDesc}>{item.desc}</p>
                       </div>
-                    </div>
+                    </motion.div>
                   );
                 })}
               </div>
@@ -94,30 +103,33 @@ export default function Contact() {
             {/* Right Column: Animated Form */}
             <motion.div 
               style={styles.formCol}
-              initial={{ opacity: 0, x: 30 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: 0.1 }}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.2 }}
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.1, delayChildren: 0.3 } }
+              }}
             >
               <div style={styles.formCard}>
-                <h3 style={styles.formTitle}>Send a Message</h3>
-                <p style={styles.formDesc}>Fill in your details below and a medical representative will reach back shortly.</p>
+                <motion.h3 style={styles.formTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>Send a Message</motion.h3>
+                <motion.p style={styles.formDesc} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>Fill in your details below and a medical representative will reach back shortly.</motion.p>
                 
                 <form style={styles.form}>
-                  <div style={styles.inputWrapper}>
-                    <input type="text" placeholder="Full Name" style={styles.inputField} required />
-                  </div>
-                  <div style={styles.inputWrapper}>
-                    <input type="email" placeholder="Email Address" style={styles.inputField} required />
-                  </div>
-                  <div style={styles.inputWrapper}>
-                    <input type="tel" placeholder="Mobile Number" style={styles.inputField} required />
-                  </div>
-                  <div style={styles.inputWrapper}>
-                    <textarea placeholder="How can we help your smile today?" style={styles.textareaField} required></textarea>
-                  </div>
+                  <motion.div style={styles.inputWrapper} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
+                    <motion.input type="text" placeholder="Full Name" style={styles.inputField} required whileFocus={{ scale: 1.01, borderColor: 'var(--brand-surgical-blue)' }} />
+                  </motion.div>
+                  <motion.div style={styles.inputWrapper} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
+                    <motion.input type="email" placeholder="Email Address" style={styles.inputField} required whileFocus={{ scale: 1.01, borderColor: 'var(--brand-surgical-blue)' }} />
+                  </motion.div>
+                  <motion.div style={styles.inputWrapper} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
+                    <motion.input type="tel" placeholder="Mobile Number" style={styles.inputField} required whileFocus={{ scale: 1.01, borderColor: 'var(--brand-surgical-blue)' }} />
+                  </motion.div>
+                  <motion.div style={styles.inputWrapper} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
+                    <motion.textarea placeholder="How can we help your smile today?" style={styles.textareaField} required whileFocus={{ scale: 1.01, borderColor: 'var(--brand-surgical-blue)' }}></motion.textarea>
+                  </motion.div>
                   
-                  <div style={{ marginTop: '1rem' }}>
+                  <motion.div style={{ marginTop: '1rem' }} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
                     <motion.button 
                       type="button" 
                       style={styles.submitBtn}
@@ -126,7 +138,7 @@ export default function Contact() {
                     >
                       Submit Message <Send size={14} />
                     </motion.button>
-                  </div>
+                  </motion.div>
                 </form>
               </div>
             </motion.div>
@@ -252,6 +264,9 @@ const styles = {
     display: 'flex',
     gap: '1.25rem',
     alignItems: 'flex-start',
+    padding: '0.75rem',
+    borderRadius: '16px',
+    cursor: 'default',
   },
   iconWrapper: {
     width: '42px',

@@ -1,5 +1,5 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import { CheckCircle2, Award, Heart, Shield, Calendar, UserCheck, Languages, Clipboard } from 'lucide-react';
 
@@ -17,8 +17,21 @@ const values = [
   { icon: Award, title: 'Modern Equipment', desc: 'Fully sterilized, state-of-the-art equipment to ensure maximum safety and precision.' },
   { icon: CheckCircle2, title: 'Painless Treatments', desc: 'Advanced techniques and gentle care make every procedure as comfortable as possible.' },
 ];
+const bgImages = [
+  'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2070&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1598256989800-fea5f20eb180?q=80&w=2070&auto=format&fit=crop',
+  'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2070&auto=format&fit=crop'
+];
 
 export default function About() {
+  const [currentBg, setCurrentBg] = useState(0);
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      setCurrentBg((prev) => (prev + 1) % bgImages.length);
+    }, 3500);
+    return () => clearInterval(timer);
+  }, []);
   const cardVariants = {
     hidden: { opacity: 0, y: 20 },
     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: 'easeOut' } }
@@ -34,7 +47,28 @@ export default function About() {
       
       {/* ── HERO BANNER ── */}
       <section style={styles.heroBanner}>
-        <div style={styles.heroOverlay} />
+        <AnimatePresence>
+          <motion.img
+            key={currentBg}
+            src={bgImages[currentBg]}
+            initial={{ opacity: 0, scale: 1.05 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: 'easeInOut' }}
+            style={{
+              position: 'absolute',
+              inset: 0,
+              width: '100%',
+              height: '100%',
+              objectFit: 'cover',
+              zIndex: 0
+            }}
+            alt="Dental Clinic Background"
+          />
+        </AnimatePresence>
+        
+        {/* Light overlay to maintain text readability */}
+        <div style={{ ...styles.heroOverlay, display: 'block', backgroundColor: 'rgba(255, 255, 255, 0.6)' }} />
         <div style={styles.heroOverlayGrid} />
         <div style={styles.container}>
           <motion.div

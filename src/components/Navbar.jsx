@@ -342,7 +342,8 @@ const styles = {
     fontSize: '0.95rem',
     transition: 'color 0.25s ease',
     textDecoration: 'none',
-    paddingBottom: '0.25rem'
+    paddingBottom: '0.25rem',
+    outline: 'none'
   },
   dropdownCard: {
     position: 'absolute',

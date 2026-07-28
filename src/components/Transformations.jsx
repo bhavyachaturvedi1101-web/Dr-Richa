@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { ArrowRight, UserCheck, HeartHandshake, ShieldAlert } from 'lucide-react';
+import { ArrowRight, UserCheck, HeartHandshake, ShieldAlert, Sparkles, CheckCircle2 } from 'lucide-react';
 
 const cases = [
   {
@@ -8,57 +8,111 @@ const cases = [
     title: 'Painless Geriatric Solution',
     desc: 'A successful and painless tooth extraction performed on an 80-year-old patient. With careful geriatric dental protocols, the procedure ensured minimal discomfort and rapid healing.',
     tag: 'Geriatric Care',
-    icon: ShieldAlert
+    icon: ShieldAlert,
+    image: '/exp-1.png',
+    badge: 'Age 80+ Safe Care'
   },
   {
     category: 'Pediatric Care · Cavity Filling',
     title: 'Zero-Anxiety Child Restoration',
     desc: 'Gentle cavity sealing for a 6-year-old patient. Completed using positive reinforcement techniques, saving the baby tooth to preserve the vital permanent teeth alignment blueprint.',
     tag: 'Pediatric Care',
-    icon: HeartHandshake
+    icon: HeartHandshake,
+    image: '/exp-2.png',
+    badge: 'Painless Sealant'
   },
   {
     category: 'Endodontics · Microscope RCT',
     title: 'Tooth Preservation Success',
     desc: 'Advanced microscopic root canal therapy to treat deep decay. Fully saved the natural tooth structure, avoiding extraction and restoring full biting strength.',
     tag: 'Tooth Preservation',
-    icon: UserCheck
+    icon: UserCheck,
+    image: '/rct_image.png',
+    badge: 'Saved Natural Tooth'
   }
 ];
 
 export default function Transformations() {
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: { staggerChildren: 0.15 }
+    }
+  };
+
+  const cardVariants = {
+    hidden: { opacity: 0, y: 35 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
+    }
+  };
+
   return (
     <section style={styles.section} id="transformations">
       <div style={styles.container}>
         
         {/* Header */}
-        <div style={styles.header}>
-          <span style={styles.subtag}>Real Cases · Real Results</span>
+        <motion.div 
+          style={styles.header}
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.7 }}
+        >
+          <div style={styles.pillTag}>
+            <Sparkles size={14} color="#38bdf8" />
+            <span>REAL CASES · PROVEN RESULTS</span>
+          </div>
           <h2 style={styles.heading}>Incredible Transformations.</h2>
           <p style={styles.subheading}>
-            Explore actual clinical case logs documenting successful pain-free restorations and geriatric treatments.
+            Explore actual clinical case logs documenting successful pain-free restorations, tooth preservation, and gentle geriatric procedures.
           </p>
-        </div>
+        </motion.div>
 
         {/* Grid Cases */}
-        <div style={styles.grid}>
+        <motion.div 
+          style={styles.grid}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, amount: 0.15 }}
+          variants={containerVariants}
+        >
           {cases.map((c, idx) => {
             const Icon = c.icon;
             return (
               <motion.div
                 key={idx}
                 style={styles.card}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.7, delay: idx * 0.1 }}
-                whileHover={{ y: -6, boxShadow: '0 20px 40px rgba(0,0,0,0.06)' }}
+                variants={cardVariants}
+                whileHover={{ 
+                  y: -10, 
+                  boxShadow: '0 25px 50px -12px rgba(37, 151, 208, 0.18)',
+                  borderColor: 'rgba(56, 189, 248, 0.35)' 
+                }}
               >
-                <div style={styles.cardHeader}>
-                  <div style={styles.iconBox}>
-                    <Icon size={18} color="var(--brand-surgical-blue)" />
+                {/* Case Study Image Header */}
+                <div style={styles.imageBox}>
+                  <motion.img 
+                    src={c.image} 
+                    alt={c.title}
+                    style={styles.cardImg}
+                    whileHover={{ scale: 1.08 }}
+                    transition={{ duration: 0.5, ease: 'easeOut' }}
+                  />
+                  <div style={styles.imgOverlay} />
+                  
+                  {/* Badge */}
+                  <div style={styles.topBadge}>
+                    <CheckCircle2 size={12} color="#10b981" />
+                    <span>{c.badge}</span>
                   </div>
-                  <span style={styles.tagText}>{c.tag}</span>
+
+                  <div style={styles.glassIconBox}>
+                    <Icon size={18} color="#38bdf8" />
+                  </div>
                 </div>
 
                 <div style={styles.cardContent}>
@@ -69,14 +123,15 @@ export default function Transformations() {
 
                 <div style={styles.cardFooter}>
                   <div style={styles.line} />
-                  <span style={styles.footerLink}>
-                    View Case Study Details <ArrowRight size={12} />
-                  </span>
+                  <div style={styles.footerLinkRow}>
+                    <span style={styles.footerLink}>View Case Details</span>
+                    <ArrowRight size={14} color="var(--brand-surgical-blue)" />
+                  </div>
                 </div>
               </motion.div>
             );
           })}
-        </div>
+        </motion.div>
 
       </div>
     </section>
@@ -85,29 +140,39 @@ export default function Transformations() {
 
 const styles = {
   section: {
-    padding: '7rem 0',
+    padding: '7.5rem 0',
     backgroundColor: '#ffffff',
+    position: 'relative',
+    overflow: 'hidden',
   },
   container: {
-    maxWidth: '1200px',
+    maxWidth: '1240px',
     margin: '0 auto',
     padding: '0 2rem',
   },
   header: {
     textAlign: 'center',
     marginBottom: '5.5rem',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
-  subtag: {
-    fontSize: '0.8rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.3em',
+  pillTag: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    backgroundColor: 'rgba(56, 189, 248, 0.1)',
+    border: '1px solid rgba(56, 189, 248, 0.25)',
     color: 'var(--brand-surgical-blue)',
-    fontWeight: '700',
-    display: 'block',
-    marginBottom: '0.75rem',
+    fontSize: '0.78rem',
+    fontWeight: '800',
+    letterSpacing: '0.2em',
+    padding: '6px 16px',
+    borderRadius: '999px',
+    marginBottom: '1.25rem',
   },
   heading: {
-    fontSize: 'clamp(2.25rem, 4vw, 3.25rem)',
+    fontSize: 'clamp(2.3rem, 4.5vw, 3.4rem)',
     color: 'var(--neutral-ink)',
     fontWeight: '800',
     letterSpacing: '-0.02em',
@@ -116,57 +181,84 @@ const styles = {
   subheading: {
     fontSize: '1.1rem',
     color: 'var(--neutral-charcoal)',
-    maxWidth: '560px',
+    maxWidth: '600px',
     margin: '0 auto',
     lineHeight: '1.7',
   },
   grid: {
     display: 'grid',
     gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))',
-    gap: '2rem',
+    gap: '2.25rem',
   },
   card: {
     backgroundColor: '#f8fbfe',
     border: '1px solid #dbeef9',
-    borderRadius: '24px',
-    padding: '2.25rem',
+    borderRadius: '28px',
+    overflow: 'hidden',
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    minHeight: '340px',
-    transition: 'all 0.3s ease',
+    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
     cursor: 'pointer',
+    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.03)',
   },
-  cardHeader: {
+  imageBox: {
+    position: 'relative',
+    height: '210px',
+    width: '100%',
+    overflow: 'hidden',
+  },
+  cardImg: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  imgOverlay: {
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(to top, rgba(15, 23, 42, 0.75) 0%, transparent 70%)',
+  },
+  topBadge: {
+    position: 'absolute',
+    top: '16px',
+    left: '16px',
+    backgroundColor: 'rgba(255, 255, 255, 0.92)',
+    backdropFilter: 'blur(8px)',
+    color: '#0f172a',
+    fontSize: '0.72rem',
+    fontWeight: '800',
+    padding: '5px 12px',
+    borderRadius: '999px',
     display: 'flex',
-    justifyContent: 'space-between',
     alignItems: 'center',
+    gap: '6px',
+    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
   },
-  iconBox: {
-    width: '38px',
-    height: '38px',
-    borderRadius: '10px',
-    backgroundColor: '#e0f2fe',
+  glassIconBox: {
+    position: 'absolute',
+    bottom: '16px',
+    right: '16px',
+    width: '40px',
+    height: '40px',
+    borderRadius: '12px',
+    backgroundColor: 'rgba(255, 255, 255, 0.9)',
+    backdropFilter: 'blur(8px)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
-  tagText: {
-    fontSize: '0.75rem',
-    fontWeight: '700',
-    color: 'var(--brand-surgical-blue)',
-    textTransform: 'uppercase',
-    letterSpacing: '0.05em',
-  },
   cardContent: {
-    margin: '2rem 0 1.5rem',
+    padding: '1.75rem 1.75rem 1.25rem',
+    flexGrow: 1,
   },
   categoryText: {
-    fontSize: '0.8rem',
-    color: 'var(--neutral-slate)',
-    fontWeight: '600',
+    fontSize: '0.78rem',
+    color: 'var(--brand-surgical-blue)',
+    fontWeight: '700',
+    textTransform: 'uppercase',
+    letterSpacing: '0.08em',
     display: 'block',
-    marginBottom: '0.5rem',
+    marginBottom: '0.6rem',
   },
   caseTitle: {
     fontSize: '1.35rem',
@@ -181,21 +273,25 @@ const styles = {
     lineHeight: '1.65',
   },
   cardFooter: {
+    padding: '0 1.75rem 1.75rem',
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.75rem',
+    gap: '0.9rem',
   },
   line: {
     height: '1px',
     backgroundColor: '#dbeef9',
     width: '100%',
   },
-  footerLink: {
-    fontSize: '0.8rem',
-    fontWeight: '700',
-    color: 'var(--neutral-ink)',
+  footerLinkRow: {
     display: 'flex',
     alignItems: 'center',
-    gap: '6px',
+    justifyContent: 'space-between',
+  },
+  footerLink: {
+    fontSize: '0.82rem',
+    fontWeight: '700',
+    color: 'var(--neutral-ink)',
   },
 };
+

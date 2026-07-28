@@ -3,14 +3,10 @@ import { motion } from 'framer-motion';
 import Hero from '../components/Hero';
 import AboutMinimal from '../components/AboutMinimal';
 import Specialist from '../components/Specialist';
-import TreatmentsOverview from '../components/TreatmentsOverview';
 import WhyTrustUs from '../components/WhyTrustUs';
 import Process from '../components/Process';
 import Testimonials from '../components/Testimonials';
-import Transformations from '../components/Transformations';
 import Education from '../components/Education';
-import DigitalJourneys from '../components/DigitalJourneys';
-import { StickyFeatureSection } from '../components/ui/sticky-scroll-cards-section';
 
 export default function Home() {
   return (
@@ -23,15 +19,12 @@ export default function Home() {
       <Hero />
       <AboutMinimal />
       <Specialist />
-      <TreatmentsOverview />
       <WhyTrustUs />
       <Process />
       <Testimonials />
-      <Transformations />
       <Education />
-      <StickyFeatureSection />
-      <DigitalJourneys />
     </motion.div>
   );
 }
+
 

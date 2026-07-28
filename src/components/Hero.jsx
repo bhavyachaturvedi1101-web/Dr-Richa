@@ -1,22 +1,19 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, Calendar, CheckCircle2, ChevronDown } from 'lucide-react';
+import { Phone, Calendar, CheckCircle2, ArrowUpRight, Star } from 'lucide-react';
 
 export default function Hero() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.2
-      }
+      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 25 },
+    hidden: { opacity: 0, y: 30 },
     visible: {
       opacity: 1,
       y: 0,
@@ -26,112 +23,127 @@ export default function Hero() {
 
   return (
     <section style={styles.hero}>
-      {/* Background Container with Video loop */}
-      <div style={styles.bgWrapper}>
-        {/* High-quality background video loop */}
-        <video
-          autoPlay
-          loop
-          muted
-          playsInline
-          style={{
-            position: 'absolute',
-            inset: 0,
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-            objectPosition: 'center',
-            zIndex: 1,
-            opacity: 1 // Fully visible background video
-          }}
-        >
-          <source src="https://assets.mixkit.co/videos/39480/39480-720.mp4" type="video/mp4" />
-        </video>
-        {/* Dark overlay for text contrast */}
-        <div style={styles.overlayMain} />
-      </div>
+      {/* Gradient background */}
+      <div style={styles.bgGradient} />
 
-      {/* Hero Content Area */}
-      <div style={styles.container}>
+      {/* Decorative blobs */}
+      <div style={styles.blobTopRight} />
+      <div style={styles.blobBottomLeft} />
+
+      <div style={styles.outerContainer} className="responsive-flex-row">
+        {/* LEFT: Text Content */}
         <motion.div
-          style={styles.content}
+          style={styles.textCol}
           initial="hidden"
           animate="visible"
           variants={containerVariants}
         >
-          <motion.span
-            style={styles.eyebrow}
-            variants={itemVariants}
-          >
-            Indore's Premier Dental Surgery
-          </motion.span>
-
-          <motion.h1
-            style={styles.title}
-            variants={itemVariants}
-          >
-            A smile you're <span style={styles.accent}>proud</span> to show.
+          {/* Main Headline */}
+          <motion.h1 style={styles.title} variants={itemVariants} className="huge-title">
+            Restore <span style={styles.accentUnderline}>Your True</span>{' '}
+            <span style={styles.accentBlue}>Smile</span>
           </motion.h1>
 
-          <motion.p
-            style={styles.subtitle}
-            variants={itemVariants}
-          >
-            Indore's trusted clinic for painless microscopic root canals, advanced laser therapies, and cosmetic smiles.
+          {/* Subtext */}
+          <motion.p style={styles.subtitle} variants={itemVariants}>
+            Using <strong>advanced microscopic technology</strong>, we deliver comprehensive treatments for a healthy, confident smile — painlessly and precisely.
           </motion.p>
 
-          <motion.div
-            style={styles.ctas}
-            className="hero-ctas"
-            variants={itemVariants}
-          >
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+          {/* CTA Buttons */}
+          <motion.div style={styles.ctas} variants={itemVariants}>
+            <motion.div
+              whileHover={{ scale: 1.04, boxShadow: '0 18px 38px rgba(56,189,248,0.35)' }}
+              whileTap={{ scale: 0.97 }}
+            >
               <Link to="/contact" style={styles.ctaPrimary}>
-                <Calendar size={18} /> Book Appointment
+                <Calendar size={17} />
+                Book Appointment
+                <ArrowUpRight size={16} />
               </Link>
             </motion.div>
-            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+
+            <motion.div
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.97 }}
+            >
               <a href="tel:6262178282" style={styles.ctaSecondary}>
-                <Phone size={18} /> Call Specialist
+                <Phone size={17} />
+                Call Specialist
               </a>
             </motion.div>
           </motion.div>
 
-          {/* Quick Trust Highlights matching reference */}
-          <motion.div
-            style={styles.trustBar}
-            variants={itemVariants}
-          >
-            <div style={styles.trustItem}>
-              <CheckCircle2 size={16} color="#ffffff" />
-              <span style={styles.trustText}>5.0 Google Reviews</span>
+          {/* Patient trust row */}
+          <motion.div style={styles.trustRow} variants={itemVariants}>
+            <div style={styles.avatarGroup}>
+              {[
+                'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80',
+                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&auto=format&fit=crop&q=80',
+                'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&auto=format&fit=crop&q=80',
+              ].map((src, i) => (
+                <img key={i} src={src} alt="Patient" style={{ ...styles.avatarImg, zIndex: 3 - i }} />
+              ))}
+              <div style={styles.avatarCount}>+2k</div>
             </div>
-            <div style={styles.trustItem}>
-              <CheckCircle2 size={16} color="#ffffff" />
-              <span style={styles.trustText}>Painless Modern Care</span>
-            </div>
-            <div style={styles.trustItem}>
-              <CheckCircle2 size={16} color="#ffffff" />
-              <span style={styles.trustText}>Open 24 Hours</span>
+            <div style={styles.trustLabel}>
+              <div style={styles.trustRating}>
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} size={13} fill="#f59e0b" color="#f59e0b" />
+                ))}
+              </div>
+              <span style={styles.trustText}>Over 4,000+ loyal dental patients</span>
             </div>
           </motion.div>
+
+          {/* Trust pills */}
+          <motion.div style={styles.pillRow} variants={itemVariants}>
+            {['ISO Certified Clinic', 'Painless Modern Care', 'Open 24 Hours'].map((label, i) => (
+              <div key={i} style={styles.pill}>
+                <CheckCircle2 size={13} color="#0ea5e9" />
+                <span>{label}</span>
+              </div>
+            ))}
+          </motion.div>
         </motion.div>
-      </div>
 
-      {/* Downward Arrow Scroll Indicator */}
-      <motion.div
-        style={styles.scrollIndicator}
-        animate={{ y: [0, 8, 0] }}
-        transition={{ repeat: Infinity, duration: 1.8, ease: 'easeInOut' }}
-      >
-        <ChevronDown size={28} color="#ffffff" style={{ opacity: 0.7 }} />
-      </motion.div>
+        {/* RIGHT: Tooth Visual */}
+        <motion.div
+          style={styles.imageCol}
+          initial={{ opacity: 0, x: 60 }}
+          animate={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
+        >
+          {/* Stat card: 98% */}
+          <motion.div
+            style={styles.statCard}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 0.9, duration: 0.7 }}
+          >
+            <span style={styles.statNum}>98%</span>
+            <span style={styles.statLabel}>Loyal dental<br/>patients</span>
+          </motion.div>
 
-      {/* Bottom Wave SVG for smooth section merger */}
-      <div style={styles.waveWrapper}>
-        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={styles.waveSvg}>
-          <path d="M0,30 C480,60 960,0 1440,30 L1440,60 L0,60 Z" fill="#ffffff" />
-        </svg>
+          {/* Consultation ring */}
+          <div style={styles.rotatingRing}>
+            <svg viewBox="0 0 120 120" width="120" height="120">
+              <defs>
+                <path id="circle" d="M 60,60 m -45,0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" />
+              </defs>
+              <text style={{ fontSize: '11.5px', fill: '#0f172a', fontWeight: '700', letterSpacing: '3px' }}>
+                <textPath href="#circle">BOOK YOUR CONSULTATION • NOW •&nbsp;</textPath>
+              </text>
+            </svg>
+            <div style={styles.ringArrow}>↗</div>
+          </div>
+
+          {/* Main tooth image */}
+          <img
+            src="/hero_tooth.png"
+            alt="Restore Your Smile — Dr. Richa Tiwari"
+            style={styles.toothImage}
+          />
+        </motion.div>
       </div>
     </section>
   );
@@ -140,157 +152,271 @@ export default function Hero() {
 const styles = {
   hero: {
     position: 'relative',
-    height: '100vh',
+    minHeight: '100vh',
     display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
+    alignItems: 'stretch',
     overflow: 'hidden',
-    backgroundColor: '#000000',
+    backgroundColor: '#e8f6fc',
   },
-  bgWrapper: {
+  bgGradient: {
     position: 'absolute',
     inset: 0,
-    width: '100%',
-    height: '100%',
+    background: 'linear-gradient(135deg, #daf3fb 0%, #c5ecf8 35%, #b5e6f5 60%, #cef0e0 100%)',
     zIndex: 0,
   },
-  bgImage: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-    objectPosition: 'center',
-  },
-  overlayMain: {
+  blobTopRight: {
     position: 'absolute',
-    inset: 0,
-    backgroundColor: 'rgba(0, 0, 0, 0.5)',
-    zIndex: 1,
+    top: '-120px',
+    right: '-100px',
+    width: '520px',
+    height: '520px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(56,189,248,0.22) 0%, transparent 70%)',
+    zIndex: 0,
   },
-  container: {
-    maxWidth: '1440px',
-    width: '100%',
-    margin: '0 auto',
-    padding: '0 6%',
+  blobBottomLeft: {
+    position: 'absolute',
+    bottom: '-80px',
+    left: '-80px',
+    width: '380px',
+    height: '380px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)',
+    zIndex: 0,
+  },
+  outerContainer: {
     position: 'relative',
     zIndex: 2,
+    maxWidth: '1320px',
+    margin: '0 auto',
+    width: '100%',
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    padding: '6rem 5% 4rem',
+    gap: '3rem',
+    flexWrap: 'wrap',
   },
-  content: {
-    textAlign: 'center',
-    maxWidth: '860px',
-    color: '#ffffff',
+  textCol: {
+    flex: '1 1 480px',
     display: 'flex',
     flexDirection: 'column',
-    alignItems: 'center',
+    gap: '1.6rem',
   },
-  eyebrow: {
-    fontSize: '0.85rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.3em',
-    color: 'rgba(255, 255, 255, 0.9)',
+  eyebrowBadge: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    backgroundColor: 'rgba(255,255,255,0.75)',
+    backdropFilter: 'blur(10px)',
+    border: '1px solid rgba(14,165,233,0.3)',
+    padding: '6px 18px',
+    borderRadius: '999px',
+    fontSize: '0.8rem',
     fontWeight: '700',
-    marginBottom: '1.25rem',
+    color: '#0369a1',
+    letterSpacing: '0.05em',
+    alignSelf: 'flex-start',
+    boxShadow: '0 4px 14px rgba(14,165,233,0.12)',
+  },
+  eyebrowDot: {
+    width: '8px',
+    height: '8px',
+    borderRadius: '50%',
+    backgroundColor: '#0ea5e9',
+    boxShadow: '0 0 8px rgba(14,165,233,0.6)',
     display: 'inline-block',
+    flexShrink: 0,
   },
   title: {
-    fontSize: 'clamp(2.5rem, 6vw, 4.5rem)',
+    fontSize: 'clamp(2.6rem, 5.5vw, 5rem)',
     fontWeight: '900',
-    lineHeight: '1.1',
-    letterSpacing: '-0.02em',
-    marginBottom: '1.5rem',
-    color: '#ffffff'
+    lineHeight: '1.05',
+    letterSpacing: '-0.03em',
+    color: '#0c2340',
+    margin: 0,
   },
-  accent: {
-    background: 'linear-gradient(to right, #38bdf8, #818cf8)',
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text',
-    display: 'inline-block',
+  accentUnderline: {
+    position: 'relative',
+    display: 'inline',
+    color: '#0c2340',
+    textDecoration: 'none',
+  },
+  accentBlue: {
+    color: '#0ea5e9',
   },
   subtitle: {
-    fontSize: 'clamp(1rem, 2vw, 1.2rem)',
-    color: 'rgba(255, 255, 255, 0.9)',
-    lineHeight: '1.7',
-    maxWidth: '650px',
-    marginBottom: '2.5rem',
+    fontSize: 'clamp(1rem, 1.8vw, 1.15rem)',
+    color: '#1e4b6a',
+    lineHeight: '1.72',
+    maxWidth: '540px',
+    margin: 0,
   },
   ctas: {
     display: 'flex',
     gap: '1rem',
-    justifyContent: 'center',
     flexWrap: 'wrap',
-    marginBottom: '3rem',
+    alignItems: 'center',
   },
   ctaPrimary: {
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
-    gap: '10px',
-    backgroundColor: '#ffffff',
-    color: '#000000',
-    padding: '0.9rem 2.2rem',
+    gap: '9px',
+    backgroundColor: '#0c2340',
+    color: '#ffffff',
+    padding: '0.95rem 2.2rem',
     borderRadius: '999px',
-    fontWeight: '900',
+    fontWeight: '800',
     fontSize: '0.95rem',
     textDecoration: 'none',
-    boxShadow: '0 15px 35px rgba(255, 255, 255, 0.25)',
+    boxShadow: '0 12px 28px rgba(12,35,64,0.25)',
     transition: 'all 0.3s ease',
   },
   ctaSecondary: {
-    display: 'flex',
+    display: 'inline-flex',
     alignItems: 'center',
-    gap: '10px',
-    backgroundColor: 'transparent',
-    color: '#ffffff',
-    padding: '0.9rem 2.2rem',
+    gap: '9px',
+    backgroundColor: 'rgba(255,255,255,0.7)',
+    backdropFilter: 'blur(10px)',
+    color: '#0c2340',
+    padding: '0.95rem 2.2rem',
     borderRadius: '999px',
     fontWeight: '700',
     fontSize: '0.95rem',
     textDecoration: 'none',
-    border: '1px solid rgba(255, 255, 255, 0.2)',
+    border: '1px solid rgba(14,165,233,0.35)',
     transition: 'all 0.3s ease',
   },
-  trustBar: {
+  trustRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1rem',
+  },
+  avatarGroup: {
+    display: 'flex',
+    alignItems: 'center',
+  },
+  avatarImg: {
+    width: '36px',
+    height: '36px',
+    borderRadius: '50%',
+    border: '2.5px solid #ffffff',
+    marginRight: '-10px',
+    objectFit: 'cover',
+    boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+  },
+  avatarCount: {
+    width: '36px',
+    height: '36px',
+    borderRadius: '50%',
+    backgroundColor: '#0ea5e9',
+    color: '#ffffff',
+    fontSize: '0.65rem',
+    fontWeight: '900',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    gap: '1.5rem',
-    flexWrap: 'wrap',
+    border: '2.5px solid #ffffff',
+    marginLeft: '4px',
+    boxShadow: '0 2px 8px rgba(14,165,233,0.3)',
   },
-  trustItem: {
+  trustLabel: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '3px',
+  },
+  trustRating: {
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
+    gap: '2px',
   },
   trustText: {
-    fontSize: '0.82rem',
+    fontSize: '0.78rem',
     fontWeight: '600',
-    color: 'rgba(255, 255, 255, 0.9)'
+    color: '#1e4b6a',
   },
-  divider: {
-    color: 'rgba(0, 0, 0, 0.15)',
-    fontSize: '0.8rem',
+  pillRow: {
+    display: 'flex',
+    gap: '0.75rem',
+    flexWrap: 'wrap',
   },
-  scrollIndicator: {
-    position: 'absolute',
-    bottom: '80px',
-    left: '50%',
-    transform: 'translateX(-50%)',
+  pill: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    backgroundColor: 'rgba(255,255,255,0.75)',
+    backdropFilter: 'blur(8px)',
+    border: '1px solid rgba(14,165,233,0.2)',
+    padding: '5px 14px',
+    borderRadius: '999px',
+    fontSize: '0.78rem',
+    fontWeight: '700',
+    color: '#0369a1',
+    boxShadow: '0 2px 8px rgba(14,165,233,0.08)',
+  },
+  // Right column
+  imageCol: {
+    flex: '1 1 420px',
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    minHeight: '480px',
+  },
+  toothImage: {
+    width: '100%',
+    maxWidth: '540px',
+    height: 'auto',
+    objectFit: 'contain',
+    position: 'relative',
     zIndex: 2,
-    cursor: 'pointer',
+    filter: 'drop-shadow(0 40px 60px rgba(14,165,233,0.25))',
   },
-  waveWrapper: {
+  statCard: {
     position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    zIndex: 3,
-    lineHeight: 0,
+    left: '-20px',
+    bottom: '80px',
+    zIndex: 4,
+    backgroundColor: '#0c2340',
+    color: '#ffffff',
+    borderRadius: '24px',
+    padding: '1rem 1.5rem',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '2px',
+    boxShadow: '0 20px 40px rgba(12,35,64,0.3)',
+    minWidth: '110px',
   },
-  waveSvg: {
-    display: 'block',
-    width: '100%',
-    height: '40px',
-  }
+  statNum: {
+    fontSize: '2.2rem',
+    fontWeight: '900',
+    lineHeight: '1',
+    color: '#38bdf8',
+  },
+  statLabel: {
+    fontSize: '0.72rem',
+    fontWeight: '600',
+    color: 'rgba(255,255,255,0.75)',
+    lineHeight: '1.4',
+  },
+  rotatingRing: {
+    position: 'absolute',
+    bottom: '40px',
+    right: '20px',
+    zIndex: 4,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    width: '120px',
+    height: '120px',
+    cursor: 'pointer',
+    userSelect: 'none',
+  },
+  ringArrow: {
+    position: 'absolute',
+    fontSize: '1.4rem',
+    fontWeight: '900',
+    color: '#0c2340',
+    lineHeight: 1,
+  },
 };

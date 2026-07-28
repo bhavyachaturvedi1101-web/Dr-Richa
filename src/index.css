@@ -110,3 +110,60 @@ a { color: inherit; }
   }
 }
 
+/* ============================================
+   RESPONSIVE STRUCTURAL UTILITY CLASSES
+   ============================================ */
+.responsive-flex-row {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: wrap !important;
+}
+.responsive-grid-2 {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+}
+.responsive-sticky {
+  position: sticky !important;
+}
+
+@media (max-width: 900px) {
+  .responsive-flex-row {
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .responsive-flex-row > * {
+    width: 100% !important;
+    flex: 1 1 100% !important;
+  }
+  
+  .responsive-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 2rem !important;
+  }
+
+  .responsive-sticky {
+    position: relative !important;
+    top: 0 !important;
+    height: auto !important;
+    min-height: auto !important;
+  }
+  
+  /* Utilities for mobile text centering */
+  .mobile-text-center {
+    text-align: center !important;
+    align-items: center !important;
+  }
+  
+  /* Utilities for scaling huge typography */
+  .huge-title {
+    font-size: clamp(2.5rem, 8vw, 3.5rem) !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .responsive-grid-2 {
+    grid-template-columns: 1fr !important;
+    gap: 1.5rem !important;
+  }
+}

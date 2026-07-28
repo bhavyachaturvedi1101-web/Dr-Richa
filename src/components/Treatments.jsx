@@ -43,7 +43,7 @@ const deepTreatments = [
       'Dental bridges to bridge gaps left by single or multiple missing teeth',
       'Metal-free bio-compatible materials to prevent dark margins near the gums'
     ],
-    image: '/dental_service_6.jpg',
+    image: '/crowns_image.png',
     icon: Award
   },
   {
@@ -85,7 +85,7 @@ const deepTreatments = [
       'Laser-activated whitening gel for rapid, non-invasive results',
       'Clinically formulated desensitizing agents to prevent teeth sensitivity'
     ],
-    image: '/dental_service_6.jpg',
+    image: '/teeth_whitening.png',
     icon: Sparkles
   },
   {
@@ -99,7 +99,7 @@ const deepTreatments = [
       'Restores the structural integrity of decayed teeth to prevent fractures',
       'Smooth, polished margins that blend seamlessly with natural enamel'
     ],
-    image: '/dental_service_3.jpg',
+    image: '/tooth_filling.png',
     icon: Shield
   },
   {
@@ -113,7 +113,7 @@ const deepTreatments = [
       'Gingival contouring to correct gummy smiles and expose more enamel',
       'Coordinated cosmetic and orthodontic combinations for celebrity smiles'
     ],
-    image: '/highlights.png',
+    image: '/smile_designing.png',
     icon: Smile
   },
   {
@@ -127,7 +127,7 @@ const deepTreatments = [
       'Surgical wisdom teeth extractions to prevent crowding and jaw pain',
       'Complete post-operative care guidelines for rapid socket healing'
     ],
-    image: '/emergency_image.png',
+    image: '/tooth_extraction.png',
     icon: X
   },
   {
@@ -141,7 +141,7 @@ const deepTreatments = [
       'Easily removable at any time by Dr. Tiwari without marking the tooth',
       'Adds a temporary or long-term sparkle to accessorize your smile'
     ],
-    image: '/clinic_interior.png',
+    image: '/dental_jewellery.png',
     icon: Star
   },
   {
@@ -155,7 +155,7 @@ const deepTreatments = [
       'Monitoring developmental spacing to prevent future aligner requirements',
       'Gentle scaling and clinical guidance to cure early child cavities'
     ],
-    image: '/dental_service_3.jpg',
+    image: '/pedodontics_child.png',
     icon: Heart
   }
 ];
