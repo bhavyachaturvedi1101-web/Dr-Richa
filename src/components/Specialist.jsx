@@ -242,10 +242,6 @@ export default function Specialist() {
           onMouseLeave={() => setIsPaused(false)}
         >
           <div style={styles.headerWrapper}>
-            <div style={styles.pillTag}>
-              <Sparkles size={14} color="#38bdf8" />
-              <span>CLINICAL EXCELLENCE</span>
-            </div>
             <h3 style={styles.expertiseSubheading}>Areas of Expertise</h3>
             <p style={styles.expertiseDesc}>Advanced procedures utilizing state-of-the-art diagnostic machinery and micro-surgical operating tools.</p>
           </div>

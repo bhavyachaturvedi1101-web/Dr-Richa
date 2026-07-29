@@ -455,10 +455,6 @@ export default function WhyTrustUs() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <div className="bento-pill-tag">
-            <Sparkles size={14} color="#0284c7" />
-            <span>HOW WE ARE DIFFERENT</span>
-          </div>
           <h2 className="bento-heading">
             Why Patients <span className="bento-heading-gradient">Trust Us.</span>
           </h2>

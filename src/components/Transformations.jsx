@@ -62,10 +62,6 @@ export default function Transformations() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <div style={styles.pillTag}>
-            <Sparkles size={14} color="#38bdf8" />
-            <span>REAL CASES · PROVEN RESULTS</span>
-          </div>
           <h2 style={styles.heading}>Incredible Transformations.</h2>
           <p style={styles.subheading}>
             Explore actual clinical case logs documenting successful pain-free restorations, tooth preservation, and gentle geriatric procedures.

@@ -127,10 +127,6 @@ export default function Education() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <span style={styles.subtag}>
-              <Sparkles size={14} style={{ marginRight: '8px' }} />
-              Learn From Us
-            </span>
             <h2 style={styles.heading}>Your Dental Health.</h2>
             <p style={styles.subheading}>
               Curated clinical insights on maintaining dental structure, pH balance, and long-term oral wellness.

@@ -45,10 +45,6 @@ export default function Testimonials() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <div style={styles.pillTag}>
-            <Star size={14} color="#f59e0b" fill="#f59e0b" />
-            <span>PATIENT REVIEWS · 5.0 GOOGLE RATING</span>
-          </div>
           <h2 style={styles.heading}>What Our Patients Say</h2>
           <p style={styles.subheading}>
             Real stories and heartfelt reviews from patients who experienced our zero-anxiety, pain-free dental care.

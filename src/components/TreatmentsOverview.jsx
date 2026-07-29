@@ -124,10 +124,6 @@ export default function TreatmentsOverview() {
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <div style={styles.pillTag}>
-            <CheckCircle2 size={14} color="#38bdf8" />
-            <span>CLINICAL EXPERTISE</span>
-          </div>
           <h2 style={styles.heading}>Specialized Treatments</h2>
           <p style={styles.desc}>
             Empathetic dental solutions utilizing state-of-the-art diagnostic machinery, laser systems, and sterile operating layouts.
