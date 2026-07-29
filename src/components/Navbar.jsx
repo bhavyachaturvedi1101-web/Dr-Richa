@@ -88,7 +88,16 @@ export default function Navbar() {
       <div style={styles.container}>
 
         {/* Left Side: Brand Title & Logo (Matching Reference Image "auriex" position) */}
-        <Link to="/" style={styles.logoWrapper} onClick={closeMenu}>
+        <Link 
+          to="/" 
+          style={{
+            ...styles.logoWrapper, 
+            backgroundColor: (!isHomePage && !isScrolled) ? 'rgba(255, 255, 255, 0.95)' : 'transparent',
+            padding: (!isHomePage && !isScrolled) ? '4px 16px 4px 4px' : '0',
+            borderRadius: (!isHomePage && !isScrolled) ? '50px' : '0'
+          }} 
+          onClick={closeMenu}
+        >
           <motion.div
             style={styles.logoIconCircle}
             whileHover={{ scale: 1.05 }}
