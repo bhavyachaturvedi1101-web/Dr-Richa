@@ -60,16 +60,16 @@ export default function Hero() {
             </motion.h1>
 
             {/* Subtitle Tagline */}
-            <motion.p style={styles.titleTagline} variants={itemVariants}>
+            <motion.p style={styles.titleTagline} className="hero-tagline-responsive" variants={itemVariants}>
               Restore <span style={{ color: '#0ea5e9' }}>Your True</span> Smile
             </motion.p>
 
             {/* Description Text */}
-            <motion.p style={styles.subtitle} variants={itemVariants}>
+            <motion.p style={styles.subtitle} className="hero-desc-responsive" variants={itemVariants}>
               We surpass standard care to deliver a seamless, stress-free experience, prioritizing your comfort, confidence, and lasting oral wellness.
             </motion.p>
 
-            <motion.p style={styles.subtitleSecondary} variants={itemVariants}>
+            <motion.p style={styles.subtitleSecondary} className="hero-desc-secondary-responsive" variants={itemVariants}>
               Using <strong>advanced microscopic technology</strong>, we deliver comprehensive treatments — painlessly and precisely.
             </motion.p>
 
