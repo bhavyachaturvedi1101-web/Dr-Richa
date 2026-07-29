@@ -16,10 +16,10 @@ export default function AboutMinimal() {
 
       <div style={styles.container}>
         <div style={styles.grid} className="responsive-flex-row">
-          
+
           {/* Left Column: Visual Capsules */}
           <div style={styles.visualCol} className="about-visual-col">
-            <motion.div 
+            <motion.div
               style={styles.capsuleWrapper}
               className="about-capsule-wrapper"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
@@ -42,7 +42,7 @@ export default function AboutMinimal() {
             </motion.div>
 
             {/* Overlapping Reception capsule */}
-            <motion.div 
+            <motion.div
               style={styles.subCapsuleWrapper}
               className="about-sub-capsule-wrapper"
               initial={{ opacity: 0, x: -30, y: 30 }}
@@ -51,15 +51,15 @@ export default function AboutMinimal() {
               transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
               whileHover={{ scale: 1.05 }}
             >
-              <img 
-                src="/highlights.png" 
-                alt="Clinic Highlights" 
-                style={styles.subImg} 
+              <img
+                src="/highlights.png"
+                alt="Clinic Highlights"
+                style={styles.subImg}
               />
             </motion.div>
 
             {/* Floating Glassmorphism Badge */}
-            <motion.div 
+            <motion.div
               style={styles.badge}
               className="about-badge-wrapper"
               initial={{ opacity: 0, scale: 0.8 }}
@@ -77,7 +77,7 @@ export default function AboutMinimal() {
           </div>
 
           {/* Right Column: Copywriting */}
-          <motion.div 
+          <motion.div
             style={styles.textCol}
             initial="hidden"
             whileInView="visible"
@@ -177,19 +177,19 @@ const styles = {
   visualCol: {
     flex: '1 1 500px',
     position: 'relative',
-    height: '550px',
+    height: '570px',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
   },
   capsuleWrapper: {
     position: 'relative',
-    width: '420px',
-    height: '420px',
-    borderRadius: '50%',
+    width: '380px',
+    height: '500px',
+    borderRadius: '80px',
     overflow: 'hidden',
-    border: '6px solid #ffffff',
-    boxShadow: '0 30px 70px rgba(0, 0, 0, 0.12)',
+    border: 'none',
+    boxShadow: '0 30px 70px rgba(0, 0, 0, 0.14)',
     flexShrink: 0,
   },
   mainImg: {
@@ -200,18 +200,63 @@ const styles = {
   imgOverlay: {
     position: 'absolute',
     inset: 0,
-    background: 'linear-gradient(to top, rgba(0,0,0,0.2) 0%, transparent 60%)',
+    background: 'linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 60%)',
   },
-  subCapsuleWrapper: {
+  liveOverlay: {
     position: 'absolute',
-    bottom: '4%',
-    left: '0%',
-    width: '150px',
-    height: '150px',
+    bottom: '12%',
+    left: '50%',
+    transform: 'translateX(-50%)',
+    textAlign: 'center',
+    zIndex: 5,
+    pointerEvents: 'none',
+  },
+  liveText: {
+    display: 'block',
+    fontSize: '1.25rem',
+    fontWeight: '700',
+    fontStyle: 'italic',
+    color: '#e879a0',
+    letterSpacing: '0.02em',
+    marginBottom: '4px',
+  },
+  liveSubText: {
+    display: 'block',
+    fontSize: '0.65rem',
+    fontWeight: '800',
+    letterSpacing: '0.25em',
+    color: '#ffffff',
+    textTransform: 'uppercase',
+  },
+  /* top-right circle overlay */
+  circleTopRight: {
+    position: 'absolute',
+    top: '0%',
+    right: '-14%',
+    width: '145px',
+    height: '145px',
     borderRadius: '50%',
     overflow: 'hidden',
     border: '5px solid #ffffff',
-    boxShadow: '0 20px 40px rgba(0,0,0,0.12)',
+    boxShadow: '0 20px 45px rgba(0,0,0,0.15)',
+    zIndex: 10,
+  },
+  circleImg: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  /* bottom-left rounded rect overlay */
+  subCapsuleWrapper: {
+    position: 'absolute',
+    bottom: '4%',
+    left: '-4%',
+    width: '185px',
+    height: '115px',
+    borderRadius: '20px',
+    overflow: 'hidden',
+    border: '5px solid #ffffff',
+    boxShadow: '0 20px 45px rgba(0,0,0,0.15)',
     zIndex: 10,
   },
   subImg: {
@@ -219,21 +264,22 @@ const styles = {
     height: '100%',
     objectFit: 'cover',
   },
+  /* top-right badge overlapping video */
   badge: {
     position: 'absolute',
-    top: '4%',
-    right: '0%',
-    width: '115px',
-    height: '115px',
-    backgroundColor: 'rgba(255, 255, 255, 0.88)',
-    backdropFilter: 'blur(16px)',
-    border: '1px solid rgba(255,255,255,0.4)',
-    borderRadius: '50%',
+    top: '8%',
+    right: '5%',
+    width: '130px',
+    height: '100px',
+    backgroundColor: '#ffffff',
+    border: '1px solid rgba(0,0,0,0.05)',
+    borderRadius: '24px',
+    padding: '1rem',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-    zIndex: 10,
+    boxShadow: '0 20px 50px rgba(0,0,0,0.12)',
+    zIndex: 15,
     cursor: 'default',
   },
   badgeInner: {

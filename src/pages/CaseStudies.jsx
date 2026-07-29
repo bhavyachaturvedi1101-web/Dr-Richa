@@ -45,8 +45,30 @@ export default function CaseStudies() {
       style={{ backgroundColor: '#ffffff' }}
     >
       {/* ── HERO BANNER ── */}
-      <section style={styles.heroBanner}>
-        <div style={styles.heroOverlay} />
+      <section style={styles.heroBanner} className="casestudies-hero-banner">
+        {/* Background Image featuring Clinical Dental Case Study X-Ray & Reports */}
+        <img
+          src="https://images.unsplash.com/photo-1576091160550-2173dba999ef?auto=format&fit=crop&w=2070&q=80"
+          alt="Dental Case Study Medical X-Ray Diagnostic Report"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 35%',
+            zIndex: 0,
+          }}
+        />
+
+        {/* Dark Overlay to make white title pop crystal clear */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.5) 50%, rgba(15, 23, 42, 0.3) 100%)',
+          zIndex: 1
+        }} />
+
         <div style={styles.container}>
           <motion.div
             style={styles.heroContent}
@@ -57,13 +79,25 @@ export default function CaseStudies() {
               visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
             }}
           >
-            <motion.p style={styles.heroSubtag} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
+            <motion.p 
+              style={{ ...styles.heroSubtag, color: '#38bdf8' }} 
+              className="casestudies-hero-subtag"
+              variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
+            >
               Clinical Logs
             </motion.p>
-            <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-              Case <span style={{ color: 'var(--brand-surgical-blue)' }}>Studies.</span>
+            <motion.h1 
+              style={{ ...styles.heroTitle, color: '#ffffff', textShadow: '0 2px 15px rgba(0,0,0,0.6)' }} 
+              className="casestudies-hero-title"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            >
+              Case <span style={{ color: '#38bdf8' }}>Studies.</span>
             </motion.h1>
-            <motion.p style={styles.heroDesc} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+            <motion.p 
+              style={{ ...styles.heroDesc, color: '#e2e8f0', textShadow: '0 2px 10px rgba(0,0,0,0.6)' }} 
+              className="casestudies-hero-desc"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            >
               Documented treatment logs and structural tooth restorations showcasing our commitment to precision and painless dentistry.
             </motion.p>
           </motion.div>
@@ -186,10 +220,12 @@ const styles = {
   },
   heroBanner: {
     position: 'relative',
-    backgroundColor: '#f8fafc',
-    padding: '10rem 0 6rem',
+    backgroundColor: '#0f172a',
+    padding: '13rem 0 8rem',
+    minHeight: '520px',
+    display: 'flex',
+    alignItems: 'center',
     overflow: 'hidden',
-    borderBottom: '1px solid rgba(0,0,0,0.03)',
   },
   heroContent: {
     maxWidth: '800px',
