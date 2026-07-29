@@ -527,6 +527,7 @@ const styles = {
   section: {
     padding: '8rem 0',
     backgroundColor: '#fdfbf7',
+    background: 'linear-gradient(180deg, #edf7fc 0%, #fdfbf7 100%)',
     position: 'relative',
     overflow: 'hidden',
   },
