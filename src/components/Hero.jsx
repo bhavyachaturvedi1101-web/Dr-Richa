@@ -1,14 +1,28 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { Phone, Calendar, CheckCircle2, ArrowUpRight, Star } from 'lucide-react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { Phone, Calendar, CheckCircle2, ChevronDown } from 'lucide-react';
+import MagneticButton from './ui/MagneticButton';
 
 export default function Hero() {
+  const heroRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: heroRef,
+    offset: ['start start', 'end start']
+  });
+
+  // Parallax transformations for background and floating badges
+  const bgY = useTransform(scrollYProgress, [0, 1], ['0%', '30%']);
+  const opacity = useTransform(scrollYProgress, [0, 0.8], [1, 0.2]);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
+      transition: {
+        staggerChildren: 0.12,
+        delayChildren: 0.15
+      }
     }
   };
 
@@ -17,14 +31,36 @@ export default function Hero() {
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.75, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
+  const words = ["A", "smile", "you're", "proud", "to", "show."];
+
   return (
-    <section style={styles.hero}>
-      {/* Gradient background */}
-      <div style={styles.bgGradient} />
+    <section ref={heroRef} style={styles.hero}>
+      {/* Background Container with Video loop & Parallax */}
+      <motion.div style={{ ...styles.bgWrapper, y: bgY, opacity, willChange: 'transform, opacity' }}>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center',
+            zIndex: 1,
+            opacity: 1
+          }}
+        >
+          <source src="https://assets.mixkit.co/videos/39480/39480-720.mp4" type="video/mp4" />
+        </video>
+        <div style={styles.overlayMain} />
+      </motion.div>
 
       {/* Decorative blobs */}
       <div style={styles.blobTopRight} />
@@ -38,39 +74,57 @@ export default function Hero() {
           animate="visible"
           variants={containerVariants}
         >
-          {/* Main Headline */}
-          <motion.h1 style={styles.title} variants={itemVariants} className="huge-title">
-            Restore <span style={styles.accentUnderline}>Your True</span>{' '}
-            <span style={styles.accentBlue}>Smile</span>
-          </motion.h1>
+          {/* Staggered Word-by-Word Title Entrance */}
+          <h1 style={styles.title} aria-label="A smile you're proud to show.">
+            {words.map((word, idx) => (
+              <motion.span
+                key={idx}
+                variants={{
+                  hidden: { opacity: 0, y: 28, scale: 0.96 },
+                  visible: {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
+                  }
+                }}
+                style={{
+                  display: 'inline-block',
+                  marginRight: '0.28em',
+                  color: word === 'proud' ? '#38bdf8' : '#ffffff',
+                  willChange: 'transform, opacity'
+                }}
+              >
+                {word}
+              </motion.span>
+            ))}
+          </h1>
 
           {/* Subtext */}
           <motion.p style={styles.subtitle} variants={itemVariants}>
             Using <strong>advanced microscopic technology</strong>, we deliver comprehensive treatments for a healthy, confident smile — painlessly and precisely.
           </motion.p>
 
-          {/* CTA Buttons */}
-          <motion.div style={styles.ctas} variants={itemVariants}>
-            <motion.div
-              whileHover={{ scale: 1.04, boxShadow: '0 18px 38px rgba(56,189,248,0.35)' }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Link to="/contact" style={styles.ctaPrimary}>
-                <Calendar size={17} />
-                Book Appointment
-                <ArrowUpRight size={16} />
-              </Link>
-            </motion.div>
+          <motion.div
+            style={styles.ctas}
+            className="hero-ctas"
+            variants={itemVariants}
+          >
+            <MagneticButton strength={0.35}>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <Link to="/contact" style={styles.ctaPrimary}>
+                  <Calendar size={18} /> Book Appointment
+                </Link>
+              </motion.div>
+            </MagneticButton>
 
-            <motion.div
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <a href="tel:6262178282" style={styles.ctaSecondary}>
-                <Phone size={17} />
-                Call Specialist
-              </a>
-            </motion.div>
+            <MagneticButton strength={0.35}>
+              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                <a href="tel:6262178282" style={styles.ctaSecondary}>
+                  <Phone size={18} /> Call Specialist
+                </a>
+              </motion.div>
+            </MagneticButton>
           </motion.div>
 
           {/* Patient trust row */}
@@ -164,25 +218,11 @@ const styles = {
     background: 'linear-gradient(135deg, #daf3fb 0%, #c5ecf8 35%, #b5e6f5 60%, #cef0e0 100%)',
     zIndex: 0,
   },
-  blobTopRight: {
+  overlayMain: {
     position: 'absolute',
-    top: '-120px',
-    right: '-100px',
-    width: '520px',
-    height: '520px',
-    borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(56,189,248,0.22) 0%, transparent 70%)',
-    zIndex: 0,
-  },
-  blobBottomLeft: {
-    position: 'absolute',
-    bottom: '-80px',
-    left: '-80px',
-    width: '380px',
-    height: '380px',
-    borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)',
-    zIndex: 0,
+    inset: 0,
+    backgroundColor: 'rgba(0, 0, 0, 0.52)',
+    zIndex: 1,
   },
   outerContainer: {
     position: 'relative',
@@ -203,47 +243,30 @@ const styles = {
     flexDirection: 'column',
     gap: '1.6rem',
   },
-  eyebrowBadge: {
+  eyebrow: {
+    fontSize: '0.85rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.25em',
+    color: 'rgba(255, 255, 255, 0.9)',
+    fontWeight: '700',
+    marginBottom: '1.25rem',
     display: 'inline-flex',
     alignItems: 'center',
-    gap: '8px',
-    backgroundColor: 'rgba(255,255,255,0.75)',
-    backdropFilter: 'blur(10px)',
-    border: '1px solid rgba(14,165,233,0.3)',
-    padding: '6px 18px',
+    backgroundColor: 'rgba(255, 255, 255, 0.1)',
+    padding: '0.35rem 1rem',
     borderRadius: '999px',
-    fontSize: '0.8rem',
-    fontWeight: '700',
-    color: '#0369a1',
-    letterSpacing: '0.05em',
-    alignSelf: 'flex-start',
-    boxShadow: '0 4px 14px rgba(14,165,233,0.12)',
-  },
-  eyebrowDot: {
-    width: '8px',
-    height: '8px',
-    borderRadius: '50%',
-    backgroundColor: '#0ea5e9',
-    boxShadow: '0 0 8px rgba(14,165,233,0.6)',
-    display: 'inline-block',
-    flexShrink: 0,
+    backdropFilter: 'blur(8px)',
   },
   title: {
     fontSize: 'clamp(2.6rem, 5.5vw, 5rem)',
     fontWeight: '900',
-    lineHeight: '1.05',
-    letterSpacing: '-0.03em',
-    color: '#0c2340',
-    margin: 0,
-  },
-  accentUnderline: {
-    position: 'relative',
-    display: 'inline',
-    color: '#0c2340',
-    textDecoration: 'none',
-  },
-  accentBlue: {
-    color: '#0ea5e9',
+    lineHeight: '1.15',
+    letterSpacing: '-0.02em',
+    marginBottom: '1.5rem',
+    color: '#ffffff',
+    display: 'flex',
+    flexWrap: 'wrap',
+    justifyContent: 'center',
   },
   subtitle: {
     fontSize: 'clamp(1rem, 1.8vw, 1.15rem)',
@@ -275,16 +298,16 @@ const styles = {
   ctaSecondary: {
     display: 'inline-flex',
     alignItems: 'center',
-    gap: '9px',
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    backdropFilter: 'blur(10px)',
-    color: '#0c2340',
-    padding: '0.95rem 2.2rem',
+    gap: '10px',
+    backgroundColor: 'rgba(255, 255, 255, 0.08)',
+    color: '#ffffff',
+    padding: '0.9rem 2.2rem',
     borderRadius: '999px',
     fontWeight: '700',
     fontSize: '0.95rem',
     textDecoration: 'none',
-    border: '1px solid rgba(14,165,233,0.35)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    backdropFilter: 'blur(10px)',
     transition: 'all 0.3s ease',
   },
   trustRow: {
@@ -335,44 +358,7 @@ const styles = {
     fontWeight: '600',
     color: '#1e4b6a',
   },
-  pillRow: {
-    display: 'flex',
-    gap: '0.75rem',
-    flexWrap: 'wrap',
-  },
-  pill: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '6px',
-    backgroundColor: 'rgba(255,255,255,0.75)',
-    backdropFilter: 'blur(8px)',
-    border: '1px solid rgba(14,165,233,0.2)',
-    padding: '5px 14px',
-    borderRadius: '999px',
-    fontSize: '0.78rem',
-    fontWeight: '700',
-    color: '#0369a1',
-    boxShadow: '0 2px 8px rgba(14,165,233,0.08)',
-  },
-  // Right column
-  imageCol: {
-    flex: '1 1 420px',
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '480px',
-  },
-  toothImage: {
-    width: '100%',
-    maxWidth: '540px',
-    height: 'auto',
-    objectFit: 'contain',
-    position: 'relative',
-    zIndex: 2,
-    filter: 'drop-shadow(0 40px 60px rgba(14,165,233,0.25))',
-  },
-  statCard: {
+  scrollIndicator: {
     position: 'absolute',
     left: '-20px',
     bottom: '80px',
@@ -418,5 +404,10 @@ const styles = {
     fontWeight: '900',
     color: '#0c2340',
     lineHeight: 1,
+  },
+  waveSvg: {
+    display: 'block',
+    width: '100%',
+    height: '40px',
   },
 };

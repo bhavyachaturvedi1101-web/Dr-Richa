@@ -112,7 +112,7 @@ const deepTreatments = [
       'Restores the structural integrity of decayed teeth to prevent fractures',
       'Smooth, polished margins that blend seamlessly with natural enamel'
     ],
-    image: '/tooth_filling.png',
+    image: '/images/preventive_blog.png',
     icon: Shield
   },
   {
@@ -154,7 +154,7 @@ const deepTreatments = [
       'Easily removable at any time by Dr. Tiwari without marking the tooth',
       'Adds a temporary or long-term sparkle to accessorize your smile'
     ],
-    image: '/dental_jewellery.png',
+    image: '/dental_service_4.jpg',
     icon: Star
   },
   {
@@ -168,7 +168,7 @@ const deepTreatments = [
       'Monitoring developmental spacing to prevent future aligner requirements',
       'Gentle scaling and clinical guidance to cure early child cavities'
     ],
-    image: '/pedodontics_child.png',
+    image: '/images/pediatric_blog.png',
     icon: Heart
   }
 ];

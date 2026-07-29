@@ -208,6 +208,38 @@ a { color: inherit; }
   }
 }
 
+@media (max-width: 480px) {
+  div[style*="bottom: 24px"][style*="right: 24px"] {
+    bottom: 14px !important;
+    right: 12px !important;
+  }
+
+  section, footer > div {
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 2.75rem !important;
+    padding-bottom: 2.75rem !important;
+  }
+
+  h1 {
+    font-size: 1.75rem !important;
+  }
+  h2 {
+    font-size: 1.45rem !important;
+  }
+}
+
+@keyframes chatPulse {
+  0%, 100% {
+    transform: scale(0.85);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+}
+
 
 @media (max-width: 900px) {
   .responsive-grid-2 {

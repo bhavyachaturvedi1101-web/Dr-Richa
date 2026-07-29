@@ -1,1 +1,14 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#3b82f6" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smile"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <!-- Outer light blue border circle filling the frame -->
+  <circle cx="50" cy="50" r="47" fill="#ffffff" stroke="#2597d0" stroke-width="6" />
+
+  <!-- Centered tooth and medical cross scaled large for tab bar visibility -->
+  <g transform="translate(50, 50) scale(1.35) translate(-100, -78)">
+    <!-- Tooth outline -->
+    <path d="M 83,58 C 88,48 95,48 100,54 C 105,48 112,48 117,58 C 121,70 118,88 114,102 C 111,109 107,109 103,100 C 101,95 99,95 97,100 C 93,109 89,109 86,102 C 82,88 79,70 83,58 Z" fill="#f0f9ff" stroke="#0f172a" stroke-width="4.5" stroke-linejoin="round" />
+    
+    <!-- Medical Cross inside tooth -->
+    <circle cx="100" cy="76" r="13" fill="#ffffff" stroke="#2597d0" stroke-width="3" />
+    <path d="M 94,76 L 106,76 M 100,70 L 100,82" fill="none" stroke="#2597d0" stroke-width="3" stroke-linecap="round" />
+  </g>
+</svg>

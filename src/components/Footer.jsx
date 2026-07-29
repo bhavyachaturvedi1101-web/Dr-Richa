@@ -90,9 +90,11 @@ export default function Footer() {
           <p style={styles.creditsText}>Designed and Developed with Advanced AI Support.</p>
         </div>
       </div>
+
     </footer>
   );
 }
+
 
 const styles = {
   footer: {
@@ -225,147 +227,6 @@ const styles = {
     fontSize: '0.8rem',
     fontWeight: '600',
   },
-  // Floating Actions
-  widgetsWrapper: {
-    position: 'fixed',
-    bottom: '24px',
-    right: '24px',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px',
-    zIndex: 1020,
-  },
-  whatsappFloat: {
-    width: '46px',
-    height: '46px',
-    borderRadius: '50%',
-    backgroundColor: '#25d366',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxShadow: '0 8px 24px rgba(37,211,102,0.3)',
-    textDecoration: 'none',
-  },
-  chatTrigger: {
-    width: '46px',
-    height: '46px',
-    borderRadius: '50%',
-    backgroundColor: 'var(--brand-surgical-blue)',
-    border: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    boxShadow: '0 8px 24px rgba(37,151,208,0.4)',
-    cursor: 'pointer',
-    position: 'relative',
-  },
-  chatPulse: {
-    position: 'absolute',
-    right: '58px',
-    whiteSpace: 'nowrap',
-    backgroundColor: '#ffffff',
-    color: 'var(--brand-surgical-blue)',
-    fontSize: '0.85rem',
-    fontWeight: '800',
-    padding: '0.45rem 1rem',
-    borderRadius: '12px',
-    boxShadow: '0 8px 24px rgba(0,0,0,0.12)',
-    letterSpacing: '0.02em',
-  },
-  // Chatbox panel
-  chatBox: {
-    position: 'fixed',
-    bottom: '84px',
-    right: '24px',
-    width: '340px',
-    backgroundColor: '#ffffff',
-    borderRadius: '24px',
-    boxShadow: '0 20px 50px rgba(0,0,0,0.15)',
-    border: '1px solid rgba(0,0,0,0.06)',
-    zIndex: 1030,
-    overflow: 'hidden',
-    display: 'flex',
-    flexDirection: 'column',
-  },
-  chatHeader: {
-    backgroundColor: 'var(--neutral-ink)',
-    padding: '1rem 1.25rem',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  chatHeaderLeft: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-  },
-  chatDot: {
-    width: '8px',
-    height: '8px',
-    borderRadius: '50%',
-    backgroundColor: 'var(--brand-trust-green)',
-  },
-  chatTitle: {
-    fontSize: '0.85rem',
-    fontWeight: '700',
-    color: '#ffffff',
-  },
-  chatClose: {
-    background: 'none',
-    border: 'none',
-    cursor: 'pointer',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  chatLogs: {
-    height: '240px',
-    overflowY: 'auto',
-    padding: '1.25rem',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '12px',
-  },
-  chatMsgRow: {
-    display: 'flex',
-    width: '100%',
-  },
-  chatBubble: {
-    maxWidth: '85%',
-    padding: '0.75rem 1rem',
-    fontSize: '0.85rem',
-    lineHeight: '1.4',
-  },
-  chatOptions: {
-    padding: '1rem 1.25rem 1.5rem',
-    borderTop: '1px solid rgba(0,0,0,0.05)',
-    backgroundColor: '#f8fbfe',
-  },
-  optionsLabel: {
-    fontSize: '0.72rem',
-    color: 'var(--neutral-slate)',
-    fontWeight: '700',
-    display: 'block',
-    marginBottom: '0.5rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.02em',
-  },
-  optionsList: {
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '6px',
-  },
-  optionBtn: {
-    backgroundColor: '#ffffff',
-    border: '1px solid rgba(37,151,208,0.15)',
-    padding: '0.6rem 0.85rem',
-    borderRadius: '10px',
-    fontSize: '0.8rem',
-    textAlign: 'left',
-    color: 'var(--neutral-ink)',
-    fontWeight: '600',
-    cursor: 'pointer',
-    transition: 'all 0.15s ease',
-  }
 };
+
 

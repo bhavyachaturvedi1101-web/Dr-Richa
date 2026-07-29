@@ -1,7 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Activity, Award, Smile, Shield, X, Heart, Cpu, Sparkles, Star, ArrowRight, CheckCircle2 } from 'lucide-react';
+import { Activity, Award, Smile, Shield, X, Heart, Cpu, Sparkles, Star, ArrowRight } from 'lucide-react';
+import ScrollReveal, { StaggerContainer, StaggerItem } from './ui/ScrollReveal';
+import MagneticButton from './ui/MagneticButton';
 
 const treatmentList = [
   { 
@@ -95,98 +97,66 @@ const treatmentList = [
 ];
 
 export default function TreatmentsOverview() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.08 }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6, ease: 'easeOut' }
-    }
-  };
-
   return (
     <section style={styles.section} id="treatments-overview">
       <div style={styles.container}>
-        
-        {/* Header Block */}
-        <motion.div 
-          style={styles.header}
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <div style={styles.pillTag}>
-            <CheckCircle2 size={14} color="#38bdf8" />
-            <span>CLINICAL EXPERTISE</span>
-          </div>
+
+        {/* Header Block with Scroll Reveal */}
+        <ScrollReveal direction="fade-up" style={styles.header}>
+          <span style={styles.subtag}>Clinical Expertise</span>
           <h2 style={styles.heading}>Specialized Treatments</h2>
           <p style={styles.desc}>
             Empathetic dental solutions utilizing state-of-the-art diagnostic machinery, laser systems, and sterile operating layouts.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
-        {/* 11 Treatments Grid */}
-        <motion.div 
-          style={styles.grid}
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.1 }}
-          variants={containerVariants}
-        >
+        {/* 11 Treatments Grid with Stagger Container */}
+        <StaggerContainer style={styles.grid} staggerDelay={0.07}>
           {treatmentList.map((t, idx) => {
             const Icon = t.icon;
             return (
-              <motion.div
+              <StaggerItem
                 key={idx}
-                style={styles.card}
-                variants={cardVariants}
-                whileHover={{ 
-                  y: -8, 
-                  boxShadow: '0 20px 40px rgba(37,151,208,0.14)', 
-                  borderColor: 'rgba(56,189,248,0.35)' 
-                }}
+                direction="fade-up"
               >
-                {/* Visual Image Header */}
-                <div style={styles.imageBox}>
-                  <img src={t.image} alt={t.name} style={styles.cardImg} />
-                  <div style={styles.imgOverlay} />
-                  <div style={styles.iconBox}>
-                    <Icon size={18} color="#38bdf8" />
+                <motion.div
+                  style={{ ...styles.card, willChange: 'transform, opacity' }}
+                  whileHover={{
+                    y: -8,
+                    boxShadow: '0 25px 45px -12px rgba(37,151,208,0.12)',
+                    borderColor: 'rgba(37,151,208,0.35)',
+                    transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] }
+                  }}
+                >
+                  <div style={styles.cardHeader}>
+                    <div style={styles.iconBox}>
+                      <Icon size={20} color="var(--brand-surgical-blue)" />
+                    </div>
+                    <span style={styles.cardTag}>{t.tag}</span>
                   </div>
-                  <span style={styles.cardTag}>{t.tag}</span>
-                </div>
-                
-                <div style={styles.cardBody}>
+
                   <h3 style={styles.cardTitle}>{t.name}</h3>
                   <p style={styles.cardDesc}>{t.desc}</p>
-                  
+
                   <Link to={`/treatments#${t.id}`} style={styles.exploreLink}>
-                    <span>Explore Treatment</span>
-                    <ArrowRight size={14} color="var(--brand-surgical-blue)" />
+                    Explore Treatment <ArrowRight size={14} />
                   </Link>
-                </div>
-              </motion.div>
+                </motion.div>
+              </StaggerItem>
             );
           })}
-        </motion.div>
+        </StaggerContainer>
 
         {/* Center Booking Action */}
-        <div style={styles.actionBlock}>
-          <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
-            <Link to="/contact" style={styles.actionBtn}>
-              Book a Treatment Consultation <ArrowRight size={16} />
-            </Link>
-          </motion.div>
-        </div>
+        <ScrollReveal direction="fade-up" delay={0.15} style={styles.actionBlock}>
+          <MagneticButton strength={0.3}>
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+              <Link to="/contact" style={styles.actionBtn}>
+                Book a Treatment Consultation
+              </Link>
+            </motion.div>
+          </MagneticButton>
+        </ScrollReveal>
 
       </div>
     </section>

@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldAlert, Compass, Star, Eye, Sparkles, CheckCircle2 } from 'lucide-react';
+import React from 'react';
+import { motion } from 'framer-motion';
+import { ShieldAlert, Compass, Star, Eye } from 'lucide-react';
+import ScrollReveal, { StaggerContainer, StaggerItem } from './ui/ScrollReveal';
 
 const trustPillars = [
   {
@@ -46,110 +47,61 @@ const trustPillars = [
 ];
 
 export default function WhyTrustUs() {
-  const [activeIndex, setActiveIndex] = useState(0);
-
   return (
     <section style={styles.section} id="why-us">
       {/* Background ambient lighting */}
       <div style={styles.ambientGlow} />
 
-      <div style={styles.container}>
-        
-        {/* Section Header */}
-        <motion.div 
-          style={styles.header}
-          initial={{ opacity: 0, y: 25 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-        >
-          <div style={styles.pillTag}>
-            <Sparkles size={14} color="#38bdf8" />
-            <span>HOW WE ARE DIFFERENT</span>
-          </div>
+        {/* Section Header with Scroll Reveal */}
+        <ScrollReveal direction="fade-up" style={styles.header}>
+          <span style={styles.subtag}>How We Are Different</span>
           <h2 style={styles.heading}>Why Patients Trust Us.</h2>
           <p style={styles.subheading}>
             Four core clinical pillars that define every single visit, ensuring absolute safety, painless comfort, and total peace of mind.
           </p>
-        </motion.div>
+        </ScrollReveal>
 
-        {/* Expanding Accordion Container */}
-        <div style={styles.accordionContainer}>
+        {/* Pillars Grid with Stagger Container */}
+        <StaggerContainer style={styles.grid} staggerDelay={0.12}>
           {trustPillars.map((pillar, idx) => {
             const isActive = activeIndex === idx;
             const Icon = pillar.icon;
 
             return (
-              <motion.div
+              <StaggerItem
                 key={idx}
-                onClick={() => setActiveIndex(idx)}
-                onMouseEnter={() => setActiveIndex(idx)}
-                layout
-                transition={{ type: 'spring', stiffness: 220, damping: 26 }}
-                style={{
-                  ...styles.accordionCard,
-                  flex: isActive ? '3.8 1 0%' : '0.65 1 0%',
-                  minWidth: isActive ? '280px' : '70px',
-                  cursor: isActive ? 'default' : 'pointer',
-                }}
+                direction="fade-up"
               >
-                {/* Background Image */}
-                <img src={pillar.image} alt={pillar.title} style={styles.accordionImg} />
+                <motion.div
+                  style={{ ...styles.card, willChange: 'transform, opacity' }}
+                  whileHover={{
+                    y: -8,
+                    boxShadow: '0 25px 45px -12px rgba(37,151,208,0.12)',
+                    borderColor: 'rgba(37,151,208,0.35)',
+                    transition: { duration: 0.25, ease: [0.16, 1, 0.3, 1] }
+                  }}
+                >
+                  <div style={styles.cardTop}>
+                    <div style={styles.iconBox}>
+                      <Icon size={20} color="var(--brand-surgical-blue)" />
+                    </div>
+                    <span style={styles.numText}>{pillar.num}</span>
+                  </div>
 
-                {/* Dark Gradient Overlay */}
-                <div style={{
-                  ...styles.accordionOverlay,
-                  background: isActive
-                    ? 'linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.45) 60%, rgba(0, 0, 0, 0.2) 100%)'
-                    : 'linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.5) 100%)'
-                }} />
+                  <div style={styles.cardMiddle}>
+                    <h3 style={styles.pillarTitle}>{pillar.title}</h3>
+                    <p style={styles.pillarDesc}>{pillar.desc}</p>
+                  </div>
 
-                {/* Top Badge */}
-                <div style={styles.accordionBadge}>
-                  {pillar.num}
-                </div>
-
-                {/* Active Expanded Content */}
-                <AnimatePresence mode="wait">
-                  {isActive ? (
-                    <motion.div
-                      key="active"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.35, ease: 'easeOut' }}
-                      style={styles.accordionActiveContent}
-                    >
-                      <div style={styles.accordionCategoryPill}>
-                        <Icon size={14} color="#38bdf8" />
-                        <span>{pillar.category}</span>
-                      </div>
-                      <h3 style={styles.accordionActiveTitle}>{pillar.title}</h3>
-                      <p style={styles.accordionActiveDesc}>{pillar.desc}</p>
-                      
-                      <div style={styles.taglineBox}>
-                        <CheckCircle2 size={14} color="#10b981" />
-                        <span>{pillar.tagline}</span>
-                      </div>
-                    </motion.div>
-                  ) : (
-                    /* Inactive Collapsed Vertical Label */
-                    <motion.div
-                      key="collapsed"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      style={styles.accordionCollapsedContent}
-                    >
-                      <span style={styles.verticalTitle}>{pillar.title}</span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-              </motion.div>
+                  <div style={styles.cardBottom}>
+                    <div style={styles.line} />
+                    <span style={styles.tagline}>{pillar.tagline}</span>
+                  </div>
+                </motion.div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
 
       </div>
     </section>
