@@ -1,6 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { CheckCircle, ShieldAlert, Activity, Droplets, HeartPulse, Shield, Zap, Sparkles } from 'lucide-react';
+import { CheckCircle, ShieldAlert } from 'lucide-react';
+import { GiToothbrush, GiTooth, GiWaterDrop, GiShinyApple } from 'react-icons/gi';
+import { FaStethoscope, FaMedkit } from 'react-icons/fa';
 
 const wellnessTips = [
   {
@@ -8,7 +10,7 @@ const wellnessTips = [
     category: 'Circadian Rhythm',
     title: 'Persistence',
     desc: 'Brush twice daily using fluoride paste. Two minutes is the gold standard for clinical oral health.',
-    icon: <Activity size={24} color="#38bdf8" />,
+    icon: <GiToothbrush size={24} color="#38bdf8" />,
     gradient: 'linear-gradient(135deg, #e0f2fe 0%, #bae6fd 100%)'
   },
   {
@@ -16,7 +18,7 @@ const wellnessTips = [
     category: 'Interproximal Care',
     title: 'Depth',
     desc: 'Floss daily to reach the 35% of tooth surfaces your toothbrush bristles simply cannot touch.',
-    icon: <Droplets size={24} color="#818cf8" />,
+    icon: <GiTooth size={24} color="#818cf8" />,
     gradient: 'linear-gradient(135deg, #e0e7ff 0%, #c7d2fe 100%)'
   },
   {
@@ -24,7 +26,7 @@ const wellnessTips = [
     category: 'pH Neutralization',
     title: 'Balance',
     desc: 'Drink plenty of water. Adequate hydration neutralizes acidic plaque and prevents enamel erosion.',
-    icon: <HeartPulse size={24} color="#34d399" />,
+    icon: <GiWaterDrop size={24} color="#34d399" />,
     gradient: 'linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%)'
   },
   {
@@ -32,7 +34,7 @@ const wellnessTips = [
     category: 'Structural Integrity',
     title: 'Nutrition',
     desc: 'Focus on calcium-rich whole foods. Limiting direct sugars starves the cavity-causing bacteria.',
-    icon: <Shield size={24} color="#fbbf24" />,
+    icon: <GiShinyApple size={24} color="#fbbf24" />,
     gradient: 'linear-gradient(135deg, #fef3c7 0%, #fde68a 100%)'
   },
   {
@@ -40,7 +42,7 @@ const wellnessTips = [
     category: 'Tissue Preservation',
     title: 'Vitality',
     desc: 'Avoid tobacco products. It is the leading cause of early gum recession and oral malignancies.',
-    icon: <Zap size={24} color="#f87171" />,
+    icon: <FaMedkit size={24} color="#f87171" />,
     gradient: 'linear-gradient(135deg, #fee2e2 0%, #fecaca 100%)'
   },
   {
@@ -48,7 +50,7 @@ const wellnessTips = [
     category: 'Predictive Analytics',
     title: 'Precision',
     desc: 'Semiannual clinical check-ups catch 90% of dental concerns before they manifest as severe pain.',
-    icon: <Sparkles size={24} color="#a78bfa" />,
+    icon: <FaStethoscope size={24} color="#a78bfa" />,
     gradient: 'linear-gradient(135deg, #ede9fe 0%, #ddd6fe 100%)'
   }
 ];
@@ -161,6 +163,11 @@ export default function Education() {
               
               <div style={styles.tipCardInner}>
                 <div style={styles.tipWatermark}>{tip.num}</div>
+                
+                {/* Faded Background Icon */}
+                <div style={styles.bgIconWrapper}>
+                  {tip.icon}
+                </div>
                 
                 <div style={styles.tipHeader}>
                   <motion.div 
@@ -356,6 +363,16 @@ const styles = {
     lineHeight: 1,
     zIndex: 0,
     userSelect: 'none',
+  },
+  bgIconWrapper: {
+    position: 'absolute',
+    bottom: '20px',
+    right: '20px',
+    opacity: 0.15,
+    transform: 'scale(5)',
+    transformOrigin: 'bottom right',
+    zIndex: 0,
+    pointerEvents: 'none',
   },
   tipHeader: {
     display: 'flex',
