@@ -73,9 +73,30 @@ export default function Blogs() {
     >
       
       {/* ── HERO BANNER ── */}
-      <section style={styles.heroBanner}>
-        <div style={styles.heroOverlay} />
-        <div style={styles.heroOverlayGrid} />
+      <section style={styles.heroBanner} className="blogs-hero-banner">
+        {/* Background Image */}
+        <img
+          src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&w=2070&q=80"
+          alt="Dr. Richa Tiwari - Clinical Wisdom & Dental Research"
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            objectPosition: 'center 25%',
+            zIndex: 0,
+          }}
+        />
+
+        {/* Subtle Dark Overlay to ensure 100% crystal clear white text */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.5) 50%, rgba(15, 23, 42, 0.3) 100%)',
+          zIndex: 1
+        }} />
+
         <div style={styles.container}>
           <motion.div
             style={styles.heroContent}
@@ -86,13 +107,25 @@ export default function Blogs() {
               visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
             }}
           >
-            <motion.p style={styles.heroSubtag} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
+            <motion.p 
+              style={{ ...styles.heroSubtag, color: '#38bdf8' }} 
+              className="blogs-hero-subtag"
+              variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
+            >
               Clinical Wisdom
             </motion.p>
-            <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-              Our Dental <span style={{ color: 'var(--brand-surgical-blue)' }}>Blogs.</span>
+            <motion.h1 
+              style={{ ...styles.heroTitle, color: '#ffffff', textShadow: '0 2px 15px rgba(0,0,0,0.6)' }} 
+              className="blogs-hero-title"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            >
+              Our Dental <span style={{ color: '#38bdf8' }}>Blogs.</span>
             </motion.h1>
-            <motion.p style={styles.heroDesc} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+            <motion.p 
+              style={{ ...styles.heroDesc, color: '#e2e8f0', textShadow: '0 2px 10px rgba(0,0,0,0.6)' }} 
+              className="blogs-hero-desc"
+              variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
+            >
               Curated medical syntheses on oral integrity, biological preservation, and dental wellness.
             </motion.p>
           </motion.div>
@@ -105,6 +138,7 @@ export default function Blogs() {
           
           <motion.div 
             style={styles.grid}
+            className="blogs-grid-container"
             initial="hidden"
             whileInView="visible"
             viewport={{ once: true, amount: 0.1 }}
@@ -118,48 +152,50 @@ export default function Blogs() {
                   top: `calc(120px + ${idx * 20}px)`,
                   zIndex: idx,
                 }}
+                className="blog-card-item"
                 variants={itemVariants}
                 whileHover={{ y: -8, boxShadow: '0 30px 60px rgba(0,0,0,0.15)' }}
               >
                 {/* Background Image & Gradient */}
-                <div style={styles.cardBackground}>
+                <div style={styles.cardBackground} className="blog-card-bg">
                   <motion.img 
                     src={article.image} 
                     alt={article.title} 
                     style={styles.backgroundImage} 
+                    className="blog-card-img"
                     whileHover={{ scale: 1.05 }}
                     transition={{ duration: 0.6, ease: "easeOut" }}
                   />
-                  <div style={styles.overlayGradient} />
+                  <div style={styles.overlayGradient} className="blog-card-gradient" />
                 </div>
 
                 {/* Overlay Content */}
-                <div style={styles.cardContentOverlay}>
-                  <div style={styles.cardHeader}>
-                    <span style={styles.category}>{article.category}</span>
-                    <span style={styles.readTime}>{article.readTime}</span>
+                <div style={styles.cardContentOverlay} className="blog-card-content">
+                  <div style={styles.cardHeader} className="blog-card-header">
+                    <span style={styles.category} className="blog-card-category">{article.category}</span>
+                    <span style={styles.readTime} className="blog-card-readtime">{article.readTime}</span>
                   </div>
 
                   <div style={styles.cardMainText}>
-                    <h3 style={styles.blogTitle}>{article.title}</h3>
-                    <p style={styles.excerpt}>{article.excerpt}</p>
+                    <h3 style={styles.blogTitle} className="blog-card-title">{article.title}</h3>
+                    <p style={styles.excerpt} className="blog-card-excerpt">{article.excerpt}</p>
                   </div>
 
-                  <div style={styles.cardFooter}>
-                    <div style={styles.metaRow}>
-                      <div style={styles.metaItem}>
-                        <User size={14} color="rgba(255,255,255,0.7)" />
+                  <div style={styles.cardFooter} className="blog-card-footer">
+                    <div style={styles.metaRow} className="blog-card-meta">
+                      <div style={styles.metaItem} className="blog-card-meta-item">
+                        <User size={14} color="currentColor" />
                         <span>{article.author}</span>
                       </div>
-                      <div style={styles.metaItem}>
-                        <Calendar size={14} color="rgba(255,255,255,0.7)" />
+                      <div style={styles.metaItem} className="blog-card-meta-item">
+                        <Calendar size={14} color="currentColor" />
                         <span>{article.date}</span>
                       </div>
                     </div>
                     
-                    <div style={styles.line} />
+                    <div style={styles.line} className="blog-card-divider" />
                     
-                    <Link to="/contact" style={styles.readLink}>
+                    <Link to="/contact" style={styles.readLink} className="blog-card-read-link">
                       Read Article <ArrowRight size={14} />
                     </Link>
                   </div>
@@ -185,8 +221,11 @@ const styles = {
   },
   heroBanner: {
     position: 'relative',
-    backgroundColor: '#ffffff',
-    padding: '10rem 0 5rem',
+    backgroundColor: '#0f172a',
+    padding: '13rem 0 8rem',
+    minHeight: '520px',
+    display: 'flex',
+    alignItems: 'center',
     overflow: 'hidden',
   },
   heroOverlay: {
@@ -269,7 +308,7 @@ const styles = {
   overlayGradient: {
     position: 'absolute',
     inset: 0,
-    background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%)',
+    background: 'linear-gradient(to top, rgba(15, 23, 42, 0.75) 0%, rgba(15, 23, 42, 0.2) 50%, transparent 100%)',
     zIndex: 1,
   },
   cardContentOverlay: {

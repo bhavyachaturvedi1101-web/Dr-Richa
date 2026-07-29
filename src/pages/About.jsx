@@ -138,16 +138,17 @@ export default function About() {
             {/* Visual Column */}
             <motion.div
               style={styles.visualWrapper}
+              className="about-page-visual-wrapper"
               initial={{ opacity: 0, x: -30 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <div style={styles.imageCapsule}>
-                <img src="/about_doc.png" alt="Dr. Richa Tiwari" style={styles.aboutImg} />
+              <div style={styles.imageCapsule} className="about-page-image-capsule">
+                <img src="/about_doc.png" alt="Dr. Richa Tiwari" style={styles.aboutImg} className="about-page-doc-img" />
               </div>
               {/* Overlapping badge */}
-              <div style={styles.floatingStatsBadge}>
+              <div style={styles.floatingStatsBadge} className="about-page-floating-badge">
                 <span style={styles.badgeNum}>9+</span>
                 <span style={styles.badgeLabel}>Years clinical excellence</span>
               </div>
@@ -247,9 +248,6 @@ export default function About() {
                 >
                   <div style={styles.valueImgContainer}>
                     <img src={v.img} alt={v.title} style={styles.valueImg} />
-                    <div style={styles.iconBoxFloating}>
-                      <Icon size={20} color="var(--brand-surgical-blue)" />
-                    </div>
                   </div>
                   <div style={styles.valueContent}>
                     <h3 style={styles.valueTitle}>{v.title}</h3>

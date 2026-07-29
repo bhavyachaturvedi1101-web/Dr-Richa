@@ -132,17 +132,17 @@ export default function Contact() {
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.1 }}
             >
-              <div style={styles.formCard}>
+              <div style={styles.formCard} className="contact-form-card">
                 {/* Gradient Header */}
-                <div style={styles.formHeader}>
-                  <div style={styles.formHeaderIcon}>🦷</div>
+                <div style={styles.formHeader} className="contact-form-header">
+                  <div style={styles.formHeaderIcon} className="contact-form-header-icon">🦷</div>
                   <div>
-                    <h3 style={styles.formTitle}>Book an Appointment</h3>
-                    <p style={styles.formDesc}>Dr. Richa Tiwari Vyas · Indore Dental Speciality Centre</p>
+                    <h3 style={styles.formTitle} className="contact-form-title">Book an Appointment</h3>
+                    <p style={styles.formDesc} className="contact-form-desc">Dr. Richa Tiwari Vyas · Indore Dental Speciality Centre</p>
                   </div>
                 </div>
 
-                <div style={styles.formBody}>
+                <div style={styles.formBody} className="contact-form-body">
                 {submitted ? (
                   <motion.div
                     initial={{ opacity: 0, scale: 0.9 }}
@@ -157,31 +157,31 @@ export default function Contact() {
                   </motion.div>
                 ) : (
                   <>
-                    <form style={styles.form} onSubmit={handleSubmit}>
+                    <form style={styles.form} className="contact-form-element" onSubmit={handleSubmit}>
 
                       {/* Name & Phone */}
-                      <div style={styles.rowTwo}>
-                        <div style={styles.inputWrapper}>
-                          <label style={styles.inputLabel}>👤 Full Name *</label>
-                          <input type="text" placeholder="e.g. Rahul Sharma" style={styles.inputField} required />
+                      <div style={styles.rowTwo} className="contact-form-row-two">
+                        <div style={styles.inputWrapper} className="contact-input-wrapper">
+                          <label style={styles.inputLabel} className="contact-input-label">👤 Full Name *</label>
+                          <input type="text" placeholder="e.g. Rahul Sharma" style={styles.inputField} className="contact-input-field" required />
                         </div>
-                        <div style={styles.inputWrapper}>
-                          <label style={styles.inputLabel}>📞 Mobile Number *</label>
-                          <input type="tel" placeholder="+91 XXXXX XXXXX" style={styles.inputField} required />
+                        <div style={styles.inputWrapper} className="contact-input-wrapper">
+                          <label style={styles.inputLabel} className="contact-input-label">📞 Mobile Number *</label>
+                          <input type="tel" placeholder="+91 XXXXX XXXXX" style={styles.inputField} className="contact-input-field" required />
                         </div>
                       </div>
 
                       {/* Email */}
-                      <div style={styles.inputWrapper}>
-                        <label style={styles.inputLabel}>✉️ Email Address</label>
-                        <input type="email" placeholder="your@email.com" style={styles.inputField} />
+                      <div style={styles.inputWrapper} className="contact-input-wrapper">
+                        <label style={styles.inputLabel} className="contact-input-label">✉️ Email Address</label>
+                        <input type="email" placeholder="your@email.com" style={styles.inputField} className="contact-input-field" />
                       </div>
 
                       {/* Treatment Type */}
-                      <div style={styles.inputWrapper}>
-                        <label style={styles.inputLabel}>🦷 Treatment / Service Needed *</label>
+                      <div style={styles.inputWrapper} className="contact-input-wrapper">
+                        <label style={styles.inputLabel} className="contact-input-label">🦷 Treatment / Service Needed *</label>
                         <div style={styles.selectWrapper}>
-                          <select style={styles.selectField} required defaultValue="">
+                          <select style={styles.selectField} className="contact-select-field" required defaultValue="">
                             <option value="" disabled>— Select a treatment —</option>
                             {treatments.map((t, i) => <option key={i} value={t}>{t}</option>)}
                           </select>
@@ -190,20 +190,21 @@ export default function Contact() {
                       </div>
 
                       {/* Date & Time */}
-                      <div style={styles.rowTwo}>
-                        <div style={styles.inputWrapper}>
-                          <label style={styles.inputLabel}>📅 Preferred Date *</label>
+                      <div style={styles.rowTwo} className="contact-form-row-two">
+                        <div style={styles.inputWrapper} className="contact-input-wrapper">
+                          <label style={styles.inputLabel} className="contact-input-label">📅 Preferred Date *</label>
                           <input 
                             type="date" 
                             style={styles.inputField} 
+                            className="contact-input-field"
                             required 
                             min={new Date().toISOString().split('T')[0]} 
                           />
                         </div>
-                        <div style={styles.inputWrapper}>
-                          <label style={styles.inputLabel}>⏰ Preferred Time *</label>
+                        <div style={styles.inputWrapper} className="contact-input-wrapper">
+                          <label style={styles.inputLabel} className="contact-input-label">⏰ Preferred Time *</label>
                           <div style={styles.selectWrapper}>
-                            <select style={styles.selectField} required defaultValue="">
+                            <select style={styles.selectField} className="contact-select-field" required defaultValue="">
                               <option value="" disabled>— Pick a slot —</option>
                               {timeSlots.map((s, i) => <option key={i} value={s}>{s}</option>)}
                             </select>
@@ -213,17 +214,19 @@ export default function Contact() {
                       </div>
 
                       {/* Concern */}
-                      <div style={styles.inputWrapper}>
-                        <label style={styles.inputLabel}>💬 Describe Your Concern (Optional)</label>
+                      <div style={styles.inputWrapper} className="contact-input-wrapper">
+                        <label style={styles.inputLabel} className="contact-input-label">💬 Describe Your Concern (Optional)</label>
                         <textarea 
                           placeholder="E.g. I have mild tooth pain in the lower left area since 3 days..." 
                           style={styles.textareaField}
+                          className="contact-textarea-field"
                         ></textarea>
                       </div>
                       
                       <motion.button 
                         type="submit" 
                         style={styles.submitBtn}
+                        className="contact-submit-btn"
                         whileHover={{ scale: 1.03, boxShadow: '0 8px 24px rgba(37,151,208,0.4)' }}
                         whileTap={{ scale: 0.97 }}
                       >

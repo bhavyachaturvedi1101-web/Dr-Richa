@@ -194,7 +194,6 @@ export default function Education() {
         {/* Myths vs Facts Subsection */}
         <div style={styles.mythsSection}>
           <div style={styles.mythsHeader}>
-            <span style={styles.subtag}>Common Truths</span>
             <h3 style={styles.mythsTitle}>Dental Myths Debunked</h3>
           </div>
 
