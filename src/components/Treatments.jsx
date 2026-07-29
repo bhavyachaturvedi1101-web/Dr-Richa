@@ -161,6 +161,8 @@ const deepTreatments = [
   }
 ];
 
+
+
 const categories = [
   'All Procedures',
   'Endodontics',
@@ -340,11 +342,33 @@ export default function Treatments() {
         }
       `}} />
 
-      {/* ── HERO BANNER WITH HD CLEAR DENTAL VISUAL (ZERO FADING / ZERO OVERLAY) ── */}
-      <section style={styles.heroBanner}>
+      {/* ── HERO BANNER ── */}
+      <section style={styles.heroBanner} className="treatments-hero-banner">
+        <motion.img
+          src="/luxury_dental_room.png"
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: 'easeInOut' }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 0
+          }}
+          alt="Dental Clinic Background"
+        />
+
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.45) 50%, rgba(15, 23, 42, 0.25) 100%)',
+          zIndex: 1
+        }} />
+
         <div style={styles.container}>
           <div className="hero-grid-responsive" style={styles.heroGrid}>
-            {/* LEFT COL: Typography & Clinical Badges */}
             <motion.div
               className="hero-text-col"
               style={styles.heroTextCol}
@@ -355,54 +379,17 @@ export default function Treatments() {
                 visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
               }}
             >
-              <motion.div variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} style={{ marginBottom: '1rem' }}>
-                <span style={{
-                  background: '#e0f2fe',
-                  color: '#0284c7',
-                  padding: '6px 14px',
-                  borderRadius: '999px',
-                  fontWeight: '800',
-                  fontSize: '0.78rem',
-                  letterSpacing: '0.08em',
-                  textTransform: 'uppercase'
-                }}>
-                  ✦ COMPREHENSIVE CLINICAL EXPERTISE
-                </span>
-              </motion.div>
 
-              <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-                Our Specialized <span style={{ color: '#0284c7' }}>Treatments.</span>
+
+              <motion.h1 style={{ ...styles.heroTitle, color: '#ffffff', textShadow: '0 2px 15px rgba(0,0,0,0.6)' }} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                Our Specialized <span style={{ color: '#38bdf8' }}>Treatments.</span>
               </motion.h1>
               
-              <motion.p style={styles.heroDesc} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+              <motion.p style={{ ...styles.heroDesc, color: '#e2e8f0', textShadow: '0 2px 10px rgba(0,0,0,0.6)' }} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
                 Explore our full spectrum of microscopic, surgical, and cosmetic dental procedures led by Dr. Richa Tiwari Vyas. Every treatment is designed with precision and pain-free patient comfort in mind.
               </motion.p>
 
-              <motion.div style={styles.heroBadgesRow} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-                <div style={styles.heroBadgePill}>
-                  <span>⚡ Microscope Assisted</span>
-                </div>
-                <div style={styles.heroBadgePill}>
-                  <span>⚡ Pain-Free Protocol</span>
-                </div>
-                <div style={styles.heroBadgePill}>
-                  <span>⚡ 100% Sterilized Care</span>
-                </div>
-              </motion.div>
-            </motion.div>
 
-            {/* RIGHT COL: 100% HD Clear Visible Dental Image (No Fading / No Overlay) */}
-            <motion.div
-              style={styles.heroImgCol}
-              initial={{ opacity: 0, scale: 0.95, x: 40 }}
-              animate={{ opacity: 1, scale: 1, x: 0 }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-            >
-              <img
-                src="/dental_service_2.jpg"
-                alt="High Definition Dental Surgical Procedure"
-                style={styles.heroHDImage}
-              />
             </motion.div>
           </div>
         </div>
@@ -624,26 +611,21 @@ const styles = {
   },
   heroBanner: {
     position: 'relative',
-    backgroundColor: '#f8fbfe',
-    padding: '8.5rem 0 5.5rem',
+    backgroundColor: '#ffffff',
+    padding: '10rem 0 6rem',
     overflow: 'hidden',
-    color: '#0f172a',
-    borderBottom: '1px solid #e2e8f0',
   },
   heroGrid: {
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    gap: '4rem',
+    justifyContent: 'center',
   },
   heroTextCol: {
-    flex: '1.15 1 420px',
-    textAlign: 'left',
-  },
-  heroImgCol: {
-    flex: '1 1 420px',
+    maxWidth: '800px',
+    textAlign: 'center',
     display: 'flex',
-    justifyContent: 'center',
+    flexDirection: 'column',
+    alignItems: 'center',
   },
   heroHDImage: {
     width: '100%',
@@ -672,6 +654,7 @@ const styles = {
     display: 'flex',
     flexWrap: 'wrap',
     gap: '12px',
+    justifyContent: 'center',
   },
   heroBadgePill: {
     display: 'inline-flex',

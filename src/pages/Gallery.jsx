@@ -65,9 +65,28 @@ export default function Gallery() {
     >
       
       {/* ── HERO BANNER ── */}
-      <section style={styles.heroBanner}>
-        <div style={styles.heroOverlay} />
-        <div style={styles.heroOverlayGrid} />
+      <section style={styles.heroBanner} className="gallery-hero-banner">
+        <motion.img
+          src="/clinic_gallery_hero.png"
+          initial={{ opacity: 0, scale: 1.05 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 1.5, ease: 'easeInOut' }}
+          style={{
+            position: 'absolute',
+            inset: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 0
+          }}
+          alt="Dental Clinic Gallery Background"
+        />
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.45) 50%, rgba(15, 23, 42, 0.25) 100%)',
+          zIndex: 1
+        }} />
         <div style={styles.container}>
           <motion.div
             style={styles.heroContent}
@@ -78,13 +97,10 @@ export default function Gallery() {
               visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
             }}
           >
-            <motion.p style={styles.heroSubtag} variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}>
-              Clinical Sanctuary
-            </motion.p>
-            <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-              Our Clinic <span style={{ color: 'var(--brand-surgical-blue)' }}>Gallery.</span>
+            <motion.h1 style={{ ...styles.heroTitle, color: '#ffffff', textShadow: '0 2px 15px rgba(0,0,0,0.6)' }} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+              Our Clinic <span style={{ color: '#38bdf8' }}>Gallery.</span>
             </motion.h1>
-            <motion.p style={styles.heroDesc} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+            <motion.p style={{ ...styles.heroDesc, color: '#e2e8f0', textShadow: '0 2px 10px rgba(0,0,0,0.6)' }} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
               A visual walkthrough of our high-hygiene operating bays, diagnostic equipment, and reception lobbies.
             </motion.p>
           </motion.div>

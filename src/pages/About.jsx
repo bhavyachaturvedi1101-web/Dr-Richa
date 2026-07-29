@@ -105,13 +105,7 @@ export default function About() {
               visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
             }}
           >
-            <motion.p
-              style={{ ...styles.heroSubtag, color: '#38bdf8' }}
-              className="about-hero-subtag"
-              variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
-            >
-              Our Story
-            </motion.p>
+
             <motion.h1
               style={{ ...styles.heroTitle, color: '#ffffff', textShadow: '0 2px 15px rgba(0,0,0,0.6)' }}
               className="about-hero-title"

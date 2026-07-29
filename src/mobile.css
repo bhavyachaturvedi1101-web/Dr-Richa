@@ -613,4 +613,10 @@
     overflow-wrap: break-word;
     word-break: break-word;
   }
+
+  /* Treatments & Gallery Hero Padding for Mobile */
+  .treatments-hero-banner,
+  .gallery-hero-banner {
+    padding: 140px 1rem 4rem !important;
+  }
 }
