@@ -327,14 +327,14 @@ a {
     width: 100% !important;
     max-width: 100% !important;
     height: 100% !important;
-    object-position: 70% 25% !important;
-    opacity: 0.38 !important;
+    object-position: 80% 20% !important;
+    opacity: 0.85 !important;
     mask-image: none !important;
     -webkit-mask-image: none !important;
     filter: contrast(1.05) brightness(1.02) !important;
   }
 
   .hero-bg-overlay-responsive {
-    background: linear-gradient(to bottom, rgba(226, 244, 248, 0.85) 0%, rgba(226, 244, 248, 0.68) 100%) !important;
+    background: linear-gradient(to bottom, rgba(226, 244, 248, 0.75) 0%, rgba(226, 244, 248, 0.45) 50%, rgba(226, 244, 248, 0.25) 100%) !important;
   }
 }

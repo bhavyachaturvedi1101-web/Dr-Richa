@@ -40,22 +40,24 @@
     margin-bottom: 0.75rem !important;
   }
 
-  /* Background image — subtle behind text */
+  /* Background image — vivid & clearly visible on mobile */
   .hero-bg-image-responsive {
     width: 100% !important;
     max-width: 100% !important;
     height: 100% !important;
-    object-position: 72% 20% !important;
-    opacity: 0.32 !important;
+    object-position: 80% 20% !important;
+    opacity: 0.85 !important;
     mask-image: none !important;
     -webkit-mask-image: none !important;
+    filter: contrast(1.05) brightness(1.02) !important;
   }
 
   .hero-bg-overlay-responsive {
     background: linear-gradient(
       to bottom,
-      rgba(226, 244, 248, 0.9) 0%,
-      rgba(226, 244, 248, 0.72) 100%
+      rgba(226, 244, 248, 0.75) 0%,
+      rgba(226, 244, 248, 0.45) 50%,
+      rgba(226, 244, 248, 0.25) 100%
     ) !important;
   }
 
