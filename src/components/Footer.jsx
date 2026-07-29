@@ -16,8 +16,8 @@ export default function Footer() {
         <div style={styles.grid} className="footer-container">
           
           {/* Brand Info */}
-          <div style={styles.brand}>
-            <div style={styles.logoRow}>
+          <div style={styles.brand} className="footer-brand-col">
+            <div style={styles.logoRow} className="footer-logo-row">
               <div style={{
                 width: '38px',
                 height: '38px',
@@ -36,14 +36,14 @@ export default function Footer() {
             <p style={styles.tagline}>
               Providing high-end dental care, painless laser therapies, and microscopic treatments in Indore. Experience medicine with hospitality.
             </p>
-            <div style={styles.certBlock}>
+            <div style={styles.certBlock} className="footer-cert-block">
               <Award size={14} color="var(--brand-surgical-blue)" />
               <span style={styles.certText}>Licensed Aesthetic Clinic & Dental Surgery</span>
             </div>
           </div>
 
           {/* Navigation Links */}
-          <div>
+          <div className="footer-nav-col">
             <h4 style={styles.colTitle}>Resources</h4>
             {[
               { label: 'Home', to: '/' },
@@ -58,17 +58,17 @@ export default function Footer() {
           </div>
 
           {/* Contact Details */}
-          <div>
+          <div className="footer-contact-col">
             <h4 style={styles.colTitle}>Get In Touch</h4>
-            <div style={styles.infoRow}>
+            <div style={styles.infoRow} className="footer-info-row">
               <Phone size={16} color="var(--brand-surgical-blue)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <span style={styles.infoText}>6262178282</span>
             </div>
-            <div style={styles.infoRow}>
+            <div style={styles.infoRow} className="footer-info-row">
               <MapPin size={16} color="var(--brand-surgical-blue)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <span style={styles.infoText}>F 9, 10, BCM CITY, Khandelwal Nagar, Janki Nagar, Indore</span>
             </div>
-            <div style={styles.infoRow}>
+            <div style={styles.infoRow} className="footer-info-row">
               <Clock size={16} color="var(--brand-surgical-blue)" style={{ flexShrink: 0, marginTop: '2px' }} />
               <span style={styles.infoText}>Open 24 Hrs, Monday – Sunday</span>
             </div>
@@ -77,7 +77,7 @@ export default function Footer() {
         </div>
 
         {/* Local SEO keywords */}
-        <div style={styles.seoFooter}>
+        <div style={styles.seoFooter} className="footer-seo-block">
           <p style={styles.seoTitle}>Popular Treatments in Indore</p>
           <p style={styles.seoText}>
             Root Canal Treatment in Indore | Microscopic RCT Indore | Laser Dentistry Indore | Clear Aligners in Indore | Braces Indore | Kids Dentist in Indore | Dental Crowns & Bridges Indore | Tooth Extraction Indore | Emergency Dentist Indore | Painless Dental Clinic Indore | Cosmetic smile makeover Indore
@@ -85,7 +85,7 @@ export default function Footer() {
         </div>
 
         {/* Bottom Credits */}
-        <div style={styles.bottom}>
+        <div style={styles.bottom} className="footer-bottom-row">
           <p style={styles.bottomText}>© 2026 Dental Speciality Centre Indore. All rights reserved.</p>
           <p style={styles.creditsText}>Designed and Developed with Advanced AI Support.</p>
         </div>

@@ -74,11 +74,53 @@
     gap: 2.5rem !important;
   }
 
-  /* Shrink the image column height */
-  .responsive-flex-row > div:first-child {
+  .about-visual-col {
     flex: unset !important;
     width: 100% !important;
+    max-width: 320px !important;
     height: 320px !important;
+    margin: 0 auto !important;
+    position: relative !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .about-capsule-wrapper {
+    position: relative !important;
+    width: 250px !important;
+    height: 250px !important;
+    border-radius: 50% !important;
+    left: auto !important;
+    top: auto !important;
+    border: 4px solid #ffffff !important;
+  }
+
+  .about-sub-capsule-wrapper {
+    position: absolute !important;
+    width: 100px !important;
+    height: 100px !important;
+    border-radius: 50% !important;
+    left: 0% !important;
+    bottom: 0% !important;
+    border: 3px solid #ffffff !important;
+  }
+
+  .about-badge-wrapper {
+    position: absolute !important;
+    top: 0% !important;
+    right: 0% !important;
+    width: 85px !important;
+    height: 85px !important;
+    border-radius: 50% !important;
+    padding: 0 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+
+  .about-badge-num {
+    font-size: 1.4rem !important;
   }
 
   /* Text column full width */
@@ -144,15 +186,67 @@
     gap: 2rem !important;
   }
 
-  /* Hide sticky image col on mobile — tabs only */
+  /* Hide sticky image col on mobile since cards feature their image background directly */
   .expertise-image-col {
-    position: static !important;
-    top: auto !important;
+    display: none !important;
   }
 
-  .expertise-image-frame {
-    height: 280px !important;
-    border-radius: 20px !important;
+  /* Light theme card container for mobile */
+  .expertise-tab-card {
+    position: relative !important;
+    overflow: hidden !important;
+    border-radius: 24px !important;
+    background-color: #ffffff !important;
+    border: 1px solid rgba(14, 165, 233, 0.16) !important;
+    box-shadow: 0 10px 30px rgba(12, 35, 64, 0.05) !important;
+    padding: 1.25rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  /* Treatment image inside crisp light photo frame */
+  .expertise-card-mobile-bg {
+    display: block !important;
+    position: relative !important;
+    width: 100% !important;
+    height: 190px !important;
+    border-radius: 16px !important;
+    overflow: hidden !important;
+    margin-bottom: 0.85rem !important;
+    order: -1 !important;
+    flex-shrink: 0 !important;
+  }
+
+  .expertise-mobile-bg-img {
+    width: 100% !important;
+    height: 100% !important;
+    object-fit: cover !important;
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  .expertise-mobile-bg-overlay {
+    display: none !important;
+  }
+
+  /* Clean Light Theme Typography */
+  .expertise-tab-card h4 {
+    color: #0c2340 !important;
+    font-size: 1.18rem !important;
+    font-weight: 800 !important;
+    text-shadow: none !important;
+    margin-top: 0.2rem !important;
+  }
+
+  .expertise-tab-card p {
+    color: #475569 !important;
+    font-size: 0.88rem !important;
+    line-height: 1.6 !important;
+    text-shadow: none !important;
+  }
+
+  .expertise-tab-card span {
+    text-shadow: none !important;
   }
 
   /* Glass card hidden on mobile */
@@ -192,16 +286,33 @@
   }
 
   .bento-card {
-    min-height: 380px !important;
-    border-radius: 22px !important;
+    min-height: unset !important;
+    height: auto !important;
+    border-radius: 20px !important;
   }
 
   .bento-card-photo-box {
-    height: 200px !important;
+    height: 135px !important;
+  }
+
+  .bento-num-badge {
+    padding: 4px 10px !important;
+    font-size: 0.72rem !important;
+  }
+
+  .bento-icon-btn {
+    width: 36px !important;
+    height: 36px !important;
   }
 
   .bento-card-bottom {
-    padding: 1.4rem !important;
+    padding: 1.1rem 1.2rem !important;
+    gap: 0.65rem !important;
+  }
+
+  .bento-card-bottom p {
+    font-size: 0.86rem !important;
+    line-height: 1.5 !important;
   }
 
   .bento-heading {
@@ -249,10 +360,18 @@
     display: none !important;
   }
 
-  /* Remove translateX offsets on mobile */
+  .process-mobile-vertical-line {
+    display: block !important;
+  }
+
+  /* Remove translateX offsets on mobile & allow clean Y-slide entrance animation */
+  .process-step-item {
+    width: 100% !important;
+  }
+
   .timeline-node-1,
   .timeline-node-2 {
-    transform: translateX(0) !important;
+    transform: none !important;
   }
 
   /* Dental illustration shrinks */
@@ -318,9 +437,29 @@
     gap: 1rem !important;
   }
 
-  /* Myths grid → single column */
-  #education div[style*="mythsGrid"] {
-    grid-template-columns: 1fr !important;
+  .myth-card-item {
+    padding: 1.4rem !important;
+    border-radius: 20px !important;
+    gap: 1.25rem !important;
+  }
+
+  .myth-row-block,
+  .fact-row-block {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.6rem !important;
+    width: 100% !important;
+  }
+
+  .myth-left-badge,
+  .fact-left-badge {
+    align-self: flex-start !important;
+    margin-bottom: 0.15rem !important;
+  }
+
+  .fact-row-block {
+    padding-top: 1.25rem !important;
   }
 }
 
@@ -334,19 +473,73 @@
     border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
   }
 
-  .footer-container {
-    flex-direction: column !important;
-    gap: 2.5rem !important;
-  }
-
   footer div[style*="inner"] {
-    padding: 3rem 1.25rem 2rem !important;
+    padding: 1.75rem 1.25rem 1.5rem !important;
   }
 
-  footer div[style*="bottom"] {
+  .footer-container {
+    display: flex !important;
     flex-direction: column !important;
-    align-items: flex-start !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 1rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .footer-brand-col {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
     gap: 0.5rem !important;
+    margin-bottom: 0.25rem !important;
+    flex: none !important;
+    height: auto !important;
+    min-height: unset !important;
+  }
+
+  .footer-nav-col,
+  .footer-contact-col {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+    gap: 0.35rem !important;
+    margin-top: 0 !important;
+    flex: none !important;
+    height: auto !important;
+    min-height: unset !important;
+  }
+
+  .footer-logo-row,
+  .footer-cert-block,
+  .footer-info-row {
+    justify-content: center !important;
+    align-items: center !important;
+    text-align: center !important;
+    width: 100% !important;
+  }
+
+  .footer-cert-block {
+    margin-top: 0.2rem !important;
+    margin-bottom: 0 !important;
+  }
+
+  .footer-seo-block {
+    text-align: center !important;
+    padding-top: 1.5rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+
+  .footer-bottom-row {
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    text-align: center !important;
+    gap: 0.4rem !important;
+    padding-top: 1.25rem !important;
   }
 }
 

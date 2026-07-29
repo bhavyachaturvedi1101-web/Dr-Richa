@@ -203,22 +203,23 @@ export default function Education() {
               <motion.div 
                 key={idx}
                 style={styles.mythCard}
+                className="myth-card-item"
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: idx * 0.1 }}
                 whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(0,0,0,0.08)' }}
               >
-                <div style={styles.mythRow}>
-                  <div style={styles.mythLeft}>
+                <div style={styles.mythRow} className="myth-row-block">
+                  <div style={styles.mythLeft} className="myth-left-badge">
                     <ShieldAlert size={16} color="#ef4444" />
                     <span style={styles.mythLabel}>Myth</span>
                   </div>
                   <p style={styles.mythText}>{item.myth}</p>
                 </div>
 
-                <div style={styles.factRow}>
-                  <div style={styles.factLeft}>
+                <div style={styles.factRow} className="fact-row-block">
+                  <div style={styles.factLeft} className="fact-left-badge">
                     <motion.div
                       animate={{ rotate: [0, 15, 0] }}
                       transition={{ duration: 2, repeat: Infinity, repeatDelay: 3 }}

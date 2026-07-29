@@ -87,9 +87,27 @@ export default function Process() {
               </svg>
             </div>
 
+            {/* Mobile Vertical Connecting Line between step circles 01, 02, 03, 04 */}
+            <motion.div
+              className="process-mobile-vertical-line"
+              initial={{ scaleY: 0 }}
+              whileInView={{ scaleY: 1 }}
+              viewport={{ once: true, amount: 0.1 }}
+              transition={{ duration: 0.8, ease: 'easeOut' }}
+              style={{
+                position: 'absolute',
+                top: '26px',
+                bottom: '26px',
+                left: '26px',
+                width: '2.5px',
+                background: 'linear-gradient(to bottom, #2597d0 0%, #38bdf8 100%)',
+                transformOrigin: 'top',
+                zIndex: 1,
+              }}
+            />
+
             <div style={styles.timeline}>
               {steps.map((step, idx) => {
-                // To place the items on the curve: item 1 and 4 are at x=0, item 2 and 3 are pushed to x=42px
                 const isMiddle = idx === 1 || idx === 2;
                 
                 return (
@@ -97,17 +115,23 @@ export default function Process() {
                     key={idx}
                     style={{
                       ...styles.timelineItem,
-                      transform: isMiddle ? 'translateX(42px)' : 'translateX(0px)'
                     }}
-                    initial={{ opacity: 0, x: isMiddle ? 60 : 30 }}
-                    whileInView={{ opacity: 1, x: isMiddle ? 42 : 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.15 * idx }}
-                    className={`timeline-node-${idx}`}
+                    initial={{ opacity: 0, y: 35, x: isMiddle ? 42 : 0 }}
+                    whileInView={{ opacity: 1, y: 0, x: isMiddle ? 42 : 0 }}
+                    viewport={{ once: true, amount: 0.2 }}
+                    transition={{ duration: 0.65, delay: 0.14 * idx, ease: [0.16, 1, 0.3, 1] }}
+                    className={`process-step-item timeline-node-${idx}`}
                   >
-                    <div style={styles.nodeCircle}>
+                    <motion.div 
+                      style={styles.nodeCircle}
+                      className="process-step-circle"
+                      initial={{ scale: 0.8 }}
+                      whileInView={{ scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ duration: 0.4, delay: 0.14 * idx + 0.1 }}
+                    >
                       <span style={styles.nodeNum}>{step.num}</span>
-                    </div>
+                    </motion.div>
                     <div style={styles.nodeContent}>
                       <h3 style={styles.nodeTitle}>{step.title}</h3>
                       <p style={styles.nodeDesc}>{step.desc}</p>
@@ -259,6 +283,7 @@ const styles = {
     flexShrink: 0,
     boxShadow: '0 4px 15px rgba(0,0,0,0.03)',
     position: 'relative',
+    zIndex: 2,
   },
   nodeNum: {
     fontSize: '1rem',

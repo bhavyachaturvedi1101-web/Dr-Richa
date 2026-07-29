@@ -257,6 +257,7 @@ export default function Specialist() {
                 return (
                   <motion.div
                     key={item.id}
+                    className="expertise-tab-card"
                     onClick={() => setActiveIndex(idx)}
                     onMouseEnter={() => { setActiveIndex(idx); setIsPaused(true); }}
                     onMouseLeave={() => setIsPaused(false)}
@@ -269,6 +270,11 @@ export default function Specialist() {
                     whileHover={{ x: 6, backgroundColor: '#ffffff' }}
                     transition={{ duration: 0.3 }}
                   >
+                    {/* Mobile-only treatment background image */}
+                    <div className="expertise-card-mobile-bg">
+                      <img src={item.image} alt={item.title} className="expertise-mobile-bg-img" />
+                      <div className="expertise-mobile-bg-overlay" />
+                    </div>
                     {/* Active Progress Bar Animation */}
                     {isActive && (
                       <motion.div 

@@ -18,9 +18,10 @@ export default function AboutMinimal() {
         <div style={styles.grid} className="responsive-flex-row">
           
           {/* Left Column: Visual Capsules */}
-          <div style={styles.visualCol}>
+          <div style={styles.visualCol} className="about-visual-col">
             <motion.div 
               style={styles.capsuleWrapper}
+              className="about-capsule-wrapper"
               initial={{ opacity: 0, scale: 0.9, y: 20 }}
               whileInView={{ opacity: 1, scale: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
@@ -43,6 +44,7 @@ export default function AboutMinimal() {
             {/* Overlapping Reception capsule */}
             <motion.div 
               style={styles.subCapsuleWrapper}
+              className="about-sub-capsule-wrapper"
               initial={{ opacity: 0, x: -30, y: 30 }}
               whileInView={{ opacity: 1, x: 0, y: 0 }}
               viewport={{ once: true }}
@@ -59,6 +61,7 @@ export default function AboutMinimal() {
             {/* Floating Glassmorphism Badge */}
             <motion.div 
               style={styles.badge}
+              className="about-badge-wrapper"
               initial={{ opacity: 0, scale: 0.8 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
@@ -67,7 +70,7 @@ export default function AboutMinimal() {
               whileHover={{ scale: 1.1, y: -12 }}
             >
               <div style={styles.badgeInner}>
-                <span style={styles.badgeNum}>9+</span>
+                <span style={styles.badgeNum} className="about-badge-num">9+</span>
                 <span style={styles.badgeText}>Years<br />Mastery</span>
               </div>
             </motion.div>
@@ -180,13 +183,14 @@ const styles = {
     justifyContent: 'center',
   },
   capsuleWrapper: {
-    position: 'absolute',
-    width: '70%',
-    height: '90%',
-    borderRadius: '160px',
+    position: 'relative',
+    width: '420px',
+    height: '420px',
+    borderRadius: '50%',
     overflow: 'hidden',
-    border: '1px solid rgba(0,0,0,0.04)',
-    boxShadow: '0 30px 70px rgba(0, 0, 0, 0.08)',
+    border: '6px solid #ffffff',
+    boxShadow: '0 30px 70px rgba(0, 0, 0, 0.12)',
+    flexShrink: 0,
   },
   mainImg: {
     width: '100%',
@@ -200,11 +204,11 @@ const styles = {
   },
   subCapsuleWrapper: {
     position: 'absolute',
-    bottom: '5%',
-    left: '2%',
-    width: '45%',
-    height: '30%',
-    borderRadius: '40px',
+    bottom: '4%',
+    left: '0%',
+    width: '150px',
+    height: '150px',
+    borderRadius: '50%',
     overflow: 'hidden',
     border: '5px solid #ffffff',
     boxShadow: '0 20px 40px rgba(0,0,0,0.12)',
@@ -217,14 +221,18 @@ const styles = {
   },
   badge: {
     position: 'absolute',
-    top: '12%',
-    right: '2%',
-    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+    top: '4%',
+    right: '0%',
+    width: '115px',
+    height: '115px',
+    backgroundColor: 'rgba(255, 255, 255, 0.88)',
     backdropFilter: 'blur(16px)',
     border: '1px solid rgba(255,255,255,0.4)',
-    borderRadius: '35px',
-    padding: '1.25rem 2rem',
-    boxShadow: '0 20px 40px rgba(0,0,0,0.08)',
+    borderRadius: '50%',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
     zIndex: 10,
     cursor: 'default',
   },
