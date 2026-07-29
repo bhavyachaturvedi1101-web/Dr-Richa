@@ -61,7 +61,7 @@ export default function Gallery() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: '#fdfbf7' }}
     >
       
       {/* ── HERO BANNER ── */}
@@ -175,8 +175,8 @@ const styles = {
   },
   heroBanner: {
     position: 'relative',
-    backgroundColor: '#ffffff',
-    padding: '10rem 0 5rem',
+    backgroundColor: '#fdfbf7',
+    padding: '16rem 0 10rem',
     overflow: 'hidden',
   },
   heroOverlay: {

@@ -42,7 +42,7 @@ export default function CaseStudies() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: '#fdfbf7' }}
     >
       {/* ── HERO BANNER ── */}
       <section style={styles.heroBanner} className="casestudies-hero-banner">
@@ -274,7 +274,7 @@ const styles = {
     width: '50%',
   },
   imageBackground: {
-    backgroundColor: '#f1f5f9',
+    backgroundColor: '#fdfbf7',
     borderRadius: '24px',
     padding: '0', // Removed padding so image fills the card
     display: 'flex',

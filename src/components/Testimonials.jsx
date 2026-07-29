@@ -104,7 +104,7 @@ export default function Testimonials() {
 const styles = {
   section: {
     padding: '7.5rem 2rem',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     position: 'relative',
     overflow: 'hidden',
   },

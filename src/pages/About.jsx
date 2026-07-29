@@ -63,7 +63,7 @@ export default function About() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: '#fdfbf7' }}
     >
 
       {/* ── HERO BANNER ── */}
@@ -268,7 +268,7 @@ const styles = {
   },
   heroBanner: {
     position: 'relative',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     padding: '10rem 0 5rem',
     overflow: 'hidden',
   },
@@ -349,7 +349,7 @@ const styles = {
     position: 'absolute',
     bottom: '8%',
     right: '5%',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     border: '1px solid rgba(0,0,0,0.06)',
     borderRadius: '24px',
     padding: '1rem 1.5rem',
@@ -451,7 +451,7 @@ const styles = {
     gap: '1rem',
   },
   credCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     border: '1px solid rgba(0,0,0,0.05)',
     borderRadius: '20px',
     padding: '1.25rem 2rem',
@@ -491,7 +491,7 @@ const styles = {
     gap: '2rem',
   },
   valueCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     border: '1px solid #dbeef9',
     borderRadius: '24px',
     cursor: 'default',
@@ -516,7 +516,7 @@ const styles = {
     width: '42px',
     height: '42px',
     borderRadius: '12px',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',

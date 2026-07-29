@@ -177,7 +177,7 @@ export default function Process() {
 const styles = {
   section: {
     padding: '8rem 0',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     position: 'relative',
     overflow: 'hidden',
   },
@@ -275,7 +275,7 @@ const styles = {
     width: '52px',
     height: '52px',
     borderRadius: '50%',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     border: '2px solid var(--brand-surgical-blue)',
     display: 'flex',
     alignItems: 'center',

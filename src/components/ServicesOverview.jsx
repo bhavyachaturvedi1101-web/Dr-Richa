@@ -185,7 +185,7 @@ export default function ServicesOverview() {
 const styles = {
   section: {
     padding: '7rem 0',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
   },
   container: {
     maxWidth: '1200px',

@@ -127,7 +127,7 @@ export default function Services() {
   };
 
   return (
-    <div style={{ backgroundColor: '#ffffff' }}>
+    <div style={{ backgroundColor: '#fdfbf7' }}>
       
       {/* ── HERO BANNER ── */}
       <section style={styles.heroBanner}>

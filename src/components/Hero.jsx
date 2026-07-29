@@ -290,7 +290,7 @@ const styles = {
     display: 'inline-flex',
     alignItems: 'center',
     gap: '8px',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     color: '#0c2340',
     padding: '0.88rem 1.7rem',
     borderRadius: '999px',

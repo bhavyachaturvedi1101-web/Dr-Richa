@@ -267,7 +267,7 @@ export default function Specialist() {
                       borderColor: isActive ? 'rgba(56, 189, 248, 0.4)' : 'rgba(0,0,0,0.05)',
                       boxShadow: isActive ? '0 15px 35px rgba(37, 151, 208, 0.12)' : 'none',
                     }}
-                    whileHover={{ x: 6, backgroundColor: '#ffffff' }}
+                    whileHover={{ x: 6, backgroundColor: '#fdfbf7' }}
                     transition={{ duration: 0.3 }}
                   >
                     {/* Mobile-only treatment background image */}

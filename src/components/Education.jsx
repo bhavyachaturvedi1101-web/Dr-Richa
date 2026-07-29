@@ -322,7 +322,7 @@ const styles = {
   },
   tipCard: {
     position: 'relative',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     borderRadius: '28px',
     padding: '2px', // Space for animated border
     boxShadow: '0 10px 30px rgba(0,0,0,0.03)',
@@ -337,7 +337,7 @@ const styles = {
   },
   tipCardInner: {
     position: 'relative',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     borderRadius: '26px',
     padding: '2.5rem',
     height: '100%',
@@ -428,7 +428,7 @@ const styles = {
     margin: '0 auto',
   },
   mythCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     border: '1px solid rgba(0,0,0,0.04)',
     borderRadius: '24px',
     padding: '2.5rem',

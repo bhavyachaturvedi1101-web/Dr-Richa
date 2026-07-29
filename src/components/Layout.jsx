@@ -11,7 +11,7 @@ export default function Layout() {
   const currentOutlet = useOutlet();
 
   return (
-    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#ffffff' }}>
+    <div style={{ display: 'flex', flexDirection: 'column', minHeight: '100vh', backgroundColor: '#fdfbf7' }}>
       <Navbar />
       <main style={{ flex: 1, position: 'relative' }}>
         <AnimatePresence mode="wait" onExitComplete={() => window.scrollTo(0, 0)}>

@@ -47,7 +47,7 @@ body {
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   color: var(--neutral-ink);
-  background: #ffffff;
+  background: #fdfbf7;
   -webkit-font-smoothing: antialiased;
 }
 
@@ -86,7 +86,7 @@ a {
   top: 70px;
   left: 0;
   right: 0;
-  background: #ffffff;
+  background: #fdfbf7;
   padding: 1.5rem;
   z-index: 999;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);

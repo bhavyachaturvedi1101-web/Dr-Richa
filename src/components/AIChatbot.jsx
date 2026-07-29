@@ -505,7 +505,7 @@ const styles = {
     maxWidth: 'calc(100vw - 32px)',
     height: '560px',
     maxHeight: 'calc(100vh - 120px)',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     borderRadius: '20px',
     boxShadow: '0 16px 48px rgba(15, 23, 42, 0.22)',
     border: '1px solid rgba(0, 0, 0, 0.08)',
@@ -630,7 +630,7 @@ const styles = {
     alignItems: 'center',
     gap: '0.3rem',
     padding: '0.35rem 0.7rem',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     border: '1px solid rgba(0,0,0,0.1)',
     borderRadius: '999px',
     fontSize: '0.75rem',
@@ -680,7 +680,7 @@ const styles = {
     alignItems: 'center',
     gap: '0.35rem',
     padding: '0.7rem 1rem',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     borderRadius: '16px',
     border: '1px solid rgba(0,0,0,0.08)',
     borderBottomLeftRadius: '4px'
@@ -697,7 +697,7 @@ const styles = {
     alignItems: 'center',
     gap: '0.5rem',
     padding: '0.75rem 1rem',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     borderTop: '1px solid rgba(0,0,0,0.08)'
   },
   textInput: {

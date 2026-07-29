@@ -39,7 +39,7 @@ export default function IntroLoader() {
             position: 'fixed',
             inset: 0,
             zIndex: 9999,
-            backgroundColor: '#ffffff',
+            backgroundColor: '#fdfbf7',
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

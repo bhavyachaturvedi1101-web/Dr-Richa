@@ -202,7 +202,7 @@ export default function WhyTrustUs() {
           display: flex;
           flex-direction: column;
           border: 1px solid rgba(226, 232, 240, 0.95);
-          background: #ffffff;
+          background: #fdfbf7;
           cursor: pointer;
           transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
           box-shadow: 0 15px 40px -10px rgba(15, 23, 42, 0.08);
@@ -224,7 +224,7 @@ export default function WhyTrustUs() {
           height: 250px;
           width: 100%;
           overflow: hidden;
-          background: #f1f5f9;
+          background: #fdfbf7;
         }
         .bento-card-bg-img {
           width: 100%;
@@ -291,7 +291,7 @@ export default function WhyTrustUs() {
           justify-content: space-between;
           flex: 1;
           gap: 1.25rem;
-          background: #ffffff;
+          background: #fdfbf7;
         }
         @media (max-width: 640px) {
           .bento-card-bottom {
@@ -380,7 +380,7 @@ export default function WhyTrustUs() {
           padding: 1.5rem;
         }
         .bento-modal-box {
-          background: #ffffff;
+          background: #fdfbf7;
           border: 1px solid rgba(226, 232, 240, 0.95);
           border-radius: 36px;
           max-width: 820px;

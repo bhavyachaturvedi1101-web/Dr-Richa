@@ -229,7 +229,7 @@
     top: auto !important;
     min-height: auto !important;
     height: auto !important;
-    background-color: #ffffff !important;
+    background-color: #fdfbf7 !important;
     border-radius: 16px !important;
     border: 1px solid rgba(14, 165, 233, 0.15) !important;
     box-shadow: 0 4px 15px rgba(0,0,0,0.03) !important;
@@ -266,7 +266,7 @@
     display: flex !important;
     flex-direction: column !important;
     gap: 0.2rem !important;
-    background-color: #ffffff !important;
+    background-color: #fdfbf7 !important;
     color: #1e293b !important;
     border-radius: 0 0 16px 16px !important;
   }
@@ -504,7 +504,7 @@
     position: relative !important;
     overflow: hidden !important;
     border-radius: 24px !important;
-    background-color: #ffffff !important;
+    background-color: #fdfbf7 !important;
     border: 1px solid rgba(14, 165, 233, 0.16) !important;
     box-shadow: 0 10px 30px rgba(12, 35, 64, 0.05) !important;
     padding: 1.25rem !important;
@@ -900,6 +900,6 @@
   /* Treatments & Gallery Hero Padding for Mobile */
   .treatments-hero-banner,
   .gallery-hero-banner {
-    padding: 140px 1rem 4rem !important;
+    padding: 200px 1rem 8rem !important;
   }
 }

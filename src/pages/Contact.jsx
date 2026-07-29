@@ -42,7 +42,7 @@ export default function Contact() {
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.6 }}
-      style={{ backgroundColor: '#ffffff' }}
+      style={{ backgroundColor: '#fdfbf7' }}
     >
       
       {/* ── HERO BANNER ── */}
@@ -404,7 +404,7 @@ const styles = {
     flex: '1 1 500px',
   },
   formCard: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     border: '1px solid #dbeef9',
     borderRadius: '30px',
     overflow: 'hidden',

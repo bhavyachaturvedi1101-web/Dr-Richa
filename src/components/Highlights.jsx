@@ -165,7 +165,7 @@ const styles = {
     top: '1rem',
     left: '1rem',
     zIndex: 2,
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     color: 'var(--neutral-ink)',
     width: '48px',
     height: '48px',

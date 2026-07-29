@@ -16,7 +16,7 @@ import {
   ChevronDown,
   ChevronUp
 } from 'lucide-react';
-import MagneticButton from './ui/MagneticButton';
+
 
 const deepTreatments = [
   {
@@ -196,7 +196,7 @@ export default function Treatments() {
       : deepTreatments.filter(t => t.tag === selectedCategory);
 
   return (
-    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', position: 'relative' }}>
+    <div style={{ backgroundColor: '#fdfbf7', minHeight: '100vh', position: 'relative' }}>
       {/* SCOPED STYLES & MOBILE COMPACT RESPONSIVE RULES */}
       <style dangerouslySetInnerHTML={{__html: `
         .desktop-treatment-card {
@@ -242,7 +242,7 @@ export default function Treatments() {
         }
         /* MOBILE COMPACT CARD STYLING */
         .mobile-compact-box {
-          background: #ffffff;
+          background: #fdfbf7;
           border: 1px solid #e2e8f0;
           border-radius: 24px;
           padding: 1.25rem;
@@ -473,12 +473,10 @@ export default function Treatments() {
                           </div>
 
                           <div style={{ marginTop: '1.75rem' }}>
-                            <MagneticButton>
                               <Link to="/contact" style={styles.bookBtn}>
                                 <span>Book Treatment Consultation</span>
                                 <ArrowUpRight size={17} />
                               </Link>
-                            </MagneticButton>
                           </div>
                         </div>
                       </div>
@@ -611,7 +609,7 @@ const styles = {
   },
   heroBanner: {
     position: 'relative',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     padding: '10rem 0 6rem',
     overflow: 'hidden',
   },
@@ -660,7 +658,7 @@ const styles = {
     display: 'inline-flex',
     alignItems: 'center',
     gap: '6px',
-    background: '#ffffff',
+    background: '#fdfbf7',
     border: '1px solid #bae6fd',
     color: '#0284c7',
     fontSize: '0.82rem',
@@ -671,7 +669,7 @@ const styles = {
   },
   filterSection: {
     padding: '2rem 0',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     position: 'sticky',
     top: '76px',
     zIndex: 30,
@@ -709,7 +707,7 @@ const styles = {
     gap: '6rem',
   },
   cardBlock: {
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     borderRadius: '32px',
     border: '1px solid #e2e8f0',
     padding: '3rem',

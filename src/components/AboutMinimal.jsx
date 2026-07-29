@@ -136,7 +136,7 @@ const styles = {
   section: {
     position: 'relative',
     padding: '7rem 0',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     overflow: 'hidden',
   },
   blurTop: {
@@ -271,7 +271,7 @@ const styles = {
     right: '5%',
     width: '130px',
     height: '100px',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     border: '1px solid rgba(0,0,0,0.05)',
     borderRadius: '24px',
     padding: '1rem',

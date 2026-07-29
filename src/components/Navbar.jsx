@@ -78,7 +78,7 @@ export default function Navbar() {
           background-color: rgba(255, 255, 255, 0.9);
         }
         .pill-nav-link.active-pill {
-          background-color: #ffffff !important;
+          background-color: #fdfbf7 !important;
           color: #0c2340 !important;
           box-shadow: 0 2px 10px rgba(12, 35, 64, 0.08);
           font-weight: 700 !important;
@@ -296,7 +296,7 @@ const styles = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     boxShadow: '0 4px 12px rgba(12, 35, 64, 0.08)',
     flexShrink: 0,
   },
@@ -360,7 +360,7 @@ const styles = {
     top: 'calc(100% + 14px)',
     right: '-80px',
     width: '640px',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     borderRadius: '24px',
     padding: '1.2rem',
     boxShadow: '0 20px 50px rgba(12,35,64,0.14)',
@@ -426,7 +426,7 @@ const styles = {
   mobileMenu: {
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     borderRadius: '20px',
     marginTop: '0.75rem',
     padding: '1rem 0',

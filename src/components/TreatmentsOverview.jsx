@@ -192,7 +192,7 @@ export default function TreatmentsOverview() {
 const styles = {
   section: {
     padding: '7.5rem 0',
-    backgroundColor: '#ffffff',
+    backgroundColor: '#fdfbf7',
     position: 'relative',
     overflow: 'hidden',
   },
