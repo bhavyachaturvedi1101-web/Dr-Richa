@@ -12,7 +12,9 @@ import {
   Sparkles,
   Star,
   ClipboardCheck,
-  ArrowUpRight
+  ArrowUpRight,
+  ChevronDown,
+  ChevronUp
 } from 'lucide-react';
 import MagneticButton from './ui/MagneticButton';
 
@@ -79,52 +81,10 @@ const deepTreatments = [
     title: 'Orthodontics',
     desc: 'Align crooked, crowded, or protruding teeth to optimize your bite and facial symmetry. We offer invisible clear aligners alongside traditional braces.',
     points: [
-      'Invisible clear aligners that are virtually undetectable and removable',
-      'Traditional metal and ceramic braces for complex structural issues',
-      'Interactive 3D dental mapping to simulate your final smile progression',
-      'Maintains dental hygiene by correcting crowded, hard-to-clean spaces'
-    ],
-    image: '/images/case_study_orthodontics.png',
-    icon: Smile
-  },
-  {
-    id: 'whitening',
-    tag: 'Cosmetics',
-    title: 'Teeth Whitening',
-    desc: 'Brighten your smile instantly. Our in-office teeth whitening system utilizes safe, professional-grade bleaching agents to lift stains and discoloration.',
-    points: [
-      'Safely brightens teeth by up to 8 shades in a single clinical session',
-      'Removes deep extrinsic stains from tobacco, tea, coffee, and food dyes',
-      'Laser-activated whitening gel for rapid, non-invasive results',
-      'Clinically formulated desensitizing agents to prevent teeth sensitivity'
-    ],
-    image: '/teeth_whitening.png',
-    icon: Sparkles
-  },
-  {
-    id: 'restoration',
-    tag: 'Restorative',
-    title: 'Restoration / Filling',
-    desc: 'Cure tooth cavities with aesthetic, mercury-free composite materials. These composite fillings bond directly to the enamel, maintaining tooth strength.',
-    points: [
-      '100% metal-free, tooth-colored composite resin fillings',
-      'Inlays and onlays for teeth that have suffered moderate structural decay',
-      'Restores the structural integrity of decayed teeth to prevent fractures',
-      'Smooth, polished margins that blend seamlessly with natural enamel'
-    ],
-    image: '/tooth_filling.png',
-    icon: Shield
-  },
-  {
-    id: 'smile',
-    tag: 'Aesthetics',
-    title: 'Smile Designing',
-    desc: 'Transform your overall look with a custom-designed smile alignment plan. We analyze your lips, facial proportions, and jaw symmetry to construct your perfect smile.',
-    points: [
-      'Custom ceramic veneers to mask dental alignment and shape defects',
-      'Composite bonding to restore minor chipping and dental gaps',
-      'Gingival contouring to correct gummy smiles and expose more enamel',
-      'Coordinated cosmetic and orthodontic combinations for celebrity smiles'
+      'Custom-molded transparent clear aligners for virtually invisible treatment',
+      'Advanced self-ligating ceramic and metallic brackets for rapid alignment',
+      'Correction of overbite, underbite, crossbite, and spacing issues',
+      'Digital smile simulation showing your final aligned teeth before starting'
     ],
     image: '/smile_designing.png',
     icon: Smile
@@ -132,107 +92,126 @@ const deepTreatments = [
   {
     id: 'extraction',
     tag: 'Oral Surgery',
-    title: 'Extraction',
-    desc: 'When teeth are severely damaged or crowded, extraction is necessary. We perform safe, sterile, and painless extractions, including complex wisdom teeth removals.',
+    title: 'Wisdom Tooth & Surgery',
+    desc: 'When a wisdom tooth is impacted or infected, prompt surgical removal is essential. Our team ensures a calm, painless procedure with rapid healing protocols.',
     points: [
-      'Painless tooth extractions under gentle local anesthesia',
-      'Specialized care for geriatric patients with cardiac comorbidities',
-      'Surgical wisdom teeth extractions to prevent crowding and jaw pain',
-      'Complete post-operative care guidelines for rapid socket healing'
+      '3D CBCT radiographic analysis to map nerve pathways precisely',
+      'Minimally invasive surgical techniques to preserve surrounding bone',
+      'Effective local anesthesia and sedation for zero-discomfort procedures',
+      'Advanced PRF (Platelet Rich Fibrin) therapy to accelerate tissue healing'
     ],
     image: '/tooth_extraction.png',
-    icon: X
+    icon: Activity
+  },
+  {
+    id: 'kids',
+    tag: 'Pedodontics',
+    title: 'Pediatric Dentistry',
+    desc: 'We create a fun, fear-free environment for children. Early dental care sets the stage for a lifetime of healthy adult teeth and proper jaw development.',
+    points: [
+      'Gentle fluoride applications and protective pit-and-fissure sealants',
+      'Pain-free cavity restorations using child-friendly dental materials',
+      'Preventive orthodontic screening for growing jaws and developing bites',
+      'Patient, friendly tell-show-do communication to eliminate dental anxiety'
+    ],
+    image: '/pedodontics_child.png',
+    icon: Heart
+  },
+  {
+    id: 'cosmetic',
+    tag: 'Aesthetic Dentistry',
+    title: 'Smile Makeover',
+    desc: 'Enhance your smile’s color, shape, and symmetry with ultra-thin porcelain veneers, composite bonding, and professional laser whitening.',
+    points: [
+      'Custom-crafted ultra-thin porcelain laminates and dental veneers',
+      'Instant composite edge-bonding to repair chips and minor gaps',
+      'In-clinic LED laser teeth whitening for up to 8 shades brighter teeth',
+      'Holistic facial symmetry evaluation by Dr. Richa Tiwari Vyas'
+    ],
+    image: '/teeth_whitening.png',
+    icon: Sparkles
   },
   {
     id: 'jewellery',
-    tag: 'Cosmetics',
-    title: 'Dental Jewellery',
-    desc: 'Add a touch of sparkle to your smile. We offer safe, non-invasive placement of premium crystals, gems, and diamonds on your teeth.',
+    tag: 'Aesthetic Accessories',
+    title: 'Dental Jewellery & Tooth Gems',
+    desc: 'Express your personality with safe, non-invasive sparkling tooth gems and dental crystals. Applied without drilling or damaging your natural tooth enamel, our dental jewellery adds an elegant, eye-catching sparkle to your smile.',
     points: [
-      '100% safe, non-invasive placement of dental gems without drilling',
-      'Medical-grade biocompatible adhesive that does not damage the enamel',
-      'Easily removable at any time by Dr. Tiwari without marking the tooth',
-      'Adds a temporary or long-term sparkle to accessorize your smile'
+      'Zero drilling or removal of natural tooth enamel structure',
+      'Premium biocompatible Swarovski-style dental crystals and gold gems',
+      'Applied using professional orthodontic adhesive in just 15 minutes',
+      '100% reversible and safe to remove or replace anytime'
     ],
     image: '/dental_jewellery.png',
     icon: Star
   },
   {
-    id: 'pedodontics',
-    tag: 'Pediatrics',
-    title: 'Pedodontics / Child Care',
-    desc: 'Build positive oral hygiene habits for your kids in an anxiety-free environment. We focus on preventive sealants, gentle scaling, and kid-friendly dental education.',
+    id: 'filling',
+    tag: 'Restorative Dentistry',
+    title: 'Aesthetic Tooth Restoration & Fillings',
+    desc: 'Preserve decayed or chipped teeth with invisible, mercury-free composite tooth fillings. Our layered nanohybrid composites match your tooth’s natural shade, translucency, and anatomy perfectly.',
     points: [
-      'Zero-anxiety pediatric operating bays with kid-friendly protocols',
-      'Preventive cavity pit-and-fissure sealants and fluoride varnishes',
-      'Monitoring developmental spacing to prevent future aligner requirements',
-      'Gentle scaling and clinical guidance to cure early child cavities'
+      'Mercury-free, tooth-colored composite resins for natural aesthetics',
+      'Minimally invasive cavity preparation preserving healthy enamel',
+      'Instant light-cured polymer bonding for immediate chewing strength',
+      'Seamless shade-matching that blends invisibly with natural teeth'
     ],
-    image: '/pedodontics_child.png',
-    icon: Heart
+    image: '/tooth_filling.png',
+    icon: Shield
   }
 ];
 
 const categories = [
-  'All',
+  'All Procedures',
   'Endodontics',
   'Implantology',
   'Prosthodontics',
   'Periodontics',
   'Orthodontics',
-  'Cosmetics',
-  'Restorative',
-  'Aesthetics',
   'Oral Surgery',
-  'Pediatrics'
+  'Pedodontics',
+  'Aesthetic Dentistry'
 ];
 
 export default function Treatments() {
-  const { hash } = useLocation();
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const location = useLocation();
+  const [selectedCategory, setSelectedCategory] = useState('All Procedures');
+  const [expandedCardId, setExpandedCardId] = useState(null);
 
   useEffect(() => {
-    if (hash) {
-      const targetId = hash.replace('#', '');
-      const matched = deepTreatments.find((t) => t.id === targetId);
-      if (matched) {
-        setSelectedCategory('All');
-        setTimeout(() => {
-          const element = document.getElementById(targetId);
-          if (element) {
-            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        }, 150);
-      }
+    if (location.state && location.state.selectedCategory) {
+      setSelectedCategory(location.state.selectedCategory);
     }
-  }, [hash]);
+  }, [location.state]);
 
-  const filteredTreatments = selectedCategory === 'All'
-    ? deepTreatments
-    : deepTreatments.filter((t) => t.tag === selectedCategory);
+  const toggleExpand = (id) => {
+    setExpandedCardId(prev => (prev === id ? null : id));
+  };
+
+  const filteredTreatments =
+    selectedCategory === 'All Procedures'
+      ? deepTreatments
+      : deepTreatments.filter(t => t.tag === selectedCategory);
 
   return (
-    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh' }}>
-      <style dangerouslySetInnerHTML={{ __html: `
-        @media (max-width: 900px) {
-          .treatment-card-grid {
-            flex-direction: column !important;
-            gap: 2rem !important;
+    <div style={{ backgroundColor: '#ffffff', minHeight: '100vh', position: 'relative' }}>
+      {/* SCOPED STYLES & MOBILE COMPACT RESPONSIVE RULES */}
+      <style dangerouslySetInnerHTML={{__html: `
+        .desktop-treatment-card {
+          display: block;
+        }
+        .mobile-treatment-card {
+          display: none;
+        }
+        @media (max-width: 768px) {
+          .desktop-treatment-card {
+            display: none !important;
           }
-          .treatment-img-box {
-            width: 100% !important;
-            min-height: 260px !important;
-            max-height: 320px !important;
+          .mobile-treatment-card {
+            display: block !important;
           }
-          .treatment-hero-grid {
-            flex-direction: column !important;
-            text-align: center !important;
-            gap: 2.5rem !important;
-          }
-          .treatment-hero-img-col {
-            width: 100% !important;
-            max-width: 400px !important;
-            margin: 0 auto !important;
+          .category-tab-scroll {
+            padding-bottom: 0.75rem !important;
           }
         }
         .treatment-card-hover {
@@ -259,71 +238,177 @@ export default function Treatments() {
         .category-tab-scroll::-webkit-scrollbar {
           display: none;
         }
+        /* MOBILE COMPACT CARD STYLING */
+        .mobile-compact-box {
+          background: #ffffff;
+          border: 1px solid #e2e8f0;
+          border-radius: 24px;
+          padding: 1.25rem;
+          box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.06);
+          margin-bottom: 1.25rem;
+          transition: all 0.3s ease;
+        }
+        .mobile-compact-header {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-bottom: 0.85rem;
+        }
+        .mobile-tag-pill {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: #f0f9ff;
+          border: 1px solid #bae6fd;
+          color: #0284c7;
+          font-size: 0.75rem;
+          font-weight: 800;
+          padding: 4px 10px;
+          border-radius: 999px;
+          text-transform: uppercase;
+        }
+        .mobile-thumb-row {
+          display: flex;
+          align-items: center;
+          gap: 1rem;
+          margin-bottom: 0.9rem;
+        }
+        .mobile-thumb-img {
+          width: 85px;
+          height: 85px;
+          border-radius: 16px;
+          object-fit: cover;
+          border: 1px solid #e2e8f0;
+          flex-shrink: 0;
+          box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
+        }
+        .mobile-card-title {
+          font-size: 1.3rem;
+          font-weight: 800;
+          color: #0f172a;
+          line-height: 1.2;
+          margin-bottom: 4px;
+        }
+        .mobile-card-desc {
+          font-size: 0.92rem;
+          color: #475569;
+          line-height: 1.55;
+          margin-bottom: 1rem;
+        }
+        .mobile-accordion-btn {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          background: #f8fafc;
+          border: 1px solid #e2e8f0;
+          padding: 10px 14px;
+          border-radius: 14px;
+          color: #0284c7;
+          font-weight: 700;
+          font-size: 0.85rem;
+          cursor: pointer;
+          margin-bottom: 0.85rem;
+          transition: all 0.25s ease;
+        }
+        .mobile-accordion-btn:active {
+          background: #f0f9ff;
+          border-color: #0284c7;
+        }
+        .mobile-book-bar {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-top: 0.85rem;
+          border-top: 1px solid #f1f5f9;
+        }
+        .hero-grid-responsive {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 4rem;
+        }
+        @media (max-width: 768px) {
+          .hero-grid-responsive {
+            flex-direction: column !important;
+            text-align: center;
+            gap: 2.5rem !important;
+          }
+          .hero-grid-responsive .hero-text-col {
+            text-align: center !important;
+          }
+        }
       `}} />
 
-      {/* ── HERO BANNER WITH CLINIC BACKGROUND IMAGE ── */}
+      {/* ── HERO BANNER WITH HD CLEAR DENTAL VISUAL (ZERO FADING / ZERO OVERLAY) ── */}
       <section style={styles.heroBanner}>
-        {/* Background Image & Gradient Overlay */}
-        <div style={styles.heroBgWrapper}>
-          <img
-            src="/clinic_interior.png"
-            alt="Dental Surgery Clinic Interior"
-            style={styles.heroBgImg}
-          />
-          <div style={styles.heroBgOverlay} />
-        </div>
-
         <div style={styles.container}>
-          <motion.div
-            style={styles.heroContent}
-            initial="hidden"
-            animate="visible"
-            variants={{
-              hidden: { opacity: 0 },
-              visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
-            }}
-          >
-            <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-              Our Specialized <span style={{ color: '#38bdf8' }}>Treatments.</span>
-            </motion.h1>
-            <motion.p style={styles.heroDesc} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-              Explore our full spectrum of microscopic, surgical, and cosmetic dental procedures led by Dr. Richa Tiwari Vyas. Every treatment is designed with precision and pain-free patient comfort in mind.
-            </motion.p>
-          </motion.div>
-        </div>
-      </section>
+          <div className="hero-grid-responsive" style={styles.heroGrid}>
+            {/* LEFT COL: Typography & Clinical Badges */}
+            <motion.div
+              className="hero-text-col"
+              style={styles.heroTextCol}
+              initial="hidden"
+              animate="visible"
+              variants={{
+                hidden: { opacity: 0 },
+                visible: { opacity: 1, transition: { staggerChildren: 0.15 } }
+              }}
+            >
+              <motion.div variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }} style={{ marginBottom: '1rem' }}>
+                <span style={{
+                  background: '#e0f2fe',
+                  color: '#0284c7',
+                  padding: '6px 14px',
+                  borderRadius: '999px',
+                  fontWeight: '800',
+                  fontSize: '0.78rem',
+                  letterSpacing: '0.08em',
+                  textTransform: 'uppercase'
+                }}>
+                  ✦ COMPREHENSIVE CLINICAL EXPERTISE
+                </span>
+              </motion.div>
 
-      {/* ── INTERACTIVE CATEGORY FILTER BAR ── */}
-      <section style={styles.filterSection}>
-        <div style={styles.container}>
-          <div className="category-tab-scroll">
-            {categories.map((cat) => {
-              const isSelected = selectedCategory === cat;
-              return (
-                <button
-                  key={cat}
-                  onClick={() => setSelectedCategory(cat)}
-                  style={{
-                    ...styles.categoryBtn,
-                    color: isSelected ? '#ffffff' : 'var(--neutral-charcoal)',
-                  }}
-                >
-                  {isSelected && (
-                    <motion.div
-                      layoutId="activeTreatmentTab"
-                      style={styles.activeTabPill}
-                      transition={{ type: 'spring', stiffness: 350, damping: 28 }}
-                    />
-                  )}
-                  <span style={{ position: 'relative', zIndex: 2 }}>{cat}</span>
-                </button>
-              );
-            })}
+              <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                Our Specialized <span style={{ color: '#0284c7' }}>Treatments.</span>
+              </motion.h1>
+              
+              <motion.p style={styles.heroDesc} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                Explore our full spectrum of microscopic, surgical, and cosmetic dental procedures led by Dr. Richa Tiwari Vyas. Every treatment is designed with precision and pain-free patient comfort in mind.
+              </motion.p>
+
+              <motion.div style={styles.heroBadgesRow} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
+                <div style={styles.heroBadgePill}>
+                  <span>⚡ Microscope Assisted</span>
+                </div>
+                <div style={styles.heroBadgePill}>
+                  <span>⚡ Pain-Free Protocol</span>
+                </div>
+                <div style={styles.heroBadgePill}>
+                  <span>⚡ 100% Sterilized Care</span>
+                </div>
+              </motion.div>
+            </motion.div>
+
+            {/* RIGHT COL: 100% HD Clear Visible Dental Image (No Fading / No Overlay) */}
+            <motion.div
+              style={styles.heroImgCol}
+              initial={{ opacity: 0, scale: 0.95, x: 40 }}
+              animate={{ opacity: 1, scale: 1, x: 0 }}
+              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+            >
+              <img
+                src="/dental_service_2.jpg"
+                alt="High Definition Dental Surgical Procedure"
+                style={styles.heroHDImage}
+              />
+            </motion.div>
           </div>
         </div>
       </section>
 
-      {/* ── DETAILS WRAPPER (UNIQUE 3D PERSPECTIVE ANIMATED CARDS) ── */}
+      {/* ── DETAILS WRAPPER (DESKTOP FULL VIEW + MOBILE COMPACT ACCORDION) ── */}
       <section style={styles.detailsSection}>
         <div style={styles.container}>
           <AnimatePresence mode="popLayout">
@@ -337,80 +422,188 @@ export default function Treatments() {
               {filteredTreatments.map((t, idx) => {
                 const Icon = t.icon;
                 const isEven = idx % 2 === 0;
+                const isExpanded = expandedCardId === t.id;
 
                 return (
-                  <motion.div
-                    key={t.id}
-                    id={t.id}
-                    layout
-                    className="treatment-card-hover"
-                    style={styles.cardBlock}
-                    initial={{ opacity: 0, y: 50, rotateX: 10, scale: 0.95 }}
-                    whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
-                    viewport={{ once: true, amount: 0.15 }}
-                    transition={{ duration: 0.7, delay: (idx % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
-                  >
-                    <div
-                      className="treatment-card-grid"
-                      style={{
-                        ...styles.blockGrid,
-                        flexDirection: isEven ? 'row' : 'row-reverse',
-                      }}
+                  <div key={t.id} id={t.id}>
+                    {/* ── 1) DESKTOP CARD VIEW (UNTOUCHED PRESERVED LUXURY LAYOUT) ── */}
+                    <motion.div
+                      layout
+                      className="treatment-card-hover desktop-treatment-card"
+                      style={styles.cardBlock}
+                      initial={{ opacity: 0, y: 50, rotateX: 10, scale: 0.95 }}
+                      whileInView={{ opacity: 1, y: 0, rotateX: 0, scale: 1 }}
+                      viewport={{ once: true, amount: 0.15 }}
+                      transition={{ duration: 0.7, delay: (idx % 3) * 0.1, ease: [0.16, 1, 0.3, 1] }}
                     >
-                      {/* Uncropped Image Block (Full Image Visible with objectFit: contain) */}
-                      <div className="treatment-img-box" style={styles.imageBlock}>
-                        <div style={styles.imgBadge}>
-                          <Icon size={14} color="#0284c7" />
+                      <div
+                        style={{
+                          ...styles.blockGrid,
+                          flexDirection: isEven ? 'row' : 'row-reverse',
+                        }}
+                      >
+                        {/* Uncropped Image Block */}
+                        <div style={styles.imageBlock}>
+                          <div style={styles.imgBadge}>
+                            <Icon size={14} color="#0284c7" />
+                            <span>{t.tag}</span>
+                          </div>
+                          <img
+                            src={t.image}
+                            alt={t.title}
+                            className="treatment-img"
+                            style={styles.procedureImg}
+                          />
+                        </div>
+
+                        {/* Info Block */}
+                        <div style={styles.infoBlock}>
+                          <div style={styles.tagWrapper}>
+                            <div style={styles.iconCircle}>
+                              <Icon size={18} color="var(--brand-surgical-blue)" />
+                            </div>
+                            <span style={styles.tagText}>{t.tag}</span>
+                          </div>
+
+                          <h3 style={styles.blockTitle}>{t.title}</h3>
+                          <p style={styles.blockDesc}>{t.desc}</p>
+
+                          {/* Interactive Bullet Points with Hover Translate */}
+                          <div style={styles.pointsList}>
+                            {t.points.map((pt, i) => (
+                              <motion.div
+                                key={i}
+                                style={styles.pointRow}
+                                whileHover={{ x: 8 }}
+                                transition={{ type: 'spring', stiffness: 350, damping: 20 }}
+                              >
+                                <div style={styles.checkIconWrapper}>
+                                  <ClipboardCheck size={15} color="var(--brand-surgical-blue)" />
+                                </div>
+                                <span style={styles.pointText}>{pt}</span>
+                              </motion.div>
+                            ))}
+                          </div>
+
+                          <div style={{ marginTop: '1.75rem' }}>
+                            <MagneticButton>
+                              <Link to="/contact" style={styles.bookBtn}>
+                                <span>Book Treatment Consultation</span>
+                                <ArrowUpRight size={17} />
+                              </Link>
+                            </MagneticButton>
+                          </div>
+                        </div>
+                      </div>
+                    </motion.div>
+
+                    {/* ── 2) MOBILE-ONLY COMPACT EXPANDABLE FLAGSHIP CARD ── */}
+                    <div className="mobile-treatment-card mobile-compact-box">
+                      {/* Top Category Badge */}
+                      <div className="mobile-compact-header">
+                        <div className="mobile-tag-pill">
+                          <Icon size={13} color="#0284c7" />
                           <span>{t.tag}</span>
                         </div>
-                        <img
-                          src={t.image}
-                          alt={t.title}
-                          className="treatment-img"
-                          style={styles.procedureImg}
-                        />
+                        <span style={{ fontSize: '0.78rem', color: '#64748b', fontWeight: 700 }}>
+                          0{idx + 1} / 0{filteredTreatments.length}
+                        </span>
                       </div>
 
-                      {/* Info Block */}
-                      <div style={styles.infoBlock}>
-                        <div style={styles.tagWrapper}>
-                          <div style={styles.iconCircle}>
-                            <Icon size={18} color="var(--brand-surgical-blue)" />
-                          </div>
-                          <span style={styles.tagText}>{t.tag}</span>
+                      {/* Thumbnail + Title Row */}
+                      <div className="mobile-thumb-row">
+                        <img 
+                          src={t.image} 
+                          alt={t.title} 
+                          className="mobile-thumb-img"
+                        />
+                        <div>
+                          <h3 className="mobile-card-title">{t.title}</h3>
+                          <p style={{ fontSize: '0.8rem', color: '#0284c7', fontWeight: 700 }}>
+                            Dr. Richa Tiwari Vyas • Specialty
+                          </p>
                         </div>
+                      </div>
 
-                        <h3 style={styles.blockTitle}>{t.title}</h3>
-                        <p style={styles.blockDesc}>{t.desc}</p>
+                      {/* Concise Description */}
+                      <p className="mobile-card-desc">{t.desc}</p>
 
-                        {/* Interactive Bullet Points with Hover Translate */}
-                        <div style={styles.pointsList}>
-                          {t.points.map((pt, i) => (
-                            <motion.div
-                              key={i}
-                              style={styles.pointRow}
-                              whileHover={{ x: 8 }}
-                              transition={{ type: 'spring', stiffness: 350, damping: 20 }}
-                            >
-                              <div style={styles.checkIconWrapper}>
-                                <ClipboardCheck size={15} color="var(--brand-surgical-blue)" />
-                              </div>
-                              <span style={styles.pointText}>{pt}</span>
-                            </motion.div>
-                          ))}
+                      {/* Interactive Accordion Button to Toggle 4 Highlights */}
+                      <button 
+                        type="button"
+                        className="mobile-accordion-btn"
+                        onClick={() => toggleExpand(t.id)}
+                      >
+                        <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
+                          <Sparkles size={14} color="#0284c7" />
+                          <span>
+                            {isExpanded ? 'Hide 4 Clinical Highlights' : 'View 4 Clinical Highlights'}
+                          </span>
                         </div>
+                        {isExpanded ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
+                      </button>
 
-                        <div style={{ marginTop: '1.75rem' }}>
-                          <MagneticButton>
-                            <Link to="/contact" style={styles.bookBtn}>
-                              <span>Book Treatment Consultation</span>
-                              <ArrowUpRight size={17} />
-                            </Link>
-                          </MagneticButton>
-                        </div>
+                      {/* Expandable 4 Bullet Points */}
+                      <AnimatePresence>
+                        {isExpanded && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: 'auto', opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.35, ease: 'easeInOut' }}
+                            style={{ overflow: 'hidden' }}
+                          >
+                            <div style={{
+                              background: '#f8fafc',
+                              border: '1px solid #e2e8f0',
+                              borderRadius: '16px',
+                              padding: '1rem',
+                              marginBottom: '1rem',
+                              display: 'flex',
+                              flexDirection: 'column',
+                              gap: '0.75rem'
+                            }}>
+                              {t.points.map((pt, i) => (
+                                <div key={i} style={{ display: 'flex', gap: '10px', alignItems: 'flex-start' }}>
+                                  <div style={styles.checkIconWrapper}>
+                                    <ClipboardCheck size={14} color="#0284c7" />
+                                  </div>
+                                  <span style={{ fontSize: '0.88rem', color: '#334155', lineHeight: 1.5, fontWeight: 500 }}>
+                                    {pt}
+                                  </span>
+                                </div>
+                              ))}
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+
+                      {/* Mobile Card Footer Action */}
+                      <div className="mobile-book-bar">
+                        <span style={{ fontSize: '0.84rem', color: '#475569', fontWeight: 700 }}>
+                          Ready for a consult?
+                        </span>
+                        <Link 
+                          to="/contact"
+                          style={{
+                            display: 'inline-flex',
+                            alignItems: 'center',
+                            gap: '6px',
+                            background: '#0f172a',
+                            color: '#ffffff',
+                            padding: '8px 16px',
+                            borderRadius: '12px',
+                            fontWeight: 800,
+                            fontSize: '0.84rem',
+                            textDecoration: 'none'
+                          }}
+                        >
+                          <span>Book Consult</span>
+                          <ArrowUpRight size={14} />
+                        </Link>
                       </div>
                     </div>
-                  </motion.div>
+                  </div>
                 );
               })}
             </motion.div>
@@ -431,120 +624,133 @@ const styles = {
   },
   heroBanner: {
     position: 'relative',
-    backgroundColor: '#07080a',
-    padding: '10rem 0 5.5rem',
+    backgroundColor: '#f8fbfe',
+    padding: '8.5rem 0 5.5rem',
     overflow: 'hidden',
-    color: '#ffffff',
+    color: '#0f172a',
+    borderBottom: '1px solid #e2e8f0',
   },
-  heroBgWrapper: {
-    position: 'absolute',
-    inset: 0,
-    width: '100%',
-    height: '100%',
-    zIndex: 1,
-    overflow: 'hidden',
+  heroGrid: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    gap: '4rem',
   },
-  heroBgImg: {
+  heroTextCol: {
+    flex: '1.15 1 420px',
+    textAlign: 'left',
+  },
+  heroImgCol: {
+    flex: '1 1 420px',
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  heroHDImage: {
     width: '100%',
-    height: '100%',
+    maxHeight: '410px',
     objectFit: 'cover',
-    objectPosition: 'center',
+    borderRadius: '28px',
+    boxShadow: '0 25px 60px -15px rgba(2, 132, 199, 0.22)',
+    border: '4px solid #ffffff',
     display: 'block',
   },
-  heroBgOverlay: {
-    position: 'absolute',
-    inset: 0,
-    background: 'linear-gradient(135deg, rgba(7, 8, 10, 0.88) 0%, rgba(15, 23, 42, 0.82) 55%, rgba(37, 151, 208, 0.52) 100%)',
-    backdropFilter: 'blur(2px)',
-  },
-  heroContent: {
-    position: 'relative',
-    zIndex: 2,
-    maxWidth: '820px',
-    margin: '0 auto',
-    textAlign: 'center',
-    color: '#ffffff',
-  },
   heroTitle: {
-    fontSize: 'clamp(2.5rem, 6vw, 4.25rem)',
+    fontSize: 'clamp(2.5rem, 4.2vw, 4.2rem)',
     fontWeight: '900',
-    lineHeight: '1.12',
-    letterSpacing: '-0.025em',
-    color: '#ffffff',
     marginBottom: '1.25rem',
+    lineHeight: '1.12',
+    letterSpacing: '-0.03em',
+    color: '#0f172a',
   },
   heroDesc: {
-    fontSize: '1.15rem',
-    color: '#e2e8f0',
-    lineHeight: '1.7',
-    maxWidth: '680px',
-    margin: '0 auto',
+    fontSize: '1.12rem',
+    color: '#475569',
+    lineHeight: '1.75',
+    marginBottom: '1.75rem',
   },
-  // Filter Bar
+  heroBadgesRow: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    gap: '12px',
+  },
+  heroBadgePill: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    background: '#ffffff',
+    border: '1px solid #bae6fd',
+    color: '#0284c7',
+    fontSize: '0.82rem',
+    fontWeight: '800',
+    padding: '7px 15px',
+    borderRadius: '999px',
+    boxShadow: '0 2px 8px rgba(2, 132, 199, 0.08)',
+  },
   filterSection: {
-    padding: '0 0 2rem',
-    borderBottom: '1px solid #f1f5f9',
+    padding: '2rem 0',
+    backgroundColor: '#ffffff',
+    position: 'sticky',
+    top: '76px',
+    zIndex: 30,
+    borderBottom: '1px solid #e2e8f0',
+    boxShadow: '0 4px 20px rgba(0,0,0,0.03)',
   },
   categoryBtn: {
-    position: 'relative',
-    border: 'none',
     background: 'none',
+    border: 'none',
     padding: '0.65rem 1.35rem',
-    borderRadius: '9999px',
-    fontSize: '0.9rem',
-    fontWeight: '700',
+    fontSize: '0.92rem',
+    fontWeight: '800',
     cursor: 'pointer',
-    transition: 'color 0.2s',
+    position: 'relative',
+    borderRadius: '9999px',
     whiteSpace: 'nowrap',
+    transition: 'color 0.25s',
     outline: 'none',
   },
   activeTabPill: {
     position: 'absolute',
     inset: 0,
-    background: 'linear-gradient(135deg, var(--brand-surgical-blue), #0284c7)',
+    background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
     borderRadius: '9999px',
-    boxShadow: '0 6px 15px rgba(2, 132, 199, 0.3)',
     zIndex: 1,
+    boxShadow: '0 4px 15px rgba(2, 132, 199, 0.25)',
   },
-  // Cards Container
   detailsSection: {
-    padding: '4rem 0 8rem',
+    padding: '6rem 0 8rem',
+    position: 'relative',
   },
   cardsContainer: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '3rem',
+    gap: '6rem',
   },
   cardBlock: {
-    scrollMarginTop: '120px',
     backgroundColor: '#ffffff',
-    border: '1px solid #e2e8f0',
     borderRadius: '32px',
-    padding: '2.5rem',
-    boxShadow: '0 10px 30px rgba(0, 0, 0, 0.04)',
-    position: 'relative',
+    border: '1px solid #e2e8f0',
+    padding: '3rem',
+    boxShadow: '0 20px 40px rgba(0, 0, 0, 0.04)',
     overflow: 'hidden',
   },
   blockGrid: {
     display: 'flex',
-    gap: '3rem',
+    gap: '4rem',
     alignItems: 'center',
+    justifyContent: 'space-between',
   },
-  // Uncropped Image Block (objectFit: contain ensures 100% visibility)
   imageBlock: {
-    flex: '1 1 420px',
-    minHeight: '340px',
-    maxHeight: '400px',
-    borderRadius: '24px',
-    overflow: 'hidden',
-    position: 'relative',
+    flex: '1 1 480px',
+    minHeight: '400px',
     backgroundColor: '#f8fafc',
+    borderRadius: '24px',
     border: '1px solid #e2e8f0',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
+    position: 'relative',
+    overflow: 'hidden',
     padding: '1.5rem',
-    boxShadow: 'inset 0 2px 10px rgba(0,0,0,0.02)',
   },
   procedureImg: {
     width: '100%',
@@ -643,15 +849,14 @@ const styles = {
     display: 'inline-flex',
     alignItems: 'center',
     gap: '8px',
-    background: 'linear-gradient(135deg, var(--neutral-ink), #1e293b)',
+    background: 'linear-gradient(135deg, #0284c7 0%, #0369a1 100%)',
     color: '#ffffff',
     padding: '0.9rem 1.85rem',
     borderRadius: '14px',
     fontWeight: '800',
     fontSize: '0.92rem',
     textDecoration: 'none',
-    boxShadow: '0 10px 25px rgba(0, 0, 0, 0.15)',
+    boxShadow: '0 10px 25px rgba(2, 132, 199, 0.25)',
     transition: 'transform 0.2s',
   }
 };
-

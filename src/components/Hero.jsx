@@ -121,7 +121,7 @@ export default function Hero() {
             transition={{ delay: 0.9, duration: 0.7 }}
           >
             <span style={styles.statNum}>98%</span>
-            <span style={styles.statLabel}>Loyal dental<br/>patients</span>
+            <span style={styles.statLabel}>Loyal dental<br />patients</span>
           </motion.div>
 
           {/* Consultation ring */}

@@ -75,6 +75,30 @@ export default function Navbar() {
         .dropdown-item-hover:hover {
           background-color: rgba(37, 151, 208, 0.04) !important;
         }
+        .nav-link-hover {
+          position: relative;
+          text-decoration: none;
+          transition: color 0.25s ease;
+          padding-bottom: 4px;
+        }
+        .nav-link-hover::after {
+          content: '';
+          position: absolute;
+          bottom: 0px;
+          left: 0;
+          width: 0%;
+          height: 2px;
+          background: linear-gradient(90deg, #0284c7, #38bdf8);
+          transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+          border-radius: 2px;
+        }
+        .nav-link-hover:hover::after,
+        .nav-link-hover.active-nav-link::after {
+          width: 100%;
+        }
+        .nav-link-hover:hover {
+          color: #0284c7 !important;
+        }
       `}} />
       <div style={styles.container}>
 
@@ -119,11 +143,11 @@ export default function Navbar() {
                   onMouseLeave={() => setDropdownOpen(false)}
                 >
                   <button
+                    className={isActive ? 'nav-link-hover active-nav-link' : 'nav-link-hover'}
                     style={{
                       ...styles.link,
                       color: dropdownOpen ? 'var(--brand-surgical-blue)' : linkTextClr,
                       fontWeight: isActive ? '700' : '500',
-                      borderBottom: isActive ? '2px solid var(--brand-surgical-blue)' : '2px solid transparent',
                       background: 'none',
                       border: 'none',
                       cursor: 'pointer',
@@ -188,11 +212,11 @@ export default function Navbar() {
               <Link
                 key={link.name}
                 to={link.path}
+                className={isActive ? 'nav-link-hover active-nav-link' : 'nav-link-hover'}
                 style={{
                   ...styles.link,
                   color: isActive ? 'var(--brand-surgical-blue)' : linkTextClr,
-                  fontWeight: isActive ? '700' : '500',
-                  borderBottom: isActive ? '2px solid var(--brand-surgical-blue)' : '2px solid transparent'
+                  fontWeight: isActive ? '700' : '500'
                 }}
               >
                 {link.name}

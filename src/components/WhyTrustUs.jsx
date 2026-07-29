@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ShieldAlert, Compass, Star, Eye, Sparkles, CheckCircle2 } from 'lucide-react';
+import {
+  ShieldAlert,
+  Compass,
+  Star,
+  Eye,
+  Sparkles,
+  CheckCircle2,
+  X,
+  ShieldCheck,
+  ArrowUpRight,
+  Award,
+  Zap
+} from 'lucide-react';
 
 const trustPillars = [
   {
@@ -11,7 +23,8 @@ const trustPillars = [
     tagline: 'ISO-Certified Hygiene Standards',
     icon: ShieldAlert,
     image: '/clinic_interior.png',
-    badge: 'Zero Contamination'
+    badge: 'Zero Contamination',
+    colSpanClass: 'bento-col-wide' // Spans 7 columns on desktop
   },
   {
     num: '02 / 04',
@@ -21,7 +34,8 @@ const trustPillars = [
     tagline: 'Comfort Guaranteed On All Procedures',
     icon: Compass,
     image: '/laser_image.png',
-    badge: 'Gentle Rotary Tech'
+    badge: 'Gentle Rotary Tech',
+    colSpanClass: 'bento-col-compact' // Spans 5 columns on desktop
   },
   {
     num: '03 / 04',
@@ -31,7 +45,8 @@ const trustPillars = [
     tagline: '9+ Years Of Dedicated Practice',
     icon: Star,
     image: '/about_doc.png',
-    badge: 'Chief Surgeon Led'
+    badge: 'Chief Surgeon Led',
+    colSpanClass: 'bento-col-compact' // Spans 5 columns on desktop
   },
   {
     num: '04 / 04',
@@ -41,300 +56,595 @@ const trustPillars = [
     tagline: 'Detailed Treatment Blueprints',
     icon: Eye,
     image: '/highlights.png',
-    badge: 'Digital 3D Walkthrough'
+    badge: 'Digital 3D Walkthrough',
+    colSpanClass: 'bento-col-wide' // Spans 7 columns on desktop
   }
 ];
 
 export default function WhyTrustUs() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [selectedPillar, setSelectedPillar] = useState(null);
 
   return (
-    <section style={styles.section} id="why-us">
-      {/* Background ambient lighting */}
-      <div style={styles.ambientGlow} />
+    <section className="bento-trust-section" id="why-us">
+      {/* Scoped CSS for Light Theme Google / Apple Flagship Bento Architecture */}
+      <style>{`
+        .bento-trust-section {
+          padding: 7.5rem 0;
+          background: linear-gradient(180deg, #f8fbfe 0%, #edf7fc 100%);
+          color: #0f172a;
+          position: relative;
+          overflow: hidden;
+          font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        }
+        .bento-bg-glow-left {
+          position: absolute;
+          top: 15%;
+          left: -10%;
+          width: 650px;
+          height: 650px;
+          background: radial-gradient(circle, rgba(37, 151, 208, 0.08) 0%, transparent 70%);
+          pointer-events: none;
+          z-index: 0;
+        }
+        .bento-bg-glow-right {
+          position: absolute;
+          bottom: 10%;
+          right: -10%;
+          width: 650px;
+          height: 650px;
+          background: radial-gradient(circle, rgba(16, 185, 129, 0.06) 0%, transparent 70%);
+          pointer-events: none;
+          z-index: 0;
+        }
+        .bento-container {
+          max-width: 1280px;
+          margin: 0 auto;
+          padding: 0 1.75rem;
+          position: relative;
+          z-index: 2;
+        }
+        /* SECTION HEADER */
+        .bento-header {
+          text-align: center;
+          margin-bottom: 3.5rem;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+        .bento-pill-tag {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: rgba(37, 151, 208, 0.1);
+          border: 1px solid rgba(37, 151, 208, 0.28);
+          color: #0284c7;
+          font-size: 0.78rem;
+          font-weight: 800;
+          letter-spacing: 0.22em;
+          padding: 7px 20px;
+          border-radius: 999px;
+          margin-bottom: 1.25rem;
+          text-transform: uppercase;
+          box-shadow: 0 4px 15px rgba(37, 151, 208, 0.08);
+        }
+        .bento-heading {
+          font-size: clamp(2.5rem, 5vw, 3.8rem);
+          color: #0f172a;
+          font-weight: 800;
+          letter-spacing: -0.03em;
+          margin-bottom: 1rem;
+          line-height: 1.12;
+        }
+        .bento-heading-gradient {
+          background: linear-gradient(135deg, #0f172a 0%, #0284c7 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+        .bento-subheading {
+          font-size: 1.15rem;
+          color: #475569;
+          max-width: 680px;
+          margin: 0 auto;
+          line-height: 1.7;
+        }
+        /* TRUST CREDENTIALS BANNER (LIGHT THEME) */
+        .bento-credentials-bar {
+          display: flex;
+          flex-wrap: wrap;
+          justify-content: center;
+          gap: 1.5rem;
+          margin-bottom: 3rem;
+          padding: 1rem 1.75rem;
+          background: rgba(255, 255, 255, 0.88);
+          backdrop-filter: blur(16px);
+          border: 1px solid rgba(226, 232, 240, 0.95);
+          border-radius: 20px;
+          box-shadow: 0 10px 30px rgba(15, 23, 42, 0.05);
+        }
+        .credential-item {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          font-size: 0.86rem;
+          font-weight: 700;
+          color: #334155;
+        }
+        .credential-dot {
+          width: 6px;
+          height: 6px;
+          border-radius: 50%;
+          background: #0284c7;
+        }
+        /* 12-COLUMN ASYMMETRIC BENTO MATRIX */
+        .bento-grid {
+          display: grid;
+          grid-template-columns: repeat(12, 1fr);
+          gap: 1.75rem;
+        }
+        .bento-col-wide {
+          grid-column: span 7;
+        }
+        .bento-col-compact {
+          grid-column: span 5;
+        }
+        @media (max-width: 1024px) {
+          .bento-col-wide,
+          .bento-col-compact {
+            grid-column: span 12;
+          }
+        }
+        /* INDIVIDUAL BENTO CARD (LIGHT THEME) */
+        .bento-card {
+          position: relative;
+          border-radius: 32px;
+          overflow: hidden;
+          min-height: 480px;
+          display: flex;
+          flex-direction: column;
+          border: 1px solid rgba(226, 232, 240, 0.95);
+          background: #ffffff;
+          cursor: pointer;
+          transition: all 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+          box-shadow: 0 15px 40px -10px rgba(15, 23, 42, 0.08);
+        }
+        @media (max-width: 640px) {
+          .bento-card {
+            min-height: 420px;
+            border-radius: 24px;
+          }
+        }
+        .bento-card:hover {
+          border-color: rgba(37, 151, 208, 0.7);
+          transform: translateY(-7px);
+          box-shadow: 0 25px 60px -15px rgba(2, 132, 199, 0.18);
+        }
+        /* UPPER PHOTO SHOWCASE IN CARD */
+        .bento-card-photo-box {
+          position: relative;
+          height: 250px;
+          width: 100%;
+          overflow: hidden;
+          background: #f1f5f9;
+        }
+        .bento-card-bg-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .bento-card:hover .bento-card-bg-img {
+          transform: scale(1.08);
+        }
+        /* TOP FLOATING BADGES OVER PHOTO */
+        .bento-card-top {
+          position: absolute;
+          top: 18px;
+          left: 18px;
+          right: 18px;
+          z-index: 2;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 1rem;
+        }
+        .bento-num-badge {
+          display: inline-flex;
+          align-items: center;
+          gap: 10px;
+          background: rgba(255, 255, 255, 0.94);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(226, 232, 240, 0.9);
+          padding: 6px 14px;
+          border-radius: 999px;
+          font-size: 0.78rem;
+          font-weight: 800;
+          color: #0284c7;
+          letter-spacing: 0.08em;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        .bento-icon-btn {
+          width: 46px;
+          height: 46px;
+          border-radius: 14px;
+          background: rgba(255, 255, 255, 0.94);
+          backdrop-filter: blur(12px);
+          border: 1px solid rgba(226, 232, 240, 0.9);
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          color: #0284c7;
+          transition: all 0.35s ease;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+        }
+        .bento-card:hover .bento-icon-btn {
+          background: #0284c7;
+          color: #ffffff;
+          border-color: #0284c7;
+          transform: rotate(6deg) scale(1.08);
+          box-shadow: 0 8px 25px rgba(2, 132, 199, 0.35);
+        }
+        /* BOTTOM LIGHT THEME CONTENT */
+        .bento-card-bottom {
+          padding: 2.2rem;
+          display: flex;
+          flex-direction: column;
+          justify-content: space-between;
+          flex: 1;
+          gap: 1.25rem;
+          background: #ffffff;
+        }
+        @media (max-width: 640px) {
+          .bento-card-bottom {
+            padding: 1.6rem;
+          }
+        }
+        .bento-category-label {
+          font-size: 0.74rem;
+          font-weight: 800;
+          color: #0284c7;
+          letter-spacing: 0.18em;
+          text-transform: uppercase;
+        }
+        .bento-card-title {
+          font-size: clamp(1.65rem, 2.7vw, 2.3rem);
+          font-weight: 800;
+          color: #0f172a;
+          line-height: 1.18;
+          letter-spacing: -0.02em;
+          margin-top: 4px;
+        }
+        .bento-card-desc {
+          font-size: 1rem;
+          color: #475569;
+          line-height: 1.65;
+        }
+        /* BADGE & TAGLINE FOOTER */
+        .bento-card-footer {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          flex-wrap: wrap;
+          gap: 0.75rem;
+          padding-top: 1.25rem;
+          border-top: 1px solid #f1f5f9;
+        }
+        .bento-tagline-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 8px;
+          background: #ecfdf5;
+          border: 1px solid #a7f3d0;
+          color: #059669;
+          font-size: 0.82rem;
+          font-weight: 700;
+          padding: 6px 14px;
+          border-radius: 999px;
+        }
+        .bento-badge-chip {
+          display: inline-flex;
+          align-items: center;
+          gap: 6px;
+          background: #f0f9ff;
+          border: 1px solid #bae6fd;
+          color: #0284c7;
+          font-size: 0.78rem;
+          font-weight: 700;
+          padding: 6px 14px;
+          border-radius: 999px;
+        }
+        .bento-explore-hint {
+          display: inline-flex;
+          align-items: center;
+          gap: 5px;
+          font-size: 0.82rem;
+          font-weight: 700;
+          color: #0284c7;
+          opacity: 0.85;
+          transition: all 0.25s ease;
+        }
+        .bento-card:hover .bento-explore-hint {
+          transform: translateX(4px);
+          opacity: 1;
+        }
 
-      <div style={styles.container}>
-        
-        {/* Section Header */}
-        <motion.div 
-          style={styles.header}
+        /* SPOTLIGHT MODAL (LIGHT THEME) */
+        .bento-modal-backdrop {
+          position: fixed;
+          inset: 0;
+          background: rgba(15, 23, 42, 0.65);
+          backdrop-filter: blur(16px);
+          z-index: 9999;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          padding: 1.5rem;
+        }
+        .bento-modal-box {
+          background: #ffffff;
+          border: 1px solid rgba(226, 232, 240, 0.95);
+          border-radius: 36px;
+          max-width: 820px;
+          width: 100%;
+          overflow: hidden;
+          position: relative;
+          box-shadow: 0 35px 80px rgba(15, 23, 42, 0.25);
+        }
+        .bento-modal-img-wrap {
+          position: relative;
+          height: 380px;
+          width: 100%;
+        }
+        @media (max-width: 640px) {
+          .bento-modal-img-wrap {
+            height: 250px;
+          }
+        }
+        .bento-modal-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+        .bento-modal-close-btn {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          width: 44px;
+          height: 44px;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.95);
+          border: 1px solid rgba(226, 232, 240, 0.95);
+          color: #0f172a;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          cursor: pointer;
+          z-index: 10;
+          transition: all 0.25s ease;
+          box-shadow: 0 4px 15px rgba(0, 0, 0, 0.12);
+        }
+        .bento-modal-close-btn:hover {
+          background: #ef4444;
+          border-color: #ef4444;
+          color: #ffffff;
+          transform: scale(1.08);
+        }
+        .bento-modal-content {
+          padding: 2.5rem;
+          display: flex;
+          flex-direction: column;
+          gap: 1.2rem;
+          color: #0f172a;
+        }
+        @media (max-width: 640px) {
+          .bento-modal-content {
+            padding: 1.75rem;
+          }
+        }
+      `}</style>
+
+      {/* Background radial ambient lights */}
+      <div className="bento-bg-glow-left" />
+      <div className="bento-bg-glow-right" />
+
+      <div className="bento-container">
+        {/* Header Section */}
+        <motion.div
+          className="bento-header"
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.7 }}
         >
-          <div style={styles.pillTag}>
-            <Sparkles size={14} color="#38bdf8" />
+          <div className="bento-pill-tag">
+            <Sparkles size={14} color="#0284c7" />
             <span>HOW WE ARE DIFFERENT</span>
           </div>
-          <h2 style={styles.heading}>Why Patients Trust Us.</h2>
-          <p style={styles.subheading}>
+          <h2 className="bento-heading">
+            Why Patients <span className="bento-heading-gradient">Trust Us.</span>
+          </h2>
+          <p className="bento-subheading">
             Four core clinical pillars that define every single visit, ensuring absolute safety, painless comfort, and total peace of mind.
           </p>
         </motion.div>
 
-        {/* Expanding Accordion Container */}
-        <div style={styles.accordionContainer}>
+        {/* Credentials trust strip (Light Theme) */}
+        <div className="bento-credentials-bar">
+          <div className="credential-item">
+            <ShieldCheck size={16} color="#0284c7" />
+            <span>100% Hospital-Grade Sterilization</span>
+          </div>
+          <span className="credential-dot" />
+          <div className="credential-item">
+            <Zap size={16} color="#0284c7" />
+            <span>Whisper-Quiet Rotary Systems</span>
+          </div>
+          <span className="credential-dot" />
+          <div className="credential-item">
+            <Award size={16} color="#0284c7" />
+            <span>9+ Years Chief Surgeon Expertise</span>
+          </div>
+          <span className="credential-dot" />
+          <div className="credential-item">
+            <Eye size={16} color="#0284c7" />
+            <span>Digital 3D Diagnostic Walkthrough</span>
+          </div>
+        </div>
+
+        {/* 12-Column Asymmetric Bento Grid (Light Theme) */}
+        <div className="bento-grid">
           {trustPillars.map((pillar, idx) => {
-            const isActive = activeIndex === idx;
-            const Icon = pillar.icon;
+            const PillarIcon = pillar.icon;
 
             return (
               <motion.div
                 key={idx}
-                onClick={() => setActiveIndex(idx)}
-                onMouseEnter={() => setActiveIndex(idx)}
-                layout
-                transition={{ type: 'spring', stiffness: 220, damping: 26 }}
-                style={{
-                  ...styles.accordionCard,
-                  flex: isActive ? '3.8 1 0%' : '0.65 1 0%',
-                  minWidth: isActive ? '280px' : '70px',
-                  cursor: isActive ? 'default' : 'pointer',
-                }}
+                className={`bento-card ${pillar.colSpanClass}`}
+                onClick={() => setSelectedPillar(pillar)}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.6, delay: idx * 0.12 }}
               >
-                {/* Background Image */}
-                <img src={pillar.image} alt={pillar.title} style={styles.accordionImg} />
+                {/* Upper Photo Showcase */}
+                <div className="bento-card-photo-box">
+                  <img
+                    src={pillar.image}
+                    alt={pillar.title}
+                    className="bento-card-bg-img"
+                  />
 
-                {/* Dark Gradient Overlay */}
-                <div style={{
-                  ...styles.accordionOverlay,
-                  background: isActive
-                    ? 'linear-gradient(to top, rgba(15, 23, 42, 0.95) 0%, rgba(15, 23, 42, 0.45) 60%, rgba(0, 0, 0, 0.2) 100%)'
-                    : 'linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.5) 100%)'
-                }} />
+                  {/* Top Floating Badges */}
+                  <div className="bento-card-top">
+                    <div className="bento-num-badge">
+                      <span>{pillar.num}</span>
+                      <span>•</span>
+                      <span>{pillar.category}</span>
+                    </div>
 
-                {/* Top Badge */}
-                <div style={styles.accordionBadge}>
-                  {pillar.num}
+                    <div className="bento-icon-btn">
+                      <PillarIcon size={20} />
+                    </div>
+                  </div>
                 </div>
 
-                {/* Active Expanded Content */}
-                <AnimatePresence mode="wait">
-                  {isActive ? (
-                    <motion.div
-                      key="active"
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      exit={{ opacity: 0, y: 10 }}
-                      transition={{ duration: 0.35, ease: 'easeOut' }}
-                      style={styles.accordionActiveContent}
-                    >
-                      <div style={styles.accordionCategoryPill}>
-                        <Icon size={14} color="#38bdf8" />
-                        <span>{pillar.category}</span>
-                      </div>
-                      <h3 style={styles.accordionActiveTitle}>{pillar.title}</h3>
-                      <p style={styles.accordionActiveDesc}>{pillar.desc}</p>
-                      
-                      <div style={styles.taglineBox}>
-                        <CheckCircle2 size={14} color="#10b981" />
+                {/* Bottom White Luxury Content Box */}
+                <div className="bento-card-bottom">
+                  <div>
+                    <span className="bento-category-label">{pillar.category}</span>
+                    <h3 className="bento-card-title">{pillar.title}</h3>
+                  </div>
+
+                  <p className="bento-card-desc">{pillar.desc}</p>
+
+                  <div className="bento-card-footer">
+                    <div style={{ display: 'flex', gap: '0.6rem', flexWrap: 'wrap', alignItems: 'center' }}>
+                      <div className="bento-tagline-chip">
+                        <CheckCircle2 size={15} color="#059669" />
                         <span>{pillar.tagline}</span>
                       </div>
-                    </motion.div>
-                  ) : (
-                    /* Inactive Collapsed Vertical Label */
-                    <motion.div
-                      key="collapsed"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.2 }}
-                      style={styles.accordionCollapsedContent}
-                    >
-                      <span style={styles.verticalTitle}>{pillar.title}</span>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
+
+                      <div className="bento-badge-chip">
+                        <ShieldCheck size={14} color="#0284c7" />
+                        <span>{pillar.badge}</span>
+                      </div>
+                    </div>
+
+                    <div className="bento-explore-hint">
+                      <span>Inspect Photo</span>
+                      <ArrowUpRight size={16} />
+                    </div>
+                  </div>
+                </div>
               </motion.div>
             );
           })}
         </div>
-
       </div>
+
+      {/* INTERACTIVE SPOTLIGHT MODAL (LIGHT THEME) */}
+      <AnimatePresence>
+        {selectedPillar && (
+          <motion.div
+            className="bento-modal-backdrop"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            onClick={() => setSelectedPillar(null)}
+          >
+            <motion.div
+              className="bento-modal-box"
+              initial={{ scale: 0.9, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.92, y: 20 }}
+              transition={{ type: 'spring', damping: 25, stiffness: 300 }}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                type="button"
+                className="bento-modal-close-btn"
+                onClick={() => setSelectedPillar(null)}
+                aria-label="Close modal"
+              >
+                <X size={20} />
+              </button>
+
+              <div className="bento-modal-img-wrap">
+                <img
+                  src={selectedPillar.image}
+                  alt={selectedPillar.title}
+                  className="bento-modal-img"
+                />
+              </div>
+
+              <div className="bento-modal-content">
+                <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', flexWrap: 'wrap' }}>
+                  <span style={{
+                    color: '#0284c7',
+                    fontWeight: 800,
+                    fontSize: '0.78rem',
+                    letterSpacing: '0.15em',
+                    background: '#f0f9ff',
+                    border: '1px solid #bae6fd',
+                    padding: '6px 14px',
+                    borderRadius: '999px'
+                  }}>
+                    {selectedPillar.num} • {selectedPillar.category}
+                  </span>
+                  <span className="bento-badge-chip">
+                    <ShieldCheck size={14} color="#0284c7" />
+                    {selectedPillar.badge}
+                  </span>
+                </div>
+
+                <h3 style={{ fontSize: '2.2rem', fontWeight: 800, color: '#0f172a', lineHeight: 1.15 }}>
+                  {selectedPillar.title}
+                </h3>
+
+                <p style={{ fontSize: '1.05rem', color: '#475569', lineHeight: 1.7 }}>
+                  {selectedPillar.desc}
+                </p>
+
+                <div style={{
+                  display: 'flex',
+                  alignItems: 'center',
+                  gap: '8px',
+                  background: '#ecfdf5',
+                  border: '1px solid #a7f3d0',
+                  color: '#059669',
+                  padding: '10px 18px',
+                  borderRadius: '16px',
+                  fontWeight: 700,
+                  width: 'fit-content',
+                  marginTop: '0.5rem'
+                }}>
+                  <CheckCircle2 size={18} color="#059669" />
+                  <span>{selectedPillar.tagline}</span>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
-
-const styles = {
-  section: {
-    padding: '7.5rem 0',
-    backgroundColor: '#f8fbfe',
-    position: 'relative',
-    overflow: 'hidden',
-  },
-  ambientGlow: {
-    position: 'absolute',
-    top: '30%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '700px',
-    height: '700px',
-    background: 'radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 70%)',
-    pointerEvents: 'none',
-  },
-  container: {
-    maxWidth: '1240px',
-    margin: '0 auto',
-    padding: '0 2rem',
-    position: 'relative',
-    zIndex: 2,
-  },
-  header: {
-    textAlign: 'center',
-    marginBottom: '4.5rem',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-  },
-  pillTag: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '8px',
-    backgroundColor: 'rgba(56, 189, 248, 0.1)',
-    border: '1px solid rgba(56, 189, 248, 0.25)',
-    color: 'var(--brand-surgical-blue)',
-    fontSize: '0.78rem',
-    fontWeight: '800',
-    letterSpacing: '0.2em',
-    padding: '6px 16px',
-    borderRadius: '999px',
-    marginBottom: '1.25rem',
-  },
-  heading: {
-    fontSize: 'clamp(2.3rem, 4.5vw, 3.4rem)',
-    color: 'var(--neutral-ink)',
-    fontWeight: '800',
-    letterSpacing: '-0.02em',
-    marginBottom: '1rem',
-  },
-  subheading: {
-    fontSize: '1.1rem',
-    color: 'var(--neutral-charcoal)',
-    maxWidth: '620px',
-    margin: '0 auto',
-    lineHeight: '1.7',
-  },
-  accordionContainer: {
-    display: 'flex',
-    gap: '1.25rem',
-    minHeight: '520px',
-    maxWidth: '1240px',
-    margin: '0 auto',
-    width: '100%',
-    flexWrap: 'nowrap',
-    overflowX: 'auto',
-    padding: '1rem 0',
-  },
-  accordionCard: {
-    position: 'relative',
-    borderRadius: '36px',
-    overflow: 'hidden',
-    height: '520px',
-    boxShadow: '0 20px 50px rgba(0, 0, 0, 0.1)',
-    border: '1px solid rgba(255, 255, 255, 0.2)',
-    transition: 'box-shadow 0.3s ease',
-  },
-  accordionImg: {
-    position: 'absolute',
-    inset: 0,
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
-  },
-  accordionOverlay: {
-    position: 'absolute',
-    inset: 0,
-    zIndex: 1,
-    transition: 'background 0.4s ease',
-  },
-  accordionBadge: {
-    position: 'absolute',
-    top: '24px',
-    left: '24px',
-    zIndex: 3,
-    backgroundColor: 'rgba(255, 255, 255, 0.95)',
-    backdropFilter: 'blur(8px)',
-    color: 'var(--brand-surgical-blue)',
-    fontWeight: '800',
-    fontSize: '0.85rem',
-    padding: '6px 16px',
-    borderRadius: '999px',
-    boxShadow: '0 4px 14px rgba(0, 0, 0, 0.15)',
-  },
-  accordionActiveContent: {
-    position: 'absolute',
-    bottom: 0,
-    left: 0,
-    width: '100%',
-    padding: '2.5rem',
-    zIndex: 2,
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '0.9rem',
-    color: '#ffffff',
-  },
-  accordionCategoryPill: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '6px',
-    alignSelf: 'flex-start',
-    backgroundColor: 'rgba(56, 189, 248, 0.2)',
-    border: '1px solid rgba(56, 189, 248, 0.4)',
-    color: '#38bdf8',
-    fontSize: '0.75rem',
-    fontWeight: '800',
-    letterSpacing: '0.15em',
-    padding: '4px 12px',
-    borderRadius: '999px',
-    textTransform: 'uppercase',
-  },
-  accordionActiveTitle: {
-    fontSize: 'clamp(1.6rem, 3vw, 2.3rem)',
-    fontWeight: '800',
-    lineHeight: '1.2',
-    color: '#ffffff',
-    letterSpacing: '-0.02em',
-  },
-  accordionActiveDesc: {
-    fontSize: '1rem',
-    lineHeight: '1.65',
-    color: 'rgba(255, 255, 255, 0.9)',
-    maxWidth: '650px',
-  },
-  taglineBox: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '8px',
-    backgroundColor: 'rgba(15, 23, 42, 0.75)',
-    backdropFilter: 'blur(8px)',
-    border: '1px solid rgba(255, 255, 255, 0.2)',
-    padding: '6px 16px',
-    borderRadius: '999px',
-    fontSize: '0.82rem',
-    fontWeight: '700',
-    color: '#ffffff',
-    marginTop: '0.5rem',
-    alignSelf: 'flex-start',
-  },
-  accordionCollapsedContent: {
-    position: 'absolute',
-    bottom: '3rem',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    zIndex: 2,
-    whiteSpace: 'nowrap',
-  },
-  verticalTitle: {
-    writingMode: 'vertical-rl',
-    transform: 'rotate(180deg)',
-    fontSize: '1.15rem',
-    fontWeight: '800',
-    letterSpacing: '0.08em',
-    color: 'rgba(255, 255, 255, 0.95)',
-    textTransform: 'uppercase',
-  },
-};
-
-
-
