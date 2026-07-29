@@ -16,31 +16,32 @@ const values = [
     icon: Heart, 
     title: 'Patient-First Care', 
     desc: 'Every decision we make centers on your comfort, health, and long-term smile.',
-    img: 'https://images.unsplash.com/photo-1571772996211-2f02c9727629?q=80&w=600&auto=format&fit=crop'
+    img: 'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=800&q=80'
   },
   { 
     icon: Shield, 
     title: 'No Hidden Charges', 
     desc: 'Transparent pricing with honest advice. We never recommend unnecessary procedures.',
-    img: 'https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?q=80&w=600&auto=format&fit=crop'
+    img: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=800&q=80'
   },
   { 
     icon: Award, 
     title: 'Modern Equipment', 
     desc: 'Fully sterilized, state-of-the-art equipment to ensure maximum safety and precision.',
-    img: 'https://images.unsplash.com/photo-1579684453423-f84349ef60b0?q=80&w=600&auto=format&fit=crop'
+    img: 'https://images.unsplash.com/photo-1579684453423-f84349ef60b0?auto=format&fit=crop&w=800&q=80'
   },
   { 
     icon: CheckCircle2, 
     title: 'Painless Treatments', 
     desc: 'Advanced techniques and gentle care make every procedure as comfortable as possible.',
-    img: 'https://images.unsplash.com/photo-1629909615184-74f495363b67?q=80&w=600&auto=format&fit=crop'
+    img: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=800&q=80'
   },
 ];
 const bgImages = [
-  'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=2070&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1598256989800-fea5f20eb180?q=80&w=2070&auto=format&fit=crop',
-  'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=2070&auto=format&fit=crop'
+  'https://images.unsplash.com/photo-1629909613654-28e377c37b09?auto=format&fit=crop&w=1920&q=80',
+  'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?auto=format&fit=crop&w=1920&q=80',
+  'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?auto=format&fit=crop&w=1920&q=80',
+  'https://images.unsplash.com/photo-1579684453423-f84349ef60b0?auto=format&fit=crop&w=1920&q=80'
 ];
 
 export default function About() {
@@ -66,7 +67,7 @@ export default function About() {
     >
 
       {/* ── HERO BANNER ── */}
-      <section style={styles.heroBanner}>
+      <section style={styles.heroBanner} className="about-hero-banner">
         <AnimatePresence>
           <motion.img
             key={currentBg}
@@ -87,9 +88,13 @@ export default function About() {
           />
         </AnimatePresence>
 
-        {/* Light overlay to maintain text readability */}
-        <div style={{ ...styles.heroOverlay, display: 'block', backgroundColor: 'rgba(255, 255, 255, 0.6)' }} />
-        <div style={styles.heroOverlayGrid} />
+        {/* Dark subtle gradient overlay to eliminate whitish film & keep image 100% vivid */}
+        <div style={{
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(15, 23, 42, 0.85) 0%, rgba(15, 23, 42, 0.45) 50%, rgba(15, 23, 42, 0.25) 100%)',
+          zIndex: 1
+        }} />
         <div style={styles.container}>
           <motion.div
             style={styles.heroContent}
@@ -101,19 +106,22 @@ export default function About() {
             }}
           >
             <motion.p
-              style={styles.heroSubtag}
+              style={{ ...styles.heroSubtag, color: '#38bdf8' }}
+              className="about-hero-subtag"
               variants={{ hidden: { opacity: 0, y: 15 }, visible: { opacity: 1, y: 0 } }}
             >
               Our Story
             </motion.p>
             <motion.h1
-              style={styles.heroTitle}
+              style={{ ...styles.heroTitle, color: '#ffffff', textShadow: '0 2px 15px rgba(0,0,0,0.6)' }}
+              className="about-hero-title"
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
             >
-              Dental Speciality <span style={{ color: 'var(--brand-surgical-blue)' }}>Centre.</span>
+              Dental Speciality <span style={{ color: '#38bdf8' }}>Centre.</span>
             </motion.h1>
             <motion.p
-              style={styles.heroDesc}
+              style={{ ...styles.heroDesc, color: '#e2e8f0', textShadow: '0 2px 10px rgba(0,0,0,0.6)' }}
+              className="about-hero-desc"
               variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}
             >
               Trusted dental care in Indore — where clinical expertise meets empathetic patient hospitality.

@@ -132,7 +132,7 @@ export default function Specialist() {
   return (
     <section style={styles.section} id="doctor">
       <div style={styles.container}>
-        
+
         {/* Header Title */}
         <div style={styles.sectionHeader}>
           <span style={styles.subtag}>Meet The Specialist</span>
@@ -143,9 +143,9 @@ export default function Specialist() {
 
         {/* Core Layout Grid */}
         <div style={styles.grid} className="specialist-bio-grid">
-          
+
           {/* Biography Details */}
-          <motion.div 
+          <motion.div
             style={styles.bioCol}
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -182,7 +182,7 @@ export default function Specialist() {
 
           {/* Profile Card & Stats */}
           <div style={styles.visualCol} className="specialist-visual-col">
-            <motion.div 
+            <motion.div
               style={styles.cardWrapper}
               className="specialist-card-wrapper"
               initial={{ opacity: 0, y: 30 }}
@@ -191,17 +191,17 @@ export default function Specialist() {
               transition={{ duration: 0.8 }}
               whileHover={{ y: -8, scale: 1.02 }}
             >
-              <img 
-                src="/about_doc.png" 
-                alt="Dr. Richa Tiwari Vyas" 
-                style={styles.profileImg} 
+              <img
+                src="/about_doc.png"
+                alt="Dr. Richa Tiwari Vyas"
+                style={styles.profileImg}
               />
               <div style={styles.cardGradient} />
             </motion.div>
 
             {/* Metrics */}
             <div style={styles.statsRow} className="specialist-stats-row">
-              <motion.div 
+              <motion.div
                 style={styles.statBox}
                 whileHover={{ y: -4, scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 300 }}
@@ -211,7 +211,7 @@ export default function Specialist() {
                 <span style={styles.statLabel}>Years Mastery</span>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 style={styles.statBox}
                 whileHover={{ y: -4, scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 300 }}
@@ -221,7 +221,7 @@ export default function Specialist() {
                 <span style={styles.statLabel}>Procedures</span>
               </motion.div>
 
-              <motion.div 
+              <motion.div
                 style={styles.statBox}
                 whileHover={{ y: -4, scale: 1.05 }}
                 transition={{ type: 'spring', stiffness: 300 }}
@@ -236,7 +236,7 @@ export default function Specialist() {
         </div>
 
         {/* Areas of Expertise - Squarespace Split Progress Showcase Animation */}
-        <div 
+        <div
           style={styles.expertiseSection}
           onMouseEnter={() => setIsPaused(true)}
           onMouseLeave={() => setIsPaused(false)}
@@ -248,7 +248,7 @@ export default function Specialist() {
 
           {/* Squarespace Split Showcase Viewport */}
           <div style={styles.showcaseGrid} className="responsive-grid-2">
-            
+
             {/* Left Column: Interactive Feature Tabs */}
             <div style={styles.tabsCol}>
               {listItems.map((item, idx) => {
@@ -277,7 +277,7 @@ export default function Specialist() {
                     </div>
                     {/* Active Progress Bar Animation */}
                     {isActive && (
-                      <motion.div 
+                      <motion.div
                         style={styles.progressBar}
                         initial={{ width: '0%' }}
                         animate={{ width: isPaused ? '100%' : '100%' }}
@@ -337,15 +337,15 @@ export default function Specialist() {
                     transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
                     style={styles.imageWrapper}
                   >
-                    <img 
-                      src={activeItem.image} 
+                    <img
+                      src={activeItem.image}
                       alt={activeItem.title}
                       style={styles.displayImage}
                     />
                     <div style={styles.imageOverlay} />
 
                     {/* Top Glass Badge */}
-                    <motion.div 
+                    <motion.div
                       style={styles.topGlassBadge}
                       initial={{ opacity: 0, y: -10 }}
                       animate={{ opacity: 1, y: 0 }}
@@ -356,7 +356,7 @@ export default function Specialist() {
                     </motion.div>
 
                     {/* Bottom Glass Content Card */}
-                    <motion.div 
+                    <motion.div
                       style={styles.bottomGlassCard}
                       className="expertise-glass-card"
                       initial={{ opacity: 0, y: 20 }}
