@@ -119,44 +119,50 @@ export default function Blogs() {
                   zIndex: idx,
                 }}
                 variants={itemVariants}
-                whileHover={{ y: -8, boxShadow: '0 20px 40px rgba(37,151,208,0.06)', borderColor: 'rgba(37,151,208,0.2)' }}
+                whileHover={{ y: -8, boxShadow: '0 30px 60px rgba(0,0,0,0.15)' }}
               >
-                <div style={styles.cardImageContainer}>
+                {/* Background Image & Gradient */}
+                <div style={styles.cardBackground}>
                   <motion.img 
                     src={article.image} 
                     alt={article.title} 
-                    style={styles.cardImage} 
+                    style={styles.backgroundImage} 
                     whileHover={{ scale: 1.05 }}
-                    transition={{ duration: 0.4 }}
+                    transition={{ duration: 0.6, ease: "easeOut" }}
                   />
-                </div>
-                <div style={styles.cardHeader}>
-                  <span style={styles.category}>{article.category}</span>
-                  <span style={styles.readTime}>{article.readTime}</span>
+                  <div style={styles.overlayGradient} />
                 </div>
 
-                <div style={styles.cardContent}>
-                  <h3 style={styles.blogTitle}>{article.title}</h3>
-                  <p style={styles.excerpt}>{article.excerpt}</p>
-                </div>
-
-                <div style={styles.cardFooter}>
-                  <div style={styles.metaRow}>
-                    <div style={styles.metaItem}>
-                      <User size={14} color="var(--neutral-slate)" />
-                      <span>{article.author}</span>
-                    </div>
-                    <div style={styles.metaItem}>
-                      <Calendar size={14} color="var(--neutral-slate)" />
-                      <span>{article.date}</span>
-                    </div>
+                {/* Overlay Content */}
+                <div style={styles.cardContentOverlay}>
+                  <div style={styles.cardHeader}>
+                    <span style={styles.category}>{article.category}</span>
+                    <span style={styles.readTime}>{article.readTime}</span>
                   </div>
-                  
-                  <div style={styles.line} />
-                  
-                  <Link to="/contact" style={styles.readLink}>
-                    Read Article <ArrowRight size={12} />
-                  </Link>
+
+                  <div style={styles.cardMainText}>
+                    <h3 style={styles.blogTitle}>{article.title}</h3>
+                    <p style={styles.excerpt}>{article.excerpt}</p>
+                  </div>
+
+                  <div style={styles.cardFooter}>
+                    <div style={styles.metaRow}>
+                      <div style={styles.metaItem}>
+                        <User size={14} color="rgba(255,255,255,0.7)" />
+                        <span>{article.author}</span>
+                      </div>
+                      <div style={styles.metaItem}>
+                        <Calendar size={14} color="rgba(255,255,255,0.7)" />
+                        <span>{article.date}</span>
+                      </div>
+                    </div>
+                    
+                    <div style={styles.line} />
+                    
+                    <Link to="/contact" style={styles.readLink}>
+                      Read Article <ArrowRight size={14} />
+                    </Link>
+                  </div>
                 </div>
               </motion.div>
             ))}
@@ -233,103 +239,123 @@ const styles = {
     display: 'flex',
     flexDirection: 'column',
     gap: '4rem',
-    maxWidth: '750px',
+    maxWidth: '850px',
     margin: '0 auto',
     paddingBottom: '5rem',
   },
   card: {
-    backgroundColor: '#ffffff',
-    border: '1px solid rgba(0,0,0,0.05)',
+    position: 'sticky',
     borderRadius: '24px',
-    padding: '1.75rem',
+    overflow: 'hidden',
+    minHeight: '480px',
+    display: 'flex',
+    flexDirection: 'column',
+    transition: 'all 0.3s ease',
+    cursor: 'pointer',
+    boxShadow: '0 -10px 40px rgba(0,0,0,0.05)',
+  },
+  cardBackground: {
+    position: 'absolute',
+    inset: 0,
+    width: '100%',
+    height: '100%',
+    zIndex: 0,
+  },
+  backgroundImage: {
+    width: '100%',
+    height: '100%',
+    objectFit: 'cover',
+  },
+  overlayGradient: {
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(to top, rgba(0,0,0,0.95) 0%, rgba(0,0,0,0.6) 50%, rgba(0,0,0,0.2) 100%)',
+    zIndex: 1,
+  },
+  cardContentOverlay: {
+    position: 'relative',
+    zIndex: 2,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    minHeight: '280px',
-    transition: 'all 0.3s ease',
-    cursor: 'pointer',
-    position: 'sticky',
-    boxShadow: '0 -10px 40px rgba(0,0,0,0.03)',
+    padding: '3rem',
+    flex: 1,
+    height: '100%',
   },
   cardHeader: {
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-    marginBottom: '1.5rem',
-  },
-  cardImageContainer: {
-    width: '100%',
-    height: '240px',
-    marginBottom: '1.5rem',
-    overflow: 'hidden',
-    borderRadius: '16px',
-  },
-  cardImage: {
-    width: '100%',
-    height: '100%',
-    objectFit: 'cover',
+    marginBottom: 'auto', // Pushes everything else down
   },
   category: {
-    fontSize: '0.72rem',
+    fontSize: '0.75rem',
     textTransform: 'uppercase',
     letterSpacing: '0.12em',
-    fontWeight: '700',
-    color: 'var(--brand-surgical-blue)',
-    backgroundColor: 'var(--neutral-sky-tint)',
-    padding: '0.25rem 0.65rem',
+    fontWeight: '800',
+    color: '#ffffff',
+    backgroundColor: 'var(--brand-surgical-blue)',
+    padding: '0.35rem 0.85rem',
     borderRadius: '6px',
   },
   readTime: {
-    fontSize: '0.78rem',
-    color: 'var(--neutral-slate)',
+    fontSize: '0.85rem',
+    color: 'rgba(255,255,255,0.9)',
     fontWeight: '600',
+    backgroundColor: 'rgba(0,0,0,0.3)',
+    padding: '0.3rem 0.75rem',
+    borderRadius: '999px',
+    backdropFilter: 'blur(4px)',
   },
-  cardContent: {
+  cardMainText: {
     marginBottom: '2rem',
+    marginTop: '4rem',
   },
   blogTitle: {
-    fontSize: '1.2rem',
+    fontSize: '2rem',
     fontWeight: '800',
-    color: 'var(--neutral-ink)',
-    lineHeight: '1.3',
+    color: '#ffffff',
+    lineHeight: '1.2',
     letterSpacing: '-0.01em',
-    marginBottom: '0.75rem',
+    marginBottom: '1rem',
   },
   excerpt: {
-    fontSize: '0.92rem',
-    color: 'var(--neutral-charcoal)',
+    fontSize: '1.05rem',
+    color: 'rgba(255,255,255,0.8)',
     lineHeight: '1.6',
+    maxWidth: '650px',
   },
   cardFooter: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '0.75rem',
+    gap: '1.25rem',
   },
   metaRow: {
     display: 'flex',
-    gap: '1.5rem',
+    gap: '2rem',
     alignItems: 'center',
-    marginBottom: '0.25rem',
   },
   metaItem: {
     display: 'flex',
     alignItems: 'center',
-    gap: '6px',
-    fontSize: '0.8rem',
-    color: 'var(--neutral-charcoal)',
+    gap: '8px',
+    fontSize: '0.9rem',
+    color: 'rgba(255,255,255,0.8)',
+    fontWeight: '500',
   },
   line: {
     height: '1px',
-    backgroundColor: 'rgba(0,0,0,0.05)',
+    backgroundColor: 'rgba(255,255,255,0.15)',
     width: '100%',
   },
   readLink: {
-    fontSize: '0.82rem',
+    fontSize: '0.95rem',
     fontWeight: '700',
-    color: 'var(--neutral-ink)',
+    color: '#ffffff',
     textDecoration: 'none',
     display: 'inline-flex',
     alignItems: 'center',
-    gap: '6px',
+    gap: '8px',
+    alignSelf: 'flex-start',
   }
 };

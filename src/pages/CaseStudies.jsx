@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { CheckCircle, FolderHeart, Activity, ArrowRight } from 'lucide-react';
+import { CheckCircle, FolderHeart, Activity, ArrowRight, Check } from 'lucide-react';
 
 const caseLogs = [
   {
@@ -37,23 +37,6 @@ const caseLogs = [
 ];
 
 export default function CaseStudies() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 }
-    }
-  };
-
-  const cardVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: 'easeOut' }
-    }
-  };
-
   return (
     <motion.div
       initial={{ opacity: 0 }}
@@ -61,11 +44,9 @@ export default function CaseStudies() {
       transition={{ duration: 0.6 }}
       style={{ backgroundColor: '#ffffff' }}
     >
-
       {/* ── HERO BANNER ── */}
       <section style={styles.heroBanner}>
         <div style={styles.heroOverlay} />
-        <div style={styles.heroOverlayGrid} />
         <div style={styles.container}>
           <motion.div
             style={styles.heroContent}
@@ -80,10 +61,10 @@ export default function CaseStudies() {
               Clinical Logs
             </motion.p>
             <motion.h1 style={styles.heroTitle} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-              Clinical Case <span style={{ color: 'var(--brand-surgical-blue)' }}>Studies.</span>
+              Case <span style={{ color: 'var(--brand-surgical-blue)' }}>Studies.</span>
             </motion.h1>
             <motion.p style={styles.heroDesc} variants={{ hidden: { opacity: 0, y: 20 }, visible: { opacity: 1, y: 0 } }}>
-              Documented treatment logs and structural tooth restorations completed at Dental Speciality Centre.
+              Documented treatment logs and structural tooth restorations showcasing our commitment to precision and painless dentistry.
             </motion.p>
           </motion.div>
         </div>
@@ -92,75 +73,112 @@ export default function CaseStudies() {
       {/* ── CASE STUDIES LIST ── */}
       <section style={styles.section}>
         <div style={styles.container}>
-
-          <motion.div
-            style={styles.list}
-            initial="hidden"
-            whileInView="visible"
-            viewport={{ once: true, amount: 0.1 }}
-            variants={containerVariants}
-          >
+          <div style={styles.list}>
             {caseLogs.map((log, idx) => {
               const Icon = log.icon;
+              const isEven = idx % 2 === 0;
+              
               return (
                 <motion.div
                   key={idx}
-                  style={styles.card}
-                  variants={cardVariants}
-                  whileHover={{ y: -5, boxShadow: '0 20px 40px rgba(37,151,208,0.05)' }}
+                  style={{
+                    ...styles.caseRow,
+                    flexDirection: isEven ? 'row' : 'row-reverse'
+                  }}
+                  className="case-study-row"
+                  initial={{ opacity: 0, y: 40 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{ duration: 0.8, ease: 'easeOut' }}
                 >
-                  <div style={styles.cardImageContainer}>
-                    <img src={log.image} alt={log.title} style={styles.cardImage} />
+                  {/* Image Block */}
+                  <div style={styles.imageBlock}>
+                    <div style={styles.imageBackground}>
+                      <motion.img 
+                        src={log.image} 
+                        alt={log.title} 
+                        style={styles.cardImage} 
+                        whileHover={{ scale: 1.05 }}
+                        transition={{ duration: 0.5 }}
+                      />
+                    </div>
                   </div>
-                  <div style={styles.cardHeader}>
+
+                  {/* Content Block */}
+                  <div style={styles.contentBlock}>
                     <div style={styles.tagWrapper}>
-                      <Icon size={16} color="var(--brand-surgical-blue)" />
+                      <Icon size={18} color="var(--brand-surgical-blue)" />
                       <span style={styles.category}>{log.category}</span>
                     </div>
+                    
+                    <h2 style={styles.caseTitle}>{log.title}</h2>
                     <span style={styles.patientBadge}>{log.patient}</span>
-                  </div>
 
-                  <h2 style={styles.caseTitle}>{log.title}</h2>
+                    <div style={styles.contentGrid}>
+                      <div style={styles.contentItem}>
+                        <div style={styles.labelRow}>
+                          <span style={styles.dot} />
+                          <span style={styles.sectionLabel}>Clinical Diagnosis</span>
+                        </div>
+                        <p style={styles.sectionText}>{log.diagnosis}</p>
+                      </div>
 
-                  {/* Diagnosis, treatment and result list */}
-                  <div style={styles.contentGrid}>
-                    <div style={styles.contentItem}>
-                      <span style={styles.sectionLabel}>Clinical Diagnosis:</span>
-                      <p style={styles.sectionText}>{log.diagnosis}</p>
+                      <div style={styles.contentItem}>
+                        <div style={styles.labelRow}>
+                          <span style={styles.dot} />
+                          <span style={styles.sectionLabel}>Treatment Protocol</span>
+                        </div>
+                        <p style={styles.sectionText}>{log.treatment}</p>
+                      </div>
+
+                      <div style={styles.resultItem}>
+                        <div style={styles.labelRow}>
+                          <Check size={16} color="var(--brand-trust-green)" />
+                          <span style={styles.resultLabel}>Procedure Result</span>
+                        </div>
+                        <p style={styles.resultText}>{log.result}</p>
+                      </div>
                     </div>
 
-                    <div style={styles.contentItem}>
-                      <span style={styles.sectionLabel}>Treatment Details:</span>
-                      <p style={styles.sectionText}>{log.treatment}</p>
-                    </div>
-
-                    <div style={styles.contentItem}>
-                      <span style={styles.sectionLabel}>Procedure Result:</span>
-                      <p style={styles.resultText}>{log.result}</p>
-                    </div>
-                  </div>
-
-                  <div style={styles.cardFooter}>
-                    <div style={styles.line} />
-                    <Link to="/contact" style={styles.footerLink}>
-                      Consult Dr. Tiwari on similar concerns <ArrowRight size={14} />
-                    </Link>
                   </div>
                 </motion.div>
               );
             })}
-          </motion.div>
+          </div>
+          
+          <div style={styles.actionRow}>
+            <div style={styles.line} />
+            <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.98 }}>
+              <Link to="/contact" style={styles.actionBtn}>
+                Consult Dr. Tiwari on similar concerns <ArrowRight size={16} />
+              </Link>
+            </motion.div>
+            <div style={styles.line} />
+          </div>
 
         </div>
       </section>
 
+      {/* Responsive Styles */}
+      <style dangerouslySetInnerHTML={{__html: `
+        @media (max-width: 992px) {
+          .case-study-row {
+            flex-direction: column !important;
+            gap: 3rem !important;
+          }
+          .case-study-row > div {
+            width: 100% !important;
+            padding: 0 !important;
+          }
+        }
+      `}} />
     </motion.div>
   );
 }
 
 const styles = {
   container: {
-    maxWidth: '1200px',
+    maxWidth: '1280px',
     margin: '0 auto',
     padding: '0 2rem',
     position: 'relative',
@@ -168,23 +186,10 @@ const styles = {
   },
   heroBanner: {
     position: 'relative',
-    backgroundColor: '#ffffff',
-    padding: '10rem 0 5rem',
+    backgroundColor: '#f8fafc',
+    padding: '10rem 0 6rem',
     overflow: 'hidden',
-  },
-  heroOverlay: {
-    position: 'absolute',
-    inset: 0,
-    background: 'transparent',
-    zIndex: 1,
-    display: 'none',
-  },
-  heroOverlayGrid: {
-    position: 'absolute',
-    inset: 0,
-    background: 'transparent',
-    zIndex: 1,
-    display: 'none',
+    borderBottom: '1px solid rgba(0,0,0,0.03)',
   },
   heroContent: {
     maxWidth: '800px',
@@ -193,136 +198,179 @@ const styles = {
     color: 'var(--neutral-ink)',
   },
   heroSubtag: {
-    fontSize: '0.85rem',
+    fontSize: '0.9rem',
     textTransform: 'uppercase',
     letterSpacing: '0.3em',
     color: 'var(--brand-surgical-blue)',
     fontWeight: '700',
-    marginBottom: '1rem',
+    marginBottom: '1.5rem',
   },
   heroTitle: {
-    fontSize: 'clamp(2.5rem, 6vw, 4.25rem)',
+    fontSize: 'clamp(3rem, 6vw, 4.5rem)',
     fontWeight: '800',
     lineHeight: '1.1',
-    letterSpacing: '-0.02em',
+    letterSpacing: '-0.03em',
     color: 'var(--neutral-ink)',
-    marginBottom: '1.25rem',
+    marginBottom: '1.5rem',
   },
   heroDesc: {
     fontSize: '1.15rem',
     color: 'var(--neutral-charcoal)',
-    lineHeight: '1.65',
+    lineHeight: '1.7',
     maxWidth: '600px',
     margin: '0 auto',
   },
   section: {
-    padding: '6rem 0 7rem',
+    padding: '8rem 0 10rem',
   },
   list: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '3rem',
+    gap: '10rem', // Large gap for editorial feel
   },
-  card: {
-    backgroundColor: '#ffffff',
-    border: '1px solid rgba(0,0,0,0.05)',
-    borderRadius: '30px',
-    padding: '2.5rem 3rem',
-    transition: 'all 0.3s ease',
-  },
-  cardHeader: {
+  caseRow: {
     display: 'flex',
-    justifyContent: 'space-between',
     alignItems: 'center',
-    flexWrap: 'wrap',
-    gap: '1rem',
-    marginBottom: '1.5rem',
+    gap: '6rem',
   },
-  cardImageContainer: {
-    width: '100%',
-    height: '280px',
-    marginBottom: '2.5rem',
-    borderRadius: '16px',
+  imageBlock: {
+    flex: '1 1 50%',
+    width: '50%',
+  },
+  imageBackground: {
+    backgroundColor: '#f1f5f9',
+    borderRadius: '24px',
+    padding: '0', // Removed padding so image fills the card
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    aspectRatio: '4/3',
+    boxShadow: '0 20px 40px rgba(0,0,0,0.08)', // Moved shadow to container
     overflow: 'hidden',
   },
   cardImage: {
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
+    objectFit: 'cover', // Cover ensures it fits the card exactly
+  },
+  contentBlock: {
+    flex: '1 1 50%',
+    width: '50%',
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1.5rem',
   },
   tagWrapper: {
     display: 'flex',
     alignItems: 'center',
-    gap: '8px',
+    gap: '10px',
+    marginBottom: '0.5rem',
   },
   category: {
-    fontSize: '0.75rem',
+    fontSize: '0.85rem',
     textTransform: 'uppercase',
-    letterSpacing: '0.1em',
+    letterSpacing: '0.15em',
     fontWeight: '700',
     color: 'var(--brand-surgical-blue)',
   },
+  caseTitle: {
+    fontSize: 'clamp(2rem, 3vw, 2.75rem)',
+    fontWeight: '800',
+    color: 'var(--neutral-ink)',
+    lineHeight: '1.15',
+    letterSpacing: '-0.02em',
+  },
   patientBadge: {
-    fontSize: '0.8rem',
+    display: 'inline-block',
+    fontSize: '0.9rem',
     fontWeight: '600',
     color: 'var(--neutral-slate)',
     backgroundColor: 'var(--neutral-cloud-gray)',
-    padding: '0.3rem 0.75rem',
+    padding: '0.5rem 1rem',
     borderRadius: '8px',
-  },
-  caseTitle: {
-    fontSize: '1.85rem',
-    fontWeight: '800',
-    color: 'var(--neutral-ink)',
-    letterSpacing: '-0.02em',
-    marginBottom: '2rem',
+    alignSelf: 'flex-start',
+    marginBottom: '1rem',
   },
   contentGrid: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1.5rem',
-    marginBottom: '2rem',
+    gap: '2rem',
+    marginTop: '1rem',
   },
   contentItem: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '4px',
+    gap: '8px',
+    paddingLeft: '1.25rem',
+    borderLeft: '2px solid rgba(0,0,0,0.05)',
+  },
+  labelRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  dot: {
+    width: '6px',
+    height: '6px',
+    borderRadius: '50%',
+    backgroundColor: 'var(--neutral-slate)',
   },
   sectionLabel: {
-    fontSize: '0.8rem',
-    fontWeight: '800',
+    fontSize: '0.85rem',
+    fontWeight: '700',
     color: 'var(--neutral-slate)',
     textTransform: 'uppercase',
-    letterSpacing: '0.04em',
+    letterSpacing: '0.05em',
   },
   sectionText: {
-    fontSize: '0.98rem',
+    fontSize: '1.05rem',
     color: 'var(--neutral-charcoal)',
-    lineHeight: '1.65',
+    lineHeight: '1.6',
   },
-  resultText: {
-    fontSize: '1.02rem',
-    fontWeight: '700',
-    color: 'var(--brand-trust-green)',
-    lineHeight: '1.5',
-  },
-  cardFooter: {
+  resultItem: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1.25rem',
+    gap: '8px',
+    padding: '1.5rem',
+    backgroundColor: '#f8fafc',
+    borderRadius: '16px',
+    border: '1px solid rgba(16, 185, 129, 0.15)', // Light green border
+  },
+  resultLabel: {
+    fontSize: '0.85rem',
+    fontWeight: '800',
+    color: 'var(--brand-trust-green)',
+    textTransform: 'uppercase',
+    letterSpacing: '0.05em',
+  },
+  resultText: {
+    fontSize: '1.05rem',
+    fontWeight: '600',
+    color: 'var(--neutral-ink)',
+    lineHeight: '1.5',
+  },
+  actionRow: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '2rem',
+    marginTop: '8rem',
   },
   line: {
+    flex: 1,
     height: '1px',
     backgroundColor: 'rgba(0,0,0,0.06)',
-    width: '100%',
   },
-  footerLink: {
-    fontSize: '0.88rem',
+  actionBtn: {
+    backgroundColor: 'var(--brand-surgical-blue)',
+    color: '#ffffff',
+    padding: '1.25rem 2.5rem',
+    borderRadius: '999px',
     fontWeight: '700',
-    color: 'var(--neutral-ink)',
+    fontSize: '1rem',
     textDecoration: 'none',
+    boxShadow: '0 10px 25px rgba(37, 151, 208, 0.25)',
     display: 'inline-flex',
     alignItems: 'center',
-    gap: '6px',
-  }
+    gap: '12px',
+  },
 };
