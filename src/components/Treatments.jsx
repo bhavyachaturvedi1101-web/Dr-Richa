@@ -98,7 +98,7 @@ const deepTreatments = [
       'Laser-activated whitening gel for rapid, non-invasive results',
       'Clinically formulated desensitizing agents to prevent teeth sensitivity'
     ],
-    image: '/dental_service_6.jpg',
+    image: '/teeth_whitening.png',
     icon: Sparkles
   },
   {
@@ -126,7 +126,7 @@ const deepTreatments = [
       'Gingival contouring to correct gummy smiles and expose more enamel',
       'Coordinated cosmetic and orthodontic combinations for celebrity smiles'
     ],
-    image: '/highlights.png',
+    image: '/smile_designing.png',
     icon: Smile
   },
   {
@@ -140,7 +140,7 @@ const deepTreatments = [
       'Surgical wisdom teeth extractions to prevent crowding and jaw pain',
       'Complete post-operative care guidelines for rapid socket healing'
     ],
-    image: '/emergency_image.png',
+    image: '/tooth_extraction.png',
     icon: X
   },
   {

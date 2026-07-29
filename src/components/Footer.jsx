@@ -1,9 +1,8 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Clock, Award } from 'lucide-react';
+import { Mail, MapPin, Phone, Award, Clock } from 'lucide-react';
 
 export default function Footer() {
-
   return (
     <footer style={styles.footer}>
       {/* Wave transition from white page content */}

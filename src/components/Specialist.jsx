@@ -1,17 +1,133 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState, useEffect, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import { Award, ArrowRight } from 'lucide-react';
+import { Award, ArrowRight, CheckCircle2, ShieldCheck, Sparkles } from 'lucide-react';
+
+// Count-up component — animates from 0 to `target` when scrolled into view
+function CountUp({ target, suffix = '', duration = 1800 }) {
+  const [count, setCount] = useState(0);
+  const ref = useRef(null);
+  const started = useRef(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting && !started.current) {
+          started.current = true;
+          const startTime = performance.now();
+          const step = (now) => {
+            const elapsed = now - startTime;
+            const progress = Math.min(elapsed / duration, 1);
+            // Ease-out cubic
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setCount(Math.floor(eased * target));
+            if (progress < 1) requestAnimationFrame(step);
+            else setCount(target);
+          };
+          requestAnimationFrame(step);
+          observer.disconnect();
+        }
+      },
+      { threshold: 0.4 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [target, duration]);
+
+  return <span ref={ref}>{count}{suffix}</span>;
+}
 
 export default function Specialist() {
+  const [activeIndex, setActiveIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+
   const listItems = [
-    { num: '01', title: 'Microscopic Root Canal Therapy (RCT)', image: 'https://images.unsplash.com/photo-1606811841689-23dfddce3e95?q=80&w=600&auto=format&fit=crop' },
-    { num: '02', title: 'Painless Laser & Restorative Endodontics', image: 'https://images.unsplash.com/photo-1598256989800-fea5ce5146c1?q=80&w=600&auto=format&fit=crop' },
-    { num: '03', title: 'Aesthetic Ceramic Crowns & Restoration Work', image: 'https://images.unsplash.com/photo-1588776814546-1ffcf47267a5?q=80&w=600&auto=format&fit=crop' },
-    { num: '04', title: 'Gentle Preventive Cleaning & Hygiene', image: 'https://images.unsplash.com/photo-1522849696084-818b291c6b68?q=80&w=600&auto=format&fit=crop' },
-    { num: '05', title: 'Pediatric Dentistry & Child Oral Care', image: 'https://images.unsplash.com/photo-1518152006812-edab29b069ac?q=80&w=600&auto=format&fit=crop' },
-    { num: '06', title: 'TMJ Treatment & Jaw Corrections', image: 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?q=80&w=600&auto=format&fit=crop' },
+    {
+      id: 'rct',
+      num: '01',
+      title: 'Microscopic Root Canal Therapy (RCT)',
+      category: 'ENDODONTICS',
+      desc: 'Painless, precision endodontic therapy performed under high-magnification surgical operating microscopes to preserve natural teeth.',
+      tagline: 'High-Magnification Precision',
+      image: '/exp-1.png',
+      badge: 'Microscope Assisted',
+      stat: '100%',
+      statLabel: 'Tooth Saved'
+    },
+    {
+      id: 'laser',
+      num: '02',
+      title: 'Painless Laser & Restorative Endodontics',
+      category: 'LASER THERAPY',
+      desc: 'Advanced bio-laser sterilizing technology for bloodless, silent, zero-anxiety gum and pulpal restorations.',
+      tagline: 'Bloodless & Silent Procedure',
+      image: '/exp-2.png',
+      badge: 'Zero-Anxiety Bio-Laser',
+      stat: '0%',
+      statLabel: 'Bleeding & Pain'
+    },
+    {
+      id: 'crowns',
+      num: '03',
+      title: 'Aesthetic Ceramic Crowns & Restoration',
+      category: 'PROSTHODONTICS',
+      desc: 'Custom CAD/CAM zirconia and E-max metal-free ceramic crowns engineered for natural translucent smiles and maximum bite strength.',
+      tagline: 'CAD/CAM Engineered Zirconia',
+      image: '/crowns_image.png',
+      badge: 'Metal-Free Ceramic',
+      stat: '10 Yrs+',
+      statLabel: 'Durability'
+    },
+    {
+      id: 'preventive',
+      num: '04',
+      title: 'Gentle Preventive Cleaning & Hygiene',
+      category: 'PREVENTIVE CARE',
+      desc: 'Ultrasonic scaling and polished stain removal to prevent gingivitis, periodontitis, and maintain lifelong oral wellness.',
+      tagline: 'Ultrasonic Stain Removal',
+      image: '/dental_service_2.jpg',
+      badge: 'Deep Ultrasonic Scale',
+      stat: '90%',
+      statLabel: 'Issue Prevention'
+    },
+    {
+      id: 'pediatric',
+      num: '05',
+      title: 'Pediatric Dentistry & Child Oral Care',
+      category: 'PEDODONTICS',
+      desc: 'Gentle, zero-anxiety pediatric care, fluoride sealants, and cavity management tailored for children in a warm, welcoming environment.',
+      tagline: 'Child-Friendly Environment',
+      image: '/exp-2.png',
+      badge: 'Zero-Anxiety Kids Care',
+      stat: '100%',
+      statLabel: 'Child Comfort'
+    },
+    {
+      id: 'tmj',
+      num: '06',
+      title: 'TMJ Treatment & Jaw Corrections',
+      category: 'MAXILLOFACIAL CARE',
+      desc: 'Non-invasive temporomandibular joint therapy, bite realignment splints, and muscle relaxation to eliminate chronic jaw pain.',
+      tagline: 'Bite Realignment & Pain Relief',
+      image: '/dental_service_4.jpg',
+      badge: 'Non-Invasive Splint Therapy',
+      stat: '95%',
+      statLabel: 'Pain Relief'
+    },
   ];
+
+  // Auto rotate tabs like Squarespace showcase
+  useEffect(() => {
+    if (isPaused) return;
+    const timer = setInterval(() => {
+      setActiveIndex((prev) => (prev + 1) % listItems.length);
+    }, 5500);
+    return () => clearInterval(timer);
+  }, [isPaused, listItems.length]);
+
+  const activeItem = listItems[activeIndex];
 
   return (
     <section style={styles.section} id="doctor">
@@ -72,6 +188,7 @@ export default function Specialist() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
+              whileHover={{ y: -8, scale: 1.02 }}
             >
               <img 
                 src="/about_doc.png" 
@@ -83,63 +200,183 @@ export default function Specialist() {
 
             {/* Metrics */}
             <div style={styles.statsRow}>
-              <div style={styles.statBox}>
-                <span style={styles.statNum}>9+</span>
+              <motion.div 
+                style={styles.statBox}
+                whileHover={{ y: -4, scale: 1.05 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <span style={styles.statNum}><CountUp target={9} suffix="+" duration={1200} /></span>
                 <div style={styles.statDivider} />
                 <span style={styles.statLabel}>Years Mastery</span>
-              </div>
+              </motion.div>
 
-              <div style={styles.statBox}>
-                <span style={styles.statNum}>4000+</span>
+              <motion.div 
+                style={styles.statBox}
+                whileHover={{ y: -4, scale: 1.05 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <span style={styles.statNum}><CountUp target={4000} suffix="+" duration={2000} /></span>
                 <div style={styles.statDivider} />
                 <span style={styles.statLabel}>Procedures</span>
-              </div>
+              </motion.div>
 
-              <div style={styles.statBox}>
-                <span style={styles.statNum}>99%</span>
+              <motion.div 
+                style={styles.statBox}
+                whileHover={{ y: -4, scale: 1.05 }}
+                transition={{ type: 'spring', stiffness: 300 }}
+              >
+                <span style={styles.statNum}><CountUp target={99} suffix="%" duration={1600} /></span>
                 <div style={styles.statDivider} />
                 <span style={styles.statLabel}>Satisfaction</span>
-              </div>
+              </motion.div>
             </div>
           </div>
 
         </div>
 
-        {/* Areas of Expertise Divider */}
-        <div style={styles.expertiseSection}>
-          <p style={styles.expertiseHeading}>Areas of Expertise</p>
-          <div style={styles.expertiseGrid}>
-            {listItems.map((item, idx) => (
-              <motion.div 
-                key={idx} 
-                style={styles.expertiseCard}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: idx * 0.08 }}
-                whileHover="hover"
-              >
-                <div style={styles.expertImageWrapper}>
-                  <motion.img 
-                    src={item.image} 
-                    alt={item.title} 
-                    style={styles.expertImage} 
-                    variants={{ hover: { scale: 1.05 } }}
-                    transition={{ duration: 0.4, ease: 'easeOut' }}
-                  />
-                  <div style={styles.expertNumOverlay}>{item.num}</div>
-                </div>
-                <div style={styles.expertContent}>
-                  <p style={styles.expertTitle}>{item.title}</p>
-                  <motion.div 
-                    style={styles.expertBar} 
-                    variants={{ hover: { width: '100%', opacity: 1 } }}
-                    transition={{ duration: 0.3 }}
-                  />
-                </div>
-              </motion.div>
-            ))}
+        {/* Areas of Expertise - Squarespace Split Progress Showcase Animation */}
+        <div 
+          style={styles.expertiseSection}
+          onMouseEnter={() => setIsPaused(true)}
+          onMouseLeave={() => setIsPaused(false)}
+        >
+          <div style={styles.headerWrapper}>
+            <div style={styles.pillTag}>
+              <Sparkles size={14} color="#38bdf8" />
+              <span>CLINICAL EXCELLENCE</span>
+            </div>
+            <h3 style={styles.expertiseSubheading}>Areas of Expertise</h3>
+            <p style={styles.expertiseDesc}>Advanced procedures utilizing state-of-the-art diagnostic machinery and micro-surgical operating tools.</p>
           </div>
+
+          {/* Squarespace Split Showcase Viewport */}
+          <div style={styles.showcaseGrid} className="responsive-grid-2">
+            
+            {/* Left Column: Interactive Feature Tabs */}
+            <div style={styles.tabsCol}>
+              {listItems.map((item, idx) => {
+                const isActive = activeIndex === idx;
+
+                return (
+                  <motion.div
+                    key={item.id}
+                    onClick={() => setActiveIndex(idx)}
+                    onMouseEnter={() => { setActiveIndex(idx); setIsPaused(true); }}
+                    onMouseLeave={() => setIsPaused(false)}
+                    style={{
+                      ...styles.tabCard,
+                      backgroundColor: isActive ? '#ffffff' : 'rgba(255, 255, 255, 0.5)',
+                      borderColor: isActive ? 'rgba(56, 189, 248, 0.4)' : 'rgba(0,0,0,0.05)',
+                      boxShadow: isActive ? '0 15px 35px rgba(37, 151, 208, 0.12)' : 'none',
+                    }}
+                    whileHover={{ x: 6, backgroundColor: '#ffffff' }}
+                    transition={{ duration: 0.3 }}
+                  >
+                    {/* Active Progress Bar Animation */}
+                    {isActive && (
+                      <motion.div 
+                        style={styles.progressBar}
+                        initial={{ width: '0%' }}
+                        animate={{ width: isPaused ? '100%' : '100%' }}
+                        transition={{ duration: isPaused ? 0 : 5.5, ease: 'linear' }}
+                      />
+                    )}
+
+                    <div style={styles.tabHeader}>
+                      <div style={styles.tabNumGroup}>
+                        <span style={{
+                          ...styles.tabNum,
+                          color: isActive ? 'var(--brand-surgical-blue)' : 'var(--neutral-slate)'
+                        }}>
+                          {item.num}
+                        </span>
+                      </div>
+                      <span style={styles.tabCategory}>{item.category}</span>
+                    </div>
+
+                    <h4 style={{
+                      ...styles.tabTitle,
+                      color: isActive ? 'var(--brand-surgical-blue)' : 'var(--neutral-ink)'
+                    }}>
+                      {item.title}
+                    </h4>
+
+                    <AnimatePresence mode="wait">
+                      {isActive && (
+                        <motion.div
+                          initial={{ opacity: 0, height: 0 }}
+                          animate={{ opacity: 1, height: 'auto' }}
+                          exit={{ opacity: 0, height: 0 }}
+                          transition={{ duration: 0.35, ease: 'easeInOut' }}
+                        >
+                          <p style={styles.tabDesc}>{item.desc}</p>
+                          <div style={styles.tabTagline}>
+                            <CheckCircle2 size={14} color="#10b981" />
+                            <span>{item.tagline}</span>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </motion.div>
+                );
+              })}
+            </div>
+
+            {/* Right Column: Dynamic Image Showcase */}
+            <div style={styles.displayCol} className="expertise-image-col">
+              <div style={styles.displayFrame} className="expertise-image-frame">
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeItem.id}
+                    initial={{ opacity: 0, scale: 0.95, y: 15 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 1.02, y: -15 }}
+                    transition={{ duration: 0.5, ease: [0.16, 1, 0.3, 1] }}
+                    style={styles.imageWrapper}
+                  >
+                    <img 
+                      src={activeItem.image} 
+                      alt={activeItem.title}
+                      style={styles.displayImage}
+                    />
+                    <div style={styles.imageOverlay} />
+
+                    {/* Top Glass Badge */}
+                    <motion.div 
+                      style={styles.topGlassBadge}
+                      initial={{ opacity: 0, y: -10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.15, duration: 0.4 }}
+                    >
+                      <ShieldCheck size={14} color="#38bdf8" />
+                      <span>{activeItem.badge}</span>
+                    </motion.div>
+
+                    {/* Bottom Glass Content Card */}
+                    <motion.div 
+                      style={styles.bottomGlassCard}
+                      className="expertise-glass-card"
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.2, duration: 0.4 }}
+                    >
+                      <div style={styles.glassStatBox}>
+                        <span style={styles.glassStatNum}>{activeItem.stat}</span>
+                        <span style={styles.glassStatLabel}>{activeItem.statLabel}</span>
+                      </div>
+
+                      <div style={styles.glassInfo}>
+                        <h4 style={styles.glassTitle}>{activeItem.title}</h4>
+                        <p style={styles.glassTagline}>{activeItem.tagline}</p>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </div>
+
+          </div>
+
         </div>
 
       </div>
@@ -154,7 +391,7 @@ const styles = {
     overflow: 'hidden',
   },
   container: {
-    maxWidth: '1200px',
+    maxWidth: '1240px',
     margin: '0 auto',
     padding: '0 2rem',
   },
@@ -303,78 +540,220 @@ const styles = {
     color: 'var(--neutral-charcoal)',
   },
   expertiseSection: {
-    marginTop: '6rem',
+    marginTop: '7rem',
     borderTop: '1px solid rgba(0,0,0,0.06)',
-    paddingTop: '4rem',
+    paddingTop: '5rem',
   },
-  expertiseHeading: {
-    fontSize: '0.75rem',
-    fontWeight: '800',
-    textTransform: 'uppercase',
-    letterSpacing: '0.4em',
-    color: 'var(--brand-surgical-blue)',
+  headerWrapper: {
     textAlign: 'center',
-    marginBottom: '3rem',
-  },
-  expertiseGrid: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fit, minmax(280px, 1fr))',
-    gap: '2.5rem 2rem',
-    maxWidth: '1100px',
-    margin: '0 auto',
-  },
-  expertiseCard: {
+    marginBottom: '4rem',
     display: 'flex',
     flexDirection: 'column',
-    backgroundColor: '#ffffff',
-    borderRadius: '16px',
-    overflow: 'hidden',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.04)',
-    cursor: 'pointer',
+    alignItems: 'center',
   },
-  expertImageWrapper: {
+  pillTag: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '8px',
+    backgroundColor: 'rgba(56, 189, 248, 0.1)',
+    border: '1px solid rgba(56, 189, 248, 0.25)',
+    color: 'var(--brand-surgical-blue)',
+    fontSize: '0.78rem',
+    fontWeight: '800',
+    letterSpacing: '0.2em',
+    padding: '6px 16px',
+    borderRadius: '999px',
+    marginBottom: '1rem',
+  },
+  expertiseSubheading: {
+    fontSize: 'clamp(2.2rem, 4.5vw, 3.2rem)',
+    fontWeight: '800',
+    color: 'var(--neutral-ink)',
+    letterSpacing: '-0.02em',
+    marginBottom: '0.75rem',
+  },
+  expertiseDesc: {
+    fontSize: '1.05rem',
+    color: 'var(--neutral-charcoal)',
+    maxWidth: '580px',
+    lineHeight: '1.65',
+  },
+  showcaseGrid: {
+    display: 'grid',
+    gridTemplateColumns: '1fr 1fr',
+    gap: '3rem',
+    alignItems: 'start',
+  },
+  tabsCol: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '1rem',
+  },
+  tabCard: {
+    position: 'relative',
+    borderRadius: '20px',
+    border: '1px solid rgba(0,0,0,0.06)',
+    padding: '1.5rem',
+    cursor: 'pointer',
+    overflow: 'hidden',
+    transition: 'all 0.35s ease',
+  },
+  progressBar: {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    height: '3px',
+    backgroundColor: 'var(--brand-surgical-blue)',
+    borderRadius: '999px',
+  },
+  tabHeader: {
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    marginBottom: '0.5rem',
+  },
+  tabNumGroup: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '10px',
+  },
+  tabNum: {
+    fontSize: '0.85rem',
+    fontWeight: '800',
+    letterSpacing: '0.08em',
+  },
+  tabCategory: {
+    fontSize: '0.68rem',
+    fontWeight: '800',
+    color: 'var(--neutral-slate)',
+    textTransform: 'uppercase',
+    letterSpacing: '0.12em',
+  },
+  tabTitle: {
+    fontSize: '1.25rem',
+    fontWeight: '800',
+    letterSpacing: '-0.01em',
+    marginBottom: '0.25rem',
+  },
+  tabDesc: {
+    fontSize: '0.9rem',
+    color: 'var(--neutral-charcoal)',
+    lineHeight: '1.6',
+    marginTop: '0.5rem',
+    marginBottom: '0.75rem',
+  },
+  tabTagline: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '6px',
+    fontSize: '0.78rem',
+    fontWeight: '700',
+    color: 'var(--brand-surgical-blue)',
+  },
+  displayCol: {
+    position: 'sticky',
+    top: '120px',
+    height: 'fit-content',
+    display: 'flex',
+    alignItems: 'flex-start',
+    justifyContent: 'center',
+  },
+  displayFrame: {
     position: 'relative',
     width: '100%',
-    height: '200px',
+    height: '680px',
+    borderRadius: '36px',
     overflow: 'hidden',
+    border: '6px solid #ffffff',
+    boxShadow: '0 30px 70px rgba(0, 0, 0, 0.12)',
+    backgroundColor: '#0f172a',
   },
-  expertImage: {
+  imageWrapper: {
+    position: 'absolute',
+    inset: 0,
+    width: '100%',
+    height: '100%',
+  },
+  displayImage: {
     width: '100%',
     height: '100%',
     objectFit: 'cover',
-    display: 'block',
   },
-  expertNumOverlay: {
+  imageOverlay: {
     position: 'absolute',
-    top: '16px',
-    right: '16px',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    backdropFilter: 'blur(4px)',
-    color: 'var(--brand-surgical-blue)',
-    fontSize: '0.85rem',
-    fontWeight: '800',
-    padding: '4px 10px',
-    borderRadius: '999px',
-    boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
+    inset: 0,
+    background: 'linear-gradient(to top, rgba(15, 23, 42, 0.9) 0%, rgba(15, 23, 42, 0.2) 60%, transparent 100%)',
   },
-  expertContent: {
+  topGlassBadge: {
+    position: 'absolute',
+    top: '20px',
+    left: '20px',
+    backgroundColor: 'rgba(15, 23, 42, 0.8)',
+    backdropFilter: 'blur(12px)',
+    border: '1px solid rgba(255, 255, 255, 0.2)',
+    color: '#ffffff',
+    fontSize: '0.78rem',
+    fontWeight: '700',
+    padding: '6px 16px',
+    borderRadius: '999px',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '8px',
+  },
+  bottomGlassCard: {
+    position: 'absolute',
+    bottom: '20px',
+    left: '20px',
+    right: '20px',
+    backgroundColor: 'rgba(255, 255, 255, 0.92)',
+    backdropFilter: 'blur(16px)',
+    border: '1px solid rgba(255, 255, 255, 0.4)',
+    borderRadius: '24px',
+    padding: '1.25rem 1.5rem',
+    display: 'flex',
+    alignItems: 'center',
+    gap: '1.25rem',
+    boxShadow: '0 15px 35px rgba(0, 0, 0, 0.15)',
+  },
+  glassStatBox: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '12px',
-    padding: '24px',
-    flex: 1,
+    alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: 'var(--neutral-sky-tint)',
+    padding: '0.6rem 1.2rem',
+    borderRadius: '16px',
+    flexShrink: 0,
   },
-  expertTitle: {
-    fontSize: '1rem',
-    fontWeight: '700',
+  glassStatNum: {
+    fontSize: '1.4rem',
+    fontWeight: '900',
+    color: 'var(--brand-surgical-blue)',
+    lineHeight: '1.1',
+  },
+  glassStatLabel: {
+    fontSize: '0.62rem',
+    fontWeight: '800',
+    textTransform: 'uppercase',
+    letterSpacing: '0.1em',
+    color: 'var(--neutral-charcoal)',
+    marginTop: '2px',
+  },
+  glassInfo: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '3px',
+  },
+  glassTitle: {
+    fontSize: '1.15rem',
+    fontWeight: '800',
     color: 'var(--neutral-ink)',
-    lineHeight: '1.4',
   },
-  expertBar: {
-    width: '30%',
-    height: '2px',
-    backgroundColor: 'var(--brand-surgical-blue)',
-    opacity: 0.6,
+  glassTagline: {
+    fontSize: '0.82rem',
+    color: 'var(--neutral-charcoal)',
+    fontWeight: '600',
   },
 };
+
+
