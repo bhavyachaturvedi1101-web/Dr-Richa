@@ -2,10 +2,15 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 export default function IntroLoader() {
-  const [showLoader, setShowLoader] = useState(false);
+  const [showLoader, setShowLoader] = useState(true);
+  const [startAnimation, setStartAnimation] = useState(false);
 
   useEffect(() => {
-    setShowLoader(true);
+    // Start animation slightly after the white background is guaranteed to be painted
+    const animTimer = setTimeout(() => {
+      setStartAnimation(true);
+    }, 100);
+
     // Lock scroll while loading
     document.body.style.overflow = 'hidden';
     
@@ -16,6 +21,7 @@ export default function IntroLoader() {
     }, 3500);
 
     return () => {
+      clearTimeout(animTimer);
       clearTimeout(timer);
       document.body.style.overflow = 'unset';
     };
@@ -40,8 +46,10 @@ export default function IntroLoader() {
             justifyContent: 'center',
           }}
         >
-          {/* Logo Animation */}
-          <motion.svg 
+          {/* Logo Animation - Only mounts after background is ready */}
+          {startAnimation && (
+            <>
+              <motion.svg 
             xmlns="http://www.w3.org/2000/svg" 
             viewBox="0 0 200 200" 
             width="180" 
@@ -133,6 +141,8 @@ export default function IntroLoader() {
               Dr. Richa Tiwari Vyas
             </p>
           </motion.div>
+          </>
+          )}
         </motion.div>
       )}
     </AnimatePresence>
