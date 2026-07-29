@@ -1,329 +1,353 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, Calendar, CheckCircle2, ArrowUpRight, Star } from 'lucide-react';
+import { Phone, Calendar, ArrowUpRight, Star } from 'lucide-react';
 
 export default function Hero() {
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.15, delayChildren: 0.2 }
+      transition: { staggerChildren: 0.12, delayChildren: 0.15 }
     }
   };
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 20 },
     visible: {
       opacity: 1,
       y: 0,
-      transition: { duration: 0.8, ease: [0.16, 1, 0.3, 1] }
+      transition: { duration: 0.7, ease: [0.16, 1, 0.3, 1] }
     }
   };
 
   return (
-    <section style={styles.hero}>
-      {/* Gradient background */}
-      <div style={styles.bgGradient} />
+    <section style={styles.heroSection} className="hero-section-responsive">
+      {/* Outer Framed Hero Container */}
+      <div style={styles.heroFrame} className="hero-frame-responsive">
+        
+        {/* Soft Ambient Pastel Glow Blobs */}
+        <div style={styles.glowTopLeft} />
+        <div style={styles.glowBottomLeft} />
+        <div style={styles.glowTopRight} />
 
-      {/* Decorative blobs */}
-      <div style={styles.blobTopRight} />
-      <div style={styles.blobBottomLeft} />
-
-      <div style={styles.outerContainer} className="responsive-flex-row">
-        {/* LEFT: Text Content */}
-        <motion.div
-          style={styles.textCol}
-          initial="hidden"
-          animate="visible"
-          variants={containerVariants}
-        >
-          {/* Main Headline */}
-          <motion.h1 style={styles.title} variants={itemVariants} className="huge-title">
-            Restore <span style={styles.accentUnderline}>Your True</span>{' '}
-            <span style={styles.accentBlue}>Smile</span>
-          </motion.h1>
-
-          {/* Subtext */}
-          <motion.p style={styles.subtitle} variants={itemVariants}>
-            Using <strong>advanced microscopic technology</strong>, we deliver comprehensive treatments for a healthy, confident smile — painlessly and precisely.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div style={styles.ctas} variants={itemVariants}>
-            <motion.div
-              whileHover={{ scale: 1.04, boxShadow: '0 18px 38px rgba(56,189,248,0.35)' }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <Link to="/contact" style={styles.ctaPrimary}>
-                <Calendar size={17} />
-                Book Appointment
-                <ArrowUpRight size={16} />
-              </Link>
-            </motion.div>
-
-            <motion.div
-              whileHover={{ scale: 1.04 }}
-              whileTap={{ scale: 0.97 }}
-            >
-              <a href="tel:6262178282" style={styles.ctaSecondary}>
-                <Phone size={17} />
-                Call Specialist
-              </a>
-            </motion.div>
-          </motion.div>
-
-          {/* Patient trust row */}
-          <motion.div style={styles.trustRow} variants={itemVariants}>
-            <div style={styles.avatarGroup}>
-              {[
-                'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80',
-                'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&auto=format&fit=crop&q=80',
-                'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&auto=format&fit=crop&q=80',
-              ].map((src, i) => (
-                <img key={i} src={src} alt="Patient" style={{ ...styles.avatarImg, zIndex: 3 - i }} />
-              ))}
-              <div style={styles.avatarCount}>+2k</div>
-            </div>
-            <div style={styles.trustLabel}>
-              <div style={styles.trustRating}>
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} size={13} fill="#f59e0b" color="#f59e0b" />
-                ))}
-              </div>
-              <span style={styles.trustText}>Over 4,000+ loyal dental patients</span>
-            </div>
-          </motion.div>
-
-          {/* Trust pills */}
-          <motion.div style={styles.pillRow} variants={itemVariants}>
-            {['ISO Certified Clinic', 'Painless Modern Care', 'Open 24 Hours'].map((label, i) => (
-              <div key={i} style={styles.pill}>
-                <CheckCircle2 size={13} color="#0ea5e9" />
-                <span>{label}</span>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
-
-        {/* RIGHT: Tooth Visual */}
-        <motion.div
-          style={styles.imageCol}
-          initial={{ opacity: 0, x: 60 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 1, ease: [0.16, 1, 0.3, 1], delay: 0.3 }}
-        >
-          {/* Stat card: 98% */}
-          <motion.div
-            style={styles.statCard}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.9, duration: 0.7 }}
-          >
-            <span style={styles.statNum}>98%</span>
-            <span style={styles.statLabel}>Loyal dental<br />patients</span>
-          </motion.div>
-
-          {/* Consultation ring */}
-          <div style={styles.rotatingRing}>
-            <svg viewBox="0 0 120 120" width="120" height="120">
-              <defs>
-                <path id="circle" d="M 60,60 m -45,0 a 45,45 0 1,1 90,0 a 45,45 0 1,1 -90,0" />
-              </defs>
-              <text style={{ fontSize: '11.5px', fill: '#0f172a', fontWeight: '700', letterSpacing: '3px' }}>
-                <textPath href="#circle">BOOK YOUR CONSULTATION • NOW •&nbsp;</textPath>
-              </text>
-            </svg>
-            <div style={styles.ringArrow}>↗</div>
-          </div>
-
-          {/* Main tooth image */}
+        {/* FULL HERO BACKGROUND IMAGE: Seamlessly blended female dentist examination photo on right */}
+        <div style={styles.bgImageWrapper} className="hero-bg-wrapper-responsive">
           <img
-            src="/hero_tooth.png"
-            alt="Restore Your Smile — Dr. Richa Tiwari"
-            style={styles.toothImage}
+            src="/female_dentist_hero_blend.png"
+            alt="Dr. Richa Tiwari Vyas — Gentle Dental Care"
+            style={styles.bgImage}
+            className="hero-bg-image-responsive"
           />
-        </motion.div>
+          <div style={styles.bgOverlay} className="hero-bg-overlay-responsive" />
+        </div>
+
+        {/* Hero Card Inner Grid Layout */}
+        <div style={styles.heroContainer} className="hero-container-responsive">
+          
+          {/* ALL CONTENT STACKED ON LEFT SIDE */}
+          <motion.div
+            style={styles.leftCol}
+            initial="hidden"
+            animate="visible"
+            variants={containerVariants}
+          >
+            {/* Main Headline - Positioned Upside at Top Left */}
+            <motion.h1 style={styles.titleSerif} variants={itemVariants}>
+              Gentle care,<br />
+              genuine hearts,<br />
+              confident smiles.
+            </motion.h1>
+
+            {/* Subtitle Tagline */}
+            <motion.p style={styles.titleTagline} variants={itemVariants}>
+              Restore <span style={{ color: '#0ea5e9' }}>Your True</span> Smile
+            </motion.p>
+
+            {/* Description Text */}
+            <motion.p style={styles.subtitle} variants={itemVariants}>
+              We surpass standard care to deliver a seamless, stress-free experience, prioritizing your comfort, confidence, and lasting oral wellness.
+            </motion.p>
+
+            <motion.p style={styles.subtitleSecondary} variants={itemVariants}>
+              Using <strong>advanced microscopic technology</strong>, we deliver comprehensive treatments — painlessly and precisely.
+            </motion.p>
+
+            {/* Action Buttons */}
+            <motion.div style={styles.ctas} variants={itemVariants}>
+              <motion.div
+                whileHover={{ scale: 1.04, boxShadow: '0 18px 38px rgba(12,35,64,0.35)' }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <Link to="/contact" style={styles.ctaPrimary}>
+                  <Calendar size={17} />
+                  Book Appointment
+                  <ArrowUpRight size={16} />
+                </Link>
+              </motion.div>
+
+              <motion.div
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.97 }}
+              >
+                <a href="tel:6262178282" style={styles.ctaSecondary}>
+                  <Phone size={16} />
+                  Call Specialist
+                </a>
+              </motion.div>
+            </motion.div>
+
+            {/* Patient Ratings */}
+            <motion.div style={styles.trustWrapper} variants={itemVariants}>
+              <div style={styles.trustRow}>
+                <div style={styles.avatarGroup}>
+                  {[
+                    'https://images.unsplash.com/photo-1534528741775-53994a69daeb?w=80&auto=format&fit=crop&q=80',
+                    'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=80&auto=format&fit=crop&q=80',
+                    'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=80&auto=format&fit=crop&q=80',
+                  ].map((src, i) => (
+                    <img key={i} src={src} alt="Patient" style={{ ...styles.avatarImg, zIndex: 3 - i }} />
+                  ))}
+                  <div style={styles.avatarCount}>+2k</div>
+                </div>
+                <div style={styles.trustLabel}>
+                  <div style={styles.trustRating}>
+                    {[...Array(5)].map((_, i) => (
+                      <Star key={i} size={13} fill="#f59e0b" color="#f59e0b" />
+                    ))}
+                  </div>
+                  <span style={styles.trustText}>Over 4,000+ loyal dental patients</span>
+                </div>
+              </div>
+            </motion.div>
+
+          </motion.div>
+
+        </div>
       </div>
     </section>
   );
 }
 
 const styles = {
-  hero: {
+  heroSection: {
     position: 'relative',
     minHeight: '100vh',
+    width: '100%',
+    backgroundColor: '#f4f9fc',
+    padding: '65px 2vw 2vw 2vw',
+    boxSizing: 'border-box',
     display: 'flex',
-    alignItems: 'stretch',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  heroFrame: {
+    position: 'relative',
+    width: '100%',
+    maxWidth: '1440px',
+    minHeight: 'calc(100vh - 85px)',
+    borderRadius: '32px',
     overflow: 'hidden',
-    backgroundColor: '#e8f6fc',
+    backgroundColor: '#e6f3f7',
+    background: 'linear-gradient(145deg, #dceef4 0%, #e2f4f8 40%, #e4f5ed 75%, #ebebc4 100%)',
+    boxShadow: '0 25px 60px -15px rgba(12,35,64,0.12), 0 0 0 1px rgba(255,255,255,0.7) inset',
+    display: 'flex',
+    alignItems: 'center',
   },
-  bgGradient: {
+  glowTopLeft: {
     position: 'absolute',
-    inset: 0,
-    background: 'linear-gradient(135deg, #daf3fb 0%, #c5ecf8 35%, #b5e6f5 60%, #cef0e0 100%)',
-    zIndex: 0,
+    top: '-80px',
+    left: '-80px',
+    width: '480px',
+    height: '480px',
+    borderRadius: '50%',
+    background: 'radial-gradient(circle, rgba(185, 230, 205, 0.75) 0%, rgba(185, 230, 205, 0) 70%)',
+    pointerEvents: 'none',
+    zIndex: 1,
   },
-  blobTopRight: {
+  glowBottomLeft: {
     position: 'absolute',
-    top: '-120px',
-    right: '-100px',
+    bottom: '-100px',
+    left: '-60px',
     width: '520px',
     height: '520px',
     borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(56,189,248,0.22) 0%, transparent 70%)',
-    zIndex: 0,
+    background: 'radial-gradient(circle, rgba(238, 236, 168, 0.85) 0%, rgba(238, 236, 168, 0) 70%)',
+    pointerEvents: 'none',
+    zIndex: 1,
   },
-  blobBottomLeft: {
+  glowTopRight: {
     position: 'absolute',
-    bottom: '-80px',
-    left: '-80px',
-    width: '380px',
-    height: '380px',
+    top: '-60px',
+    right: '-60px',
+    width: '480px',
+    height: '480px',
     borderRadius: '50%',
-    background: 'radial-gradient(circle, rgba(16,185,129,0.15) 0%, transparent 70%)',
-    zIndex: 0,
+    background: 'radial-gradient(circle, rgba(195, 235, 245, 0.8) 0%, rgba(195, 235, 245, 0) 70%)',
+    pointerEvents: 'none',
+    zIndex: 1,
   },
-  outerContainer: {
-    position: 'relative',
+  bgImageWrapper: {
+    position: 'absolute',
+    inset: 0,
     zIndex: 2,
-    maxWidth: '1320px',
-    margin: '0 auto',
-    width: '100%',
     display: 'flex',
     alignItems: 'center',
-    justifyContent: 'space-between',
-    padding: '6rem 5% 4rem',
-    gap: '3rem',
-    flexWrap: 'wrap',
+    justifyContent: 'flex-end',
+    pointerEvents: 'none',
+    overflow: 'hidden',
   },
-  textCol: {
-    flex: '1 1 480px',
+  bgImage: {
+    width: '55%',
+    maxWidth: '850px',
+    height: '100%',
+    objectFit: 'cover',
+    objectPosition: 'center 15%',
+    opacity: 0.9,
+    WebkitMaskImage: 'radial-gradient(ellipse 80% 90% at 70% 50%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 88%)',
+    maskImage: 'radial-gradient(ellipse 80% 90% at 70% 50%, rgba(0, 0, 0, 1) 45%, rgba(0, 0, 0, 0) 88%)',
+    filter: 'contrast(1.02) brightness(1.02)',
+  },
+  bgOverlay: {
+    position: 'absolute',
+    inset: 0,
+    background: 'linear-gradient(to right, rgba(226, 244, 248, 0.94) 0%, rgba(226, 244, 248, 0.55) 45%, transparent 100%)',
+    pointerEvents: 'none',
+  },
+  heroContainer: {
+    position: 'relative',
+    zIndex: 3,
+    width: '100%',
+    padding: '2.5rem 3.5rem',
+    boxSizing: 'border-box',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  leftCol: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '1.6rem',
+    gap: '0.9rem',
+    maxWidth: '580px',
   },
-  eyebrowBadge: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '8px',
-    backgroundColor: 'rgba(255,255,255,0.75)',
-    backdropFilter: 'blur(10px)',
-    border: '1px solid rgba(14,165,233,0.3)',
-    padding: '6px 18px',
-    borderRadius: '999px',
-    fontSize: '0.8rem',
-    fontWeight: '700',
-    color: '#0369a1',
-    letterSpacing: '0.05em',
-    alignSelf: 'flex-start',
-    boxShadow: '0 4px 14px rgba(14,165,233,0.12)',
-  },
-  eyebrowDot: {
-    width: '8px',
-    height: '8px',
-    borderRadius: '50%',
-    backgroundColor: '#0ea5e9',
-    boxShadow: '0 0 8px rgba(14,165,233,0.6)',
-    display: 'inline-block',
-    flexShrink: 0,
-  },
-  title: {
-    fontSize: 'clamp(2.6rem, 5.5vw, 5rem)',
-    fontWeight: '900',
-    lineHeight: '1.05',
-    letterSpacing: '-0.03em',
+  titleSerif: {
+    fontFamily: "'DM Serif Display', 'Instrument Serif', 'Prata', 'Playfair Display', Georgia, serif",
+    fontSize: 'clamp(2.6rem, 5.2vw, 4.8rem)',
+    fontWeight: '400',
+    lineHeight: '1.08',
+    letterSpacing: '-0.025em',
     color: '#0c2340',
     margin: 0,
+    textShadow: '0 2px 20px rgba(255, 255, 255, 0.85)',
   },
-  accentUnderline: {
-    position: 'relative',
-    display: 'inline',
-    color: '#0c2340',
-    textDecoration: 'none',
-  },
-  accentBlue: {
-    color: '#0ea5e9',
+  titleTagline: {
+    fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
+    fontSize: 'clamp(1rem, 1.35vw, 1.15rem)',
+    fontWeight: '700',
+    color: '#1a3854',
+    margin: 0,
+    letterSpacing: '0.01em',
   },
   subtitle: {
-    fontSize: 'clamp(1rem, 1.8vw, 1.15rem)',
-    color: '#1e4b6a',
-    lineHeight: '1.72',
+    fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
+    fontSize: 'clamp(0.95rem, 1.25vw, 1.08rem)',
+    fontWeight: '500',
+    lineHeight: '1.65',
+    color: '#0c2340',
+    margin: '0.2rem 0 0 0',
+    letterSpacing: '-0.01em',
     maxWidth: '540px',
+  },
+  subtitleSecondary: {
+    fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
+    fontSize: '0.86rem',
+    fontWeight: '400',
+    lineHeight: '1.58',
+    color: '#1e3a5f',
     margin: 0,
+    maxWidth: '540px',
   },
   ctas: {
     display: 'flex',
-    gap: '1rem',
+    gap: '0.85rem',
     flexWrap: 'wrap',
     alignItems: 'center',
+    marginTop: '0.3rem',
   },
   ctaPrimary: {
     display: 'inline-flex',
     alignItems: 'center',
-    gap: '9px',
+    gap: '8px',
     backgroundColor: '#0c2340',
     color: '#ffffff',
-    padding: '0.95rem 2.2rem',
+    padding: '0.88rem 1.9rem',
     borderRadius: '999px',
-    fontWeight: '800',
-    fontSize: '0.95rem',
+    fontWeight: '700',
+    fontSize: '0.92rem',
     textDecoration: 'none',
-    boxShadow: '0 12px 28px rgba(12,35,64,0.25)',
+    boxShadow: '0 10px 24px rgba(12,35,64,0.25)',
     transition: 'all 0.3s ease',
   },
   ctaSecondary: {
     display: 'inline-flex',
     alignItems: 'center',
-    gap: '9px',
-    backgroundColor: 'rgba(255,255,255,0.7)',
-    backdropFilter: 'blur(10px)',
+    gap: '8px',
+    backgroundColor: '#ffffff',
     color: '#0c2340',
-    padding: '0.95rem 2.2rem',
+    padding: '0.88rem 1.7rem',
     borderRadius: '999px',
     fontWeight: '700',
-    fontSize: '0.95rem',
+    fontSize: '0.92rem',
     textDecoration: 'none',
-    border: '1px solid rgba(14,165,233,0.35)',
+    border: '1px solid rgba(12,35,64,0.18)',
+    boxShadow: '0 4px 12px rgba(12,35,64,0.06)',
     transition: 'all 0.3s ease',
+  },
+  trustWrapper: {
+    display: 'flex',
+    flexDirection: 'column',
+    gap: '0.8rem',
+    marginTop: '0.2rem',
+    paddingTop: '1rem',
+    borderTop: '1px solid rgba(12, 35, 64, 0.1)',
+    maxWidth: '540px',
   },
   trustRow: {
     display: 'flex',
     alignItems: 'center',
-    gap: '1rem',
+    gap: '0.85rem',
   },
   avatarGroup: {
     display: 'flex',
     alignItems: 'center',
   },
   avatarImg: {
-    width: '36px',
-    height: '36px',
+    width: '34px',
+    height: '34px',
     borderRadius: '50%',
-    border: '2.5px solid #ffffff',
+    border: '2px solid #ffffff',
     marginRight: '-10px',
     objectFit: 'cover',
-    boxShadow: '0 2px 8px rgba(0,0,0,0.12)',
+    boxShadow: '0 2px 6px rgba(0,0,0,0.1)',
   },
   avatarCount: {
-    width: '36px',
-    height: '36px',
+    width: '34px',
+    height: '34px',
     borderRadius: '50%',
     backgroundColor: '#0ea5e9',
     color: '#ffffff',
     fontSize: '0.65rem',
-    fontWeight: '900',
+    fontWeight: '800',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    border: '2.5px solid #ffffff',
+    border: '2px solid #ffffff',
     marginLeft: '4px',
-    boxShadow: '0 2px 8px rgba(14,165,233,0.3)',
+    boxShadow: '0 2px 6px rgba(14,165,233,0.3)',
   },
   trustLabel: {
     display: 'flex',
     flexDirection: 'column',
-    gap: '3px',
+    gap: '2px',
   },
   trustRating: {
     display: 'flex',
@@ -331,92 +355,8 @@ const styles = {
     gap: '2px',
   },
   trustText: {
-    fontSize: '0.78rem',
-    fontWeight: '600',
-    color: '#1e4b6a',
-  },
-  pillRow: {
-    display: 'flex',
-    gap: '0.75rem',
-    flexWrap: 'wrap',
-  },
-  pill: {
-    display: 'inline-flex',
-    alignItems: 'center',
-    gap: '6px',
-    backgroundColor: 'rgba(255,255,255,0.75)',
-    backdropFilter: 'blur(8px)',
-    border: '1px solid rgba(14,165,233,0.2)',
-    padding: '5px 14px',
-    borderRadius: '999px',
-    fontSize: '0.78rem',
+    fontSize: '0.76rem',
     fontWeight: '700',
-    color: '#0369a1',
-    boxShadow: '0 2px 8px rgba(14,165,233,0.08)',
-  },
-  // Right column
-  imageCol: {
-    flex: '1 1 420px',
-    position: 'relative',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    minHeight: '480px',
-  },
-  toothImage: {
-    width: '100%',
-    maxWidth: '540px',
-    height: 'auto',
-    objectFit: 'contain',
-    position: 'relative',
-    zIndex: 2,
-    filter: 'drop-shadow(0 40px 60px rgba(14,165,233,0.25))',
-  },
-  statCard: {
-    position: 'absolute',
-    left: '-20px',
-    bottom: '80px',
-    zIndex: 4,
-    backgroundColor: '#0c2340',
-    color: '#ffffff',
-    borderRadius: '24px',
-    padding: '1rem 1.5rem',
-    display: 'flex',
-    flexDirection: 'column',
-    gap: '2px',
-    boxShadow: '0 20px 40px rgba(12,35,64,0.3)',
-    minWidth: '110px',
-  },
-  statNum: {
-    fontSize: '2.2rem',
-    fontWeight: '900',
-    lineHeight: '1',
-    color: '#38bdf8',
-  },
-  statLabel: {
-    fontSize: '0.72rem',
-    fontWeight: '600',
-    color: 'rgba(255,255,255,0.75)',
-    lineHeight: '1.4',
-  },
-  rotatingRing: {
-    position: 'absolute',
-    bottom: '40px',
-    right: '20px',
-    zIndex: 4,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    width: '120px',
-    height: '120px',
-    cursor: 'pointer',
-    userSelect: 'none',
-  },
-  ringArrow: {
-    position: 'absolute',
-    fontSize: '1.4rem',
-    fontWeight: '900',
     color: '#0c2340',
-    lineHeight: 1,
   },
 };

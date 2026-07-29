@@ -11,7 +11,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+      setIsScrolled(window.scrollY > 40);
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
@@ -25,20 +25,13 @@ export default function Navbar() {
 
   const navLinks = [
     { name: 'Home', path: '/' },
-    { name: 'About Us', path: '/about' },
+    { name: 'About', path: '/about' },
     { name: 'Treatments', path: '/treatments' },
     { name: 'Blogs', path: '/blogs' },
     { name: 'Gallery', path: '/gallery' },
     { name: 'Case Studies', path: '/case-studies' }
   ];
 
-  // Treatments ordered row-by-row for a perfect 2-column layout mapping:
-  // Row 1: Root Canal (RCT) | Dental Implants
-  // Row 2: Crowns & Bridges | Gum Therapy
-  // Row 3: Orthodontics | Teeth Whitening
-  // Row 4: Restoration of Teeth / Filling | Smile Designing
-  // Row 5: Extraction | Dental Jewellery
-  // Row 6: Pedodontics / Child Dentistry
   const treatments = [
     { name: 'Root Canal (RCT)', path: '/treatments#rct', icon: Activity, desc: 'Painless microscopic endodontics' },
     { name: 'Dental Implants', path: '/treatments#implants', icon: Cpu, desc: 'Permanent bio-compatible replacements' },
@@ -53,186 +46,157 @@ export default function Navbar() {
     { name: 'Pedodontics / Child Dentistry', path: '/treatments#pedodontics', icon: Heart, desc: 'Kid-friendly cavity prevention care' }
   ];
 
-  // Navbar color scheme: solid on subpages, scroll-responsive on homepage
   const isHomePage = location.pathname === '/';
-  const showSolidNav = !isHomePage || isScrolled;
-
-  const navBg = showSolidNav ? 'rgba(255, 255, 255, 0.98)' : 'rgba(7, 8, 10, 0.2)';
-  const navBorder = showSolidNav ? '1px solid rgba(0,0,0,0.06)' : '1px solid rgba(255,255,255,0.08)';
-  const navShadow = showSolidNav ? '0 10px 30px -10px rgba(0,0,0,0.08)' : 'none';
-  const logoTextClr = showSolidNav ? 'var(--neutral-ink)' : '#ffffff';
-  const linkTextClr = showSolidNav ? 'var(--neutral-charcoal)' : 'rgba(255,255,255,0.85)';
 
   return (
-    <nav style={{
-      ...styles.nav,
-      backgroundColor: navBg,
-      borderBottom: navBorder,
-      boxShadow: navShadow,
+    <header style={{
+      ...styles.navHeader,
+      backgroundColor: isScrolled ? 'rgba(255, 255, 255, 0.92)' : 'transparent',
+      backdropFilter: isScrolled ? 'blur(16px)' : 'none',
+      borderBottom: isScrolled ? '1px solid rgba(12, 35, 64, 0.06)' : 'none',
+      boxShadow: isScrolled ? '0 10px 30px rgba(12,35,64,0.06)' : 'none',
     }}>
       <style dangerouslySetInnerHTML={{
         __html: `
         .dropdown-item-hover:hover {
-          background-color: rgba(37, 151, 208, 0.04) !important;
+          background-color: rgba(14, 165, 233, 0.08) !important;
         }
-        .nav-link-hover {
-          position: relative;
+        .pill-nav-link {
           text-decoration: none;
-          transition: color 0.25s ease;
-          padding-bottom: 4px;
+          font-size: 0.88rem;
+          font-weight: 600;
+          color: #334155;
+          padding: 6px 14px;
+          border-radius: 999px;
+          transition: all 0.25s ease;
+          display: inline-flex;
+          align-items: center;
+          gap: 4px;
         }
-        .nav-link-hover::after {
-          content: '';
-          position: absolute;
-          bottom: 0px;
-          left: 0;
-          width: 0%;
-          height: 2px;
-          background: linear-gradient(90deg, #0284c7, #38bdf8);
-          transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1);
-          border-radius: 2px;
+        .pill-nav-link:hover {
+          color: #0c2340 !important;
+          background-color: rgba(255, 255, 255, 0.9);
         }
-        .nav-link-hover:hover::after,
-        .nav-link-hover.active-nav-link::after {
-          width: 100%;
-        }
-        .nav-link-hover:hover {
-          color: #0284c7 !important;
+        .pill-nav-link.active-pill {
+          background-color: #ffffff !important;
+          color: #0c2340 !important;
+          box-shadow: 0 2px 10px rgba(12, 35, 64, 0.08);
+          font-weight: 700 !important;
         }
       `}} />
+      
       <div style={styles.container}>
 
-        {/* Logo Section */}
+        {/* Left Side: Brand Title & Logo (Matching Reference Image "auriex" position) */}
         <Link to="/" style={styles.logoWrapper} onClick={closeMenu}>
           <motion.div
-            style={{
-              width: '42px',
-              height: '42px',
-              borderRadius: '50%',
-              overflow: 'hidden',
-              display: 'flex',
-              alignItems: 'center',
-              justifyContent: 'center',
-              backgroundColor: '#ffffff',
-              boxShadow: '0 4px 10px rgba(0,0,0,0.05)',
-              flexShrink: 0
-            }}
+            style={styles.logoIconCircle}
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
             <img src="/logo.svg" alt="Dental Speciality Centre Logo" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
           </motion.div>
           <div style={styles.logoTextWrapper}>
-            <span style={{ ...styles.logoText, color: logoTextClr }}>Dental Speciality Centre</span>
-            <span style={styles.logoSub}>DR. RICHA TIWARI VYAS</span>
+            <span style={styles.logoTitleText}>Dental Speciality</span>
+            <span style={styles.logoSubText}>DR. RICHA TIWARI VYAS</span>
           </div>
         </Link>
 
-        {/* Desktop Links */}
-        <div style={styles.links} className="desktop-nav">
-          {navLinks.map((link) => {
-            const isActive = location.pathname === link.path;
+        {/* Center & Right: Floating Glass Navigation Pill (Matching Reference Navbar Layout) */}
+        <div style={styles.floatingPillWrapper} className="desktop-nav">
+          
+          {/* Navigation Links inside Pill */}
+          <div style={styles.pillLinksGroup}>
+            {navLinks.map((link) => {
+              const isActive = location.pathname === link.path;
 
-            // Treatments dropdown integration
-            if (link.name === 'Treatments') {
-              return (
-                <div
-                  key={link.name}
-                  style={{ position: 'relative' }}
-                  onMouseEnter={() => setDropdownOpen(true)}
-                  onMouseLeave={() => setDropdownOpen(false)}
-                >
-                  <button
-                    className={isActive ? 'nav-link-hover active-nav-link' : 'nav-link-hover'}
-                    style={{
-                      ...styles.link,
-                      color: dropdownOpen ? 'var(--brand-surgical-blue)' : linkTextClr,
-                      fontWeight: isActive ? '700' : '500',
-                      background: 'none',
-                      border: 'none',
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '4px',
-                      paddingBottom: '0.25rem'
-                    }}
+              if (link.name === 'Treatments') {
+                return (
+                  <div
+                    key={link.name}
+                    style={{ position: 'relative' }}
+                    onMouseEnter={() => setDropdownOpen(true)}
+                    onMouseLeave={() => setDropdownOpen(false)}
                   >
-                    Treatments
-                    <ChevronDown size={14} style={{
-                      transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
-                      transition: 'transform 0.3s ease'
-                    }} />
-                  </button>
+                    <button
+                      className={isActive ? 'pill-nav-link active-pill' : 'pill-nav-link'}
+                      style={{
+                        background: 'none',
+                        border: 'none',
+                        cursor: 'pointer',
+                        color: dropdownOpen ? '#0ea5e9' : undefined
+                      }}
+                    >
+                      Treatments
+                      <ChevronDown size={14} style={{
+                        transform: dropdownOpen ? 'rotate(180deg)' : 'rotate(0deg)',
+                        transition: 'transform 0.3s ease'
+                      }} />
+                    </button>
 
-                  {/* Treatments Dropdown Card */}
-                  <AnimatePresence>
-                    {dropdownOpen && (
-                      <motion.div
-                        style={styles.dropdownCard}
-                        initial={{ opacity: 0, y: 15 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0, y: 15 }}
-                        transition={{ duration: 0.25, ease: 'easeOut' }}
-                      >
-                        <div style={styles.dropdownGrid}>
-                          {treatments.map((t) => {
-                            const IconComp = t.icon;
-                            return (
-                              <Link
-                                key={t.name}
-                                to={t.path}
-                                onClick={closeMenu}
-                                className="dropdown-item-hover"
-                                style={styles.dropdownItem}
-                              >
-                                <div style={styles.dropdownIconWrapper}>
-                                  <IconComp size={16} color="var(--brand-surgical-blue)" />
-                                </div>
-                                <div>
-                                  <div style={styles.dropdownItemTitle}>{t.name}</div>
-                                  <div style={styles.dropdownItemDesc}>{t.desc}</div>
-                                </div>
-                              </Link>
-                            );
-                          })}
-                        </div>
-                        <div style={styles.dropdownFooter}>
-                          <Link to="/treatments" onClick={closeMenu} style={styles.allServicesLink}>
-                            View All Specialized Treatments →
-                          </Link>
-                        </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </div>
+                    {/* Treatments Dropdown Card */}
+                    <AnimatePresence>
+                      {dropdownOpen && (
+                        <motion.div
+                          style={styles.dropdownCard}
+                          initial={{ opacity: 0, y: 12 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          exit={{ opacity: 0, y: 12 }}
+                          transition={{ duration: 0.2, ease: 'easeOut' }}
+                        >
+                          <div style={styles.dropdownGrid}>
+                            {treatments.map((t) => {
+                              const IconComp = t.icon;
+                              return (
+                                <Link
+                                  key={t.name}
+                                  to={t.path}
+                                  onClick={closeMenu}
+                                  className="dropdown-item-hover"
+                                  style={styles.dropdownItem}
+                                >
+                                  <div style={styles.dropdownIconWrapper}>
+                                    <IconComp size={15} color="#0ea5e9" />
+                                  </div>
+                                  <div>
+                                    <div style={styles.dropdownItemTitle}>{t.name}</div>
+                                    <div style={styles.dropdownItemDesc}>{t.desc}</div>
+                                  </div>
+                                </Link>
+                              );
+                            })}
+                          </div>
+                          <div style={styles.dropdownFooter}>
+                            <Link to="/treatments" onClick={closeMenu} style={styles.allServicesLink}>
+                              View All Specialized Treatments →
+                            </Link>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                );
+              }
+
+              return (
+                <Link
+                  key={link.name}
+                  to={link.path}
+                  className={isActive ? 'pill-nav-link active-pill' : 'pill-nav-link'}
+                >
+                  {link.name}
+                </Link>
               );
-            }
+            })}
+          </div>
 
-            return (
-              <Link
-                key={link.name}
-                to={link.path}
-                className={isActive ? 'nav-link-hover active-nav-link' : 'nav-link-hover'}
-                style={{
-                  ...styles.link,
-                  color: isActive ? 'var(--brand-surgical-blue)' : linkTextClr,
-                  fontWeight: isActive ? '700' : '500'
-                }}
-              >
-                {link.name}
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Desktop CTA */}
-        <div style={styles.ctaWrapper} className="desktop-nav">
+          {/* Right Action Pill Button inside Navbar (Matching Reference Image "Book a Session" Button) */}
           <motion.div
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
+            whileHover={{ scale: 1.04 }}
+            whileTap={{ scale: 0.96 }}
           >
-            <Link to="/contact" style={styles.ctaButton}>
-              <Calendar size={16} /> Book Appointment
+            <Link to="/contact" style={styles.pillCtaButton}>
+              <Calendar size={15} /> Book Appointment
             </Link>
           </motion.div>
         </div>
@@ -240,17 +204,14 @@ export default function Navbar() {
         {/* Mobile Hamburger */}
         <button
           onClick={toggleMenu}
-          style={{
-            ...styles.hamburger,
-            backgroundColor: showSolidNav ? 'rgba(0,0,0,0.03)' : 'rgba(255,255,255,0.1)'
-          }}
+          style={styles.hamburger}
           className="mobile-nav"
           aria-label="Toggle menu"
         >
           {menuOpen ? (
-            <X size={24} color={showSolidNav ? 'var(--neutral-ink)' : '#ffffff'} />
+            <X size={24} color="#0c2340" />
           ) : (
-            <Menu size={24} color={showSolidNav ? 'var(--neutral-ink)' : '#ffffff'} />
+            <Menu size={24} color="#0c2340" />
           )}
         </button>
       </div>
@@ -274,20 +235,20 @@ export default function Navbar() {
                   onClick={closeMenu}
                   style={{
                     ...styles.mobileLink,
-                    color: isActive ? 'var(--brand-surgical-blue)' : 'var(--neutral-ink)',
+                    color: isActive ? '#0ea5e9' : '#0c2340',
                     fontWeight: isActive ? '700' : '500',
-                    backgroundColor: isActive ? 'var(--neutral-cloud-gray)' : 'transparent'
+                    backgroundColor: isActive ? 'rgba(14,165,233,0.06)' : 'transparent'
                   }}
                 >
                   {link.name}
                 </Link>
               );
             })}
-            <div style={{ padding: '0.5rem 1rem', borderLeft: '3px solid var(--brand-surgical-blue)', margin: '0.5rem 1rem 0.25rem' }}>
-              <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: 'var(--neutral-slate)', fontWeight: 'bold', letterSpacing: '0.05em' }}>Specialties</span>
+            <div style={{ padding: '0.5rem 1rem', borderLeft: '3px solid #0ea5e9', margin: '0.5rem 1rem 0.25rem' }}>
+              <span style={{ fontSize: '0.8rem', textTransform: 'uppercase', color: '#64748b', fontWeight: 'bold', letterSpacing: '0.05em' }}>Specialties</span>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem', marginTop: '0.5rem' }}>
                 {treatments.map((t) => (
-                  <Link key={t.name} to={t.path} onClick={closeMenu} style={{ fontSize: '0.9rem', color: 'var(--neutral-charcoal)', textDecoration: 'none' }}>
+                  <Link key={t.name} to={t.path} onClick={closeMenu} style={{ fontSize: '0.9rem', color: '#334155', textDecoration: 'none' }}>
                     • {t.name}
                   </Link>
                 ))}
@@ -299,98 +260,123 @@ export default function Navbar() {
           </motion.div>
         )}
       </AnimatePresence>
-    </nav>
+    </header>
   );
 }
 
 const styles = {
-  nav: {
+  navHeader: {
     position: 'fixed',
     top: 0,
     left: 0,
     width: '100%',
     zIndex: 1000,
-    transition: 'all 0.4s cubic-bezier(0.16, 1, 0.3, 1)',
-    backdropFilter: 'blur(16px)',
+    transition: 'all 0.35s cubic-bezier(0.16, 1, 0.3, 1)',
+    padding: '0.8rem 3.5vw 0.8rem 3.5vw',
+    boxSizing: 'border-box',
   },
   container: {
-    maxWidth: '1440px',
+    maxWidth: '1400px',
     margin: '0 auto',
-    padding: '0.9rem 6%',
     display: 'flex',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    alignItems: 'center',
   },
   logoWrapper: {
     display: 'flex',
     alignItems: 'center',
     gap: '0.75rem',
-    textDecoration: 'none'
+    textDecoration: 'none',
   },
-  logoIcon: {
-    backgroundColor: 'var(--brand-surgical-blue)',
-    borderRadius: '12px',
-    padding: '0.5rem',
+  logoIconCircle: {
+    width: '42px',
+    height: '42px',
+    borderRadius: '50%',
+    overflow: 'hidden',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    boxShadow: '0 4px 14px rgba(37, 151, 208, 0.3)',
-    flexShrink: 0
+    backgroundColor: '#ffffff',
+    boxShadow: '0 4px 12px rgba(12, 35, 64, 0.08)',
+    flexShrink: 0,
   },
   logoTextWrapper: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
-  logoText: {
-    fontSize: '1.2rem',
-    fontWeight: '800',
-    letterSpacing: '-0.02em',
-    lineHeight: '1.1',
-    whiteSpace: 'nowrap'
-  },
-  logoSub: {
-    fontSize: '0.65rem',
-    textTransform: 'uppercase',
-    letterSpacing: '0.2em',
-    color: 'var(--brand-surgical-blue)',
+  logoTitleText: {
+    fontFamily: "'Playfair Display', Georgia, serif",
+    fontSize: '1.25rem',
     fontWeight: '700',
-    marginTop: '2px'
+    letterSpacing: '-0.02em',
+    color: '#0c2340',
+    lineHeight: '1.1',
+    whiteSpace: 'nowrap',
   },
-  links: {
+  logoSubText: {
+    fontFamily: "'Plus Jakarta Sans', sans-serif",
+    fontSize: '0.62rem',
+    textTransform: 'uppercase',
+    letterSpacing: '0.18em',
+    color: '#0ea5e9',
+    fontWeight: '800',
+    marginTop: '2px',
+  },
+  // Floating glass pill housing links and right action button (Matching reference image)
+  floatingPillWrapper: {
     display: 'flex',
-    gap: '2.5rem',
-    alignItems: 'center'
+    alignItems: 'center',
+    gap: '0.6rem',
+    backgroundColor: 'rgba(255, 255, 255, 0.85)',
+    backdropFilter: 'blur(16px)',
+    WebkitBackdropFilter: 'blur(16px)',
+    border: '1px solid rgba(255, 255, 255, 0.9)',
+    borderRadius: '999px',
+    padding: '7px 8px 7px 18px',
+    boxShadow: '0 12px 35px rgba(12, 35, 64, 0.09)',
   },
-  link: {
-    fontSize: '0.95rem',
-    transition: 'color 0.25s ease',
+  pillLinksGroup: {
+    display: 'flex',
+    alignItems: 'center',
+    gap: '0.2rem',
+  },
+  pillCtaButton: {
+    display: 'inline-flex',
+    alignItems: 'center',
+    gap: '7px',
+    backgroundColor: '#0c2340',
+    color: '#ffffff',
+    padding: '0.65rem 1.4rem',
+    borderRadius: '999px',
+    fontWeight: '700',
+    fontSize: '0.88rem',
     textDecoration: 'none',
-    paddingBottom: '0.25rem',
-    outline: 'none'
+    boxShadow: '0 6px 18px rgba(12, 35, 64, 0.22)',
+    whiteSpace: 'nowrap',
+    transition: 'all 0.25s ease',
   },
   dropdownCard: {
     position: 'absolute',
-    top: '100%',
-    left: '-20px',
-    width: '680px',
-    backgroundColor: '#f0f7fd',
+    top: 'calc(100% + 14px)',
+    right: '-80px',
+    width: '640px',
+    backgroundColor: '#ffffff',
     borderRadius: '24px',
-    padding: '1.25rem',
-    boxShadow: '0 20px 45px rgba(37,151,208,0.08)',
-    border: '1px solid #cce3f5',
-    marginTop: '0.8rem',
-    zIndex: 1010
+    padding: '1.2rem',
+    boxShadow: '0 20px 50px rgba(12,35,64,0.14)',
+    border: '1px solid rgba(14,165,233,0.15)',
+    zIndex: 1020,
   },
   dropdownGrid: {
     display: 'grid',
     gridTemplateColumns: '1fr 1fr',
-    gap: '4px'
+    gap: '4px',
   },
   dropdownItem: {
     display: 'flex',
     alignItems: 'center',
-    gap: '12px',
-    padding: '0.6rem 0.8rem',
+    gap: '10px',
+    padding: '0.55rem 0.75rem',
     borderRadius: '12px',
     textDecoration: 'none',
     transition: 'background-color 0.2s',
@@ -398,77 +384,62 @@ const styles = {
   dropdownIconWrapper: {
     width: '28px',
     height: '28px',
-    borderRadius: '6px',
-    backgroundColor: '#ffffff',
+    borderRadius: '8px',
+    backgroundColor: 'rgba(14,165,233,0.1)',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    flexShrink: 0
+    flexShrink: 0,
   },
   dropdownItemTitle: {
     fontSize: '0.82rem',
     fontWeight: '700',
-    color: 'var(--neutral-ink)'
+    color: '#0c2340',
   },
   dropdownItemDesc: {
-    fontSize: '0.7rem',
-    color: 'var(--neutral-charcoal)',
-    marginTop: '1px'
+    fontSize: '0.68rem',
+    color: '#64748b',
+    marginTop: '1px',
   },
   dropdownFooter: {
     marginTop: '0.5rem',
-    paddingTop: '0.75rem',
+    paddingTop: '0.7rem',
     borderTop: '1px solid rgba(0,0,0,0.05)',
-    textAlign: 'center'
+    textAlign: 'center',
   },
   allServicesLink: {
     fontSize: '0.82rem',
     fontWeight: '700',
-    color: 'var(--brand-surgical-blue)',
-    textDecoration: 'none'
-  },
-  ctaWrapper: {
-    display: 'flex',
-    alignItems: 'center'
-  },
-  ctaButton: {
-    display: 'flex',
-    alignItems: 'center',
-    gap: '8px',
-    backgroundColor: 'var(--brand-surgical-blue)',
-    color: '#ffffff',
-    padding: '0.7rem 1.4rem',
-    borderRadius: '999px',
-    fontWeight: '700',
-    fontSize: '0.9rem',
+    color: '#0ea5e9',
     textDecoration: 'none',
-    boxShadow: '0 4px 14px rgba(37, 151, 208, 0.3)',
-    whiteSpace: 'nowrap'
   },
   hamburger: {
     display: 'none',
-    background: 'none',
-    border: 'none',
+    backgroundColor: 'rgba(255, 255, 255, 0.8)',
+    border: '1px solid rgba(255,255,255,0.9)',
     cursor: 'pointer',
     padding: '0.5rem',
-    borderRadius: '10px',
-    transition: 'background-color 0.2s'
+    borderRadius: '999px',
+    backdropFilter: 'blur(10px)',
+    boxShadow: '0 4px 12px rgba(12,35,64,0.08)',
   },
   mobileMenu: {
     display: 'flex',
     flexDirection: 'column',
     backgroundColor: '#ffffff',
-    borderTop: '1px solid rgba(0,0,0,0.06)',
+    borderRadius: '20px',
+    marginTop: '0.75rem',
     padding: '1rem 0',
     maxHeight: '80vh',
     overflowY: 'auto',
-    boxShadow: '0 10px 30px rgba(0,0,0,0.08)'
+    boxShadow: '0 12px 35px rgba(12,35,64,0.12)',
+    border: '1px solid rgba(14,165,233,0.15)',
   },
   mobileLink: {
     padding: '0.75rem 2rem',
-    fontSize: '1rem',
+    fontSize: '0.98rem',
     textDecoration: 'none',
-    transition: 'all 0.2s'
+    transition: 'all 0.2s',
   },
   mobileCta: {
     display: 'flex',
@@ -476,15 +447,16 @@ const styles = {
     justifyContent: 'center',
     gap: '8px',
     margin: '1rem 2rem 0.5rem',
-    backgroundColor: 'var(--brand-surgical-blue)',
+    backgroundColor: '#0c2340',
     color: '#ffffff',
     padding: '0.85rem',
-    borderRadius: '12px',
+    borderRadius: '999px',
     fontWeight: '700',
     fontSize: '0.95rem',
     textAlign: 'center',
     textDecoration: 'none',
-    boxShadow: '0 4px 12px rgba(37, 151, 208, 0.2)'
+    boxShadow: '0 6px 18px rgba(12, 35, 64, 0.25)',
   }
 };
+
 
