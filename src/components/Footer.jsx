@@ -6,8 +6,8 @@ export default function Footer() {
   return (
     <footer style={styles.footer}>
       {/* Wave transition from white page content */}
-      <div style={styles.wave}>
-        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={styles.waveSvg}>
+      <div style={styles.wave} className="footer-wave-wrapper">
+        <svg viewBox="0 0 1440 60" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none" style={styles.waveSvg} className="footer-wave-svg">
           <path d="M0,30 C480,60 960,0 1440,30 L1440,60 L0,60 Z" fill="#07080a" />
         </svg>
       </div>
@@ -103,11 +103,15 @@ const styles = {
   wave: {
     lineHeight: 0,
     backgroundColor: '#ffffff',
+    marginBottom: '-2px',
+    overflow: 'hidden',
+    display: 'block',
   },
   waveSvg: {
     display: 'block',
     width: '100%',
     height: '40px',
+    marginBottom: '-2px',
   },
   inner: {
     padding: '5rem 6% 3rem',

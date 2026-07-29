@@ -1,0 +1,371 @@
+/* ============================================================
+   MOBILE.CSS — Responsive overrides for screens ≤ 768px
+   Applies ONLY to mobile. Desktop layout is untouched.
+   ============================================================ */
+
+/* ── Navbar ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .desktop-nav {
+    display: none !important;
+  }
+  .mobile-nav {
+    display: flex !important;
+  }
+}
+
+/* ── Hero Section ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero-section-responsive {
+    padding: 78px 10px 14px 10px !important;
+    min-height: 100svh !important;
+  }
+
+  .hero-frame-responsive {
+    border-radius: 22px !important;
+    min-height: unset !important;
+  }
+
+  .hero-container-responsive {
+    padding: 1.75rem 1.25rem 1.5rem !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0 !important;
+  }
+
+  /* Title scales down nicely */
+  .hero-container-responsive h1 {
+    font-size: clamp(2.1rem, 9vw, 2.8rem) !important;
+    line-height: 1.1 !important;
+    margin-bottom: 0.75rem !important;
+  }
+
+  /* Background image — subtle behind text */
+  .hero-bg-image-responsive {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    object-position: 72% 20% !important;
+    opacity: 0.32 !important;
+    mask-image: none !important;
+    -webkit-mask-image: none !important;
+  }
+
+  .hero-bg-overlay-responsive {
+    background: linear-gradient(
+      to bottom,
+      rgba(226, 244, 248, 0.9) 0%,
+      rgba(226, 244, 248, 0.72) 100%
+    ) !important;
+  }
+
+  .hero-bg-wrapper-responsive {
+    justify-content: center !important;
+  }
+}
+
+/* ── About Minimal ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Stack visual col above text col */
+  .responsive-flex-row {
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+  }
+
+  /* Shrink the image column height */
+  .responsive-flex-row > div:first-child {
+    flex: unset !important;
+    width: 100% !important;
+    height: 320px !important;
+  }
+
+  /* Text column full width */
+  .responsive-flex-row > div:last-child {
+    flex: unset !important;
+    width: 100% !important;
+  }
+}
+
+/* About section padding reduction on mobile */
+@media (max-width: 768px) {
+  #about {
+    padding: 4rem 0 !important;
+  }
+
+  #about .container,
+  #about > div > div {
+    padding: 0 1.1rem !important;
+  }
+}
+
+/* ── Specialist Section ────────────────────────────────────── */
+@media (max-width: 768px) {
+  #doctor {
+    padding: 4rem 0 !important;
+  }
+
+  #doctor > div {
+    padding: 0 1.1rem !important;
+  }
+
+  /* Bio + profile card: stack vertically */
+  .specialist-bio-grid {
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+  }
+
+  /* Make profile card a nice mobile size */
+  .specialist-card-wrapper {
+    height: 320px !important;
+    width: 75% !important;
+    max-width: 300px !important;
+    margin: 0 auto !important;
+  }
+
+  /* Visual col — center aligned on mobile */
+  .specialist-visual-col {
+    width: 100% !important;
+    align-items: center !important;
+  }
+
+  /* Stats row full width */
+  .specialist-stats-row {
+    max-width: 100% !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+
+  /* Expertise showcase: stack tabs above image */
+  .responsive-grid-2 {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2rem !important;
+  }
+
+  /* Hide sticky image col on mobile — tabs only */
+  .expertise-image-col {
+    position: static !important;
+    top: auto !important;
+  }
+
+  .expertise-image-frame {
+    height: 280px !important;
+    border-radius: 20px !important;
+  }
+
+  /* Glass card hidden on mobile */
+  .expertise-glass-card {
+    display: none !important;
+  }
+
+  /* Section heading scale */
+  #doctor h2 {
+    font-size: clamp(2.2rem, 9vw, 3rem) !important;
+  }
+
+  #doctor h3 {
+    font-size: clamp(1.8rem, 8vw, 2.4rem) !important;
+  }
+}
+
+/* ── Why Trust Us (Bento Grid) ─────────────────────────────── */
+@media (max-width: 768px) {
+  .bento-trust-section {
+    padding: 4rem 0 !important;
+  }
+
+  .bento-container {
+    padding: 0 1.1rem !important;
+  }
+
+  /* Stack all bento cards full width */
+  .bento-grid {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  .bento-col-wide,
+  .bento-col-compact {
+    grid-column: span 1 !important;
+  }
+
+  .bento-card {
+    min-height: 380px !important;
+    border-radius: 22px !important;
+  }
+
+  .bento-card-photo-box {
+    height: 200px !important;
+  }
+
+  .bento-card-bottom {
+    padding: 1.4rem !important;
+  }
+
+  .bento-heading {
+    font-size: clamp(2rem, 8vw, 2.8rem) !important;
+  }
+
+  .bento-subheading {
+    font-size: 1rem !important;
+  }
+
+  .bento-credentials-bar {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+  }
+}
+
+/* ── Process Section ──────────────────────────────────────── */
+@media (max-width: 768px) {
+  #process {
+    padding: 4rem 0 !important;
+  }
+
+  #process > div {
+    padding: 0 1.1rem !important;
+  }
+
+  /* Center header spacing */
+  #process div[style*="headerCentered"] {
+    margin-bottom: 2.5rem !important;
+  }
+
+  #process h2 {
+    font-size: clamp(2rem, 9vw, 2.8rem) !important;
+  }
+
+  /* Grid: single column */
+  .process-grid {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+  }
+
+  .process-timeline-svg {
+    display: none !important;
+  }
+
+  /* Remove translateX offsets on mobile */
+  .timeline-node-1,
+  .timeline-node-2 {
+    transform: translateX(0) !important;
+  }
+
+  /* Dental illustration shrinks */
+  #process div[style*="mediaContainer"] {
+    max-width: 260px !important;
+    margin: 0 auto !important;
+  }
+
+  #process div[style*="leftCol"] {
+    padding-right: 0 !important;
+  }
+
+  /* Timeline items closer together */
+  #process div[style*="timeline"] {
+    gap: 2rem !important;
+  }
+
+  /* Action row */
+  #process div[style*="actionRow"] {
+    margin-top: 3rem !important;
+  }
+}
+
+/* ── Testimonials ─────────────────────────────────────────── */
+@media (max-width: 768px) {
+  #testimonials {
+    padding: 4rem 1.1rem !important;
+  }
+
+  #testimonials h2 {
+    font-size: clamp(1.9rem, 8vw, 2.5rem) !important;
+  }
+
+  /* Grid: single column cards */
+  #testimonials div[style*="gridTemplateColumns"] {
+    grid-template-columns: 1fr !important;
+    gap: 1.25rem !important;
+  }
+
+  #testimonials div[style*="card"] {
+    padding: 1.5rem !important;
+    border-radius: 20px !important;
+  }
+
+  #testimonials div[style*="header"] {
+    margin-bottom: 2.5rem !important;
+  }
+}
+
+/* ── Education Section ────────────────────────────────────── */
+@media (max-width: 768px) {
+  #education {
+    padding: 4rem 1.1rem !important;
+  }
+
+  #education h2 {
+    font-size: clamp(1.9rem, 8vw, 2.5rem) !important;
+  }
+
+  /* Wellness tips grid → single column */
+  #education div[style*="grid"] {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Myths grid → single column */
+  #education div[style*="mythsGrid"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .footer-wave-wrapper {
+    display: none !important;
+  }
+
+  footer {
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+  }
+
+  .footer-container {
+    flex-direction: column !important;
+    gap: 2.5rem !important;
+  }
+
+  footer div[style*="inner"] {
+    padding: 3rem 1.25rem 2rem !important;
+  }
+
+  footer div[style*="bottom"] {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.5rem !important;
+  }
+}
+
+/* ── Navbar Mobile Menu ───────────────────────────────────── */
+@media (max-width: 768px) {
+  /* Navbar: smaller padding */
+  header[style] {
+    padding: 0.7rem 1rem 0.7rem 1rem !important;
+  }
+}
+
+/* ── Global Mobile Helpers ────────────────────────────────── */
+@media (max-width: 768px) {
+  /* All sections: reduce horizontal padding */
+  section {
+    overflow-x: hidden;
+  }
+
+  /* Prevent text overflow */
+  p, h1, h2, h3, h4 {
+    overflow-wrap: break-word;
+    word-break: break-word;
+  }
+}

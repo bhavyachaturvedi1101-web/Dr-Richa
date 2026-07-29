@@ -142,7 +142,7 @@ export default function Specialist() {
         </div>
 
         {/* Core Layout Grid */}
-        <div style={styles.grid}>
+        <div style={styles.grid} className="specialist-bio-grid">
           
           {/* Biography Details */}
           <motion.div 
@@ -181,9 +181,10 @@ export default function Specialist() {
           </motion.div>
 
           {/* Profile Card & Stats */}
-          <div style={styles.visualCol}>
+          <div style={styles.visualCol} className="specialist-visual-col">
             <motion.div 
               style={styles.cardWrapper}
+              className="specialist-card-wrapper"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
@@ -199,7 +200,7 @@ export default function Specialist() {
             </motion.div>
 
             {/* Metrics */}
-            <div style={styles.statsRow}>
+            <div style={styles.statsRow} className="specialist-stats-row">
               <motion.div 
                 style={styles.statBox}
                 whileHover={{ y: -4, scale: 1.05 }}

@@ -56,7 +56,7 @@ export default function Hero() {
             <motion.h1 style={styles.titleSerif} variants={itemVariants}>
               Gentle care,<br />
               genuine hearts,<br />
-              confident smiles.
+              confident <span style={{ color: '#0ea5e9' }}>smiles.</span>
             </motion.h1>
 
             {/* Subtitle Tagline */}
@@ -230,14 +230,13 @@ const styles = {
     maxWidth: '580px',
   },
   titleSerif: {
-    fontFamily: "'DM Serif Display', 'Instrument Serif', 'Prata', 'Playfair Display', Georgia, serif",
+    fontFamily: "'Plus Jakarta Sans', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif",
     fontSize: 'clamp(2.6rem, 5.2vw, 4.8rem)',
-    fontWeight: '400',
-    lineHeight: '1.08',
-    letterSpacing: '-0.025em',
-    color: '#0c2340',
+    fontWeight: '800',
+    lineHeight: '1.06',
+    letterSpacing: '-0.035em',
+    color: '#151515',
     margin: 0,
-    textShadow: '0 2px 20px rgba(255, 255, 255, 0.85)',
   },
   titleTagline: {
     fontFamily: "'Plus Jakarta Sans', 'Inter', sans-serif",
