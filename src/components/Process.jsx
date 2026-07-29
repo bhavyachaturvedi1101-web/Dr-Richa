@@ -1,7 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
-import toothImg from '../assets/tooth_transparent.png';
+import dentalImg from '../assets/dental_workers.png';
 
 export default function Process() {
   const steps = [
@@ -54,20 +54,19 @@ export default function Process() {
         <div style={styles.grid} className="process-grid">
           {/* Left Column: Media */}
           <div style={styles.leftCol}>
-            <motion.div 
+            <motion.div
               style={styles.mediaContainer}
               initial={{ opacity: 0, scale: 0.95 }}
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8, delay: 0.2 }}
             >
-              <video 
-                src="/video.mp4.mp4" 
-                autoPlay 
-                loop 
-                muted 
-                playsInline
-                style={styles.toothVideo}
+              <motion.img
+                src={dentalImg}
+                alt="Dental Care Illustration"
+                style={styles.dentalImage}
+                animate={{ y: [0, -12, 0] }}
+                transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
               />
             </motion.div>
           </div>
@@ -78,17 +77,12 @@ export default function Process() {
             {/* SVG Connecting Arc */}
             <div style={styles.timelineSvgContainer} className="process-timeline-svg">
               <svg viewBox="0 0 150 100" style={styles.timelineSvg} preserveAspectRatio="none">
-                <motion.path 
+                <path 
                   d="M 26 0 Q 120 50 26 100" 
                   fill="none" 
-                  stroke="rgba(37, 151, 208, 0.35)" 
+                  stroke="rgba(37, 151, 208, 0.8)" 
                   strokeWidth="2"
-                  strokeDasharray="4 4"
                   vectorEffect="non-scaling-stroke"
-                  initial={{ pathLength: 0 }}
-                  whileInView={{ pathLength: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.5, ease: "easeOut" }}
                 />
               </svg>
             </div>
@@ -208,20 +202,18 @@ const styles = {
   mediaContainer: {
     position: 'relative',
     width: '100%',
-    maxWidth: '550px',
+    maxWidth: '560px',
     aspectRatio: '1/1',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: 'transparent',
-    overflow: 'hidden',
-    borderRadius: '24px', // Optional: smooth the corners
   },
-  toothVideo: {
+  dentalImage: {
     width: '100%',
     height: '100%',
-    objectFit: 'cover',
-    objectPosition: 'right center', // Shifts the video to the right to try and hide text on the left
+    objectFit: 'contain',
+    mixBlendMode: 'multiply',
   },
   rightCol: {
     position: 'relative',
