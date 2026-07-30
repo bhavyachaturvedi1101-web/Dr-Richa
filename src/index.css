@@ -5,7 +5,10 @@
 @tailwind utilities;
 
 .expertise-card-mobile-bg,
-.process-mobile-vertical-line {
+.process-mobile-vertical-line,
+.hero-mobile-badge,
+.hero-smile-svg,
+.mobile-only-br {
   display: none !important;
 }
 

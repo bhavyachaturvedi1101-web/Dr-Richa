@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Phone, Calendar, ArrowUpRight, Star } from 'lucide-react';
+import { Phone, Calendar, ArrowUpRight, Star, ShieldCheck } from 'lucide-react';
 
 export default function Hero() {
   const containerVariants = {
@@ -52,11 +52,23 @@ export default function Hero() {
             animate="visible"
             variants={containerVariants}
           >
+            {/* Mobile Badge - Expert Dental Care */}
+            <motion.div className="hero-mobile-badge" variants={itemVariants}>
+              <div className="hero-mobile-badge-icon">
+                <ShieldCheck size={14} color="#ffffff" strokeWidth={3} />
+              </div>
+              <span className="hero-mobile-badge-text">EXPERT DENTAL CARE</span>
+            </motion.div>
+
             {/* Main Headline - Positioned Upside at Top Left */}
-            <motion.h1 style={styles.titleSerif} variants={itemVariants}>
+            <motion.h1 style={styles.titleSerif} variants={itemVariants} className="hero-title-responsive">
               Gentle care,<br />
               genuine hearts,<br />
-              confident <span style={{ color: '#0ea5e9' }}>smiles.</span>
+              confident <br className="mobile-only-br" /><span style={{ color: '#0ea5e9', position: 'relative', display: 'inline-block' }}>smiles.
+                <svg className="hero-smile-svg" viewBox="0 0 100 20" style={{ overflow: 'visible' }}>
+                  <path d="M5 5 Q 50 20 95 5" fill="none" stroke="#0ea5e9" strokeWidth="4" strokeLinecap="round" />
+                </svg>
+              </span>
             </motion.h1>
 
             {/* Subtitle Tagline */}
